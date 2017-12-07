@@ -96,17 +96,17 @@ namespace DatacenterMap.Web.Controllers
             return usuario;
         }
 
-        public Andar CreateAndar(int numeroAndar, int quantidadeSalas, int edificacaoId)
-        {
-            var andar = new Andar
-            {
-                NumeroAndar = numeroAndar,
-                QuantidadeMaximaSalas = quantidadeSalas,
-                Edificacao = contexto.Edificacoes.Where(x => x.Id == edificacaoId).FirstOrDefault()
-            };
+        //public Andar CreateAndar(int numeroAndar, int quantidadeSalas, int edificacaoId)
+        //{
+        //    var andar = new Andar
+        //    {
+        //        NumeroAndar = numeroAndar,
+        //        QuantidadeMaximaSalas = quantidadeSalas,
+        //        Edificacao = contexto.Edificacoes.Where(x => x.Id == edificacaoId).FirstOrDefault()
+        //    };
 
-            return andar;
-        }
+        //    return andar;
+        //}
 
         public Usuario CreateUsuario(string nome, string email, string senha)
         {

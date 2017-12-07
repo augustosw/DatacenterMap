@@ -12,7 +12,7 @@ namespace DatacenterMap.Domain.Entidades
         public double Longitude { get; set; }
         public List<Andar> Andares { get; set; }
 
-        protected Edificacao()
+        public Edificacao()
         {
             Andares = new List<Andar>(); 
         }
