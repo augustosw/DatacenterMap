@@ -13,12 +13,7 @@ namespace DatacenterMap.Web.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, new { dados });
         }
 
-        public HttpResponseMessage BadRequest(params string[] mensagens)
-        {
-            return Request.CreateResponse(HttpStatusCode.BadRequest, new { mensagens });
-        }
-
-        public HttpResponseMessage BadRequest(IEnumerable<string> mensagens)
+        public HttpResponseMessage BadRequest(List<string> mensagens)
         {
             return Request.CreateResponse(HttpStatusCode.BadRequest, new { mensagens });
         }

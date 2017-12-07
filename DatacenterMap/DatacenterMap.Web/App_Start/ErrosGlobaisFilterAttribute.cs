@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Web.Http.Filters;
 
-namespace AutDemo.WebApi
+namespace DatacenterMap.Web
 {
     public class ErrosGlobaisFilterAttribute : ExceptionFilterAttribute
     {

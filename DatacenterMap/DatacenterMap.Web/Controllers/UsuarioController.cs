@@ -10,7 +10,7 @@ using System.Web.Http;
 namespace DatacenterMap.Web.Controllers
 {
     [RoutePrefix("api/usuario")]
-    public class UsuarioController : ApiController
+    public class UsuarioController : ControllerBasica
     {
 
         private IDatacenterMapContext contexto;
@@ -28,6 +28,9 @@ namespace DatacenterMap.Web.Controllers
         [HttpPost]
         public IHttpActionResult CadastrarUsuario([FromBody] UsuarioModel request)
         {
+            if (request == null)
+                return BadRequest($"O parametro {nameof(request)} não pode ser null");
+
             if (contexto.Usuarios.Where(x => x.Email == request.Email).Count() != 0) return BadRequest("Já existe uma conta com esse email");
 
             Usuario usuario = new Usuario(request.Nome, request.Email, request.Senha);
@@ -40,11 +43,10 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(usuario);
             }
 
-            return BadRequest("Impossível cadastrar usuário com nome ou email vazio.");
+            return (IHttpActionResult) BadRequest(usuario.Mensagens);
         }
 
         [HttpPut]
-        [Route("{id}")]
         public IHttpActionResult AlterarUsuario([FromBody] UsuarioModel request)
         {
             if (request == null)
@@ -65,21 +67,7 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(usuarioLogado);
             }
 
-            return BadRequest();
-        }
-
-        [HttpGet]
-        [Route("{id}")]
-        public IHttpActionResult PesquisarUsuarioPorId([FromUri] int id)
-        {
-            var usuario = contexto.Usuarios
-                       .AsNoTracking()
-                       .FirstOrDefault(x => x.Id == id);
-
-            if (usuario == null)
-                return NotFound();
-
-            return Ok(usuario);
+            return (IHttpActionResult) BadRequest(usuario.Mensagens); ;
         }
 
         [HttpPost]

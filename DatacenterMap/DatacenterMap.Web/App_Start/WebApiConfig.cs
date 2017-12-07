@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace AutDemo.WebApi
+namespace DatacenterMap.Web
 {
     public static class WebApiConfig
     {

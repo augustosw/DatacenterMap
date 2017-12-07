@@ -1,9 +1,8 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using System.Data.Entity;
 //using DatacenterMap.Infra.Mappings;
-using DatacenterMap.Infra;
 
-namespace TF.WebApi.Infra
+namespace DatacenterMap.Infra
 {
 
     public class BookingContext : DbContext, IDatacenterMapContext
