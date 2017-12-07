@@ -25,6 +25,15 @@ namespace DatacenterMap.Domain.Entidades
             if (QuantidadeMaximaSlots <= 0)
                 Mensagens.Add("Quantidade máxima de slots deve ser maior que 0.");
 
+            if (Largura <= 0)
+                Mensagens.Add("Largura deve ser maior que 0.");
+
+            if (Comprimento <= 0)
+                Mensagens.Add("Comprimento deve ser maior que 0.");
+      
+            if (string.IsNullOrWhiteSpace(NumeroSala))
+                Mensagens.Add("Numero da sala é inválido.");
+
             return Mensagens.Count == 0;
         }
     }
