@@ -1,6 +1,6 @@
 // Service de salas
-angular.module('app').factory('salaService', function ($http) {
-	let url = "http://localhost:9090/api/sala";
+angular.module('app').factory('salaService', function ($http, $location) {
+	let url = $location.absUrl() + "/equipamento";
 
     function criar(sala){
         return $http.post(url, sala);

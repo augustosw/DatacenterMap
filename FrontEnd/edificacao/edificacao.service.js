@@ -1,6 +1,6 @@
 // Service de edificacoes
-angular.module('app').factory('edificacaoService', function ($http) {
-	let url = "http://localhost:9090/api/edificacao";
+angular.module('app').factory('edificacaoService', function ($http, $location) {
+	let url = $location.absUrl() + "/edificacao";
 
     function criar(edificacao){
         return $http.post(url, edificacao);
