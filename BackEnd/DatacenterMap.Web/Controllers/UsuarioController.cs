@@ -33,7 +33,7 @@ namespace DatacenterMap.Web.Controllers
 
             if (contexto.Usuarios.Where(x => x.Email == request.Email).Count() != 0) return BadRequest("Já existe uma conta com esse email");
 
-            Usuario usuario = new Usuario(request.Nome, request.Email, request.Senha);
+            Usuario usuario = CreateUsuario(request.Nome, request.Email, request.Senha);
 
             if (usuario.Validar())
             {
@@ -56,8 +56,7 @@ namespace DatacenterMap.Web.Controllers
 
             if (usuarioLogado == null) return BadRequest("Usuário inexistente");
 
-            Usuario usuario = new Usuario(request.Nome, request.Email, request.Senha);
-            if (usuario.Validar())
+            if (usuarioLogado.Validar())
             {
                 usuarioLogado.Nome = request.Nome;
                 usuarioLogado.Senha = request.Senha;
@@ -67,7 +66,7 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(usuarioLogado);
             }
 
-            return (IHttpActionResult)BadRequest(usuario.Mensagens); ;
+            return (IHttpActionResult) BadRequest(usuarioLogado.Mensagens); ;
         }
 
         [HttpPost]
@@ -92,10 +91,37 @@ namespace DatacenterMap.Web.Controllers
         public Usuario UsuarioLogado()
         {
             var usuario = contexto.Usuarios
-                       .AsNoTracking()
                        .FirstOrDefault(x => x.Email == User.Identity.Name);
 
             return usuario;
         }
+
+        public Andar CreateAndar(int numeroAndar, int quantidadeSalas, int edificacaoId)
+        {
+            var andar = new Andar
+            {
+                NumeroAndar = numeroAndar,
+                QuantidadeMaximaSalas = quantidadeSalas,
+                Edificacao = contexto.Edificacoes.Where(x => x.Id == edificacaoId).FirstOrDefault()
+            };
+
+            return andar;
+        }
+
+        public Usuario CreateUsuario(string nome, string email, string senha)
+        {
+            if (!string.IsNullOrWhiteSpace(senha))
+                senha = Criptografia.CriptografarSenha(email, senha);
+
+            var usuario = new Usuario
+            {
+                Nome = nome,
+                Email = email,
+                Senha = senha
+            };
+
+            return usuario;
+        }
+   
     }
 }

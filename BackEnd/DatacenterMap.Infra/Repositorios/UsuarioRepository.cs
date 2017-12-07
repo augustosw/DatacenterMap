@@ -10,13 +10,7 @@ namespace DatacenterMap.Infra.Repositorios
 
         static UsuarioRepository()
         {
-            // YWRtaW5AY3dpLmNvbS5icjoxMjM0NTY=
-            var usrAdmin = new Usuario("admin", "admin@cwi.com.br", "123456");
-            _usuarios.Add(usrAdmin.Email, usrAdmin);
-
-            // Z2lvdmFuaUBjd2kuY29tLmJyOjEyMzQ1Ng==
-            var usrGiovani = new Usuario("giovani", "giovani@cwi.com.br", "123456");
-            _usuarios.Add(usrGiovani.Email, usrGiovani);
+            
         }
 
         public UsuarioRepository()
