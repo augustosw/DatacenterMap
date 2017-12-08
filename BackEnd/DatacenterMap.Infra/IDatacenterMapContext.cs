@@ -10,6 +10,7 @@ namespace DatacenterMap.Infra
         DbSet<Edificacao> Edificacoes { get; set; }
         DbSet<Andar> Andares { get; set; }
         DbSet<Sala> Salas { get; set; }
+        DbSet<Slot> Slots { get; set; }
 
         int SaveChanges();
 
