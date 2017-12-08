@@ -176,6 +176,12 @@ a {
     background: #fff;
 }
 
+[data-tooltip]:after {
+    content:attr(data-tooltip);
+    position:absolute; 
+    font-size: 45px; 
+}
+
 @media screen and (max-width: 65.625em), screen and (max-height: 40.625em) {
 	.edificacao-wrapper {
 		width: 100vw;

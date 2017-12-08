@@ -6,6 +6,7 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     $scope.adicionarAndar = adicionarAndar;
     $scope.selecionarAndar= selecionarAndar;
     $scope.isAlterar = !!$routeParams.id; 
+    $scope.voltar = voltar;
 
     // TODO: necessário criar dados para poder usar.
     // setup(); 
@@ -61,7 +62,9 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         console.log(andar);
     }
 
-
-
+    function voltar(){
+        $scope.detalhe = false;
+        $scope.andares = [1,2,3,4,5]
+    }
 
 });
