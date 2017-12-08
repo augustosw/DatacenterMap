@@ -1,6 +1,7 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -30,13 +31,18 @@ namespace DatacenterMap.Web.Controllers
 
             Andar andar = contexto.Andares.AsNoTracking().Where(x => x.Id == request.AndarId).FirstOrDefault();
 
-            if (contexto.Salas.Where(x => x.Andar == andar && x.NumeroSala.Equals(request.NumeroSala)).Count() != 0) return BadRequest("Já existe uma sala com esse número nesse andar.");
+            if (contexto.Salas.Where(x => x.Andar == andar && x.NumeroSala.Equals(request.NumeroSala)).Count() != 0)
+                return BadRequest("Já existe uma sala com esse número nesse andar.");
 
             Sala sala = CreateSala(request.NumeroSala, request.QuantidadeMaximaSlots, request.Largura, request.Comprimento);
 
             if (sala.Validar())
             {
                 contexto.Salas.Add(sala);
+                for (var i = 0; i < sala.QuantidadeMaximaSlots; i++)
+                {
+                    contexto.Slots.Add(CreateSlot(sala));
+                }
                 contexto.SaveChanges();
 
                 return Ok(sala);
@@ -55,12 +61,22 @@ namespace DatacenterMap.Web.Controllers
 
             Sala salaNova = CreateSala(request.NumeroSala, request.QuantidadeMaximaSlots, request.Largura, request.Comprimento);
 
+            if (salaNova.QuantidadeMaximaSlots < salaAntiga.QuantidadeMaximaSlots)
+                return BadRequest("A quantidade máxima de slots não pode ser diminuida.");
+
             if (salaNova.Validar())
             {
                 // Possível alterar o comprimento, largura e quantidade máxima de slots
                 salaAntiga.Comprimento = request.Comprimento;
                 salaAntiga.Largura = request.Largura;
                 salaAntiga.QuantidadeMaximaSlots = request.QuantidadeMaximaSlots;
+
+                int quantidadeExtrasSlots = request.QuantidadeMaximaSlots - salaAntiga.QuantidadeMaximaSlots;
+                for(var i=0; i < quantidadeExtrasSlots; i++)
+                {
+                    contexto.Slots.Add(CreateSlot(salaAntiga));
+                }
+
                 contexto.SaveChanges();
 
                 return Ok(salaAntiga);
@@ -76,7 +92,10 @@ namespace DatacenterMap.Web.Controllers
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
             Sala sala = contexto.Salas.Where(x => x.Id == id).FirstOrDefault();
+            //List<Slot> slots = contexto.Slots.Where(x => x.Sala == sala).ToList();
+
             contexto.Salas.Remove(sala);
+            //contexto.Slots.RemoveRange(slots);
 
             return Ok("Removido com Sucesso");
         }
@@ -92,6 +111,17 @@ namespace DatacenterMap.Web.Controllers
             };
 
             return sala;
+        }
+
+        public Slot CreateSlot(Sala sala)
+        {
+            var slot = new Slot
+            {
+                Ocupado = false,
+                Sala = sala
+            };
+
+            return slot;
         }
 
     }
