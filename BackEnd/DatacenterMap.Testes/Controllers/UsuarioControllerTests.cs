@@ -28,7 +28,17 @@ namespace DatacenterMap.Testes.Controllers
 			Assert.IsTrue(usuario.Mensagens[0] == "Nome é inválido.");
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Nao_Deve_Validar_Entidade_Usuario_Com_Nome_Vazio()
+        {
+            var usuario = CriarNovoUsuario();
+            usuario.Nome = " ";
+            Assert.IsFalse(usuario.Validar());
+            Assert.IsTrue(usuario.Mensagens.Any());
+            Assert.IsTrue(usuario.Mensagens[0] == "Nome é inválido.");
+        }
+
+        [TestMethod]
 		public void Nao_Deve_Validar_Entidade_Usuario_Sem_Email()
 		{
 			var usuario = CriarNovoUsuario();
@@ -38,7 +48,17 @@ namespace DatacenterMap.Testes.Controllers
 			Assert.IsTrue(usuario.Mensagens[0] == "Email é inválido.");
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Nao_Deve_Validar_Entidade_Usuario_Com_Email_Vazio()
+        {
+            var usuario = CriarNovoUsuario();
+            usuario.Email = "  ";
+            Assert.IsFalse(usuario.Validar());
+            Assert.IsTrue(usuario.Mensagens.Any());
+            Assert.IsTrue(usuario.Mensagens[0] == "Email é inválido.");
+        }
+
+        [TestMethod]
 		public void Nao_Deve_Validar_Entidade_Usuario_Com_Email_Sem_Arroba()
 		{
 			var usuario = CriarNovoUsuario();
@@ -68,7 +88,17 @@ namespace DatacenterMap.Testes.Controllers
 			Assert.IsTrue(usuario.Mensagens[0] == "Senha é inválida.");
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Nao_Deve_Validar_Entidade_Usuario_Com_Senha_Vazia()
+        {
+            var usuario = CriarNovoUsuario();
+            usuario.Senha = "  ";
+            Assert.IsFalse(usuario.Validar());
+            Assert.IsTrue(usuario.Mensagens.Any());
+            Assert.IsTrue(usuario.Mensagens[0] == "Senha é inválida.");
+        }
+
+        [TestMethod]
 		public void Deve_Validar_Senha_Usuario_Correta()
 		{
 			var usuario = CriarNovoUsuario();
