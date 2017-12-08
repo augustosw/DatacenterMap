@@ -11,7 +11,7 @@ namespace DatacenterMap.Domain.Entidades
         public string Descricao { get; set; }
         public Slot Slot { get; set; }
         public List<Gaveta> Gavetas { get; set; }
-        
+
         public Rack()
         {
             Gavetas = new List<Gaveta>();

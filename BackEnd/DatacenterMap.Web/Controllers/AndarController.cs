@@ -28,7 +28,7 @@ namespace DatacenterMap.Web.Controllers
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            Edificacao edificacao = contexto.Edificacoes.AsNoTracking().Where(x => x.Id == request.EdificacaoId).FirstOrDefault();
+            Edificacao edificacao = contexto.Edificacoes.AsNoTracking().FirstOrDefault(x => x.Id == request.EdificacaoId);
 
             if(edificacao.NumeroAndares < request.NumeroAndar) return BadRequest("O andar solicitado ultrapassa o limite máximo do prédio.");
 
@@ -53,7 +53,7 @@ namespace DatacenterMap.Web.Controllers
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            Andar andarAntigo = contexto.Andares.Where(x => x.Id == request.Id).FirstOrDefault();
+            Andar andarAntigo = contexto.Andares.FirstOrDefault(x => x.Id == request.Id);
 
             Andar novoAndar = CreateAndar(request.NumeroAndar, request.QuantidadeMaximaSalas, request.EdificacaoId);
 
@@ -74,7 +74,7 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Andar não encontrado.");
 
-            Andar andar = contexto.Andares.Where(x => x.Id == id).FirstOrDefault();
+            Andar andar = contexto.Andares.FirstOrDefault(x => x.Id == id);
             contexto.Andares.Remove(andar);
 
             return Ok("Removido com Sucesso");
@@ -86,7 +86,7 @@ namespace DatacenterMap.Web.Controllers
             {
                 NumeroAndar = numeroAndar,
                 QuantidadeMaximaSalas = quantidadeSalas,
-                Edificacao = contexto.Edificacoes.Where(x => x.Id == edificacaoId).FirstOrDefault()
+                Edificacao = contexto.Edificacoes.FirstOrDefault(x => x.Id == edificacaoId)
             };
 
             return andar;
