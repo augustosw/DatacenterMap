@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'auth']);
+angular.module('app', ['ngRoute', 'auth', 'ui.bootstrap']);
 
 // Configurações utilizadas pelo módulo de autenticação (authService)
 angular.module('app').constant('authConfig', {
