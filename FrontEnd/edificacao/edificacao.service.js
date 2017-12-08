@@ -5,7 +5,7 @@ angular.module('app').factory('edificacaoService', function ($http, $location) {
     function criar(edificacao){
         return $http.post(url, edificacao);
     }
-    function exluir(edificacao){
+    function excluir(edificacao){
         return $http.put(url, edificacao);
     }
     return {
