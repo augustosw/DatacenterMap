@@ -22,9 +22,9 @@ namespace DatacenterMap.Infra.Mappings
 
 			Property(x => x.Descricao).HasColumnType("varchar").HasMaxLength(255).IsRequired();
 
-			HasRequired(x => x.Slot).WithMany().Map(x => x.MapKey("Slot_Id"));
+			HasRequired(x => x.Slot).WithRequiredDependent().Map(x => x.MapKey("Slot_Id"));
 
 			HasMany(x => x.Gavetas).WithRequired().Map(x => x.MapKey("Rack_Id"));
-		}		
+		}
 	}
 }
