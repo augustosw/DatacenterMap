@@ -1,5 +1,5 @@
 ﻿using DatacenterMap.Domain.Entidades;
-using DatacenterMap.Infra.Repositorios;
+using DatacenterMap.Infra;
 using System;
 using System.Linq;
 using System.Net;
@@ -15,11 +15,11 @@ namespace DatacenterMap.Web
 {
     public class BasicAuthorization : AuthorizeAttribute
     {
-        readonly UsuarioRepository _usuarioRepositorio;
+        readonly IDatacenterMapContext contexto;
 
         public BasicAuthorization()
         {
-            _usuarioRepositorio = new UsuarioRepository();
+            contexto = new DatacenterMapContext();
         }
 
         public override void OnAuthorization(HttpActionContext actionContext)
@@ -97,7 +97,7 @@ namespace DatacenterMap.Web
         {
             usuarioRetorno = null;
 
-            var usuario = _usuarioRepositorio.Obter(login);
+            var usuario = contexto.Usuarios.AsNoTracking().Where(x => x.Email.Equals(login)).FirstOrDefault();
 
             if (usuario != null && usuario.ValidarSenha(senha))
                 usuarioRetorno = usuario;
