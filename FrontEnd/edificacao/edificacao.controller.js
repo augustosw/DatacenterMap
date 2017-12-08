@@ -1,13 +1,12 @@
 angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $routeParams) {
 
-
     $scope.criar = criar;
     $scope.andares = [1,2,3,4,5]; //para testes atualmente
     $scope.adicionarAndar = adicionarAndar;
     $scope.selecionarAndar= selecionarAndar;
     $scope.isAlterar = !!$routeParams.id; 
     $scope.voltar = voltar;
-
+    $scope.excluir = excluir;
     // TODO: necessário criar dados para poder usar.
     // setup(); 
 
@@ -29,8 +28,9 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     //                         $scope.edificacao = response.data;
     //                     })
     // }
+    
 
-    function criar (edificacao) {
+    function criar(edificacao) {
         edificacaoService.criar(edificacao) //chama o método de post da service
             .then(
             function (response) {
@@ -64,7 +64,17 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
 
     function voltar(){
         $scope.detalhe = false;
-        $scope.andares = [1,2,3,4,5]
+        $scope.andares = [1,2,3,4,5]  
     }
+
+    function excluir(edificacao) {
+        edificacaoService.excluir(edificacao) //chama o método de delete da service
+            .then(
+            function (response) {
+                console.log(response);
+            },
+            function (response) {
+                console.log(response);
+            });
 
 });

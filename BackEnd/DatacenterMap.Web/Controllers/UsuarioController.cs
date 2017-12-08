@@ -3,8 +3,6 @@ using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
@@ -33,7 +31,7 @@ namespace DatacenterMap.Web.Controllers
 
             if (contexto.Usuarios.Where(x => x.Email == request.Email).Count() != 0) return BadRequest("Já existe uma conta com esse email");
 
-            Usuario usuario = new Usuario(request.Nome, request.Email, request.Senha);
+            Usuario usuario = CreateUsuario(request.Nome, request.Email, request.Senha);
 
             if (usuario.Validar())
             {
@@ -56,8 +54,7 @@ namespace DatacenterMap.Web.Controllers
 
             if (usuarioLogado == null) return BadRequest("Usuário inexistente");
 
-            Usuario usuario = new Usuario(request.Nome, request.Email, request.Senha);
-            if (usuario.Validar())
+            if (usuarioLogado.Validar())
             {
                 usuarioLogado.Nome = request.Nome;
                 usuarioLogado.Senha = request.Senha;
@@ -67,7 +64,7 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(usuarioLogado);
             }
 
-            return (IHttpActionResult)BadRequest(usuario.Mensagens); ;
+            return (IHttpActionResult) BadRequest(usuarioLogado.Mensagens); ;
         }
 
         [HttpPost]
@@ -92,10 +89,24 @@ namespace DatacenterMap.Web.Controllers
         public Usuario UsuarioLogado()
         {
             var usuario = contexto.Usuarios
-                       .AsNoTracking()
                        .FirstOrDefault(x => x.Email == User.Identity.Name);
 
             return usuario;
         }
+
+        public Usuario CreateUsuario(string nome, string email, string senha)
+        {
+            if (!string.IsNullOrWhiteSpace(senha))
+                senha = Criptografia.CriptografarSenha(email, senha);
+
+            var usuario = new Usuario
+            {
+                Nome = nome,
+                Email = email,
+                Senha = senha
+            };
+            return usuario;
+        }
+   
     }
 }

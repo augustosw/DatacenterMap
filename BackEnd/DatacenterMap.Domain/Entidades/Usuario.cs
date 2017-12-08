@@ -8,16 +8,8 @@
         public string Email { get; set; }
         public string Senha { get; set; }
 
-        protected Usuario()
+        public Usuario()
         {
-        }
-
-        public Usuario(string nome, string email, string senha)
-        {
-            Nome = nome;
-            Email = email;
-            if (!string.IsNullOrWhiteSpace(senha))
-                Senha = Criptografia.CriptografarSenha(email, senha);
         }
 
         public bool ValidarSenha(string senha)

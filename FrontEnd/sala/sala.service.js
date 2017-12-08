@@ -5,8 +5,8 @@ angular.module('app').factory('salaService', function ($http, $location) {
     function criar(sala){
         return $http.post(url, sala);
     }
-    function exluir(sala){
-        return $http.put(url, sala);
+    function exluir(id){
+        return $http.delete(url + id);
     }
     function editar(id, sala){
         return $http.put(url + id, sala);

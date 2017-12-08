@@ -105,10 +105,17 @@
     <Compile Include="App_Start\BasicAuthorizationAttribute.cs" />
     <Compile Include="App_Start\ErrosGlobaisFilterAttribute.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AndarController.cs" />
     <Compile Include="Controllers\ControllerBasica.cs" />
+    <Compile Include="Controllers\EdificacaoController.cs" />
+    <Compile Include="Controllers\RackController.cs" />
+    <Compile Include="Controllers\SalaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Models\AndarModel.cs" />
+    <Compile Include="Models\EdificacaoModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\RegistrarUsuarioModel.cs" />
+    <Compile Include="Models\RackModel.cs" />
+    <Compile Include="Models\SalaModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

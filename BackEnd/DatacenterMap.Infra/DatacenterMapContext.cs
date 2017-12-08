@@ -5,18 +5,26 @@ using System.Data.Entity;
 namespace DatacenterMap.Infra
 {
 
-    public class BookingContext : DbContext, IDatacenterMapContext
+    public class DatacenterMapContext : DbContext, IDatacenterMapContext
     {
 
-        public BookingContext() : this("name=DatacenterMap") { }
 
-        public BookingContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        public DatacenterMapContext() : this("name=DatacenterMap") { }
+
+        public DatacenterMapContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Edificacao> Edificacoes { get; set; }
+        public DbSet<Andar> Andares { get; set; }
+        public DbSet<Sala> Salas { get; set; }
+        public DbSet<Slot> Slots { get; set; }
+        public DbSet<Gaveta> Gavetas { get; set; }
+        public DbSet<Rack> Racks { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

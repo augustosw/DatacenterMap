@@ -41,9 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criptografia.cs" />
+    <Compile Include="Entidades\Andar.cs" />
+    <Compile Include="Entidades\Edificacao.cs" />
     <Compile Include="Entidades\EntidadeBasica.cs" />
+    <Compile Include="Entidades\Equipamento.cs" />
+    <Compile Include="Entidades\Gaveta.cs" />
+    <Compile Include="Entidades\Rack.cs" />
+    <Compile Include="Entidades\Sala.cs" />
+    <Compile Include="Entidades\Slot.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorios\IUsuarioRepositorio.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
