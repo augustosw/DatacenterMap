@@ -39,6 +39,26 @@ namespace DatacenterMap.Testes.Controllers
 		}
 
 		[TestMethod]
+		public void Nao_Deve_Validar_Entidade_Usuario_Com_Email_Sem_Arroba()
+		{
+			var usuario = CriarNovoUsuario();
+			usuario.Email = "joaozinho.teste.com";
+			Assert.IsFalse(usuario.Validar());
+			Assert.IsTrue(usuario.Mensagens.Any());
+			Assert.IsTrue(usuario.Mensagens[0] == "Email é inválido.");
+		}
+
+		[TestMethod]
+		public void Nao_Deve_Validar_Entidade_Usuario_Com_Email_Sem_Ponto()
+		{
+			var usuario = CriarNovoUsuario();
+			usuario.Email = "joaozinho@teste";
+			Assert.IsFalse(usuario.Validar());
+			Assert.IsTrue(usuario.Mensagens.Any());
+			Assert.IsTrue(usuario.Mensagens[0] == "Email é inválido.");
+		}
+
+		[TestMethod]
 		public void Nao_Deve_Validar_Entidade_Usuario_Sem_Senha()
 		{
 			var usuario = CriarNovoUsuario();
