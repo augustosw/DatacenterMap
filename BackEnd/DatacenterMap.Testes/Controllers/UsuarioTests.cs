@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DatacenterMap.Domain.Entidades;
 using System.Linq;
 using DatacenterMap.Web.Controllers;
@@ -7,7 +6,7 @@ using DatacenterMap.Web.Controllers;
 namespace DatacenterMap.Testes.Controllers
 {
 	[TestClass]
-	public class UnitTest1
+	public class UsuarioTests
 	{
 
 		[TestMethod]
