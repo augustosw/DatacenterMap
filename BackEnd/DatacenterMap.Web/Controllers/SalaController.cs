@@ -30,7 +30,7 @@ namespace DatacenterMap.Web.Controllers
 
             Andar andar = contexto.Andares.AsNoTracking().Where(x => x.Id == request.AndarId).FirstOrDefault();
 
-            if (contexto.Salas.Where(x => x.Andar == andar && x.NumeroSala == request.NumeroSala).Count() != 0) return BadRequest("Já existe uma sala com esse número nesse andar.");
+            if (contexto.Salas.Where(x => x.Andar == andar && x.NumeroSala.Equals(request.NumeroSala)).Count() != 0) return BadRequest("Já existe uma sala com esse número nesse andar.");
 
             Sala sala = CreateSala(request.NumeroSala, request.QuantidadeMaximaSlots, request.Largura, request.Comprimento);
 

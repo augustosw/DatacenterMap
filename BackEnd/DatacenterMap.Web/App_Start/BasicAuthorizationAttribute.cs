@@ -97,7 +97,7 @@ namespace DatacenterMap.Web
         {
             usuarioRetorno = null;
 
-            var usuario = contexto.Usuarios.AsNoTracking().Where(x => x.Email == login).FirstOrDefault();
+            var usuario = contexto.Usuarios.AsNoTracking().Where(x => x.Email.Equals(login)).FirstOrDefault();
 
             if (usuario != null && usuario.ValidarSenha(senha))
                 usuarioRetorno = usuario;
