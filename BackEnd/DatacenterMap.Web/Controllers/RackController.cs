@@ -1,7 +1,7 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -80,6 +80,17 @@ namespace DatacenterMap.Web.Controllers
             }
 
             return (IHttpActionResult)BadRequest(rackNova.Mensagens);
+        }
+
+        [HttpGet]
+        [Route("/{id}")]
+        public IHttpActionResult GetRack([FromUri] int id)
+        {
+            if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
+
+            Rack rack = contexto.Racks.AsNoTracking().Include(x => x.Gavetas).FirstOrDefault(x => x.Id == id);
+
+            return Ok(rack);
         }
 
         [HttpDelete]
