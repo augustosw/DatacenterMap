@@ -17,7 +17,7 @@ namespace DatacenterMap.Infra.Mappings
 
             Property(x => x.Tensao).IsRequired();
 
-            // Mapear Lista de Gavetas
-        }
+			HasMany(x => x.Gavetas).WithRequired().Map(x => x.MapKey("Equipamento_Id"));
+		}
     }
 }
