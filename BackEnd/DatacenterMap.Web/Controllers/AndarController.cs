@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
-    [RoutePrefix("api/usuario")]
+    [RoutePrefix("api/andar")]
     public class AndarController : ControllerBasica
     {
 
