@@ -1,6 +1,5 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 //using DatacenterMap.Infra.Mappings;
 
 namespace DatacenterMap.Infra
@@ -23,6 +22,9 @@ namespace DatacenterMap.Infra
         public DbSet<Andar> Andares { get; set; }
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Slot> Slots { get; set; }
+        public DbSet<Gaveta> Gavetas { get; set; }
+        public DbSet<Rack> Racks { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,6 +1,8 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -51,10 +53,31 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
 
-            Edificacao edificacao = contexto.Edificacoes.Where(x => x.Id == id).FirstOrDefault();
+            Edificacao edificacao = contexto.Edificacoes.FirstOrDefault(x => x.Id == id);
             contexto.Edificacoes.Remove(edificacao);
 
             return Ok("Removido com Sucesso");
+        }
+
+        [HttpGet]
+        [Route("/{id}")]
+        public IHttpActionResult GetEdificacao([FromUri] int id)
+        {
+            if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
+
+            Edificacao edificacao = contexto.Edificacoes.AsNoTracking().Include(x => x.Andares).FirstOrDefault(x => x.Id == id);
+   
+            return Ok(edificacao);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetEdificacoes()
+        {
+            if (contexto.Edificacoes.Count() == 0) return BadRequest("Edificações não encontradas.");
+
+            List<Edificacao> edificacoes = contexto.Edificacoes.AsNoTracking().ToList();
+
+            return Ok(edificacoes);
         }
 
         public Edificacao CreateEdificacao(string nome, int numeroAndares, double longitude, double latitude)
@@ -66,9 +89,7 @@ namespace DatacenterMap.Web.Controllers
                 Longitude = longitude,
                 Latitude = latitude
             };
-
             return edificacao;
         }
-
     }
 }

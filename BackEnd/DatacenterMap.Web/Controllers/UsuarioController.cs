@@ -105,7 +105,6 @@ namespace DatacenterMap.Web.Controllers
                 Email = email,
                 Senha = senha
             };
-
             return usuario;
         }
    

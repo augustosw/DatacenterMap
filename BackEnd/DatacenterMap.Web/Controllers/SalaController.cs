@@ -29,7 +29,7 @@ namespace DatacenterMap.Web.Controllers
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            Andar andar = contexto.Andares.AsNoTracking().Where(x => x.Id == request.AndarId).FirstOrDefault();
+            Andar andar = contexto.Andares.AsNoTracking().FirstOrDefault(x => x.Id == request.AndarId);
 
             if (contexto.Salas.Where(x => x.Andar == andar && x.NumeroSala.Equals(request.NumeroSala)).Count() != 0)
                 return BadRequest("Já existe uma sala com esse número nesse andar.");
@@ -57,7 +57,7 @@ namespace DatacenterMap.Web.Controllers
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            Sala salaAntiga = contexto.Salas.Where(x => x.Id == request.Id).FirstOrDefault();
+            Sala salaAntiga = contexto.Salas.FirstOrDefault(x => x.Id == request.Id);
 
             Sala salaNova = CreateSala(request.NumeroSala, request.QuantidadeMaximaSlots, request.Largura, request.Comprimento);
 
@@ -88,11 +88,9 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
-            Sala sala = contexto.Salas.Where(x => x.Id == id).FirstOrDefault();
-            //List<Slot> slots = contexto.Slots.Where(x => x.Sala == sala).ToList();
+            Sala sala = contexto.Salas.FirstOrDefault(x => x.Id == id);
 
             contexto.Salas.Remove(sala);
-            //contexto.Slots.RemoveRange(slots);
 
             return Ok("Removido com Sucesso");
         }
