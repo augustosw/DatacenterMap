@@ -22,6 +22,19 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
+
+        .when('/edificacao/:id?', {
+            controller: 'EdificacaoController',
+            templateUrl: 'edificacao/edificacao.html',
+           //TODO : Implementar autenticação
+            // resolve: {
+            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+            //     autenticado: function (authService) {
+            //         return authService.isAutenticadoPromise();
+            //     }
+            // }
+        })
+               
         .when('/sala', {
             controller: 'SalaController',
             templateUrl: 'sala/sala.html',
@@ -33,6 +46,7 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
+        
         .when('/rack', {
             controller: 'RackController',
             templateUrl: 'rack/rack.html',
