@@ -17,7 +17,7 @@ namespace DatacenterMap.Infra.Mappings
 
 			HasRequired(x => x.Edificacao).WithRequiredDependent().Map(x => x.MapKey("Edificacao_Id"));
 
-			HasMany(x => x.Salas).WithRequired().Map(x => x.MapKey("Sala_Id"));
+			HasMany(x => x.Salas).WithRequired().Map(x => x.MapKey("Andar_Id"));
 		}
     }
 }
