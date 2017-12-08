@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slick Playground</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-image: url("background-pattern.eps");
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .slider {
+        width: 50%;
+        margin: 10px auto;
+    }
+
+    .slick-slide {
+      margin: 10px 20px;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
+
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+      opacity: .2;
+    }
+    
+    .slick-active {
+      opacity: .5;
+
+    }
+
+    .slick-current {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="center slider">
+    <div>
+      
+      
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Legg_Mason_Building.jpg">
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Legg_Mason_Building.jpg">
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Legg_Mason_Building.jpg">
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Legg_Mason_Building.jpg">
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Legg_Mason_Building.jpg">
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Legg_Mason_Building.jpg">
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Legg_Mason_Building.jpg">
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+
+    $(document).on('ready', function() {    
+      $('.center').slick({
+        centerMode: true,
+        centerPadding: '100px',
+        slidesToShow: 3,
+        responsive: [
+          {
+            breakpoint: 808,
+            settings: {
+              arrows: true,
+              centerMode: true,
+              centerPadding: '10px',
+              slidesToShow: 3
+            }
+          },
+          {
+            breakpoint: 620,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<div class="container-header">
+  <div class="flex-row row-end">
+      <form class="navbar-form navbar-right">
+        <div ng-if="true"> <!-- TODO: validação usuario --> 
+          <div class="form-group">
+            <span uib-dropdown on-toggle="toggled(open)">
+                <a href id="simple-dropdown" uib-dropdown-toggle>
+                    <img class="user-image" src="/image/user-logo.svg" heigh="30" width="30">
+                </a>
+                <ul id="dropdown-header"class="dropdown-menu flex-row center-center" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                    <div class="arrow-up"></div>
+                    <a id="button-login" ng-click="logout()">Logout</button></a>
+                </ul>
+                </span>
+          </div>
+        </div>
+        <div ng-if="false"> <!--TODO: validação usuario --> 
+          <a class="" href="/#!/edificacao" role="button">Login</a>
+        </div>
+      </form>
+  </div>
+</div>
