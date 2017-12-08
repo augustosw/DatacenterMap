@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using DatacenterMap.Domain.Repositorios
-using System.Threading.Tasks;
+using DatacenterMap.Domain.Repositorios;
 using DatacenterMap.Domain.Entidades;
 
 namespace DatacenterMap.Testes.MockRepositorios
