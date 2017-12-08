@@ -9,16 +9,15 @@
   <link rel="stylesheet" href="style/slick.css">
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-  
+
 
   <title>Data Center Map</title>
 </head>
 
 <body ng-app="app">
     <map-header></map-header>
-    <map-sidebar></map-sidebar>
-    <div class="container">
-
+    <div class="container-wrapper">
+        <map-sidebar></map-sidebar>
         <!-- Rotas -->      
         <ng-view></ng-view>
     </div>
@@ -29,7 +28,7 @@
 </body>
 
 <!-- Angular, Rotas, Local Storage (Módulo 'auth' depende dele) -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>

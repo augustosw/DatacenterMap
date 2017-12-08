@@ -38,6 +38,9 @@ html, body {
     justify-content: flex-end
 }
 
+.container-wrapper {
+    display: flex;
+}
 
 .text-header-title {
     margin-top: 5px;
@@ -49,7 +52,8 @@ html, body {
 
 a {
     text-decoration: none;
-    color: #42464F; 
+    color: #42464F;
+    cursor: pointer; 
 }
 
 
@@ -78,6 +82,24 @@ a {
 #button-login {
     padding: 3px;
     cursor: pointer;
+}
+
+.sidebar-closed-icon,
+.sidebar {
+    background: #42464F; 
+} 
+
+.sidebar {
+    height:710px;
+    position: relative;
+    z-index: 9;
+}
+
+.sidebar-content {
+     width: auto;
+     position: relative;
+     overflow: auto;
+     z-index: 1;
 }
 
 .edificacao-wrapper {
@@ -110,8 +132,8 @@ a {
 }
 
 .base  {
-    width: 192vmin;
-    height: 128vmin;
+    width: 170vmin;
+    height: 100vmin;
     margin: -64vmin 0 0 -96vmin;
     pointer-events: none;
     transition: opacity 0.8s;
@@ -134,15 +156,14 @@ a {
 }
 
 .andares {
-    width: 96vmin;
-    height: 64vmin;
+    width: 80vmin;
+    height: 50vmin;
     margin: -32vmin 0 0 -48vmin;
     transition: transform 0.3s;
     transform-style: preserve-3d;
 }
 
 .andar {
-    
     position: relative;
     width: 100%;
     height: 100%;
@@ -170,7 +191,7 @@ a {
 .edificacao-detalhes {
     position: absolute;
     right: 0;
-    width: 300px;
+    width: 200px;
     min-height: 100vh;
     padding: 5em 0 1em;
     background: #fff;
@@ -179,8 +200,12 @@ a {
 .andar-numero {
     transition-delay: 0.45s;
     position: absolute;
-    color: #42464F;
-    
+    color: #42464F;   
+}
+
+.md-button {
+    min-height: 0px;
+    min-width: 0px; 
 }
 
 [data-tooltip]:after {

@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ngMaterial', 'auth', 'ngMessages', 'material.svgAssetsCache', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+angular.module('app', ['ngRoute', 'ngMaterial', 'auth', 'ngMessages', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 // Configurações utilizadas pelo módulo de autenticação (authService)
 angular.module('app').constant('authConfig', {
 
