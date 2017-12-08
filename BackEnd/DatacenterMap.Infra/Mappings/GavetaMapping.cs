@@ -22,7 +22,7 @@ namespace DatacenterMap.Infra.Mappings
 
 			HasRequired(x => x.Rack).WithRequiredDependent().Map(x => x.MapKey("Rack_Id"));
 
-			HasRequired(x => x.Equipamento).WithRequiredDependent().Map(x => x.MapKey("Equipamento_Id"));
+			HasOptional(x => x.Equipamento).WithOptionalDependent().Map(x => x.MapKey("Equipamento_Id"));
 		}
 	}
 }
