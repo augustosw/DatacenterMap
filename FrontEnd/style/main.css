@@ -176,10 +176,23 @@ a {
     background: #fff;
 }
 
+.andar-numero {
+    transition-delay: 0.45s;
+    position: absolute;
+    color: #42464F;
+    
+}
+
 [data-tooltip]:after {
     content:attr(data-tooltip);
     position:absolute; 
-    font-size: 45px; 
+    padding: 2px;
+    font-size: 40px; 
+    transition-delay: 0.45s;
+    border-radius: 2px;
+    white-space: nowrap;
+    transform: translateX(-80%); 
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 @media screen and (max-width: 65.625em), screen and (max-height: 40.625em) {
