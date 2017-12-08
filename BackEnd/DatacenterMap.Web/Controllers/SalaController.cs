@@ -66,9 +66,6 @@ namespace DatacenterMap.Web.Controllers
 
             if (salaNova.Validar())
             {
-                // Possível alterar o comprimento, largura e quantidade máxima de slots
-                salaAntiga.Comprimento = request.Comprimento;
-                salaAntiga.Largura = request.Largura;
                 salaAntiga.QuantidadeMaximaSlots = request.QuantidadeMaximaSlots;
 
                 int quantidadeExtrasSlots = request.QuantidadeMaximaSlots - salaAntiga.QuantidadeMaximaSlots;
