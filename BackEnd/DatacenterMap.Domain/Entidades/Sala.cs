@@ -15,7 +15,7 @@ namespace DatacenterMap.Domain.Entidades
 
         public Sala()
         {
-            
+            Slots = new List<Slot>();
         }
 
         public override bool Validar()

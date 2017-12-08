@@ -1,10 +1,7 @@
-﻿using DatacenterMap.Domain;
-using DatacenterMap.Domain.Entidades;
+﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers

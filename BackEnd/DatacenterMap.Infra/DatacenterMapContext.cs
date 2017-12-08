@@ -21,7 +21,7 @@ namespace DatacenterMap.Infra
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Edificacao> Edificacoes { get; set; }
         public DbSet<Andar> Andares { get; set; }
-
+        public DbSet<Sala> Salas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
