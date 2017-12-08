@@ -19,7 +19,7 @@ namespace DatacenterMap.Infra.Mappings
 
             Property(x => x.Longitude).IsRequired();
 
-            // Mapear lista de Andares
+			HasMany(x => x.Andares).WithRequired().Map(x => x.MapKey("Edificacao_Id"));
         }
     }
 }
