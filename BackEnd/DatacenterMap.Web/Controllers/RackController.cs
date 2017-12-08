@@ -1,6 +1,7 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
@@ -67,7 +68,7 @@ namespace DatacenterMap.Web.Controllers
             if (rackNova.Validar())
             {
                 rackAntiga.QuantidadeGavetas = request.QuantidadeGavetas;
-
+                rackAntiga.Descricao = request.Descricao;
                 int quantidadeExtrasSlots = request.QuantidadeGavetas - rackAntiga.QuantidadeGavetas;
                 for (var i = 0; i < quantidadeExtrasSlots; i++)
                 {
@@ -88,7 +89,8 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
 
-            Rack rack = contexto.Racks.AsNoTracking().Include(x => x.Gavetas).FirstOrDefault(x => x.Id == id);
+            Rack rack = contexto.Racks.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            rack.Gavetas = contexto.Gavetas.AsNoTracking().Where(x => x.Rack == rack).Include(x => x.Equipamento).ToList();
 
             return Ok(rack);
         }
@@ -104,6 +106,19 @@ namespace DatacenterMap.Web.Controllers
             contexto.Racks.Remove(rack);
 
             return Ok("Removido com Sucesso");
+        }
+
+        [HttpDelete]
+        [Route("/limpar/{id}")]
+        public IHttpActionResult LimparRack([FromUri] int id)
+        {
+            if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
+
+            Rack rack = contexto.Racks.FirstOrDefault(x => x.Id == id);
+            rack.Gavetas.ForEach(x => x.Ocupado = false && x.Equipamento == null);
+            contexto.SaveChanges();
+
+            return Ok("Todos os Equipamentos foram removidos.");
         }
 
         public Rack CreateRack(int quantidadeGavetas, int tensao, string descricao)
