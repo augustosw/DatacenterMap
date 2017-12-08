@@ -5,8 +5,8 @@ angular.module('app').factory('edificacaoService', function ($http, $location) {
     function criar(edificacao){
         return $http.post(url, edificacao);
     }
-    function exluir(edificacao){
-        return $http.put(url, edificacao);
+    function excluir(id){
+        return $http.delete(url + id);
     }
     return {
         criar: criar,
