@@ -49,6 +49,13 @@
   <ItemGroup>
     <Compile Include="DatacenterMapContext.cs" />
     <Compile Include="IDatacenterMapContext.cs" />
+    <Compile Include="Mappings\AndarMapping.cs" />
+    <Compile Include="Mappings\EdificacaoMapping.cs" />
+    <Compile Include="Mappings\EquipamentoMapping.cs" />
+    <Compile Include="Mappings\GavetaMapping.cs" />
+    <Compile Include="Mappings\RackMapping.cs" />
+    <Compile Include="Mappings\SalaMapping.cs" />
+    <Compile Include="Mappings\SlotMapping.cs" />
     <Compile Include="Mappings\UsuarioMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

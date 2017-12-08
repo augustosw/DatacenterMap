@@ -24,6 +24,7 @@ namespace DatacenterMap.Infra
         public DbSet<Slot> Slots { get; set; }
         public DbSet<Gaveta> Gavetas { get; set; }
         public DbSet<Rack> Racks { get; set; }
+        public DbSet<Equipamento> Equipamentos { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

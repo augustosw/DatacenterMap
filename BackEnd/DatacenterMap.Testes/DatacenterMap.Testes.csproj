@@ -59,7 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\UsuarioControllerTests.cs" />
+    <Compile Include="Controllers\AndarTests.cs" />
+    <Compile Include="Controllers\EdificacaoTests.cs" />
+    <Compile Include="Controllers\SalaTests.cs" />
+    <Compile Include="Controllers\UsuarioTests.cs" />
     <Compile Include="MockRepositorios\UsuarioRepositorioMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

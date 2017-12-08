@@ -13,6 +13,7 @@ namespace DatacenterMap.Infra
         DbSet<Slot> Slots { get; set; }
         DbSet<Gaveta> Gavetas { get; set; }
         DbSet<Rack> Racks { get; set; }
+        DbSet<Equipamento> Equipamentos { get; set; }
 
         int SaveChanges();
 
