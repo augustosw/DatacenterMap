@@ -3,9 +3,9 @@ using DatacenterMap.Domain.Entidades;
 
 namespace DatacenterMap.Infra.Mappings
 {
-    internal class EquipametoMapping : EntityTypeConfiguration<Equipamento>
+    internal class EquipamentoMapping : EntityTypeConfiguration<Equipamento>
     {
-        public EquipametoMapping()
+        public EquipamentoMapping()
         {
             ToTable("Equipamento", "DatacenterMap");
 
@@ -17,7 +17,6 @@ namespace DatacenterMap.Infra.Mappings
 
             Property(x => x.Tensao).IsRequired();
 
-			HasMany(x => x.Gavetas).WithRequired().Map(x => x.MapKey("Equipamento_Id"));
 		}
     }
 }

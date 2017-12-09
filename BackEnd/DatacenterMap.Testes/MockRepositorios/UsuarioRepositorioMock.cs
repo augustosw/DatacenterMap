@@ -29,7 +29,7 @@ namespace DatacenterMap.Testes.MockRepositorios
 
 		public List<Usuario> Listar()
 		{
-			throw new NotImplementedException();
+            return _usuarios;
 		}
 
 		public Usuario Obter(int id)

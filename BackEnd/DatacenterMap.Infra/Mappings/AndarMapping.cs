@@ -14,10 +14,6 @@ namespace DatacenterMap.Infra.Mappings
             Property(x => x.NumeroAndar).IsRequired();
 
             Property(x => x.QuantidadeMaximaSalas).IsRequired();
-
-			HasRequired(x => x.Edificacao).WithRequiredDependent().Map(x => x.MapKey("Edificacao_Id"));
-
-			HasMany(x => x.Salas).WithRequired().Map(x => x.MapKey("Andar_Id"));
 		}
     }
 }
