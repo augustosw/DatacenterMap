@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
+    [BasicAuthorization]
     [RoutePrefix("api/andar")]
     public class AndarController : ControllerBasica
     {
@@ -69,7 +70,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IHttpActionResult DeletarAndar([FromUri] int id)
         {
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Andar não encontrado.");

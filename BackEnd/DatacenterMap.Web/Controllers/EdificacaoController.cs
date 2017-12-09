@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
+    [BasicAuthorization]
     [RoutePrefix("api/edificacao")]
     public class EdificacaoController : ControllerBasica
     {
@@ -48,7 +49,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IHttpActionResult DeletarEdificacao([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
@@ -60,7 +61,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IHttpActionResult GetEdificacao([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");

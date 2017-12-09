@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
+    [AllowAnonymous]
     [RoutePrefix("api/usuario")]
     public class UsuarioController : ControllerBasica
     {
@@ -72,8 +73,8 @@ namespace DatacenterMap.Web.Controllers
         public IHttpActionResult Logar(LoginModel login)
         {
             var usuario = contexto.Usuarios
-                       .AsNoTracking()
-                       .FirstOrDefault(x => x.Email == login.Email);
+                        .AsNoTracking()
+                        .FirstOrDefault(x => x.Email == login.Email);
 
             if (usuario == null)
                 return NotFound();

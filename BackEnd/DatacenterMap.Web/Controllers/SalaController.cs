@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
+    [BasicAuthorization]
     [RoutePrefix("api/sala")]
     public class SalaController : ControllerBasica
     {
@@ -83,7 +84,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IHttpActionResult DeletarSala([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");

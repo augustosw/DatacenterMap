@@ -1,13 +1,13 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
+    [BasicAuthorization]
     [RoutePrefix("api/rack")]
     public class RackController : ControllerBasica
     {
@@ -42,7 +42,7 @@ namespace DatacenterMap.Web.Controllers
                 contexto.Racks.Add(rack);
                 for (var i = 0; i < rack.QuantidadeGavetas; i++)
                 {
-                    contexto.Gavetas.Add(CreateGaveta(rack, i+1));
+                    contexto.Gavetas.Add(CreateGaveta(rack, i + 1));
                 }
                 contexto.SaveChanges();
 
@@ -84,7 +84,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IHttpActionResult GetRack([FromUri] int id)
         {
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
@@ -96,7 +96,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IHttpActionResult DeletarRack([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
@@ -109,7 +109,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("/limpar/{id}")]
+        [Route("limpar/{id}")]
         public IHttpActionResult LimparRack([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
