@@ -34,6 +34,18 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
+        
+        .when('/andar', {
+            controller: 'AndarController',
+            templateUrl: 'andar/andar.html',
+            //TODO : Implementar autenticação
+            // resolve: {
+            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+            //     autenticado: function (authService) {
+            //         return authService.isAutenticadoPromise();
+            //     }
+            // }
+        })
                
         .when('/sala', {
             controller: 'SalaController',

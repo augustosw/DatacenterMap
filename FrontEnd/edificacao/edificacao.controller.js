@@ -76,5 +76,5 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
             function (response) {
                 console.log(response);
             });
-
+    }
 });
