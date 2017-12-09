@@ -2,12 +2,12 @@
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
-    [RoutePrefix("api/andar")]
     public class AndarController : ControllerBasica
     {
 
@@ -24,7 +24,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CadastrarAndar([FromBody] AndarModel request)
+        [Route("api/andar")]
+        public HttpResponseMessage CadastrarAndar([FromBody] AndarModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -45,11 +46,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(andar);
             }
 
-            return (IHttpActionResult)BadRequest(andar.Mensagens);
+            return BadRequest(andar.Mensagens);
         }
 
         [HttpPut]
-        public IHttpActionResult AlterarAndar([FromBody] AndarModel request)
+        [Route("api/andar")]
+        public HttpResponseMessage AlterarAndar([FromBody] AndarModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -66,12 +68,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(andarAntigo);
             }
 
-            return (IHttpActionResult)BadRequest(novoAndar.Mensagens); ;
+            return BadRequest(novoAndar.Mensagens); ;
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IHttpActionResult DeletarAndar([FromUri] int id)
+        [Route("api/andar/{id}")]
+        public HttpResponseMessage DeletarAndar([FromUri] int id)
         {
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Andar não encontrado.");
 

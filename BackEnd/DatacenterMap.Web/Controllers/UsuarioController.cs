@@ -3,12 +3,12 @@ using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [AllowAnonymous]
-    [RoutePrefix("api/usuario")]
     public class UsuarioController : ControllerBasica
     {
 
@@ -25,7 +25,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CadastrarUsuario([FromBody] UsuarioModel request)
+        [Route("api/usuario")]
+        public HttpResponseMessage CadastrarUsuario([FromBody] UsuarioModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -42,11 +43,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(usuario);
             }
 
-            return (IHttpActionResult)BadRequest(usuario.Mensagens);
+            return BadRequest(usuario.Mensagens);
         }
 
         [HttpPut]
-        public IHttpActionResult AlterarUsuario([FromBody] UsuarioModel request)
+        [Route("api/usuario")]
+        public HttpResponseMessage AlterarUsuario([FromBody] UsuarioModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -65,19 +67,19 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(usuarioLogado);
             }
 
-            return (IHttpActionResult) BadRequest(usuarioLogado.Mensagens); ;
+            return BadRequest(usuarioLogado.Mensagens); ;
         }
 
         [HttpPost]
-        [Route("login")]
-        public IHttpActionResult Logar(LoginModel login)
+        [Route("api/usuario/login")]
+        public HttpResponseMessage Logar(LoginModel login)
         {
             var usuario = contexto.Usuarios
                         .AsNoTracking()
                         .FirstOrDefault(x => x.Email == login.Email);
 
             if (usuario == null)
-                return NotFound();
+                return BadRequest("Não encontrado.");
 
             var senhaCriptografada = Criptografia.CriptografarSenha(login.Email, login.Senha);
             var senhaCorreta = usuario.ValidarSenha(senhaCriptografada);

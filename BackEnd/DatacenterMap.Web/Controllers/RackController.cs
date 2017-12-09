@@ -3,12 +3,12 @@ using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
-    [RoutePrefix("api/rack")]
     public class RackController : ControllerBasica
     {
 
@@ -25,7 +25,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CadastrarRack([FromBody] RackModel request)
+        [Route("api/rack")]
+        public HttpResponseMessage CadastrarRack([FromBody] RackModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -49,11 +50,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(rack);
             }
 
-            return (IHttpActionResult)BadRequest(rack.Mensagens);
+            return BadRequest(rack.Mensagens);
         }
 
         [HttpPut]
-        public IHttpActionResult AlterarRack([FromBody] RackModel request)
+        [Route("api/rack")]
+        public HttpResponseMessage AlterarRack([FromBody] RackModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -80,12 +82,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(rackAntiga);
             }
 
-            return (IHttpActionResult)BadRequest(rackNova.Mensagens);
+            return BadRequest(rackNova.Mensagens);
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IHttpActionResult GetRack([FromUri] int id)
+        [Route("api/rack/{id}")]
+        public HttpResponseMessage GetRack([FromUri] int id)
         {
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
 
@@ -96,8 +98,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IHttpActionResult DeletarRack([FromUri] int id)
+        [Route("api/rack/{id}")]
+        public HttpResponseMessage DeletarRack([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
 
@@ -109,8 +111,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("limpar/{id}")]
-        public IHttpActionResult LimparRack([FromUri] int id)
+        [Route("api/rack/limpar/{id}")]
+        public HttpResponseMessage LimparRack([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
 

@@ -1,14 +1,13 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
-    [RoutePrefix("api/sala")]
     public class SalaController : ControllerBasica
     {
 
@@ -25,7 +24,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CadastrarSala([FromBody] SalaModel request)
+        [Route("api/sala")]
+        public HttpResponseMessage CadastrarSala([FromBody] SalaModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -49,11 +49,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(sala);
             }
 
-            return (IHttpActionResult)BadRequest(sala.Mensagens);
+            return BadRequest(sala.Mensagens);
         }
 
         [HttpPut]
-        public IHttpActionResult AlterarSala([FromBody] SalaModel request)
+        [Route("api/sala")]
+        public HttpResponseMessage AlterarSala([FromBody] SalaModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -80,12 +81,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(salaAntiga);
             }
 
-            return (IHttpActionResult)BadRequest(salaNova.Mensagens);
+            return BadRequest(salaNova.Mensagens);
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IHttpActionResult DeletarSala([FromUri] int id)
+        [Route("api/sala/{id}")]
+        public HttpResponseMessage DeletarSala([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
