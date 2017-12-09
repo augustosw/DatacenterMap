@@ -1,29 +1,33 @@
-<div class="sidebar">
-    <div class="sidebar-content">
-        <section class="flex-column">
-            <md-sidenav class="md-sidenav-left" md-component-id="left"
-                md-disable-backdrop md-whiteframe="4">
-                
-                <div>
-                    <a ng-click="toggleLeft()" class="md-raised">
-                        <img src="/image/arrow-sidebar.svg" height="30px" width="30px">
-                    </a>
+<div class="sidenav" ng-class="{'sidenav-open': isSidenavOpen}">
+    <div style="background-color:#FBB041"></div>
+    <div class="flex-column">
+        <div class="sidebar-items flex-column center-center ">
+            <form class="busca-sidebar-wrapper">
+                <fieldset>
+                    <div class="sidebar-busca">
+                        <i class="fa fa-search busca-icone"></i>
+                        <input class="edificacao-busca"type="text" ng-model="busca" placeholder="Busque edificações" />
+                    </div>                        
+                </fieldset>
+            </form>
+            <hr>
+            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                <div uib-slide ng-repeat="edificacao in edificacoes | filter: busca as results " index="edificacao.id" >
+                    <img ng-src="{{edificacao.image}}" heigh="350px" width="350px" style="margin:auto;">
+                    <div class="carousel-caption">
+                        <h4>Edificacao {{edificacao.id}}</h4>
+                        <p>{{edificacao.text}}</p>
+                    </div>
+                    <div ng-if="results.length === 0">
+                        <h2>No results found...</h2>
+                    </div>
                 </div>
-                
-            </md-sidenav>
-            
-            <md-content flex layout-padding class="sidebar-closed-icon" >
-                
-                <div>
-                    <a ng-click="toggleLeft()" class="md-raised">
-                        <img src="/image/arrow-sidebar.svg" height="30px" width="30px">
-                    </a>
-                </div>
-                
-                
-            </md-content>
-            
-        </section>
-        
-    </div> 
+            </div>
+            <button class="botao-flutuante-adicionar"> + </button>
+        </div>
+    </div>
 </div>
+<div class="conteudo">
+    <img class="sidenav-toggler" ng-class="{'sidenav-image-open': isSidenavOpen}" ng-click="toggleSidenav()" height="40" width="40" src="/image/arrow-sidebar.svg">
+</div>
+    
