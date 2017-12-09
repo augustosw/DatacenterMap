@@ -1,6 +1,6 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using System.Data.Entity;
-//using DatacenterMap.Infra.Mappings;
+using DatacenterMap.Infra.Mappings;
 
 namespace DatacenterMap.Infra
 {
@@ -30,7 +30,14 @@ namespace DatacenterMap.Infra
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
-            //modelBuilder.Configurations.Add(new UsuarioMapping());
+            modelBuilder.Configurations.Add(new UsuarioMapping());
+            modelBuilder.Configurations.Add(new AndarMapping());
+            modelBuilder.Configurations.Add(new EdificacaoMapping());
+            modelBuilder.Configurations.Add(new SalaMapping());
+            modelBuilder.Configurations.Add(new SlotMapping());
+            modelBuilder.Configurations.Add(new GavetaMapping());
+            modelBuilder.Configurations.Add(new RackMapping());
+            modelBuilder.Configurations.Add(new EquipamentoMapping());
 
             base.OnModelCreating(modelBuilder);
         }

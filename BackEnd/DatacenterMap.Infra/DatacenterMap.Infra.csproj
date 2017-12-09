@@ -57,18 +57,27 @@
     <Compile Include="Mappings\SalaMapping.cs" />
     <Compile Include="Mappings\SlotMapping.cs" />
     <Compile Include="Mappings\UsuarioMapping.cs" />
+    <Compile Include="Migrations\201712090302083_Test.cs" />
+    <Compile Include="Migrations\201712090302083_Test.Designer.cs">
+      <DependentUpon>201712090302083_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DatacenterMap.Domain\DatacenterMap.Domain.csproj">
       <Project>{56e0cee8-27d8-4f9f-aab8-13881385a5d4}</Project>
       <Name>DatacenterMap.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712090302083_Test.resx">
+      <DependentUpon>201712090302083_Test.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
