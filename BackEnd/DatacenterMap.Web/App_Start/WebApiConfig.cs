@@ -1,5 +1,10 @@
-﻿using System.Web.Http;
+﻿using DatacenterMap.Infra;
+using System.Configuration;
+using System.Web.Http;
 using System.Web.Http.Cors;
+using Unity;
+using Unity.AspNet.WebApi;
+using Unity.Injection;
 
 namespace DatacenterMap.Web
 {
@@ -21,10 +26,16 @@ namespace DatacenterMap.Web
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                 name: "DefaultApi",
-                 routeTemplate: "api/{controller}/{id}",
-                 defaults: new { id = RouteParameter.Optional }
-             );
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            var connectionString = ConfigurationManager.ConnectionStrings["DatacenterMap"].ConnectionString;
+
+            var container = new UnityContainer();
+            container.RegisterType<IDatacenterMapContext, DatacenterMapContext>(new InjectionConstructor("name=DatacenterMap"));
+            config.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
 }
