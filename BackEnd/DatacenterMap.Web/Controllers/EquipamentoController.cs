@@ -32,7 +32,7 @@ namespace DatacenterMap.Web.Controllers
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            List<Gaveta> gavetasPedidas = contexto.Gavetas.Where(x => request.GavetasId.Contains(x.Id)).ToList();
+            List<Gaveta> gavetasPedidas = contexto.Gavetas.Include(x => x.Rack).Where(x => request.GavetasId.Contains(x.Id)).ToList();
 
             if (gavetasPedidas.Count() != request.Tamanho)
                 return BadRequest("A quantidade de gavetas encontradas não é igual ao tamanho do equipamento.");
@@ -43,7 +43,8 @@ namespace DatacenterMap.Web.Controllers
             if (gavetasPedidas.Any(x => x.Rack.Id != gavetasPedidas[0].Rack.Id))
                 return BadRequest("As gavetas não são do mesmo rack.");
 
-            Rack rack = contexto.Racks.FirstOrDefault(x => x.Id == gavetasPedidas[0].Rack.Id);
+            int idRack = gavetasPedidas[0].Rack.Id;
+            Rack rack = contexto.Racks.FirstOrDefault(x => x.Id == idRack);
             if (rack.Tensao != request.Tensao)
                 return BadRequest("O rack não tem a mesma tensão do equipamento.");
 
