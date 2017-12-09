@@ -4,12 +4,12 @@ using DatacenterMap.Web.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
-    [RoutePrefix("api/edificacao")]
     public class EdificacaoController : ControllerBasica
     {
 
@@ -25,8 +25,9 @@ namespace DatacenterMap.Web.Controllers
             this.contexto = contexto;
         }
 
-        [HttpPost]
-        public IHttpActionResult CadastrarEdificacao([FromBody] EdificacaoModel request)
+        [HttpPost]      
+        [Route("api/edificacao")]
+        public HttpResponseMessage CadastrarEdificacao([FromBody] EdificacaoModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -45,12 +46,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(edificacao);
             }
 
-            return (IHttpActionResult)BadRequest(edificacao.Mensagens);
+            return BadRequest(edificacao.Mensagens);
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IHttpActionResult DeletarEdificacao([FromUri] int id)
+        [Route("api/edificacao/{id}")]
+        public HttpResponseMessage DeletarEdificacao([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
 
@@ -61,8 +62,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IHttpActionResult GetEdificacao([FromUri] int id)
+        [Route("api/edificacao/{id}")]
+        public HttpResponseMessage GetEdificacao([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
 
@@ -72,7 +73,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetEdificacoes()
+        [Route("api/edificacao")]
+        public HttpResponseMessage GetEdificacoes()
         {
             if (contexto.Edificacoes.Count() == 0) return BadRequest("Edificações não encontradas.");
 

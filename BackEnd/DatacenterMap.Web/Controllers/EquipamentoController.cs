@@ -4,12 +4,12 @@ using DatacenterMap.Web.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
-    [RoutePrefix("api/equipamento")]
     public class EquipamentoController : ControllerBasica
     {
 
@@ -26,7 +26,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CadastrarEquipamento([FromBody] EquipamentoModel request)
+        [Route("api/equipamento")]
+        public HttpResponseMessage CadastrarEquipamento([FromBody] EquipamentoModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -61,13 +62,14 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(equipamento);
             }
 
-            return (IHttpActionResult)BadRequest(equipamento.Mensagens);
+            return BadRequest(equipamento.Mensagens);
         }
 
         // TO-DO: Adicionar mover equipamento
         
         [HttpPut]
-        public IHttpActionResult AlterarDescEquipamento([FromBody] EquipamentoModel request)
+        [Route("api/equipamento")]
+        public HttpResponseMessage AlterarDescEquipamento([FromBody] EquipamentoModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -82,12 +84,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(equipamentoAntigo);
             }
 
-            return (IHttpActionResult)BadRequest(equipamentoAntigo.Mensagens);
+            return BadRequest(equipamentoAntigo.Mensagens);
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IHttpActionResult GetEquipamento([FromUri] int id)
+        [Route("api/equipamento/{id}")]
+        public HttpResponseMessage GetEquipamento([FromUri] int id)
         {
             if (contexto.Equipamentos.Where(x => x.Id == id).Count() == 0) return BadRequest("Equipamento não encontrado.");
 
@@ -97,8 +99,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IHttpActionResult DeletarEquipamento([FromUri] int id)
+        [Route("api/equipamento/{id}")]
+        public HttpResponseMessage DeletarEquipamento([FromUri] int id)
         {
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Equipamento não encontrado.");
 
