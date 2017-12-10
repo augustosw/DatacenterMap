@@ -1,3 +1,6 @@
+<div ng-if="cadastro">
+    <map-edificacao-cadastro></map-edificacao-cadastro>
+</div>
 <div class="sidenav" ng-class="{'sidenav-open': isSidenavOpen}">
     <div style="background-color:#FBB041"></div>
     <div class="flex-column">
@@ -10,24 +13,14 @@
                     </div>                        
                 </fieldset>
             </form>
-            <hr>
-            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-                <div uib-slide ng-repeat="edificacao in edificacoes | filter: busca as results " index="edificacao.id" >
-                    <img ng-src="{{edificacao.image}}" heigh="350px" width="350px" style="margin:auto;">
-                    <div class="carousel-caption">
-                        <h4>Edificacao {{edificacao.id}}</h4>
-                        <p>{{edificacao.text}}</p>
-                    </div>
-                    <div ng-if="results.length === 0">
-                        <h2>No results found...</h2>
-                    </div>
-                </div>
-            </div>
-            <button class="botao-flutuante-adicionar"> + </button>
+            <map-carousel edificacoes='edificacoes'></map-carousel>
+            <hr class="separador">
+            <button ng-if="!cadastro"class="botao-flutuante-adicionar" ng-click="abrir()"> + </button>
+            <button ng-if="cadastro" class="botao-flutuante-cancelar" ng-click="fechar()"> x </button>
+            
         </div>
     </div>
 </div>
 <div class="conteudo">
     <img class="sidenav-toggler" ng-class="{'sidenav-image-open': isSidenavOpen}" ng-click="toggleSidenav()" height="40" width="40" src="/image/arrow-sidebar.svg">
 </div>
-    

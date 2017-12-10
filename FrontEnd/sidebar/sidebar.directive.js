@@ -11,35 +11,42 @@ angular.module('app')
     
     controller: function ($scope ) {
 
-        $scope.isSidenavOpen = false
-        
+        $scope.abrir = abrir;
+        $scope.fechar = fechar;
+        $scope.isSidenavOpen = true
         $scope.toggleSidenav = function() {
           $scope.isSidenavOpen = !$scope.isSidenavOpen
         }
 
-
-
-        //////////////////////////
-
-        $scope.active = 0;
-        var edificacoes = $scope.edificacoes = []; 
-        var slides = $scope.slides = [];
+        $scope.edificacoes = []; 
         var currIndex = 0;
-      
-        $scope.addSlide = function() {
-          edificacoes.push({
-            image: '/image/building.jpeg',
-            text: ['building details'][slides.length % 4],
-            id: currIndex++
-          });
-        };
-      
-        for (var i = 0; i < 4; i++) {
-          $scope.addSlide();
+
+        $scope.edificacoes.push({
+          image: '/image/building.jpeg',
+          text: ['building details'][$scope.edificacoes.length % 4],
+          id: currIndex++ 
+        });
+
+        $scope.edificacoes.push({
+            image: '/image/logo.svg',
+            text: ['segunda foto'][$scope.edificacoes.length % 4],
+            id: currIndex++ 
+          }); 
+
+
+        $scope.edificacoes.push({
+          image: '/image/user-logo.svg',
+          text: ['terceira foto'][$scope.edificacoes.length % 4],
+          id: currIndex++ 
+        });
+
+        function abrir() {
+          $scope.cadastro = true;
         }
-      
-      
-      
+
+        function fechar() {
+          $scope.cadastro = false;
+        }
 
     }
 

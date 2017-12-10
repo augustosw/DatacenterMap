@@ -25,7 +25,6 @@
     <footer class="footer">
         <h4> Developed by - Gustavo Rodrigues - João Fidellis - Steffano Heckler</h1>
     </footer>
-  
 </body>
 
 <!-- Angular, Rotas, Local Storage (Módulo 'auth' depende dele) -->
@@ -42,8 +41,13 @@
 <!-- Angular Material Library -->
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
+
 <!-- Autenticação -->
 <script src="auth/auth.module.js" type="text/javascript"></script>
+
+<!-- Google Map Api --> 
+<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script> -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5PywnaKNbuVrdxCD1cCbaCrHzqsMoc2g&libraries=places"></script>
 
 <!-- Aplicação -->
 <script src="app.module.js" type="text/javascript"></script>
@@ -55,10 +59,16 @@
 
 <!-- Services -->
 <script src="edificacao/edificacao.service.js" type="text/javascript"></script>
+<script src="carousel/carousel.directive.js" type="text/javascript"></script>
 <script src="header/header.directive.js" type="text/javascript"></script>
 <script src="sidebar/sidebar.directive.js" type="text/javascript"></script>
+<script src="edificacao-cadastro/edificacao-cadastro.directive.js" type="text/javascript"></script>
 <script src="andar/andar.service.js" type="text/javascript"></script>
 <script src="sala/sala.service.js" type="text/javascript"></script>
 <script src="rack/rack.service.js" type="text/javascript"></script>
 <script src="equipamento/equipamento.service.js" type="text/javascript"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5PywnaKNbuVrdxCD1cCbaCrHzqsMoc2g&libraries=places&callback=initMap"></script> -->
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5PywnaKNbuVrdxCD1cCbaCrHzqsMoc2g&libraries=places&callback=initAutocomplete" -->
+<!-- async defer></script> -->
 </html>
