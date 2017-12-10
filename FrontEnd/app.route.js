@@ -2,20 +2,10 @@ angular.module('app').config(function ($routeProvider) {
 
     $routeProvider
         // públicas
-<<<<<<< Updated upstream
-        .when('/cadastro', {
-            controller: 'CadastroController',
-            templateUrl: 'cadastro/cadastro.html'
-        })
-=======
         // .when('/cadastro', {
         //     controller: 'CadastroController',
         //     templateUrl: 'cadastro/cadastro.html'
         // })
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         .when('/login', {
             controller: 'LoginController',
             templateUrl: 'login/login.html'
@@ -80,13 +70,6 @@ angular.module('app').config(function ($routeProvider) {
             // }
         })
 
-<<<<<<< Updated upstream
         .otherwise('/login');
 });
-=======
-        .otherwise('/edificacao');
-});
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
