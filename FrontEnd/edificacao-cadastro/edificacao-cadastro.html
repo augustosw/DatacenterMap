@@ -1,15 +1,14 @@
-<div class="flex-column edificacao-cadastro-container">
+<div class="flex-column edificacao-cadastro-container" ng-style="fechar">
     <div>
         <form id="cadastro-form" novalidate name="cadastroEdificacaoForm" ng-submit="criar(edificacao)">
                 <div> 
-                <h3>Cadastro Edificacao</h3>
-                <span style="font-size:13px">(Todos os campos são obrigatórios)</span>
+                    <h3>Cadastro Edificacao</h3>
+                    <span style="font-size:13px">(Todos os campos são obrigatórios)</span>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="nome" class="campo-cadastro">Nome Edificacao</label>
+                    <label for="nome" class="campo-cadastro">Nome Edificação</label>
                     <input  name="nome" id="nome" ng-model="edificacao.nome"  class="form-control" ng-class="{'enviar': enviar}"placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64">
-               
 
                     <span class="campo-invalido" ng-show="cadastroEdificacaoForm.nome.$invalid && cadastroEdificacaoForm.$submitted">Nome obrigatório</span>
                     
@@ -19,24 +18,35 @@
                 </div>
                 <div class="form-group">
                     <label for="endereco" class="campo-cadastro">Localização</label>
-                    <input data-type="google-autocomplete" type="text" name="nome" id="edificacao" ng-model="endereco"  class="form-control" ng-class="{'enviar': enviar}"placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64">
-                    <input id="txtPlaces" class="controls" type="text"
-                    placeholder="Enter a location">
+                    <input id="autocomplete" ng-class="{'enviar': enviar}" placeholder="Ex: Avenida Theodomiro Porto da Fonseca - Cristo Rei, São Leopoldo - RS, Brazil" class="form-control" type="text" ng-model="localizacao" required>
+
+                </div>
+                <div class="form-group flex-column">
+                    <label for="numeroAndares" class="campo-cadastro">Número de andares</label>
+                    <div class="row flex-row row-end column-center">
+                        <div class="col-4">
+                            <button type="button" class="btn btn-success" ng-click="adicionar()" style="margin: 0 2px">+</button>
+                            <button type="button" class="btn btn-danger" ng-click="remover()" style="margin: 0 5px">-</button> 
+                        </div>
+                        <div class="col-4">
+                            <input placeholder="Digite os andares" ng-model="edificacao.numeroAndares" type="number" min="1"> 
+                        </div>
+                    </div> 
+                    <div class="col-4 flex-row center-center" style="position:relative">
+                        <div class="cadastro-numero-andares" ng-class="{'cadastro-numero-andares-lotado':isCheio}">
+                            <span ng-repeat="andar in andares">
+                            {{adicionarAndar($index)}}
+                            <img class="cadastro-imagem" src="/image/teste.svg"  ng-style="adicionando" height="200" width="200">
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="numeroAndares" class="campo-cadastro">Numero de andares</label>
-                    <span>{{edificacao.andares}}</span>
-                    <div class="flex-row row-end"> 
-                        <button type="button" class="btn btn-primary" ng-click="adicionar()">+</button> 
-                        <button type="button" class="btn btn-primary" ng-click="remover()">-</button>
-                        <input ng-model="edificacao.numeroAndares" type="number" min="1"> 
+                    <div class="flex-row">
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="button" class="btn btn-danger col-sm-offset-1" ng-click="fecharJanela()">Cancelar</button> 
                     </div>
-                    <input data-type="google-autocomplete" type="text" name="nome" id="edificacao" ng-model="endereco"  class="form-control" ng-class="{'enviar': enviar}"placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64">
                 </div>
-                
-
-
-                <button type="submit" class="btn btn-primary">enviar</button> 
         </form>
     </div> 
 </div>
