@@ -1,5 +1,6 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
+using System.Data.Entity;
 using DatacenterMap.Web.Models;
 using System.Linq;
 using System.Net.Http;
@@ -69,6 +70,17 @@ namespace DatacenterMap.Web.Controllers
             }
 
             return BadRequest(novoAndar.Mensagens); ;
+        }
+
+        [HttpGet]
+        [Route("api/andar/{id}")]
+        public HttpResponseMessage GetAndar([FromUri] int id)
+        {
+            if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
+
+            Andar andar = contexto.Andares.AsNoTracking().Include(x => x.Salas).FirstOrDefault(x => x.Id == id);
+
+            return Ok(andar);
         }
 
         [HttpDelete]
