@@ -1,7 +1,7 @@
 // Service de salas
 angular.module('app').factory('salaService', function ($http, $location) {
-	let url = $location.absUrl() + "/sala";
-
+    let url = $location.absUrl() + "/sala";
+    
     function listar(){
         return $http.get(url);
     }

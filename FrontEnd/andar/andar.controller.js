@@ -26,18 +26,18 @@ angular.module('app').controller('AndarController', function ($scope, andarServi
             });
     }
 
-    function listar () {
-        salaService.listar()
+    function listarSalas () {
+        andarService.obterPorId()
         .then(
             function (response) {
-                $scope.dataTemp = response.data;
+                $scope.dataTemp = response.data.salas;
             },
             function (response) {
                 console.log(response);
             });
     }
 
-    listar();
+    listarSalas();
     // $scope.createDummyData = function () {
     //     angular.forEach(salasIds, function (sala, key) {
     //         dataTemp[sala] = { "numeroSala": "3.1", "slots": 5, "largura": 10, "comprimento": 20 }
