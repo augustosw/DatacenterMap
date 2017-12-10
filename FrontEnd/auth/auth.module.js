@@ -18,7 +18,6 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
   let urlPrivado = authConfig.urlPrivado;
   let urlLogout = authConfig.urlLogout;
 
-
   // LOGIN - Retorna PROMISE com o response (sucesso ou erro)
   function login(usuario) {
 
@@ -28,8 +27,11 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
 
     $http({
       url: urlUsuario,
-      method: 'GET',
-      headers: headerAuth
+      method: 'POST',
+      data: {
+        'Email': usuario.username,
+        'Senha': usuario.password
+      }
     }).then(
 
       // Sucesso - HTTP 200
@@ -49,13 +51,13 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
           $location.path(urlPrivado);
         }
 
-        // resolve promise com sucesso 
+        // resolve promise com sucesso
         deferred.resolve(response);
       },
 
       // Erro
       function (response) {
-        // resolve promise com erro 
+        // resolve promise com erro
         deferred.reject(response);
       });
 
@@ -88,9 +90,6 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
   function isAutenticado() {
     return !!getUsuario();
   };
-
-
-
 
   // PROMISE
 
