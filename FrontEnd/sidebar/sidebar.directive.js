@@ -5,7 +5,10 @@ angular.module('app')
 
     restrict: 'E',
 
-    scope: {},
+    scope: { 
+      entidades: '=',
+      tipoAtual:'=' 
+    },
     
     templateUrl: 'sidebar/sidebar.directive.html',
     
@@ -18,27 +21,7 @@ angular.module('app')
           $scope.isSidenavOpen = !$scope.isSidenavOpen
         }
 
-        $scope.edificacoes = []; 
-        var currIndex = 0;
-
-        $scope.edificacoes.push({
-          image: '/image/building.jpeg',
-          text: ['building details'][$scope.edificacoes.length % 4],
-          id: currIndex++ 
-        });
-
-        $scope.edificacoes.push({
-            image: '/image/logo.svg',
-            text: ['segunda foto'][$scope.edificacoes.length % 4],
-            id: currIndex++ 
-          }); 
-
-
-        $scope.edificacoes.push({
-          image: '/image/user-logo.svg',
-          text: ['terceira foto'][$scope.edificacoes.length % 4],
-          id: currIndex++ 
-        });
+       
 
         function abrir() {
           $scope.cadastro = true;

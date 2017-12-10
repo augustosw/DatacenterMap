@@ -7,10 +7,14 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     $scope.isAlterar = false;
     $scope.voltar = voltar;
     $scope.excluir = excluir;
+    $scope.tipoEntidade = "edificacao"
     // TODO: necessário criar dados para poder usar.
-    // setup();
+   
 
-    setup();
+
+    console.log($routeParams.id);
+
+    // setup();
     function setup() {
         ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscarEdificacaoPorId(2);
     }
@@ -89,5 +93,28 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                 console.log(response);
             });
     }
+
+
+    $scope.edificacoes = []; 
+    var currIndex = 0;
+
+    $scope.edificacoes.push({
+      image: '/image/building.jpeg',
+      text: ['building details'][$scope.edificacoes.length % 4],
+      id: currIndex++ 
+    });
+
+    $scope.edificacoes.push({
+        image: '/image/logo.svg',
+        text: ['segunda foto'][$scope.edificacoes.length % 4],
+        id: currIndex++ 
+      }); 
+
+
+    $scope.edificacoes.push({
+      image: '/image/user-logo.svg',
+      text: ['terceira foto'][$scope.edificacoes.length % 4],
+      id: currIndex++ 
+    });
 
 });

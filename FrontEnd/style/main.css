@@ -135,6 +135,16 @@ a {
 .carousel-item {
     margin: 15px;
     position: relative;
+   
+}
+
+.imagem-carousel {
+    margin-bottom:5px;
+}
+
+.imagem-carousel,
+.carousel-caption  {
+    cursor: pointer;
 }
 
 .busca-sidebar-wrapper {

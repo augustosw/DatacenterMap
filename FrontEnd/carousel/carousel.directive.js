@@ -1,12 +1,13 @@
 angular.module('app')
-.directive('mapCarousel', function (authService, $rootScope, $log, $timeout) {
+.directive('mapCarousel', function (authService, $rootScope, $location, $log, $timeout) {
 
   return {
 
     restrict: 'E',
 
     scope: {  
-        edificacoes: '=edificacoes' 
+        entidades: '=',
+        tipoAtual: '=' 
     },
     
     templateUrl: 'carousel/carousel.directive.html',
@@ -14,16 +15,22 @@ angular.module('app')
     controller: function ($scope ) {
 
 
-        $scope.active = 0;
+      $scope.active = 0;
+      $scope.buscarEntidade = buscarEntidade;
 
 
-          $scope.getSecondIndex = function(index)
-          {
-            if(index-$scope.edificacoes.length>=0)
-              return index-$scope.edificacoes.length;
-            else
-              return index;
-          }
+      $scope.getSecondIndex = function(index)
+      {
+        if(index-$scope.entidades.length>=0)
+          return index-$scope.entidades.length;
+        else
+          return index;
+      }
+
+      function buscarEntidade(entidade) {
+        console.log($scope.tipoAtual);
+        $location.path(`/${$scope.tipoAtual}/${entidade.id}`);
+      }
             
       
 
