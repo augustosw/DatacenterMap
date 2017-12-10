@@ -7,6 +7,7 @@ using System.Web.Http.Results;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Controllers;
 using DatacenterMap.Web.Models;
+using System.Net.Http;
 
 namespace DatacenterMap.Testes.Controllers
 {
@@ -64,10 +65,18 @@ namespace DatacenterMap.Testes.Controllers
             var edificacao = CriarNovaEdificacao1();
 
             var edificacaoController = CriarController();
+            edificacaoController.Request = new HttpRequestMessage();
 
-            var edificacaoRetornadoNoPost = edificacaoController.CadastrarEdificacao(edificacao);
+            ObjectContent objeto = edificacaoController.CadastrarEdificacao(edificacao).Content as ObjectContent;
+            Edificacao edificacaoRetornadaNoPost = objeto.Value as Edificacao;
 
-            Assert.IsNotNull(edificacaoRetornadoNoPost);
+            Assert.IsNotNull(edificacaoRetornadaNoPost);
+
+            var edRemovida = edificacaoController.DeletarEdificacao(edificacaoRetornadaNoPost.Id);
+
+            var edificacaoRetornadoNoGet = edificacaoController.GetEdificacao(edificacaoRetornadaNoPost.Id).Content as ObjectContent;
+
+            Assert.IsNotNull(edificacaoRetornadoNoGet.Value);
         }
 
         //[TestMethod]

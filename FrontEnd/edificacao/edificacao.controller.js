@@ -22,8 +22,8 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     function buscarEdificacaoPorId(id){
         edificacaoService.buscarPorId(id)
                         .then(function(response) {
-                            console.log(response.data.dados);
-                            $scope.edificacaoSelecionada = response.data.dados;
+                            console.log(response.data);
+                            $scope.edificacaoSelecionada = response.data;
                             $scope.andaresPadroes = [];
                             $scope.andares = $scope.edificacaoSelecionada.Andares;
                             for(var i = 1; i <= $scope.edificacaoSelecionada.NumeroAndares; i++) {
