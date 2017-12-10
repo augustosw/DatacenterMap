@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AndarControllerTest.cs" />
     <Compile Include="Controllers\EdificioControllerTest.cs" />
+    <Compile Include="Controllers\SalaControllerTest.cs" />
     <Compile Include="Testes das Models\AndarTests.cs" />
     <Compile Include="Testes das Models\EdificacaoTests.cs" />
     <Compile Include="Testes das Models\EquipamentoTests.cs" />
