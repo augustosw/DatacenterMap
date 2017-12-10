@@ -13,8 +13,8 @@
         }
 
         public bool ValidarSenha(string senha)
-        {
-            return senha.Equals(Senha);
+        {       
+            return Criptografia.CriptografarSenha(Email, senha).Equals(Senha);
         }
 
         public override bool Validar()
