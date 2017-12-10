@@ -109,7 +109,7 @@ angular.module('auth').factory('authService', function (authConfig, $http, $q, $
   };
 
   function montarHeader(usuario) {
-    let hash = window.btoa(`${usuario.email}:${usuario.senha}`);
+    let hash = window.btoa(`${usuario.username}:${usuario.password}`);
     return {
       'Authorization': `Basic ${hash}`
     };

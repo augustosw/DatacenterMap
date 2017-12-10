@@ -81,8 +81,7 @@ namespace DatacenterMap.Web.Controllers
             if (usuario == null)
                 return BadRequest("Não encontrado.");
 
-            var senhaCriptografada = Criptografia.CriptografarSenha(login.Email, login.Senha);
-            var senhaCorreta = usuario.ValidarSenha(senhaCriptografada);
+            var senhaCorreta = usuario.ValidarSenha(login.Senha);
 
             if (senhaCorreta && usuario != null) return Ok(usuario);
 
