@@ -7,7 +7,7 @@ angular.module('app').factory('edificacaoService', function ($http, $location) {
     }
 
     function excluir(id){
-        return $http.delete(url + id);
+        return $http.delete(url +'/'+ id);
     }
 
 		function buscar(){
