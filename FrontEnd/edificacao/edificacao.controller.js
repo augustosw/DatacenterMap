@@ -47,10 +47,11 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                 transform:"translateZ(15vmin) rotate3d(0,0,1,20deg)",
                 opacity:1 }
         }
-        else{
+        else {
             $scope.andarStyle = {
                 transform:`translateZ(${indice*10}vmin)`,
-                opacity:1 }
+                opacity:1 
+            }
         }
         return '';  
     }
@@ -76,5 +77,6 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
             function (response) {
                 console.log(response);
             });
+    }
 
 });

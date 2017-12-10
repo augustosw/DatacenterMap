@@ -2,14 +2,14 @@ angular.module('app').config(function ($routeProvider) {
 
     $routeProvider
         // públicas
-        .when('/cadastro', {
-            controller: 'CadastroController',
-            templateUrl: 'cadastro/cadastro.html'
-        })
-        .when('/login', {
-            controller: 'LoginController',
-            templateUrl: 'login/login.html'
-        })
+        // .when('/cadastro', {
+        //     controller: 'CadastroController',
+        //     templateUrl: 'cadastro/cadastro.html'
+        // })
+        // .when('/login', {
+        //     controller: 'LoginController',
+        //     templateUrl: 'login/login.html'
+        // })
         // privadas
         .when('/edificacao', {
             controller: 'EdificacaoController',
@@ -70,5 +70,5 @@ angular.module('app').config(function ($routeProvider) {
             // }
         })
 
-        .otherwise('/login');
+        .otherwise('/edificacao');
 });
