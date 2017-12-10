@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AndarControllerTest.cs" />
     <Compile Include="Controllers\EdificioControllerTest.cs" />
     <Compile Include="Testes das Models\AndarTests.cs" />
     <Compile Include="Testes das Models\EdificacaoTests.cs" />
