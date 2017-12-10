@@ -1,8 +1,8 @@
-angular.module('app').controller('AndarController', function ($scope, andarService, salaService) {
+angular.module('app').controller('AndarController', function ($scope, $routeParams, andarService, salaService) {
 
     $scope.criar = criar;
     $scope.excluir = excluir;
-    $scope.dataTemp = [];
+    $scope.dummyData = [];
 
     function criar(andar) {
         andarService.criar(andar) //chama o método de post da service
@@ -27,10 +27,11 @@ angular.module('app').controller('AndarController', function ($scope, andarServi
     }
 
     function listarSalas () {
-        andarService.obterPorId()
+        andarService.obterPorId($routeParams.id)
         .then(
             function (response) {
-                $scope.dataTemp = response.data.salas;
+                console.log(response.data);
+                $scope.dummyData = response.data.salas;
             },
             function (response) {
                 console.log(response);

@@ -2,25 +2,13 @@ angular.module('app').config(function ($routeProvider) {
 
     $routeProvider
         // públicas
-        .when('/cadastro', {
-            controller: 'CadastroController',
-            templateUrl: 'cadastro/cadastro.html'
-        })
+        // .when('/cadastro', {
+        //     controller: 'CadastroController',
+        //     templateUrl: 'cadastro/cadastro.html'
+        // })
         .when('/login', {
             controller: 'LoginController',
             templateUrl: 'login/login.html'
-        })
-        // privadas
-        .when('/edificacao', {
-            controller: 'EdificacaoController',
-            templateUrl: 'edificacao/edificacao.html',
-            //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
         })
 
         .when('/edificacao/:id?', {
@@ -35,10 +23,9 @@ angular.module('app').config(function ($routeProvider) {
             // }
         })
         
-        .when('/andar', {
+        .when('/andar/:id?', {
             controller: 'AndarController',
             templateUrl: 'andar/andar.html',
-            //TODO : Implementar autenticação
             // resolve: {
             //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
             //     autenticado: function (authService) {
@@ -58,7 +45,7 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
-        
+
         .when('/rack', {
             controller: 'RackController',
             templateUrl: 'rack/rack.html',
@@ -84,3 +71,4 @@ angular.module('app').config(function ($routeProvider) {
 
         .otherwise('/login');
 });
+

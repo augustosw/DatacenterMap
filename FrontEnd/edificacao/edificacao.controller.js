@@ -1,34 +1,43 @@
 angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $routeParams) {
 
-    $scope.criar = criar;
-    $scope.andares = [1,2,3,4,5]; //para testes atualmente
+    $scope.criar = criar;//para testes atualmente
     $scope.adicionarAndar = adicionarAndar;
     $scope.selecionarAndar= selecionarAndar;
-    $scope.isAlterar = !!$routeParams.id; 
+    $scope.isAlterar = !!$routeParams.id;
+    $scope.isAlterar = false;
     $scope.voltar = voltar;
     $scope.excluir = excluir;
     // TODO: necessário criar dados para poder usar.
-    // setup(); 
+    // setup();
 
+    setup();
+    function setup() {
+        ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscarEdificacaoPorId(2);
+    }
 
-    // function setup() {
-    //     ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscar();
-    // }
+    function buscarEdificacaoPorId(id){
+        edificacaoService.buscarPorId(id)
+                        .then(function(response) {
+                            console.log(response.data.dados);
+                            $scope.edificacaoSelecionada = response.data.dados;
+                            $scope.andaresPadroes = [];
+                            $scope.andares = $scope.edificacaoSelecionada.Andares;
+                            for(var i = 1; i <= $scope.edificacaoSelecionada.NumeroAndares; i++) {
+                                $scope.andaresPadroes.push(i);
+                            }
+                            $scope.andaresTela = $scope.andaresPadroes;
+                            console.log($scope.andares);
+                        })
+    }
 
-    // function buscarEdificacaoPorId(id){
-    //     edificacaoService.buscarPorId(id)
-    //                     .then(function(response) {
-    //                         $scope.edificacao = response.data;
-    //                     })
-    // }
+    function buscar(){
+        edificacaoService.buscar()
+                        .then(function(response) {
+                            console.log(response.data.dados);
+                            $scope.edificacoes = response.data.dados;
+                        })
+    }
 
-    // function buscar(){
-    //     edificacaoService.buscar()
-    //                     .then(function(response) {
-    //                         $scope.edificacao = response.data;
-    //                     })
-    // }
-    
 
     function criar(edificacao) {
         edificacaoService.criar(edificacao) //chama o método de post da service
@@ -47,24 +56,27 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                 transform:"translateZ(15vmin) rotate3d(0,0,1,20deg)",
                 opacity:1 }
         }
-        else{
+        else {
             $scope.andarStyle = {
                 transform:`translateZ(${indice*10}vmin)`,
-                opacity:1 }
+                opacity:1
+            }
         }
-        return '';  
+        return '';
     }
 
     function selecionarAndar(andar) {
-        $scope.andares = [];
+        $scope.andaresTela = [];
         $scope.detalhe = true;
-        $scope.andares.push(andar);
-        console.log(andar);
+        $scope.andaresTela.push(andar);
+        $scope.andarSelecionado = $scope.andares.filter(function (valor){ return valor.NumeroAndar == andar});
+        console.log($scope.andarSelecionado);
     }
 
     function voltar(){
         $scope.detalhe = false;
-        $scope.andares = [1,2,3,4,5]  
+        $scope.andaresTela = $scope.andaresPadroes;
+        $scope.andarSelecionado = [];
     }
 
     function excluir(edificacao) {
@@ -77,4 +89,5 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                 console.log(response);
             });
     }
+
 });

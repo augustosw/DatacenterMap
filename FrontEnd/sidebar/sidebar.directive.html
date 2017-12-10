@@ -1,0 +1,26 @@
+<div ng-if="cadastro">
+    <map-edificacao-cadastro></map-edificacao-cadastro>
+</div>
+<div class="sidenav" ng-class="{'sidenav-open': isSidenavOpen}">
+    <div style="background-color:#FBB041"></div>
+    <div class="flex-column">
+        <div class="sidebar-items flex-column center-center ">
+            <form class="busca-sidebar-wrapper">
+                <fieldset>
+                    <div class="sidebar-busca">
+                        <i class="fa fa-search busca-icone"></i>
+                        <input class="edificacao-busca"type="text" ng-model="busca" placeholder="Busque edificações" />
+                    </div>                        
+                </fieldset>
+            </form>
+            <map-carousel edificacoes='edificacoes'></map-carousel>
+            <hr class="separador">
+            <button ng-if="!cadastro"class="botao-flutuante-adicionar" ng-click="abrir()"> + </button>
+            <button ng-if="cadastro" class="botao-flutuante-cancelar" ng-click="fechar()"> x </button>
+            
+        </div>
+    </div>
+</div>
+<div class="conteudo">
+    <img class="sidenav-toggler" ng-class="{'sidenav-image-open': isSidenavOpen}" ng-click="toggleSidenav()" height="40" width="40" src="/image/arrow-sidebar.svg">
+</div>

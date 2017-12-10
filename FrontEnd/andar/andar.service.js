@@ -1,6 +1,6 @@
 // Service de andares
 angular.module('app').factory('andarService', function ($http, $location) {
-	let url = $location.absUrl() + "/andar";
+	let url = "http://localhost:51641/api/andar/";
 
     function listar(){
         return $http.get(url);

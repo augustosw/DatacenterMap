@@ -8,12 +8,22 @@ namespace DatacenterMap.Web.Controllers
     public class ControllerBasica : ApiController
     {
 
-        public HttpResponseMessage OK(object dados = null)
+        public HttpResponseMessage Ok(object dados = null)
         {
             return Request.CreateResponse(HttpStatusCode.OK, new { dados });
         }
 
         public HttpResponseMessage BadRequest(List<string> mensagens)
+        {
+            return Request.CreateResponse(HttpStatusCode.BadRequest, new { mensagens });
+        }
+
+        public HttpResponseMessage BadRequest(params string[] mensagens)
+        {
+            return Request.CreateResponse(HttpStatusCode.BadRequest, new { mensagens });
+        }
+
+        public HttpResponseMessage BadRequest(IEnumerable<string> mensagens)
         {
             return Request.CreateResponse(HttpStatusCode.BadRequest, new { mensagens });
         }

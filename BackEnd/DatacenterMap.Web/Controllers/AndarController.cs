@@ -2,12 +2,12 @@
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
-    [RoutePrefix("api/andar")]
     public class AndarController : ControllerBasica
     {
 
@@ -24,7 +24,8 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CadastrarAndar([FromBody] AndarModel request)
+        [Route("api/andar")]
+        public HttpResponseMessage CadastrarAndar([FromBody] AndarModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -33,7 +34,7 @@ namespace DatacenterMap.Web.Controllers
 
             if(edificacao.NumeroAndares < request.NumeroAndar) return BadRequest("O andar solicitado ultrapassa o limite máximo do prédio.");
 
-            if (contexto.Andares.Where(x => x.Edificacao == edificacao && x.NumeroAndar == request.NumeroAndar).Count() != 0) return BadRequest("Já existe este andar no edifício.");
+            if (contexto.Andares.Where(x => x.Edificacao.Id == edificacao.Id && x.NumeroAndar == request.NumeroAndar).Count() != 0) return BadRequest("Já existe este andar no edifício.");
 
             Andar andar = CreateAndar(request.NumeroAndar, request.QuantidadeMaximaSalas, request.EdificacaoId);
 
@@ -45,11 +46,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(andar);
             }
 
-            return (IHttpActionResult)BadRequest(andar.Mensagens);
+            return BadRequest(andar.Mensagens);
         }
 
         [HttpPut]
-        public IHttpActionResult AlterarAndar([FromBody] AndarModel request)
+        [Route("api/andar")]
+        public HttpResponseMessage AlterarAndar([FromBody] AndarModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -66,12 +68,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(andarAntigo);
             }
 
-            return (IHttpActionResult)BadRequest(novoAndar.Mensagens); ;
+            return BadRequest(novoAndar.Mensagens); ;
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IHttpActionResult DeletarAndar([FromUri] int id)
+        [Route("api/andar/{id}")]
+        public HttpResponseMessage DeletarAndar([FromUri] int id)
         {
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Andar não encontrado.");
 
@@ -87,7 +89,7 @@ namespace DatacenterMap.Web.Controllers
             {
                 NumeroAndar = numeroAndar,
                 QuantidadeMaximaSalas = quantidadeSalas,
-                Edificacao = contexto.Edificacoes.FirstOrDefault(x => x.Id == edificacaoId)
+                Edificacao = contexto.Edificacoes.AsNoTracking().FirstOrDefault(x => x.Id == edificacaoId)
             };
 
             return andar;

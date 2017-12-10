@@ -1,14 +1,13 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
-    [RoutePrefix("api/sala")]
     public class SalaController : ControllerBasica
     {
 
@@ -25,21 +24,24 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CadastrarSala([FromBody] SalaModel request)
+        [Route("api/sala")]
+        public HttpResponseMessage CadastrarSala([FromBody] SalaModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            Andar andar = contexto.Andares.AsNoTracking().FirstOrDefault(x => x.Id == request.AndarId);
+            Andar andar = contexto.Andares.FirstOrDefault(x => x.Id == request.AndarId);
 
-            if (contexto.Salas.Where(x => x.Andar == andar && x.NumeroSala.Equals(request.NumeroSala)).Count() != 0)
+            if (contexto.Salas.Where(x => x.Andar.Id == andar.Id && x.NumeroSala.Equals(request.NumeroSala)).Count() != 0)
                 return BadRequest("Já existe uma sala com esse número nesse andar.");
 
             Sala sala = CreateSala(request.NumeroSala, request.QuantidadeMaximaSlots, request.Largura, request.Comprimento);
+            sala.Andar = andar;
+
+            andar.Salas.Add(sala);
 
             if (sala.Validar())
             {
-                contexto.Salas.Add(sala);
                 for (var i = 0; i < sala.QuantidadeMaximaSlots; i++)
                 {
                     contexto.Slots.Add(CreateSlot(sala));
@@ -49,11 +51,12 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(sala);
             }
 
-            return (IHttpActionResult)BadRequest(sala.Mensagens);
+            return BadRequest(sala.Mensagens);
         }
 
         [HttpPut]
-        public IHttpActionResult AlterarSala([FromBody] SalaModel request)
+        [Route("api/sala")]
+        public HttpResponseMessage AlterarSala([FromBody] SalaModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
@@ -80,19 +83,19 @@ namespace DatacenterMap.Web.Controllers
                 return Ok(salaAntiga);
             }
 
-            return (IHttpActionResult)BadRequest(salaNova.Mensagens);
+            return BadRequest(salaNova.Mensagens);
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public IHttpActionResult DeletarSala([FromUri] int id)
+        [Route("api/sala/{id}")]
+        public HttpResponseMessage DeletarSala([FromUri] int id)
         {
-            if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
+            if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
             Sala sala = contexto.Salas.FirstOrDefault(x => x.Id == id);
 
             contexto.Salas.Remove(sala);
-
+            contexto.SaveChanges();
             return Ok("Removido com Sucesso");
         }
 
