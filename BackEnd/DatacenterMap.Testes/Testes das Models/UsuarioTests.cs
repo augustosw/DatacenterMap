@@ -2,6 +2,7 @@
 using DatacenterMap.Domain.Entidades;
 using System.Linq;
 using DatacenterMap.Web.Controllers;
+using DatacenterMap.Domain;
 
 namespace DatacenterMap.Testes.Controllers
 {
@@ -116,12 +117,12 @@ namespace DatacenterMap.Testes.Controllers
 
 		private Usuario CriarNovoUsuario()
 		{
-			return new Usuario()
-			{
-				Id = 0,
-				Nome = "João Silva",
-				Email = "joaozinho@teste.com",
-				Senha = "minhasenha123"
+            return new Usuario()
+            {
+                Id = 0,
+                Nome = "João Silva",
+                Email = "joaozinho@teste.com",
+                Senha = Criptografia.CriptografarSenha("joaozinho@teste.com", "minhasenha123")
 			};
 		}
 	}
