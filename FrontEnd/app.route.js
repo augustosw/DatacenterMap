@@ -6,10 +6,10 @@ angular.module('app').config(function ($routeProvider) {
         //     controller: 'CadastroController',
         //     templateUrl: 'cadastro/cadastro.html'
         // })
-        // .when('/login', {
-        //     controller: 'LoginController',
-        //     templateUrl: 'login/login.html'
-        // })
+        .when('/login', {
+            controller: 'LoginController',
+            templateUrl: 'login/login.html'
+        })
         // privadas
         .when('/edificacao', {
             controller: 'EdificacaoController',
@@ -34,7 +34,7 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
-               
+
         .when('/sala', {
             controller: 'SalaController',
             templateUrl: 'sala/sala.html',
@@ -46,7 +46,7 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
-        
+
         .when('/rack', {
             controller: 'RackController',
             templateUrl: 'rack/rack.html',
@@ -70,5 +70,6 @@ angular.module('app').config(function ($routeProvider) {
             // }
         })
 
-        .otherwise('/edificacao');
+        .otherwise('/login');
 });
+
