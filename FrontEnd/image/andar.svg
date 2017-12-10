@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg width="264.58mm" height="171.98mm" version="1.1" viewBox="0 0 264.58334 171.97917" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<svg width="100%" height="100%" version="1.1" viewBox="0 0 264.58334 171.97917" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
  <metadata>
   <rdf:RDF>
    <cc:Work rdf:about="">
@@ -10,14 +10,7 @@
    </cc:Work>
   </rdf:RDF>
  </metadata>
- <g transform="translate(-13.229 -98.562)">
-  <g fill="#808080" stroke-width=".25814">
-   <rect class="sala" id="01" x="13.229" y="98.562" width="79.375" height="79.375"/>
-   <rect class="sala" id="02" x="105.83" y="98.562" width="79.375" height="79.375"/>
-   <rect class="sala" id="03" x="198.44" y="98.562" width="79.375" height="79.375"/>
-   <rect class="sala" id="04" x="13.229" y="191.17" width="79.375" height="79.375"/>
-   <rect class="sala" id="05" x="105.83" y="191.17" width="79.375" height="79.375"/>
-   <rect class="sala" id="06" x="198.44" y="191.17" width="79.375" height="79.375"/>
+  <g fill="#808080" stroke-width=".25814" ng-repeat="sala in dummyData">
+   <rect class="sala" id="{{ sala.numeroSala }}" x="{{ $index * 100 }}" y="50" width="79.375" height="79.375"/> 
   </g>
- </g>
 </svg>

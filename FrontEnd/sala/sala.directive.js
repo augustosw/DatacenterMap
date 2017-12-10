@@ -1,4 +1,4 @@
-angular.module('app').directive('salaAndar', ['$compile', function($compile) {
+angular.module('app').directive('salaAndar', ['$compile', function($compile, $location) {
 	return {
         restrict: 'A',
         scope: {
@@ -8,7 +8,8 @@ angular.module('app').directive('salaAndar', ['$compile', function($compile) {
         link: function (scope, element, attrs) {
             scope.elementId = element.attr("id");
             scope.salaClick = function () {
-                alert(scope.dummyData[scope.elementId].value);
+                $location.path("/sala/" + scope.elementId)
+                // alert(scope.dummyData[scope.elementId].value);
             };
             scope.salaMouseOver = function () {
                 scope.hoverSala = scope.elementId;

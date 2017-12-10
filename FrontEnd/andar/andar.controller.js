@@ -1,7 +1,8 @@
-angular.module('app').controller('AndarController', function ($scope) {
+angular.module('app').controller('AndarController', function ($scope, andarService, salaService) {
 
     $scope.criar = criar;
     $scope.excluir = excluir;
+    $scope.dataTemp = [];
 
     function criar(andar) {
         andarService.criar(andar) //chama o método de post da service
@@ -24,15 +25,26 @@ angular.module('app').controller('AndarController', function ($scope) {
                 console.log(response);
             });
     }
-    var salas = ["01", "02", "03", "04", "05", "06"];
-    $scope.createDummyData = function () {
-        var dataTemp = {};
-        angular.forEach(salas, function (sala, key) {
-            dataTemp[sala] = { numero: "3.1", slots: 5, largura: 10, comprimento: 20 }
-        });
-        $scope.dummyData = dataTemp;
-    };
-    $scope.createDummyData();
+
+    function listar () {
+        salaService.listar()
+        .then(
+            function (response) {
+                $scope.dataTemp = response.data;
+            },
+            function (response) {
+                console.log(response);
+            });
+    }
+
+    listar();
+    // $scope.createDummyData = function () {
+    //     angular.forEach(salasIds, function (sala, key) {
+    //         dataTemp[sala] = { "numeroSala": "3.1", "slots": 5, "largura": 10, "comprimento": 20 }
+    //     });
+    //     $scope.dummyData = dataTemp;
+    // };
+    // $scope.createDummyData();
 
     $scope.changeHoverSala = function (sala) {
         $scope.hoverSala = sala;
