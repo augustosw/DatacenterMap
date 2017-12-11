@@ -121,9 +121,10 @@ namespace DatacenterMap.Testes.Controllers
 
             var edRemovida = equipamentoController.DeletarEquipamento(equipamentoRetornadaNoPost.Id);
 
-            var equipamentoRetornadoNoGet = equipamentoController.GetEquipamento(equipamentoRetornadaNoPost.Id).Content as ObjectContent;
+            var objetoGet = equipamentoController.GetEquipamento(equipamentoRetornadaNoPost.Id).Content as ObjectContent;
+            Equipamento equipamentoRetornadoNoGet = objetoGet.Value as Equipamento;
 
-            Assert.IsNotNull(equipamentoRetornadoNoGet.Value);
+            Assert.IsNull(equipamentoRetornadoNoGet);
         }
 
         [TestMethod]

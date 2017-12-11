@@ -91,9 +91,10 @@ namespace DatacenterMap.Testes.Controllers
 
             var edRemovida = salaController.DeletarSala(salaRetornadaNoPost.Id);
 
-            var salaRetornadoNoGet = salaController.GetSala(salaRetornadaNoPost.Id).Content as ObjectContent;
+            var objetoGet = salaController.GetSala(salaRetornadaNoPost.Id).Content as ObjectContent;
+            Sala salaRetornadoNoGet = objetoGet.Value as Sala;
 
-            Assert.IsNotNull(salaRetornadoNoGet.Value);
+            Assert.IsNull(salaRetornadoNoGet);
         }
 
         [TestMethod]

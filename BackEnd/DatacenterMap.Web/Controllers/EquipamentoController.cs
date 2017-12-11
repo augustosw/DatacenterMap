@@ -103,12 +103,12 @@ namespace DatacenterMap.Web.Controllers
         [Route("api/equipamento/{id}")]
         public HttpResponseMessage DeletarEquipamento([FromUri] int id)
         {
-            if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Equipamento não encontrado.");
+            if (contexto.Equipamentos.Where(x => x.Id == id).Count() == 0) return BadRequest("Equipamento não encontrado.");
 
             Equipamento equipamento = contexto.Equipamentos.FirstOrDefault(x => x.Id == id);
 
             contexto.Equipamentos.Remove(equipamento);
-
+            contexto.SaveChanges();
             return Ok("Removido com Sucesso");
         }
 

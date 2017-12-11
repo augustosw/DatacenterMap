@@ -82,9 +82,10 @@ namespace DatacenterMap.Testes.Controllers
 
             var edRemovida = andarController.DeletarAndar(andarRetornadaNoPost.Id);
 
-            var andarRetornadoNoGet = andarController.GetAndar(andarRetornadaNoPost.Id).Content as ObjectContent;
+            var objetoGet = andarController.GetAndar(andarRetornadaNoPost.Id).Content as ObjectContent;
+            Andar andarRetornadoNoGet = objetoGet.Value as Andar;
 
-            Assert.IsNotNull(andarRetornadoNoGet.Value);
+            Assert.IsNull(andarRetornadoNoGet);
         }
 
         [TestMethod]

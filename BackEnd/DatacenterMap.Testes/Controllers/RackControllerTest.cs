@@ -107,9 +107,10 @@ namespace DatacenterMap.Testes.Controllers
 
             var edRemovida = rackController.DeletarRack(rackRetornadaNoPost.Id);
 
-            var rackRetornadoNoGet = rackController.GetRack(rackRetornadaNoPost.Id).Content as ObjectContent;
+            var objetoGet = rackController.GetRack(rackRetornadaNoPost.Id).Content as ObjectContent;
+            Rack rackRetornadoNoGet = objetoGet.Value as Rack;
 
-            Assert.IsNotNull(rackRetornadoNoGet.Value);
+            Assert.IsNull(rackRetornadoNoGet);
         }
 
         [TestMethod]
@@ -143,7 +144,7 @@ namespace DatacenterMap.Testes.Controllers
 
             Assert.IsFalse(resposta.IsSuccessStatusCode);
 
-            Assert.AreEqual("Já existe uma rack neste slot.", mensagens[0]);
+            Assert.AreEqual("Já existe um rack neste slot.", mensagens[0]);
         }
 
         [TestMethod]
