@@ -55,9 +55,10 @@ namespace DatacenterMap.Testes.Controllers
 
             var edRemovida = edificacaoController.DeletarEdificacao(edificacaoRetornadaNoPost.Id);
 
-            var edificacaoRetornadoNoGet = edificacaoController.GetEdificacao(edificacaoRetornadaNoPost.Id).Content as ObjectContent;
+            var objetoGet = edificacaoController.GetEdificacao(edificacaoRetornadaNoPost.Id).Content as ObjectContent;
+            Edificacao edificacaoRetornadoNoGet = objetoGet.Value as Edificacao;
 
-            Assert.IsNotNull(edificacaoRetornadoNoGet.Value);
+            Assert.IsNull(edificacaoRetornadoNoGet);
         }
 
         [TestMethod]
