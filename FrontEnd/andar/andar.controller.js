@@ -1,8 +1,8 @@
-angular.module('app').controller('AndarController', function ($scope, $routeParams, andarService, salaService) {
+angular.module('app').controller('AndarController', function ($scope, $location, $routeParams, andarService) {
 
     $scope.criar = criar;
     $scope.excluir = excluir;
-    $scope.dummyData = [];
+    $scope.salaClick = salaClick;
 
     function criar(andar) {
         andarService.criar(andar) //chama o método de post da service
@@ -26,26 +26,28 @@ angular.module('app').controller('AndarController', function ($scope, $routePara
             });
     }
 
-    function listarSalas () {
+    var dataTemp = {};
+    function listarSalas() {
         andarService.obterPorId($routeParams.id)
-        .then(
+            .then(
             function (response) {
-                console.log(response.data);
-                $scope.dummyData = response.data.salas;
+                var salas = response.data.dados.Salas;
+                angular.forEach(salas, function (sala, key) {
+                    dataTemp[sala.NumeroSala] = sala;
+                });
+                $scope.dummyData = dataTemp;
+                console.log($scope.dummyData);
             },
             function (response) {
                 console.log(response);
             });
     }
 
+    function salaClick(id) {
+        $location.path("/sala/" + id);
+    };
+
     listarSalas();
-    // $scope.createDummyData = function () {
-    //     angular.forEach(salasIds, function (sala, key) {
-    //         dataTemp[sala] = { "numeroSala": "3.1", "slots": 5, "largura": 10, "comprimento": 20 }
-    //     });
-    //     $scope.dummyData = dataTemp;
-    // };
-    // $scope.createDummyData();
 
     $scope.changeHoverSala = function (sala) {
         $scope.hoverSala = sala;

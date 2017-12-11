@@ -9,7 +9,7 @@ angular.module('app').directive('salaAndar', ['$compile', function($compile, $lo
             scope.elementId = element.attr("id");
             scope.salaClick = function () {
                 $location.path("/sala/" + scope.elementId)
-                // alert(scope.dummyData[scope.elementId].value);
+                alert(scope.dummyData[scope.elementId].value);
             };
             scope.salaMouseOver = function () {
                 scope.hoverSala = scope.elementId;

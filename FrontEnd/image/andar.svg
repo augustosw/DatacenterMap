@@ -10,7 +10,7 @@
    </cc:Work>
   </rdf:RDF>
  </metadata>
-  <g fill="#808080" stroke-width=".25814" ng-repeat="sala in dummyData">
-   <rect class="sala" id="{{ sala.numeroSala }}" x="{{ $index * 100 }}" y="50" width="79.375" height="79.375"/> 
+  <g fill="#808080" stroke-width=".25814" >
+    <rect ng-repeat="sala in dummyData" id="{{ sala.NumeroSala }}" class="sala" x="13.229" y="98.562" width="79.375" height="79.375" ng-click="salaClick(sala.Id)"/>
   </g>
 </svg>
