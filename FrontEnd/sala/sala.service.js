@@ -1,11 +1,19 @@
 // Service de salas
 angular.module('app').factory('salaService', function ($http, $location) {
-	let url = $location.absUrl() + "/equipamento";
+    let url = $location.absUrl() + "/sala";
+    
+    function listar(){
+        return $http.get(url);
+    }
+
+    function obterPorId(id){
+        return $http.get(url + id);
+    }
 
     function criar(sala){
         return $http.post(url, sala);
     }
-    function exluir(id){
+    function excluir(id){
         return $http.delete(url + id);
     }
     function editar(id, sala){
@@ -14,6 +22,8 @@ angular.module('app').factory('salaService', function ($http, $location) {
     return {
         criar: criar,
         excluir: excluir,
-        editar: editar
+        editar: editar,
+        listar: listar,
+        obterPorId: obterPorId
     }
 });   

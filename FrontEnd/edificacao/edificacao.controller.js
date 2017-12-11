@@ -1,4 +1,4 @@
-angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $routeParams) {
+angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, andarService, $routeParams) {
 
     $scope.criar = criar;//para testes atualmente
     $scope.adicionarAndar = adicionarAndar;
@@ -67,6 +67,27 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         }
         return '';
     }
+
+    var dataTemp = {};
+    function listarSalas(id) {
+        andarService.obterPorId(id)
+            .then(
+            function (response) {
+                var salas = response.data.dados.Salas;
+                angular.forEach(salas, function (sala, key) {
+                    dataTemp[sala.NumeroSala] = sala;
+                });
+                $scope.dummyData = dataTemp;
+                console.log($scope.dummyData);
+            },
+            function (response) {
+                console.log(response);
+            });
+    }
+
+    function salaClick(id) {
+        $location.path("/sala/" + id);
+    };
 
     function selecionarAndar(andar) {
         $scope.andaresTela = [];
