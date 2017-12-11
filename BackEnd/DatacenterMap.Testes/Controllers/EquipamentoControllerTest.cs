@@ -66,11 +66,22 @@ namespace DatacenterMap.Testes.Controllers
                     Descricao = "Rack 1"
                 };
 
+                Rack rack2 = new Rack()
+                {
+                    Tensao = 220,
+                    QuantidadeGavetas = 1,
+                    Slot = context.Slots.ToList()[1],
+                    Descricao = "Rack 2"
+                };
+
                 context.Racks.Add(rack);
+                context.Racks.Add(rack2);
                 for (var i = 0; i < rack.QuantidadeGavetas; i++)
                 {
                     context.Gavetas.Add(CreateGaveta(rack, i + 1));
                 }
+                context.Gavetas.Add(CreateGaveta(rack2, 1));
+
                 context.SaveChanges();
 
                 gavetas = context.Gavetas.ToList();
@@ -162,6 +173,62 @@ namespace DatacenterMap.Testes.Controllers
         }
 
         [TestMethod]
+        public void Criar_Equipamento_Deve_Retornar_Erro_Quando_A_Tensao_ForDiferente_Da_Do_Rack()
+        {
+            EquipamentoModel equipamento = CriarNovaEquipamento1();
+            equipamento.Tensao = 110;
+
+            var controller = CriarController();
+            controller.Request = new HttpRequestMessage();
+
+
+            var resposta = controller.CadastrarEquipamento(equipamento);
+            string[] mensagens = (resposta.Content as ObjectContent).Value as string[];
+
+            Assert.IsFalse(resposta.IsSuccessStatusCode);
+
+            Assert.AreEqual("O rack não tem a mesma tensão do equipamento.", mensagens[0]);
+        }
+
+        [TestMethod]
+        public void Criar_Equipamento_Deve_Retornar_Erro_Quando_O_NumeroDeGavetas_ForDiferente_Do_Tamanho()
+        {
+            EquipamentoModel equipamento = CriarNovaEquipamento1();
+            equipamento.Tamanho = 3;
+
+            var controller = CriarController();
+            controller.Request = new HttpRequestMessage();
+
+
+            var resposta = controller.CadastrarEquipamento(equipamento);
+            string[] mensagens = (resposta.Content as ObjectContent).Value as string[];
+
+            Assert.IsFalse(resposta.IsSuccessStatusCode);
+
+            Assert.AreEqual("A quantidade de gavetas encontradas não é igual ao tamanho do equipamento.", mensagens[0]);
+        }
+
+
+        [TestMethod]
+        public void Criar_Equipamento_Deve_Retornar_Erro_Quando_As_Gavetas_NaoSao_Do_Mesmo_Rack()
+        {
+            EquipamentoModel equipamento = CriarNovaEquipamento1();
+            equipamento.Tamanho = 2;
+            equipamento.GavetasId.Add(gavetas[5].Id);
+
+            var controller = CriarController();
+            controller.Request = new HttpRequestMessage();
+
+
+            var resposta = controller.CadastrarEquipamento(equipamento);
+            string[] mensagens = (resposta.Content as ObjectContent).Value as string[];
+
+            Assert.IsFalse(resposta.IsSuccessStatusCode);
+
+            Assert.AreEqual("As gavetas não são do mesmo rack.", mensagens[0]);
+        }
+
+        [TestMethod]
         public void Remover_Equipamento_Deve_Retornar_Erro_Quando_O_Id_For_Inexistente()
         {
             var controller = CriarController();
@@ -177,8 +244,11 @@ namespace DatacenterMap.Testes.Controllers
 
         private EquipamentoModel CriarNovaEquipamento1()
         {
-            List<int> ids = new List<int>();
-            ids.Add(gavetas[0].Id);
+            List<int> ids = new List<int>
+            {
+                gavetas[0].Id
+            };
+
             return new EquipamentoModel()
             {
                 Descricao = "Equipamento Teste 1",
