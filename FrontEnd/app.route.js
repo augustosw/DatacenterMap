@@ -47,7 +47,7 @@ angular.module('app').config(function ($routeProvider) {
             // }
         })
 
-        .when('/rack', {
+        .when('/rack/:id?', {
             controller: 'RackController',
             templateUrl: 'rack/rack.html',
             //TODO : Implementar autenticação

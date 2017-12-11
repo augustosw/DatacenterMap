@@ -5,11 +5,17 @@ angular.module('app').factory('rackService', function ($http, $location) {
     function criar(rack){
         return $http.post(url, rack);
     }
-    function exluir(id){
+
+    function buscarPorId(id){
+        return $http.get(url +'/'+ id);
+    }
+
+    function excluir(id){
         return $http.delete(url + id);
     }
     return {
         criar: criar,
+        buscarPorId:buscarPorId,
         excluir: excluir
     }
 });   
