@@ -11,6 +11,6 @@
   </rdf:RDF>
  </metadata>
   <g fill="#808080" stroke-width=".25814" >
-    <rect ng-repeat="sala in dummyData" id="{{ sala.NumeroSala }}" class="sala" x="13.229" y="98.562" width="79.375" height="79.375" ng-click="salaClick(sala.Id)"/>
+    <rect ng-repeat="sala in dummyData" id="{{ sala.NumeroSala }}" class="sala" ng-click="salaClick(sala.Id)" x="13.229" y="98.562" width="79.375" height="79.375" />
   </g>
 </svg>
