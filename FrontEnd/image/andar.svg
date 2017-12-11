@@ -1,16 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg width="100%" height="100%" version="1.1" viewBox="0 0 264.58334 171.97917" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
- <metadata>
-  <rdf:RDF>
-   <cc:Work rdf:about="">
-    <dc:format>image/svg+xml</dc:format>
-    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:title/>
-   </cc:Work>
-  </rdf:RDF>
- </metadata>
-  <g fill="#808080" stroke-width=".25814" >
-    <rect ng-repeat="sala in dummyData" id="{{ sala.NumeroSala }}" class="sala" ng-click="salaClick(sala.Id)" x="13.229" y="98.562" width="79.375" height="79.375" />
-  </g>
+<svg width="1200" height="800" viewBox="0 0 1200 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas">
+<g id="Group">
+<g id="Vector">
+<use xlink:href="#path0_fill" fill="#C4C4C4"/>
+</g>
+<g id="Vector (Stroke)">
+<use xlink:href="#path1_fill" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path2_fill" transform="translate(926 36)" fill="#828282"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 0 337.596L 0 0L 772.24 0L 1200 0L 1200 337.596L 887.697 337.596L 887.697 452.174L 1200 452.174L 1200 800L 0 800L 0 452.174L 278.233 452.174L 278.233 337.596L 0 337.596Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 288.233 327.596L 288.233 462.174L 10 462.174L 10 790L 1190 790L 1190 462.174L 877.697 462.174L 877.697 327.596L 1190 327.596L 1190 10L 10 10L 10 327.596L 288.233 327.596ZM 0 0L 1200 0L 1200 337.596L 887.697 337.596L 887.697 452.174L 1200 452.174L 1200 800L 0 800L 0 452.174L 278.233 452.174L 278.233 337.596L 0 337.596L 0 0Z"/>
+<path ng-repeat="sala in dummyData" id="{{ sala.NumeroSala }}" class="sala" ng-click="salaClick(sala.Id)" d="M 0 0L 229 0L 229 264L 0 264L 0 0Z"/>
+</defs>
 </svg>

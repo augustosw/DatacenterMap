@@ -7,13 +7,20 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     $scope.isAlterar = false;
     $scope.voltar = voltar;
     $scope.excluir = excluir;
+<<<<<<< HEAD
+=======
     $scope.tipoEntidade = "edificacao"
+>>>>>>> parent of 3655b3c... feat(andares): modificada tela de edificação para incluir atributos na diretiva de andar.
     // TODO: necessário criar dados para poder usar.
-   
+    // setup();
 
+<<<<<<< HEAD
+    setup();
+=======
 
     console.log($routeParams.id);
     // setup();
+>>>>>>> parent of 3655b3c... feat(andares): modificada tela de edificação para incluir atributos na diretiva de andar.
     function setup() {
         ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscarEdificacaoPorId(2);
     }
@@ -21,8 +28,8 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     function buscarEdificacaoPorId(id){
         edificacaoService.buscarPorId(id)
                         .then(function(response) {
-                            console.log(response.data);
-                            $scope.edificacaoSelecionada = response.data;
+                            console.log(response.data.dados);
+                            $scope.edificacaoSelecionada = response.data.dados;
                             $scope.andaresPadroes = [];
                             $scope.andares = $scope.edificacaoSelecionada.Andares;
                             for(var i = 1; i <= $scope.edificacaoSelecionada.NumeroAndares; i++) {
@@ -113,30 +120,5 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                 console.log(response);
             });
     }
-
-
-    //DADOS MOCKADOS PARA TESTAR SIDEBAR 
-
-    // $scope.edificacoes = []; 
-    // var currIndex = 0;
-
-    // $scope.edificacoes.push({
-    //   image: '/image/building.jpeg',
-    //   text: ['building details'][$scope.edificacoes.length % 4],
-    //   id: currIndex++ 
-    // });
-
-    // $scope.edificacoes.push({
-    //     image: '/image/logo.svg',
-    //     text: ['segunda foto'][$scope.edificacoes.length % 4],
-    //     id: currIndex++ 
-    //   }); 
-
-
-    // $scope.edificacoes.push({
-    //   image: '/image/user-logo.svg',
-    //   text: ['terceira foto'][$scope.edificacoes.length % 4],
-    //   id: currIndex++ 
-    // });
 
 });

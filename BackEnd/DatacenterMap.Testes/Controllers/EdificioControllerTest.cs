@@ -3,173 +3,144 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 using DeepEqual.Syntax;
+using System.Web.Http.Results;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Controllers;
 using DatacenterMap.Web.Models;
-using System.Net.Http;
 
 namespace DatacenterMap.Testes.Controllers
 {
     [TestClass]
     public class EdificacaoControllerTests
     {
+        //[TestMethod]
+        //public void Edificacaos_Cadastrados_Devem_Ser_Retornados_No_Obter_Por_Id()
+        //{
+        //    var edificacao = CriarNovaEdificacao1();
+
+        //    var edificacaoController = CriarController();
+
+        //    var edificacaoRetornadoNoPost = edificacaoController.CriarEdificacao(edificacao) as CreatedNegotiatedContentResult<Edificacao>;
+
+        //    Assert.IsNotNull(edificacaoRetornadoNoPost);
+
+        //    var edificacaoRetornadoNoGet = edificacaoController.ObterEdificacaoPorId(edificacaoRetornadoNoPost.Content.Id) as OkNegotiatedContentResult<Edificacao>;
+
+        //    Assert.IsNotNull(edificacaoRetornadoNoGet);
+
+        //    var edificacaoRetornadoDoBancoEIgualAoOriginal = edificacaoRetornadoNoGet.Content.WithDeepEqual(edificacao).IgnoreSourceProperty(x => x.Id).Compare();
+
+        //    Assert.IsTrue(edificacaoRetornadoDoBancoEIgualAoOriginal);
+        //}
+
+        //[TestMethod]
+        //public void Edificacaos_Atualizados_Devem_Ser_Retornados_No_Obter_Por_Id()
+        //{
+        //    var edificacao = CriarNovaEdificacao1();
+
+        //    var edificacaoController = CriarController();
+
+        //    var edificacaoRetornadoNoPost = edificacaoController.CriarEdificacao(edificacao) as CreatedNegotiatedContentResult<Edificacao>;
+
+        //    Assert.IsNotNull(edificacaoRetornadoNoPost);
+
+        //    edificacaoRetornadoNoPost.Content.Nome = "Joaquim";
+        //    var edificacaoRetornadoNoPut = edificacaoController.AtualizarEdificacao(edificacaoRetornadoNoPost.Content.Id, edificacaoRetornadoNoPost.Content) as OkNegotiatedContentResult<Edificacao>;
+
+        //    Assert.IsNotNull(edificacaoRetornadoNoPut);
+
+        //    var edificacaoRetornadoNoGet = edificacaoController.ObterEdificacaoPorId(edificacaoRetornadoNoPost.Content.Id) as OkNegotiatedContentResult<Edificacao>;
+
+        //    Assert.IsNotNull(edificacaoRetornadoNoGet);
+
+        //    var edificacaoRetornadoDoBancoEIgualAoOriginal = edificacaoRetornadoNoGet.Content.WithDeepEqual(edificacao).IgnoreSourceProperty(x => x.Id).Compare();
+
+        //    Assert.IsTrue(edificacaoRetornadoDoBancoEIgualAoOriginal);
+        //}
+
         [TestMethod]
-        public void Edificacoes_Cadastradas_Devem_Ser_Retornadas_No_Obter_Por_Id()
+        public void Edificacaos_Removidos_Nao_Devem_Ser_Retornados_No_Obter_Por_Id()
         {
             var edificacao = CriarNovaEdificacao1();
 
             var edificacaoController = CriarController();
-            edificacaoController.Request = new HttpRequestMessage();
 
-            ObjectContent objetoPost = edificacaoController.CadastrarEdificacao(edificacao).Content as ObjectContent;
-            Edificacao edificacaoRetornadaNoPost = objetoPost.Value as Edificacao;
+            var edificacaoRetornadoNoPost = edificacaoController.CadastrarEdificacao(edificacao);
 
-            Assert.IsNotNull(edificacaoRetornadaNoPost);
-
-            ObjectContent objetoGet = edificacaoController.GetEdificacao(edificacaoRetornadaNoPost.Id).Content as ObjectContent;
-            Edificacao edificacaoRetornadaNoGet = objetoGet.Value as Edificacao;
-
-            Assert.IsNotNull(edificacaoRetornadaNoGet);
-
-            var edificacaoRetornadoDoBancoEIgualAoOriginal = edificacaoRetornadaNoGet.WithDeepEqual(edificacao)
-                                                                .IgnoreSourceProperty(x => x.Id)
-                                                                .IgnoreSourceProperty(x => x.Andares)
-                                                                .IgnoreSourceProperty(x => x.Mensagens)
-                                                                .Compare();
-
-            Assert.IsTrue(edificacaoRetornadoDoBancoEIgualAoOriginal);
+            Assert.IsNotNull(edificacaoRetornadoNoPost);
         }
 
-        [TestMethod]
-        public void Edificacoes_Removidas_Nao_Devem_Ser_Retornadas_No_Obter_Por_Id()
-        {
-            var edificacao = CriarNovaEdificacao1();
+        //[TestMethod]
+        //public void Todos_Edificacaos_Cadastrados_Devem_Ser_Retornados_No_Obter_Todos()
+        //{
+        //    var edificacao1 = CriarNovaEdificacao1();
+        //    var edificacao2 = CriarNovaEdificacao2();
 
-            var edificacaoController = CriarController();
-            edificacaoController.Request = new HttpRequestMessage();
+        //    var edificacaoController = CriarController();
 
-            ObjectContent objeto = edificacaoController.CadastrarEdificacao(edificacao).Content as ObjectContent;
-            Edificacao edificacaoRetornadaNoPost = objeto.Value as Edificacao;
+        //    var edificacao1RetornadoNoPost = edificacaoController.CadastrarEdificacao(edificacao1) as HttpResponseMessage;
 
-            Assert.IsNotNull(edificacaoRetornadaNoPost);
+        //    Assert.IsNotNull(edificacao1RetornadoNoPost);
 
-            var edRemovida = edificacaoController.DeletarEdificacao(edificacaoRetornadaNoPost.Id);
+        //    var edificacao2RetornadoNoPost = edificacaoController.CadastrarEdificacao(edificacao2) as HttpResponseMessage;
 
-            var edificacaoRetornadoNoGet = edificacaoController.GetEdificacao(edificacaoRetornadaNoPost.Id).Content as ObjectContent;
+        //    Assert.IsNotNull(edificacao2RetornadoNoPost);
 
-            Assert.IsNotNull(edificacaoRetornadoNoGet.Value);
-        }
+        //    var edificacaosRetornadosDoGet = edificacaoController.GetEdificacoes() as HttpResponseMessage;
 
-        [TestMethod]
-        public void Todas_Edificacoes_Cadastradas_Devem_Ser_Retornadas_No_Obter_Todos()
-        {
-            var edificacao1 = CriarNovaEdificacao1();
-            var edificacao2 = CriarNovaEdificacao2();
+        //    Assert.IsNotNull(edificacaosRetornadosDoGet);
 
-            var edificacaoController = CriarController();
-            edificacaoController.Request = new HttpRequestMessage();
+        //    Assert.AreEqual(2, edificacaosRetornadosDoGet.Content.Count);
 
-            ObjectContent objeto1 = edificacaoController.CadastrarEdificacao(edificacao1).Content as ObjectContent;
-            Edificacao edificacaoRetornadaNoPost1 = objeto1.Value as Edificacao;
+        //    var edificacao1RetornadoDoGet = edificacaosRetornadosDoGet.Content.FirstOrDefault(edificacao => edificacao.Nome == "Teddy");
+        //    var edificacao2RetornadoDoGet = edificacaosRetornadosDoGet.Content.FirstOrDefault(edificacao => edificacao.Nome == "Tobi");
 
-            Assert.IsNotNull(edificacaoRetornadaNoPost1);
+        //    var edificacao1RetornadoDoBancoEIgualAoOriginal = edificacao1RetornadoDoGet.WithDeepEqual(edificacao1).IgnoreSourceProperty(x => x.Id).Compare();
 
-            ObjectContent objeto2 = edificacaoController.CadastrarEdificacao(edificacao2).Content as ObjectContent;
-            Edificacao edificacaoRetornadaNoPost2 = objeto2.Value as Edificacao;
+        //    Assert.IsTrue(edificacao1RetornadoDoBancoEIgualAoOriginal);
 
-            Assert.IsNotNull(edificacaoRetornadaNoPost2);
+        //    var edificacao2RetornadoDoBancoEIgualAoOriginal = edificacao2RetornadoDoGet.WithDeepEqual(edificacao2).IgnoreSourceProperty(x => x.Id).Compare();
 
-            ObjectContent objetoGet = edificacaoController.GetEdificacoes().Content as ObjectContent;
-            List<Edificacao> edificacoesRetornadasNoGet = objetoGet.Value as List<Edificacao>;
+        //    Assert.IsTrue(edificacao2RetornadoDoBancoEIgualAoOriginal);
+        //}
 
-            Assert.IsNotNull(edificacoesRetornadasNoGet);
+        //[TestMethod]
+        //public void Criar_Edificacao_Deve_Retornar_Erro_Quando_O_Edificacao_For_Nulo()
+        //{
+        //    var edificacao = CriarNovaEdificacao1();
 
-            Assert.AreEqual(2, edificacoesRetornadasNoGet.Count);
+        //    var controller = CriarController();
 
-            var edificacao1RetornadoDoGet = edificacoesRetornadasNoGet.FirstOrDefault(edificacao => edificacao.Nome.Equals("Framework"));
-            var edificacao2RetornadoDoGet = edificacoesRetornadasNoGet.FirstOrDefault(edificacao => edificacao.Nome.Equals("CWI Sede"));
+        //    var badRequest = controller.CadastrarEdificacao(null) as HttpResponseMessage;
 
-            var edificacao1RetornadoDoBancoEIgualAoOriginal = edificacao1RetornadoDoGet.WithDeepEqual(edificacao1)
-                                                                .IgnoreSourceProperty(x => x.Id)
-                                                                .IgnoreSourceProperty(x => x.Andares)
-                                                                .IgnoreSourceProperty(x => x.Mensagens).Compare();
+        //    Assert.IsNotNull(badRequest);
 
-            var edificacao2RetornadoDoBancoEIgualAoOriginal = edificacao2RetornadoDoGet.WithDeepEqual(edificacao2)
-                                                                .IgnoreSourceProperty(x => x.Id)
-                                                                .IgnoreSourceProperty(x => x.Andares)
-                                                                .IgnoreSourceProperty(x => x.Mensagens).Compare();
+        //    Assert.AreEqual(badRequest.Message, "O parametro edificacao não pode ser null");
+        //}
 
-            Assert.IsTrue(edificacao1RetornadoDoBancoEIgualAoOriginal);
-            Assert.IsTrue(edificacao2RetornadoDoBancoEIgualAoOriginal);
-        }
+        //[TestMethod]
+        //public void Atualizar_Edificacao_Deve_Retornar_Erro_Quando_O_Id_For_Inexistente()
+        //{
+        //    var controller = CriarController();
 
-        [TestMethod]
-        public void Criar_Edificacao_Deve_Retornar_Erro_Quando_A_Edificacao_For_Nula()
-        {
-            EdificacaoModel edificacao = null;
+        //    var badRequest = controller.AtualizarEdificacao(1, new Edificacao()) as HttpResponseMessage;
 
-            var controller = CriarController();
-            controller.Request = new HttpRequestMessage();
+        //    Assert.IsNotNull(badRequest);
 
-            var resposta = controller.CadastrarEdificacao(edificacao);
-            string[] mensagens = (resposta.Content as ObjectContent).Value as string[];
+        //    Assert.AreEqual(badRequest.Message, "Id inexistente");
+        //}
 
-            Assert.IsFalse(resposta.IsSuccessStatusCode);
+        //[TestMethod]
+        //public void Remover_Edificacao_Deve_Retornar_Erro_Quando_O_Id_For_Inexistente()
+        //{
+        //    var controller = CriarController();
 
-            Assert.AreEqual("O parametro request não pode ser null", mensagens[0]);
-        }
+        //    var badRequest = controller.DeletarEdificacao(1) as HttpResponseMessage;
 
-        [TestMethod]
-        public void Criar_Edificacao_Deve_Retornar_Erro_Quando_O_Nome_Ja_Existir()
-        {
-            EdificacaoModel edificacao = CriarNovaEdificacao1();
+        //    Assert.IsNotNull(badRequest);
 
-            var controller = CriarController();
-            controller.Request = new HttpRequestMessage();
-
-            controller.CadastrarEdificacao(edificacao);
-            edificacao.Latitude = 2;
-
-            var resposta = controller.CadastrarEdificacao(edificacao);
-            string[] mensagens = (resposta.Content as ObjectContent).Value as string[];
-
-            Assert.IsFalse(resposta.IsSuccessStatusCode);
-
-            Assert.AreEqual("Já existe uma edificação com esse nome.", mensagens[0]);
-        }
-
-        [TestMethod]
-        public void Criar_Edificacao_Deve_Retornar_Erro_Quando_A_Localizacao_Ja_Existir()
-        {
-            EdificacaoModel edificacao = CriarNovaEdificacao1();
-
-            var controller = CriarController();
-            controller.Request = new HttpRequestMessage();
-
-            controller.CadastrarEdificacao(edificacao);
-            edificacao.Nome = "Outro Nome";
-
-            var resposta = controller.CadastrarEdificacao(edificacao);
-            string[] mensagens = (resposta.Content as ObjectContent).Value as string[];
-
-            Assert.IsFalse(resposta.IsSuccessStatusCode);
-
-            Assert.AreEqual("Já existe uma edificação nessa localização.", mensagens[0]);
-        }
-
-        [TestMethod]
-        public void Remover_Edificacao_Deve_Retornar_Erro_Quando_O_Id_For_Inexistente()
-        {
-            var controller = CriarController();
-            controller.Request = new HttpRequestMessage();
-
-            var badRequest = controller.DeletarEdificacao(1);
-            string[] mensagens = (badRequest.Content as ObjectContent).Value as string[];
-
-            Assert.IsNotNull(badRequest);
-
-            Assert.AreEqual("Edificação não encontrada.", mensagens[0]);
-        }
+        //    Assert.AreEqual(badRequest.Message, "Id inexistente");
+        //}
 
         private EdificacaoModel CriarNovaEdificacao1()
         {
