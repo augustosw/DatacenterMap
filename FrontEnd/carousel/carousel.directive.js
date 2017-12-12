@@ -29,7 +29,8 @@ angular.module('app')
 
       function buscarEntidade(entidade) {
         console.log($scope.tipoAtual);
-        $location.path(`/${$scope.tipoAtual}/${entidade.id}`);
+        debugger;
+        $location.path(`/${$scope.tipoAtual}/${entidade.Id}`);
       }
             
       
