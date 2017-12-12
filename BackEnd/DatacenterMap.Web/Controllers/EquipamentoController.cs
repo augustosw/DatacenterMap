@@ -106,7 +106,7 @@ namespace DatacenterMap.Web.Controllers
                 if (gavetasSelecionadas.Count() == equipamento.Tamanho)
                 {
                     List<Gaveta> gavetaAntigas = contexto.Gavetas.Include(x => x.Equipamento).Where(x => x.Equipamento.Id == equipamento.Id).ToList();
-                    gavetaAntigas.ForEach(x => x.Equipamento = null);
+                    gavetaAntigas.ForEach(x => { x.Equipamento = null; x.Ocupado = false;  });
 
                     equipamento.Gavetas = gavetasSelecionadas;
                     gavetasSelecionadas.ForEach(x => x.Equipamento = equipamento);
