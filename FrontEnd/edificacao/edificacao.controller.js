@@ -4,25 +4,23 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     $scope.adicionarAndar = adicionarAndar;
     $scope.selecionarAndar = selecionarAndar;
     $scope.isAlterar = !!$routeParams.id;
-    $scope.isAlterar = false;
     $scope.voltar = voltar;
     $scope.excluir = excluir;
     $scope.tipoEntidade = "edificacao"
     // TODO: necessário criar dados para poder usar.
     // setup();
 
-
     console.log($routeParams.id);
     setup();
     function setup() {
-        ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscarEdificacaoPorId(1);
+        ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscar();
     }
 
     function buscarEdificacaoPorId(id) {
         edificacaoService.buscarPorId(id)
             .then(function (response) {
-                console.log(response.data.dados);
-                $scope.edificacaoSelecionada = response.data.dados;
+                console.log(response.data);
+                $scope.edificacaoSelecionada = response.data;
                 $scope.andaresPadroes = [];
                 $scope.andares = $scope.edificacaoSelecionada.Andares;
                 for (var i = 1; i <= $scope.edificacaoSelecionada.NumeroAndares; i++) {
@@ -36,8 +34,8 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     function buscar() {
         edificacaoService.buscar()
             .then(function (response) {
-                console.log(response.data.dados);
-                $scope.edificacoes = response.data.dados;
+                console.log(response.data);
+                $scope.edificacoes = response.data;
             })
     }
 
