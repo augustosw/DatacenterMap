@@ -1,12 +1,13 @@
 <div class="container">
     <h3 class="text-center">Selecione slots livres para adicionar Equipamentos</h3>
     <hr>
-    <div class="col-md-3 col-sm-3 col-md-offset-4">
+    <div class="col-md-3 col-xs-6 col-md-offset-4 col-xs-offset-4">
         <div class="flex-row center-center rack-content" ng-repeat="gaveta in gavetas">
             {{verificarTamanho(gaveta)}}
             <input id="{{gaveta.id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.id) || gaveta.ocupado" ng-click="aumentarTamanho(gaveta.id, ativo)" type="checkbox" ng-checked="gaveta.ocupado">
             <label class="flex-column equipamento-item" for="{{gaveta.id}}" ng-style="tamanhoGaveta" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
                 <span ng-if="gaveta.ocupado">{{gaveta.equipamento.id}}</span>
+                <span class="texto-equipamento-disponivel" ng-if="!gaveta.ocupado">(Livre)</span>
                 <div class="flex-row center-center">
                     <img ng-if="gaveta.ocupado" ng-src="image/equipamento.svg">
                 </div>
@@ -14,7 +15,7 @@
             <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)">x</button>
         </div>
     </div>
-    <div ng-if="tamanho.length > 0" class="flex-column col-md-6 cadastro-container">
+    <div ng-if="tamanho.length > 0" class="flex-column col-md-6 col-sm-offset-4 cadastro-container">
         <form id="cadastro-form" novalidate name="cadastroEquipamentoForm" ng-submit="criar(edificacao)">
             <h4 class="text-center">Cadastro de Equipamento!</h4>
             <span class="campos-obrigatorios">(Todos os campos são obrigatórios)</span>

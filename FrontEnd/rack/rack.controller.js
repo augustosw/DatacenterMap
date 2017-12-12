@@ -66,7 +66,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
                     tamanhoAtual = gaveta.equipamento.tamanho;
                     $scope.tamanhoGaveta = {
                         height:`${tamanhoAtual*30}px`,
-                        background: "#FF8C00"}
+                        background: "rgba(173, 170, 166, 0.5)"}
                     } 
             else {
                 $scope.tamanhoGaveta = { display: "none" } 
