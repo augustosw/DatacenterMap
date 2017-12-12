@@ -9,6 +9,7 @@ using System.Web.Http;
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
+    [RoutePrefix("api/sala")]
     public class SalaController : ControllerBasica
     {
 
@@ -25,7 +26,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/sala")]
         public HttpResponseMessage CadastrarSala([FromBody] SalaModel request)
         {
             if (request == null)
@@ -56,7 +56,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPut]
-        [Route("api/sala")]
         public HttpResponseMessage AlterarSala([FromBody] SalaModel request)
         {
             if (request == null)
@@ -88,7 +87,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/sala/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage DeletarSala([FromUri] int id)
         {
             if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
@@ -102,7 +101,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        [Route("api/sala/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage GetSala([FromUri] int id)
         {
             if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");

@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace DatacenterMap.Web.Controllers
 {
+    [RoutePrefix("api/equipamento")]
     [BasicAuthorization]
     public class EquipamentoController : ControllerBasica
     {
@@ -26,13 +27,14 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/equipamento")]
         public HttpResponseMessage CadastrarEquipamento([FromBody] EquipamentoModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            List<Gaveta> gavetasPedidas = contexto.Gavetas.Include(x => x.Rack).Where(x => request.GavetasId.Contains(x.Id)).OrderBy(x => x.Posicao).ToList();
+            List<Gaveta> gavetasPedidas = contexto.Gavetas.Include(x => x.Rack)
+                                          .Where(x => request.GavetasId.Contains(x.Id))
+                                          .OrderBy(x => x.Posicao).ToList();
 
             if (gavetasPedidas.Count() != request.Tamanho)
                 return BadRequest("A quantidade de gavetas encontradas não é igual ao tamanho do equipamento.");
@@ -45,7 +47,8 @@ namespace DatacenterMap.Web.Controllers
 
             for(int i = 0; i < gavetasPedidas.Count()-1; i++)
             {
-                if (gavetasPedidas[i].Posicao > gavetasPedidas[i + 1].Posicao) return BadRequest("As gavetas pedidas não são consecutivas.");
+                if (gavetasPedidas[i].Posicao > gavetasPedidas[i + 1].Posicao)
+                    return BadRequest("As gavetas pedidas não são consecutivas.");
             }
 
             int idRack = gavetasPedidas[0].Rack.Id;
@@ -72,7 +75,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPut]
-        [Route("api/equipamento/{idRack}/{idEquipamento}")]
+        [Route("{idRack}/{idEquipamento}")]
         public HttpResponseMessage MoverEquipamento([FromUri] int idRack, int idEquipamento)
         {
             if (contexto.Equipamentos.Where(x => x.Id == idEquipamento).Count() == 0) return BadRequest("Equipamento não encontrado.");
@@ -80,12 +83,11 @@ namespace DatacenterMap.Web.Controllers
 
             if (contexto.Racks.Where(x => x.Id == idRack).Count() == 0) return BadRequest("Rack não encontrado.");
 
-            int gavetasLivres = contexto.Racks.Include(x => x.Gavetas).FirstOrDefault(x => x.Id == idRack).Gavetas.Where(x => !x.Ocupado).Count();
-            if (gavetasLivres
-                < equipamento.Tamanho) return BadRequest("Não há espaço no Rack.");
-
             Rack novoRack = contexto.Racks.Include(x => x.Gavetas).FirstOrDefault(x => x.Id == idRack);
             List<Gaveta> gavetas = contexto.Gavetas.OrderBy(x => x.Posicao).Where(x => x.Rack.Id == novoRack.Id && !x.Ocupado).ToList();
+        
+            if (gavetas.Count()
+                < equipamento.Tamanho) return BadRequest("Não há espaço no Rack.");
 
             List<Gaveta> gavetasSelecionadas = new List<Gaveta>();
             foreach (Gaveta g in gavetas)
@@ -109,7 +111,7 @@ namespace DatacenterMap.Web.Controllers
                     gavetaAntigas.ForEach(x => { x.Equipamento = null; x.Ocupado = false;  });
 
                     equipamento.Gavetas = gavetasSelecionadas;
-                    gavetasSelecionadas.ForEach(x => x.Equipamento = equipamento);
+                    gavetasSelecionadas.ForEach(x => { x.Equipamento = equipamento; x.Ocupado = true; });
 
                     contexto.SaveChanges();
 
@@ -121,12 +123,10 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPut]
-        [Route("api/equipamento")]
         public HttpResponseMessage AlterarDescEquipamento([FromBody] EquipamentoModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
-
 
             Equipamento equipamentoAntigo = contexto.Equipamentos.FirstOrDefault(x => x.Id == request.Id);
 
@@ -142,7 +142,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        [Route("api/equipamento/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage GetEquipamento([FromUri] int id)
         {
             if (contexto.Equipamentos.Where(x => x.Id == id).Count() == 0) return BadRequest("Equipamento não encontrado.");
@@ -153,7 +153,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/equipamento/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage DeletarEquipamento([FromUri] int id)
         {
             if (contexto.Equipamentos.Where(x => x.Id == id).Count() == 0) return BadRequest("Equipamento não encontrado.");

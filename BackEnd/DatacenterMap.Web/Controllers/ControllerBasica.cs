@@ -29,12 +29,5 @@ namespace DatacenterMap.Web.Controllers
             response.Content = new ObjectContent(mensagens.GetType(), mensagens, GlobalConfiguration.Configuration.Formatters.JsonFormatter);
             return response;
         }
-
-        public HttpResponseMessage BadRequest(IEnumerable<string> mensagens)
-        {
-            var response = Request.CreateResponse(HttpStatusCode.BadRequest);
-            response.Content = new ObjectContent(mensagens.GetType(), mensagens, GlobalConfiguration.Configuration.Formatters.JsonFormatter);
-            return response;
-        }
     }
 }

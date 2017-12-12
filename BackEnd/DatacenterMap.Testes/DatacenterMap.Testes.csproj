@@ -82,7 +82,6 @@
     <Compile Include="Testes das Models\RackTests.cs" />
     <Compile Include="Testes das Models\SalaTests.cs" />
     <Compile Include="Testes das Models\UsuarioTests.cs" />
-    <Compile Include="MockRepositorios\UsuarioRepositorioMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
