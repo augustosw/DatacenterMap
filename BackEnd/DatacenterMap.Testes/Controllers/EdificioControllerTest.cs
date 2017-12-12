@@ -13,9 +13,15 @@ namespace DatacenterMap.Testes.Controllers
     [TestClass]
     public class EdificacaoControllerTests
     {
+        public EdificacaoControllerTests()
+        {
+            CleanUp.LimparTabelas(new DatacenterMapContext("DatacenterMapTest"));
+        }
+
         [TestMethod]
         public void Edificacoes_Cadastradas_Devem_Ser_Retornadas_No_Obter_Por_Id()
         {
+            
             var edificacao = CriarNovaEdificacao1();
 
             var edificacaoController = CriarController();

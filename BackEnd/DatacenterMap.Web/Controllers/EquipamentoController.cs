@@ -32,7 +32,7 @@ namespace DatacenterMap.Web.Controllers
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            List<Gaveta> gavetasPedidas = contexto.Gavetas.Include(x => x.Rack).Where(x => request.GavetasId.Contains(x.Id)).ToList();
+            List<Gaveta> gavetasPedidas = contexto.Gavetas.Include(x => x.Rack).Where(x => request.GavetasId.Contains(x.Id)).OrderBy(x => x.Posicao).ToList();
 
             if (gavetasPedidas.Count() != request.Tamanho)
                 return BadRequest("A quantidade de gavetas encontradas não é igual ao tamanho do equipamento.");
@@ -42,6 +42,11 @@ namespace DatacenterMap.Web.Controllers
 
             if (gavetasPedidas.Any(x => x.Rack.Id != gavetasPedidas[0].Rack.Id))
                 return BadRequest("As gavetas não são do mesmo rack.");
+
+            for(int i = 0; i < gavetasPedidas.Count()-1; i++)
+            {
+                if (gavetasPedidas[i].Posicao > gavetasPedidas[i + 1].Posicao) return BadRequest("As gavetas pedidas não são consecutivas.");
+            }
 
             int idRack = gavetasPedidas[0].Rack.Id;
             Rack rack = contexto.Racks.FirstOrDefault(x => x.Id == idRack);
@@ -66,14 +71,60 @@ namespace DatacenterMap.Web.Controllers
             return BadRequest(equipamento.Mensagens);
         }
 
-        // TO-DO: Adicionar mover equipamento
-        
+        [HttpPut]
+        [Route("api/equipamento/{idRack}/{idEquipamento}")]
+        public HttpResponseMessage MoverEquipamento([FromUri] int idRack, int idEquipamento)
+        {
+            if (contexto.Equipamentos.Where(x => x.Id == idEquipamento).Count() == 0) return BadRequest("Equipamento não encontrado.");
+            Equipamento equipamento = contexto.Equipamentos.Include(x => x.Gavetas).FirstOrDefault(x => x.Id == idEquipamento);
+
+            if (contexto.Racks.Where(x => x.Id == idRack).Count() == 0) return BadRequest("Rack não encontrado.");
+
+            int gavetasLivres = contexto.Racks.Include(x => x.Gavetas).FirstOrDefault(x => x.Id == idRack).Gavetas.Where(x => !x.Ocupado).Count();
+            if (gavetasLivres
+                < equipamento.Tamanho) return BadRequest("Não há espaço no Rack.");
+
+            Rack novoRack = contexto.Racks.Include(x => x.Gavetas).FirstOrDefault(x => x.Id == idRack);
+            List<Gaveta> gavetas = contexto.Gavetas.OrderBy(x => x.Posicao).Where(x => x.Rack.Id == novoRack.Id && !x.Ocupado).ToList();
+
+            List<Gaveta> gavetasSelecionadas = new List<Gaveta>();
+            foreach (Gaveta g in gavetas)
+            {
+                if (gavetasSelecionadas.Count() == 0 || gavetasSelecionadas.ElementAt(gavetasSelecionadas.Count() - 1).Posicao + 1 == g.Posicao)
+                {
+                    gavetasSelecionadas.Add(g);
+                }
+                else
+                {
+                    gavetasSelecionadas.Clear();
+                    gavetasSelecionadas.Add(g);
+                }
+
+                if (gavetasSelecionadas.Count() == equipamento.Tamanho)
+                {
+                    Gaveta gavetaAntiga = contexto.Gavetas.FirstOrDefault(x => x.Equipamento.Id == equipamento.Id);
+                    gavetaAntiga.Equipamento = null;
+                    gavetaAntiga.Ocupado = false;
+
+                    equipamento.Gavetas = gavetasSelecionadas;
+                    gavetasSelecionadas.ForEach(x => x.Equipamento = equipamento);
+
+                    contexto.SaveChanges();
+
+                    return Ok(equipamento);
+                }
+            }
+
+            return BadRequest("Não existem gavetas consecutivas no rack para alocar o equipamento.");
+        }
+
         [HttpPut]
         [Route("api/equipamento")]
         public HttpResponseMessage AlterarDescEquipamento([FromBody] EquipamentoModel request)
         {
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
+
 
             Equipamento equipamentoAntigo = contexto.Equipamentos.FirstOrDefault(x => x.Id == request.Id);
 

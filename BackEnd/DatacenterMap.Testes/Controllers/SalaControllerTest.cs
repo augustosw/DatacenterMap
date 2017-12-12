@@ -1,6 +1,5 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.Linq;
 using DeepEqual.Syntax;
 using DatacenterMap.Infra;
@@ -20,6 +19,8 @@ namespace DatacenterMap.Testes.Controllers
         {
             using (var context = new DatacenterMapContext("DatacenterMapTest"))
             {
+                CleanUp.LimparTabelas(new DatacenterMapContext("DatacenterMapTest"));
+
                 Edificacao edificacao = new Edificacao()
                 {
                     Nome = "Framework Building",
@@ -167,23 +168,6 @@ namespace DatacenterMap.Testes.Controllers
                 Largura = 150,
                 QuantidadeMaximaSlots = 3
             };
-        }
-
-        [TestInitialize]
-        public void Cleanup()
-        {
-            // Limpa as tabelas do banco
-            using (var context = new DatacenterMapContext("DatacenterMapTest"))
-            {
-                context.Equipamentos.RemoveRange(context.Equipamentos);
-                context.Gavetas.RemoveRange(context.Gavetas);
-                context.Racks.RemoveRange(context.Racks);
-                context.Slots.RemoveRange(context.Slots);
-                context.Salas.RemoveRange(context.Salas);
-                context.SaveChanges();
-
-
-            }
         }
 
         private SalaController CriarController()

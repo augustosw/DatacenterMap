@@ -20,6 +20,8 @@ namespace DatacenterMap.Testes.Controllers
         {
             using (var context = new DatacenterMapContext("DatacenterMapTest"))
             {
+                CleanUp.LimparTabelas(context);
+
                 Edificacao edificacao = new Edificacao()
                 {
                     Nome = "Framework Building",
@@ -171,24 +173,6 @@ namespace DatacenterMap.Testes.Controllers
                 QuantidadeMaximaSalas = 2,
                 EdificacaoId = idEdificio
             };
-        }
-
-        [TestInitialize]
-        public void Cleanup()
-        {
-            // Limpa as tabelas do banco
-            using (var context = new DatacenterMapContext("DatacenterMapTest"))
-            {
-                context.Equipamentos.RemoveRange(context.Equipamentos);
-                context.Gavetas.RemoveRange(context.Gavetas);
-                context.Racks.RemoveRange(context.Racks);
-                context.Slots.RemoveRange(context.Slots);
-                context.Salas.RemoveRange(context.Salas);
-                context.Andares.RemoveRange(context.Andares);
-                context.SaveChanges();
-
-               
-            }
         }
 
         private AndarController CriarController()
