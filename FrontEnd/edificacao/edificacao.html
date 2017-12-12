@@ -9,7 +9,7 @@
         </div>
         <div class="andares" ng-repeat="andar in andaresTela">
             {{adicionarAndar($index)}}
-            <div andar-planta class="andar imagem-andar" ng-model="andar" ng-style="andarStyle" ng-click="listarSalas(andar.Id); selecionarAndar(andar)"></div>
+            <button andar-planta class="andar imagem-andar" ng-model="andar" ng-style="andarStyle" ng-click="listarSalas(andar); selecionarAndar(andar)" ng-disabled="andarSelecionado.length > 0">
             <div class="andar-numero" data-tooltip="A {{$index+1}}" ng-style="andarStyle">
             </div>
         </div>
