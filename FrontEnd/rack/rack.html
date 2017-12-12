@@ -1,21 +1,22 @@
 <div class="container">
     <h3 class="text-center">Selecione slots livres para adicionar Equipamentos</h3>
     <hr>
-    <div class="col-md-3 col-xs-6 col-md-offset-4 col-xs-offset-4">
+    <div class="col-md-3 col-xs-6 col-md-offset-2 col-xs-offset-4">
         <div class="flex-row center-center rack-content" ng-repeat="gaveta in gavetas">
             {{verificarTamanho(gaveta)}}
             <input id="{{gaveta.id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.id) || gaveta.ocupado" ng-click="aumentarTamanho(gaveta.id, ativo)" type="checkbox" ng-checked="gaveta.ocupado">
-            <label class="flex-column equipamento-item" for="{{gaveta.id}}" ng-style="tamanhoGaveta" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
+            <label class="flex-column equipamento-item " for="{{gaveta.id}}" ng-style="tamanhoGaveta" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
                 <span ng-if="gaveta.ocupado">{{gaveta.equipamento.id}}</span>
-                <span class="texto-equipamento-disponivel" ng-if="!gaveta.ocupado">(Livre)</span>
+                <span class="texto-equipamento-disponivel" ng-if="!gaveta.ocupado && !posicaoInvalida(gaveta.id) && !ativo">(Livre)</span>
+                <img class="equipamento-selecionado"  ng-src="/image/check.svg" height="30px" width="30px" ng-if="ativo">                
                 <div class="flex-row center-center">
-                    <img ng-if="gaveta.ocupado" ng-src="image/equipamento.svg">
+                    <img  ng-if="gaveta.ocupado" width="100px" ng-src="image/equipamento.svg">
                 </div>
             </label>
-            <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)">x</button>
+            <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)"><p>x</p></button>
         </div>
     </div>
-    <div ng-if="tamanho.length > 0" class="flex-column col-md-6 col-sm-offset-4 cadastro-container">
+    <div ng-if="tamanho.length > 0" class="flex-column col-md-4 cadastro-container">
         <form id="cadastro-form" novalidate name="cadastroEquipamentoForm" ng-submit="criar(edificacao)">
             <h4 class="text-center">Cadastro de Equipamento!</h4>
             <span class="campos-obrigatorios">(Todos os campos são obrigatórios)</span>
@@ -27,11 +28,10 @@
                 
                 <span class="campo-invalido" ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.minlength">Número de caracteres muito baixo</span>
                 
-                <span class="campo-invalido"  ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.maxlength">Número de caracteres muito alto</span> 
-                
+                <span class="campo-invalido"  ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.maxlength">Número de caracteres muito alto</span>   
             </div>
             <div class="form-group row">
-                <div class="col-xs-4 col-md-4 col-xs-offset-1">
+                <div class="col-xs-4 col-md-4 ">
                     <label for="tensao" class="campo-cadastro">Tensão</label>
                     <input type="number" name="tensao" id="tensao" placeholder="Ex: 220" class="form-control" ng-class="{'enviar': enviar}" min="1" ng-model="equipamento.tensao" required>
 

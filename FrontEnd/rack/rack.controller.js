@@ -158,11 +158,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
         },
         {
             id:9,
-            ocupado:true,
-            equipamento: {
-                id:3,
-                tamanho:1
-            }
+            ocupado:false
         },
         {
             id:10,
