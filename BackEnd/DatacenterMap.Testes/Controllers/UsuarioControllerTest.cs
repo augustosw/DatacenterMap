@@ -9,7 +9,11 @@ namespace DatacenterMap.Testes.Controllers
     [TestClass]
     public class UsuarioControllerTests
     {
-     
+        public UsuarioControllerTests()
+        {
+            CleanUp.LimparTabelas(new DatacenterMapContext("DatacenterMapTest"));
+        }
+
         [TestMethod]
         public void Criar_Usuario_Deve_Retornar_Erro_Quando_A_Usuario_For_Nula()
         {
@@ -52,24 +56,6 @@ namespace DatacenterMap.Testes.Controllers
                 Email = "gustavinho@gmail.com",
                 Senha = "1234"
             };
-        }
-
-        [TestInitialize]
-        public void Cleanup()
-        {
-            // Limpa as tabelas do banco
-            using (var context = new DatacenterMapContext("DatacenterMapTest"))
-            {
-                context.Equipamentos.RemoveRange(context.Equipamentos);
-                context.Gavetas.RemoveRange(context.Gavetas);
-                context.Racks.RemoveRange(context.Racks);
-                context.Slots.RemoveRange(context.Slots);
-                context.Salas.RemoveRange(context.Salas);
-                context.Andares.RemoveRange(context.Andares);
-                context.Edificacoes.RemoveRange(context.Edificacoes);
-                context.Usuarios.RemoveRange(context.Usuarios);
-                context.SaveChanges();
-            }
         }
 
         private UsuarioController CriarController()
