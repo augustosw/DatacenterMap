@@ -7,6 +7,8 @@ angular.module('app').controller('RackController', function ($scope, rackService
     $scope.criarEquipamento = criarEquipamento; 
     $scope.posicaoInvalida = posicaoInvalida;
     $scope.deletarEquipamento = deletarEquipamento;
+    $scope.verificarTamanho = verificarTamanho;
+    var tamanhoAtual = 0;
 
     // setup(); 
     function setup() {
@@ -58,6 +60,38 @@ angular.module('app').controller('RackController', function ($scope, rackService
         return $scope.tamanho.some(x => x + 1 === idGaveta || x - 1 === idGaveta);
     }
 
+    function verificarTamanho(gaveta) {
+        if(gaveta.equipamento !== undefined){
+            if(tamanhoAtual === 0){
+                    tamanhoAtual = gaveta.equipamento.tamanho;
+                    $scope.tamanhoGaveta = {
+                        height:`${tamanhoAtual*30}px`,
+                        background: "#FF8C00"}
+                    } 
+            else {
+                $scope.tamanhoGaveta = { display: "none" } 
+            }
+        tamanhoAtual--;
+        }
+        else {
+            $scope.tamanhoGaveta = { height: "30px" }
+        }
+    }
+
+
+    // function verificarTamanho(gaveta) {
+    //     if(tamanhoAtual === 0){
+    //         equipamentoService.buscarPorId(gaveta.equipamentoId)
+    //                             .then(function(response) {
+    //                                 tamanhoAtual = response.data.tamanho;
+    //                                 $scope.tamanhoGaveta = {
+    //                                     height:`${tamanhoAtual*50}`
+    //                                 }})
+    //     }
+    //     tamanhoAtual--; 
+    // }
+    
+
     function deletarEquipamento(gaveta){
         console.log(gaveta);
         // metodos corretos, porém não há comunicacao com o banco
@@ -78,30 +112,64 @@ angular.module('app').controller('RackController', function ($scope, rackService
             id:2,
             ocupado:true,
             equipamento: {
-                id:1
+                id:1,
+                tamanho:3
             }
         },
         {
             id:3,
             ocupado:true,
             equipamento: {
-                id:1
+                id:1,
+                tamanho:3
             }
         },
         {
             id:4,
-            ocupado:false
+            ocupado:true,
+            equipamento: {
+                id:1,
+                tamanho:3
+            }
         },
         {
             id:5,
-            ocupado:false
+            ocupado:true,
+            equipamento: {
+                id:2,
+                tamanho:2
+            }
         },
         {
             id:6,
-            ocupado:false
+            ocupado:true,
+            equipamento: {
+                id:2,
+                tamanho:2
+            }
         },
         {
             id:7,
+            ocupado:false
+        },
+        {
+            id:8,
+            ocupado:false
+        },
+        {
+            id:9,
+            ocupado:true,
+            equipamento: {
+                id:3,
+                tamanho:1
+            }
+        },
+        {
+            id:10,
+            ocupado:false
+        },
+        {
+            id:11,
             ocupado:false
         }
     ];  
