@@ -78,8 +78,8 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                 angular.forEach(salas, function (sala, key) {
                     dataTemp[sala.NumeroSala] = sala;
                 });
-                $scope.dummyData = dataTemp;
-                console.log($scope.dummyData);
+                $scope.salas = dataTemp;
+                console.log($scope.salas);
             },
             function (response) {
                 console.log(response);
