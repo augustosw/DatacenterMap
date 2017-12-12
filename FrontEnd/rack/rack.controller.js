@@ -1,4 +1,5 @@
-angular.module('app').controller('RackController', function ($scope, rackService, equipamentoService, $routeParams) {
+angular.module('app').controller('RackController', function ($scope, rackService, equipamentoService, $routeParams, edificacaoService,
+                                andarService) {
     
  
     $scope.tamanho = [] 
@@ -8,6 +9,10 @@ angular.module('app').controller('RackController', function ($scope, rackService
     $scope.posicaoInvalida = posicaoInvalida;
     $scope.deletarEquipamento = deletarEquipamento;
     $scope.verificarTamanho = verificarTamanho;
+    $scope.buscarAndares = buscarAndares;
+    $scope.buscarSalas = buscarSalas;
+    $scope.buscarRacks = buscarRacks;
+
     var tamanhoAtual = 0;
 
     // setup(); 
@@ -77,6 +82,44 @@ angular.module('app').controller('RackController', function ($scope, rackService
             $scope.tamanhoGaveta = { height: "30px" }
         }
     }
+
+
+    function buscarAndares() {
+
+        //TO-DO: ADICIONAR METODO CORRETO NA SERVICE E FAZER CHAMADA AQUI.
+
+        andarService.buscarPorIdSelecionado()
+                        .then(function(response) { 
+                            $scope.andares = response.data.Andares; 
+                        })
+    }
+
+    //recebe idEdificação - retorna andares disponiveis
+
+    function buscarSalas(andar) {
+
+        //TO-DO: ADICIONAR METODO CORRETO NA SERVICE E FAZER CHAMADA AQUI.
+
+        andarService.obterPorId(andar.Id)
+                    .then(function(response) {
+                        $scope.salas = response.data.Salas;
+                    }) 
+    }
+
+    //recebe idSala - retorna salas disponiveis
+
+    function buscarRacks(sala) {
+
+        //TO-DO: ADICIONAR METODO CORRETO NA SERVICE E FAZER CHAMADA AQUI.
+
+        salaService.obterPorId(sala.Id)
+                    .then(function (response) {
+                        $scope.racks = response.data.Racks;
+                    })
+    }
+
+
+    //recebe idRack 
 
 
     // function verificarTamanho(gaveta) {
