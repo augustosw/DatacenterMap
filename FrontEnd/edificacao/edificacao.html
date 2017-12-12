@@ -1,4 +1,8 @@
 <div class="flex-row edificacao-wrapper">
+    <map-sidebar entidades='edificacoes' tipo-atual='tipoEntidade'></map-sidebar>
+    <button type="button" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}" ng-click="voltar()">
+            <img ng-src="/image/andares-voltar.svg" height="30" width="30">
+    </button>
     <div class="edificacao-container">
         <div class="base">
             <img class="base-imagem" src="/image/base-imagem.svg" alt="">
@@ -9,8 +13,5 @@
             <div class="andar-numero" data-tooltip="A {{$index+1}}" ng-style="andarStyle">
             </div>
         </div>
-    </div>
-    <div class="edificacao-detalhes">
-        <button type="button" class="btn btn-primary" ng-click="voltar()"> voltar</button>
     </div>
 </div>

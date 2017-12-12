@@ -3,7 +3,8 @@ html, body {
     padding: 0;
     background-image: url("/image/background-pattern.jpg");
     background-size: 30%;
-  }
+    font-family:'Roboto', sans-serif;    
+}
 
 .flex-row {
     display:flex; 
@@ -453,6 +454,13 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+.texto-equipamento-disponivel {
+    font-size: 10px;
+    position: absolute;
+    left:45%;
+    top: 35%;
+}
+
 .equipamento-item:hover {
     background:#CECECF;
 }
@@ -468,7 +476,7 @@ input[type="checkbox"] {
 
 .rack-content{
     position: relative;
-    background: #42464F;
+    background: linear-gradient(to left,#42464f, #2e2e2e);
     box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.3);
     border: 0px;
 }
@@ -490,11 +498,11 @@ element.style {
 }
 
 input[type="checkbox"]:checked + .equipamento-item {
-    background: #55E955;
+    background: #51b651;
 }
 
 input[type="checkbox"]:checked + .equipamento-item:hover {
-    background: #2CFF2C;
+    background: #0AC30A;
 }
 
 
@@ -704,7 +712,6 @@ input[type="checkbox"]:checked + .equipamento-item:hover {
 
 #pac-input {
     background-color: #fff;
-    font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
     margin-left: 12px;
@@ -717,10 +724,6 @@ input[type="checkbox"]:checked + .equipamento-item:hover {
     border-color: #4d90fe;
 }
 
-.pac-container {
-    font-family: Roboto;
-}
-
 #type-selector {
     color: #fff;
     background-color: #4d90fe;
@@ -728,7 +731,6 @@ input[type="checkbox"]:checked + .equipamento-item:hover {
 }
 
 #type-selector label {
-    font-family: Roboto;
     font-size: 13px;
     font-weight: 300;
 }
