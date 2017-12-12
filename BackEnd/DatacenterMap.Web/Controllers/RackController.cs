@@ -10,6 +10,7 @@ using System.Web.Http;
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
+    [RoutePrefix("api/rack")]
     public class RackController : ControllerBasica
     {
 
@@ -26,7 +27,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/rack")]
         public HttpResponseMessage CadastrarRack([FromBody] RackModel request)
         {
             if (request == null)
@@ -56,7 +56,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPut]
-        [Route("api/rack")]
         public HttpResponseMessage AlterarRack([FromBody] RackModel request)
         {
             if (request == null)
@@ -88,7 +87,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        [Route("api/rack/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage GetRack([FromUri] int id)
         {
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
@@ -100,7 +99,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/rack/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage DeletarRack([FromUri] int id)
         {
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
@@ -116,7 +115,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/rack/limpar/{id}")]
+        [Route("limpar/{id}")]
         public HttpResponseMessage LimparRack([FromUri] int id)
         {
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");

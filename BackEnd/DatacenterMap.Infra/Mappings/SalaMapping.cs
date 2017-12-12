@@ -11,7 +11,7 @@ namespace DatacenterMap.Infra.Mappings
 
 			HasKey(x => x.Id);
 
-			Property(x => x.NumeroSala).HasColumnType("varchar").IsRequired();
+			Property(x => x.NumeroSala).HasColumnType("varchar").HasMaxLength(80).IsRequired();
 
 			Property(x => x.QuantidadeMaximaSlots).IsRequired();
 

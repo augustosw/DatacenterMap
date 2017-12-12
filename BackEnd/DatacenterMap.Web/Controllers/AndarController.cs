@@ -9,6 +9,7 @@ using System.Web.Http;
 namespace DatacenterMap.Web.Controllers
 {
     [BasicAuthorization]
+    [RoutePrefix("api/andar")]
     public class AndarController : ControllerBasica
     {
 
@@ -25,7 +26,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/andar")]
         public HttpResponseMessage CadastrarAndar([FromBody] AndarModel request)
         {
             if (request == null)
@@ -51,7 +51,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPut]
-        [Route("api/andar")]
         public HttpResponseMessage AlterarAndar([FromBody] AndarModel request)
         {
             if (request == null)
@@ -73,7 +72,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
-        [Route("api/andar/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage GetAndar([FromUri] int id)
         {
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
@@ -84,7 +83,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/andar/{id}")]
+        [Route("{id}")]
         public HttpResponseMessage DeletarAndar([FromUri] int id)
         {
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Andar não encontrado.");

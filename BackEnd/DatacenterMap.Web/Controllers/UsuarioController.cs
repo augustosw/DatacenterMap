@@ -9,6 +9,7 @@ using System.Web.Http;
 namespace DatacenterMap.Web.Controllers
 {
     [AllowAnonymous]
+    [RoutePrefix("api/usuario")]
     public class UsuarioController : ControllerBasica
     {
 
@@ -25,7 +26,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/usuario")]
         public HttpResponseMessage CadastrarUsuario([FromBody] UsuarioModel request)
         {
             if (request == null)
@@ -47,7 +47,6 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPut]
-        [Route("api/usuario")]
         public HttpResponseMessage AlterarUsuario([FromBody] UsuarioModel request)
         {
             if (request == null)
@@ -71,7 +70,7 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/usuario/login")]
+        [Route("login")]
         public HttpResponseMessage Logar(LoginModel login)
         {
             var usuario = contexto.Usuarios
