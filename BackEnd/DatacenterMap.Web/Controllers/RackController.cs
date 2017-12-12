@@ -38,14 +38,14 @@ namespace DatacenterMap.Web.Controllers
             if (contexto.Racks.Where(x => x.Slot.Id == slot.Id).Count() != 0)
                 return BadRequest("Já existe um rack neste slot.");
 
-            Rack rack = CreateRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
+            Rack rack = MontarRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
             rack.Slot = slot;
 
             if (rack.Validar())
             {
                 for (var i = 0; i < rack.QuantidadeGavetas; i++)
                 {
-                    contexto.Gavetas.Add(CreateGaveta(rack, i + 1));
+                    contexto.Gavetas.Add(MontarGaveta(rack, i + 1));
                 }
                 contexto.SaveChanges();
 
@@ -63,7 +63,7 @@ namespace DatacenterMap.Web.Controllers
 
             Rack rackAntiga = contexto.Racks.FirstOrDefault(x => x.Id == request.Id);
 
-            Rack rackNova = CreateRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
+            Rack rackNova = MontarRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
 
             if (rackNova.QuantidadeGavetas < rackAntiga.QuantidadeGavetas)
                 return BadRequest("A quantidade máxima de gavetas não pode ser diminuida.");
@@ -75,7 +75,7 @@ namespace DatacenterMap.Web.Controllers
                 int quantidadeExtrasSlots = request.QuantidadeGavetas - rackAntiga.QuantidadeGavetas;
                 for (var i = 0; i < quantidadeExtrasSlots; i++)
                 {
-                    contexto.Gavetas.Add(CreateGaveta(rackAntiga, (rackAntiga.QuantidadeGavetas+i+1)));
+                    contexto.Gavetas.Add(MontarGaveta(rackAntiga, (rackAntiga.QuantidadeGavetas+i+1)));
                 }
 
                 contexto.SaveChanges();
@@ -96,6 +96,27 @@ namespace DatacenterMap.Web.Controllers
             rack.Gavetas = contexto.Gavetas.AsNoTracking().Include(x => x.Rack).Where(x => x.Rack.Id == rack.Id).Include(x => x.Equipamento).ToList();
 
             return Ok(rack);
+        }
+
+        [HttpGet]
+        [Route("disponiveis/{salaId}/{tamanho}")]
+        public HttpResponseMessage GetRacksDisponiveis([FromUri] int salaId, int tamanho)
+        {
+            List<Slot> slots = contexto.Slots
+                          .AsNoTracking()
+                          .Include(x => x.Sala)
+                          .Where(x => x.Sala.Id == salaId)
+                          .ToList();
+
+            List<int> slotsId = new List<int>();
+            slots.ForEach(x => slotsId.Add(x.Id));
+
+            List<Rack> racks = contexto.Racks.Include(x => x.Slot)
+                          .AsNoTracking()
+                          .Where(x => slotsId.Contains(x.Id) && ControllerUtils.RackIsDisponivel(contexto, x.Id, tamanho))
+                          .ToList();
+
+            return Ok(racks);
         }
 
         [HttpDelete]
@@ -135,7 +156,7 @@ namespace DatacenterMap.Web.Controllers
             return Ok("Todos os Equipamentos foram removidos.");
         }
 
-        public Rack CreateRack(int quantidadeGavetas, int tensao, string descricao)
+        public Rack MontarRack(int quantidadeGavetas, int tensao, string descricao)
         {
             var rack = new Rack
             {
@@ -146,7 +167,7 @@ namespace DatacenterMap.Web.Controllers
             return rack;
         }
 
-        public Gaveta CreateGaveta(Rack rack, int posicao)
+        public Gaveta MontarGaveta(Rack rack, int posicao)
         {
             var gaveta = new Gaveta
             {
