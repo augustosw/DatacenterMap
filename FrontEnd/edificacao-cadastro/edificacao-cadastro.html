@@ -19,7 +19,6 @@
                 <div class="form-group">
                     <label for="endereco" class="campo-cadastro">Localização</label>
                     <input id="autocomplete" ng-class="{'enviar': enviar}" placeholder="Ex: Avenida Theodomiro Porto da Fonseca - Cristo Rei, São Leopoldo - RS, Brazil" class="form-control" type="text" ng-model="localizacao" required>
-
                 </div>
                 <div class="form-group flex-column">
                     <label for="numeroAndares" class="campo-cadastro">Número de andares</label>
@@ -29,7 +28,7 @@
                             <button type="button" class="btn btn-danger" ng-click="remover()" style="margin: 0 5px">-</button> 
                         </div>
                         <div class="col-4">
-                            <input placeholder="Digite os andares" ng-model="edificacao.numeroAndares" type="number" min="1"> 
+                            <input ng-change="adicionarDigitados(numeroAndares)" placeholder="Digite os andares" ng-model="numeroAndares" type="number" min="1"> 
                         </div>
                     </div> 
                     <div class="col-4 flex-row center-center" style="position:relative">
