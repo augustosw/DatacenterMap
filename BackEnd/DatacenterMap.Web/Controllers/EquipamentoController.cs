@@ -90,16 +90,19 @@ namespace DatacenterMap.Web.Controllers
             List<Gaveta> gavetasSelecionadas = new List<Gaveta>();
             foreach (Gaveta g in gavetas)
             {
+                // Se a próxima gaveta tem a posição consecutiva em relação a anterior, adiciona a gaveta às gavetas selecionadas
                 if (gavetasSelecionadas.Count() == 0 || gavetasSelecionadas.ElementAt(gavetasSelecionadas.Count() - 1).Posicao + 1 == g.Posicao)
                 {
                     gavetasSelecionadas.Add(g);
                 }
+                // Se não, limpa as gavetas selecionadas e recomeça
                 else
                 {
                     gavetasSelecionadas.Clear();
                     gavetasSelecionadas.Add(g);
                 }
 
+                // Se as gavetas selecionadas forem do tamanho correto, termina o For e retorna o resultado
                 if (gavetasSelecionadas.Count() == equipamento.Tamanho)
                 {
                     Gaveta gavetaAntiga = contexto.Gavetas.FirstOrDefault(x => x.Equipamento.Id == equipamento.Id);
