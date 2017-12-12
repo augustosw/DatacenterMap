@@ -105,9 +105,8 @@ namespace DatacenterMap.Web.Controllers
                 // Se as gavetas selecionadas forem do tamanho correto, termina o For e retorna o resultado
                 if (gavetasSelecionadas.Count() == equipamento.Tamanho)
                 {
-                    Gaveta gavetaAntiga = contexto.Gavetas.FirstOrDefault(x => x.Equipamento.Id == equipamento.Id);
-                    gavetaAntiga.Equipamento = null;
-                    gavetaAntiga.Ocupado = false;
+                    List<Gaveta> gavetaAntigas = contexto.Gavetas.Include(x => x.Equipamento).Where(x => x.Equipamento.Id == equipamento.Id).ToList();
+                    gavetaAntigas.ForEach(x => x.Equipamento = null);
 
                     equipamento.Gavetas = gavetasSelecionadas;
                     gavetasSelecionadas.ForEach(x => x.Equipamento = equipamento);
