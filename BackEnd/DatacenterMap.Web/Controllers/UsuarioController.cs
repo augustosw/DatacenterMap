@@ -31,7 +31,7 @@ namespace DatacenterMap.Web.Controllers
             if (request == null)
                 return BadRequest($"O parametro {nameof(request)} não pode ser null");
 
-            if (contexto.Usuarios.Where(x => x.Email == request.Email).Count() != 0) return BadRequest("Já existe uma conta com esse email");
+            if (contexto.Usuarios.Where(x => x.Email == request.Email).Count() != 0) return BadRequest("Já existe uma conta com esse email.");
 
             Usuario usuario = CreateUsuario(request.Nome, request.Email, request.Senha);
 

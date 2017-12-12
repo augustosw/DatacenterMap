@@ -2,50 +2,43 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
 
     $scope.criar = criar;//para testes atualmente
     $scope.adicionarAndar = adicionarAndar;
-    $scope.selecionarAndar= selecionarAndar;
+    $scope.selecionarAndar = selecionarAndar;
     $scope.isAlterar = !!$routeParams.id;
     $scope.isAlterar = false;
     $scope.voltar = voltar;
     $scope.excluir = excluir;
-<<<<<<< HEAD
-=======
     $scope.tipoEntidade = "edificacao"
->>>>>>> parent of 3655b3c... feat(andares): modificada tela de edificação para incluir atributos na diretiva de andar.
     // TODO: necessário criar dados para poder usar.
     // setup();
 
-<<<<<<< HEAD
-    setup();
-=======
 
     console.log($routeParams.id);
-    // setup();
->>>>>>> parent of 3655b3c... feat(andares): modificada tela de edificação para incluir atributos na diretiva de andar.
+    setup();
     function setup() {
-        ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscarEdificacaoPorId(2);
+        ($scope.isAlterar) ? buscarEdificacaoPorId($routeParams.id) : buscarEdificacaoPorId(1);
     }
 
-    function buscarEdificacaoPorId(id){
+    function buscarEdificacaoPorId(id) {
         edificacaoService.buscarPorId(id)
-                        .then(function(response) {
-                            console.log(response.data.dados);
-                            $scope.edificacaoSelecionada = response.data.dados;
-                            $scope.andaresPadroes = [];
-                            $scope.andares = $scope.edificacaoSelecionada.Andares;
-                            for(var i = 1; i <= $scope.edificacaoSelecionada.NumeroAndares; i++) {
-                                $scope.andaresPadroes.push(i);
-                            }
-                            $scope.andaresTela = $scope.andaresPadroes;
-                            console.log($scope.andares);
-                        })
+            .then(function (response) {
+                console.log(response.data.dados);
+                $scope.edificacaoSelecionada = response.data.dados;
+                $scope.andaresPadroes = [];
+                $scope.andares = $scope.edificacaoSelecionada.Andares;
+                for (var i = 1; i <= $scope.edificacaoSelecionada.NumeroAndares; i++) {
+                    $scope.andaresPadroes.push(i);
+                }
+                $scope.andaresTela = $scope.andaresPadroes;
+                console.log($scope.andares);
+            })
     }
 
-    function buscar(){
+    function buscar() {
         edificacaoService.buscar()
-                        .then(function(response) {
-                            console.log(response.data.dados);
-                            $scope.edificacoes = response.data.dados;
-                        })
+            .then(function (response) {
+                console.log(response.data.dados);
+                $scope.edificacoes = response.data.dados;
+            })
     }
 
 
@@ -61,15 +54,16 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     }
 
     function adicionarAndar(indice) {
-        if($scope.detalhe){
+        if ($scope.detalhe) {
             $scope.andarStyle = {
-                transform:"translateZ(15vmin) rotate3d(0,0,1,20deg)",
-                opacity:1 }
+                transform: "translateZ(15vmin) rotate3d(0,0,1,20deg)",
+                opacity: 1
+            }
         }
         else {
             $scope.andarStyle = {
-                transform:`translateZ(${indice*10}vmin)`,
-                opacity:1
+                transform: `translateZ(${indice * 10}vmin)`,
+                opacity: 1
             }
         }
         return '';
@@ -100,11 +94,11 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         $scope.andaresTela = [];
         $scope.detalhe = true;
         $scope.andaresTela.push(andar);
-        $scope.andarSelecionado = $scope.andares.filter(function (valor){ return valor.NumeroAndar == andar});
+        $scope.andarSelecionado = $scope.andares.filter(function (valor) { return valor.NumeroAndar == andar });
         console.log($scope.andarSelecionado);
     }
 
-    function voltar(){
+    function voltar() {
         $scope.detalhe = false;
         $scope.andaresTela = $scope.andaresPadroes;
         $scope.andarSelecionado = [];

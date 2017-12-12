@@ -36,7 +36,7 @@ namespace DatacenterMap.Web.Controllers
             slot.Ocupado = true;
 
             if (contexto.Racks.Where(x => x.Slot.Id == slot.Id).Count() != 0)
-                return BadRequest("Já existe uma rack neste slot.");
+                return BadRequest("Já existe um rack neste slot.");
 
             Rack rack = CreateRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
             rack.Slot = slot;

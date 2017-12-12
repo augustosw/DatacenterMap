@@ -57,6 +57,7 @@ namespace DatacenterMap.Web.Controllers
 
             Edificacao edificacao = contexto.Edificacoes.FirstOrDefault(x => x.Id == id);
             contexto.Edificacoes.Remove(edificacao);
+            contexto.SaveChanges();
 
             return Ok("Removido com Sucesso");
         }

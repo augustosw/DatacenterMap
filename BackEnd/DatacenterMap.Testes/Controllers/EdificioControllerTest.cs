@@ -13,10 +13,23 @@ namespace DatacenterMap.Testes.Controllers
     [TestClass]
     public class EdificacaoControllerTests
     {
+<<<<<<< HEAD
         //[TestMethod]
         //public void Edificacaos_Cadastrados_Devem_Ser_Retornados_No_Obter_Por_Id()
         //{
         //    var edificacao = CriarNovaEdificacao1();
+=======
+        public EdificacaoControllerTests()
+        {
+            CleanUp.LimparTabelas(new DatacenterMapContext("DatacenterMapTest"));
+        }
+
+        [TestMethod]
+        public void Edificacoes_Cadastradas_Devem_Ser_Retornadas_No_Obter_Por_Id()
+        {
+            
+            var edificacao = CriarNovaEdificacao1();
+>>>>>>> master
 
         //    var edificacaoController = CriarController();
 
@@ -47,9 +60,17 @@ namespace DatacenterMap.Testes.Controllers
         //    edificacaoRetornadoNoPost.Content.Nome = "Joaquim";
         //    var edificacaoRetornadoNoPut = edificacaoController.AtualizarEdificacao(edificacaoRetornadoNoPost.Content.Id, edificacaoRetornadoNoPost.Content) as OkNegotiatedContentResult<Edificacao>;
 
+<<<<<<< HEAD
         //    Assert.IsNotNull(edificacaoRetornadoNoPut);
 
         //    var edificacaoRetornadoNoGet = edificacaoController.ObterEdificacaoPorId(edificacaoRetornadoNoPost.Content.Id) as OkNegotiatedContentResult<Edificacao>;
+=======
+            var objetoGet = edificacaoController.GetEdificacao(edificacaoRetornadaNoPost.Id).Content as ObjectContent;
+            Edificacao edificacaoRetornadoNoGet = objetoGet.Value as Edificacao;
+
+            Assert.IsNull(edificacaoRetornadoNoGet);
+        }
+>>>>>>> master
 
         //    Assert.IsNotNull(edificacaoRetornadoNoGet);
 

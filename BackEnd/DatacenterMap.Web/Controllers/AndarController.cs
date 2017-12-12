@@ -91,6 +91,7 @@ namespace DatacenterMap.Web.Controllers
 
             Andar andar = contexto.Andares.FirstOrDefault(x => x.Id == id);
             contexto.Andares.Remove(andar);
+            contexto.SaveChanges();
 
             return Ok("Removido com Sucesso");
         }
