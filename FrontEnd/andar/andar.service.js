@@ -1,11 +1,20 @@
 // Service de andares
 angular.module('app').factory('andarService', function ($http, $location) {
-	let url = $location.absUrl() + "/andar";
+	let url = "http://localhost:51641/api/andar/";
+
+    function listar(){
+        return $http.get(url);
+    }
+
+    function obterPorId(id){
+        return $http.get(url + id);
+    }
 
     function criar(andar){
         return $http.post(url, andar);
     }
-    function exluir(id){
+
+    function excluir(id){
         return $http.delete(url + id);
     }
     function editar(id, andar){
@@ -14,6 +23,8 @@ angular.module('app').factory('andarService', function ($http, $location) {
     return {
         criar: criar,
         excluir: excluir,
-        editar: editar
+        editar: editar,
+        listar: listar,
+        obterPorId: obterPorId
     }
 });   

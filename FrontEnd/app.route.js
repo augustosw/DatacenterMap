@@ -10,18 +10,6 @@ angular.module('app').config(function ($routeProvider) {
             controller: 'LoginController',
             templateUrl: 'login/login.html'
         })
-        // privadas
-        .when('/edificacao', {
-            controller: 'EdificacaoController',
-            templateUrl: 'edificacao/edificacao.html',
-            //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
-        })
 
         .when('/edificacao/:id?', {
             controller: 'EdificacaoController',
@@ -34,7 +22,18 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
-
+        
+        .when('/andar/:id?', {
+            controller: 'AndarController',
+            templateUrl: 'andar/andar.html',
+            // resolve: {
+            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+            //     autenticado: function (authService) {
+            //         return authService.isAutenticadoPromise();
+            //     }
+            // }
+        })
+               
         .when('/sala', {
             controller: 'SalaController',
             templateUrl: 'sala/sala.html',
@@ -47,7 +46,7 @@ angular.module('app').config(function ($routeProvider) {
             // }
         })
 
-        .when('/rack/:id?', {
+        .when('/rack', {
             controller: 'RackController',
             templateUrl: 'rack/rack.html',
             //TODO : Implementar autenticação

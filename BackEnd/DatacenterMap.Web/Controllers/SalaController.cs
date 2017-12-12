@@ -1,7 +1,6 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
-using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
@@ -93,23 +92,11 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
-            Sala sala = contexto.Salas.Include(x => x.Slots).FirstOrDefault(x => x.Id == id);
+            Sala sala = contexto.Salas.FirstOrDefault(x => x.Id == id);
 
-            contexto.Slots.RemoveRange(sala.Slots);
             contexto.Salas.Remove(sala);
             contexto.SaveChanges();
             return Ok("Removido com Sucesso");
-        }
-
-        [HttpGet]
-        [Route("api/sala/{id}")]
-        public HttpResponseMessage GetSala([FromUri] int id)
-        {
-            if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
-
-            Sala sala = contexto.Salas.AsNoTracking().FirstOrDefault(x => x.Id == id);
-
-            return Ok(sala);
         }
 
         public Sala CreateSala(string numeroSala, int quantidadeMaximaSlots, double largura, double comprimento)
