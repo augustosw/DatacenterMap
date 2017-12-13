@@ -22,7 +22,7 @@ angular.module('app')
                 salaService.criar(sala)
                             .then(
                             function (response) {
-                                $scope.andar.Salas.push(response.data);
+                                $scope.andar[0].Salas.push(response.data);
                             },
                             function(response){
                                 alert(response.data);  
