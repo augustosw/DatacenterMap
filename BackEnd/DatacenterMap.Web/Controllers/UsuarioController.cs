@@ -87,7 +87,7 @@ namespace DatacenterMap.Web.Controllers
             return BadRequest("Usuário ou senha inválido");
         }
 
-        public Usuario UsuarioLogado()
+        internal Usuario UsuarioLogado()
         {
             var usuario = contexto.Usuarios
                        .FirstOrDefault(x => x.Email == User.Identity.Name);
