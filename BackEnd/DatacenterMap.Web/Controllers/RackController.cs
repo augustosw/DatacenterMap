@@ -156,7 +156,7 @@ namespace DatacenterMap.Web.Controllers
             return Ok("Todos os Equipamentos foram removidos.");
         }
 
-        public Rack MontarRack(int quantidadeGavetas, int tensao, string descricao)
+        internal Rack MontarRack(int quantidadeGavetas, int tensao, string descricao)
         {
             var rack = new Rack
             {
@@ -167,7 +167,7 @@ namespace DatacenterMap.Web.Controllers
             return rack;
         }
 
-        public Gaveta MontarGaveta(Rack rack, int posicao)
+        internal Gaveta MontarGaveta(Rack rack, int posicao)
         {
             var gaveta = new Gaveta
             {
