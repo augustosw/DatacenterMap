@@ -10,6 +10,10 @@ angular.module('app').factory('salaService', function ($http, $location) {
         return $http.get(url + id);
     }
 
+    function buscarPorIdComRackDisponiveis(andarId, tamanho){
+        return $http.get(url + "disponiveis/" + andarId + tamanho)
+    }
+
     function criar(sala){
         return $http.post(url, sala);
     }
@@ -21,6 +25,7 @@ angular.module('app').factory('salaService', function ($http, $location) {
     }
     return {
         criar: criar,
+        buscarPorIdComRackDisponiveis:buscarPorIdComRackDisponiveis,
         excluir: excluir,
         editar: editar,
         listar: listar,

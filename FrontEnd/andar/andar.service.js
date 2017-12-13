@@ -6,6 +6,11 @@ angular.module('app').factory('andarService', function ($http, $location) {
         return $http.get(url);
     }
 
+    //método utilizado pela controller de rack para encontrar andares com equipamentos disponiveis
+    function buscarPorIdComRackDisponiveis(edificacaoId, tamanho){
+        return $http.get(url + "disponiveis/" + edificacaoId + "/" + tamanho);
+    }
+
     function obterPorId(id){
         return $http.get(url + id);
     }

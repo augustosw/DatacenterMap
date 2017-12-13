@@ -56,14 +56,12 @@ angular.module('app')
       }
       return true
     }
-
-
-
-      $scope.close = function () {
-        $mdSidenav('andar').close()
-          .then(function () {
-          });
-      };
+    
+    $scope.close = function () {
+      $mdSidenav('andar').close()
+        .then(function () {
+        });
+    };
         
 
 }}});

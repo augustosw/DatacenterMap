@@ -5,8 +5,11 @@ angular.module('app').controller('RackController', function ($scope, rackService
     $scope.tamanho = [] 
     $scope.equipamento = {};
     $scope.aumentarTamanho = aumentarTamanho;
+    $scope.isAlterar = false;
+    $scope.editar = editar; 
     $scope.criarEquipamento = criarEquipamento; 
     $scope.posicaoInvalida = posicaoInvalida;
+    $scope.equipamentoEdicao = {};
     $scope.deletarEquipamento = deletarEquipamento;
     $scope.verificarTamanho = verificarTamanho;
     $scope.buscarAndares = buscarAndares;
@@ -24,12 +27,23 @@ angular.module('app').controller('RackController', function ($scope, rackService
                     })
     }
 
-    function aumentarTamanho(idGaveta, ativo) {
+    function editar(gaveta){
+        $scope.isAlterar = true;
+        $scope.equipamentoEdicao = gaveta.Equipamento;
+    }
+
+    function aumentarTamanho(gaveta, ativo) {
+        console.log(gaveta);
+        if(gaveta.ocupado){
+            editar(gaveta);
+            return;
+        }
+        $scope.isAlterar = false;
         solicitarCadastro = true;
         if(ativo)
-            $scope.tamanho.push(idGaveta);
+            $scope.tamanho.push(gaveta.id);
         else {
-            var indice = $scope.tamanho.indexOf(idGaveta);
+            var indice = $scope.tamanho.indexOf(gaveta.id);
             if (indice > -1) {
             $scope.tamanho.splice(indice, 1);
             }
@@ -84,35 +98,23 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
 
-    function buscarAndares() {
-
-        //TO-DO: ADICIONAR METODO CORRETO NA SERVICE E FAZER CHAMADA AQUI.
-
-        andarService.buscarPorIdSelecionado()
+    function buscarAndares(equipamentoEdicao) {
+        let edificacaoAtualId = edificacaoService.buscarIdDeEdificacaoAtual();
+        andarService.buscarPorIdComRackDisponiveis(edificacaoAtualId, equipamentoEdicao.Tamanho)
                         .then(function(response) { 
                             $scope.andares = response.data.Andares; 
                         })
     }
 
-    //recebe idEdificação - retorna andares disponiveis
-
-    function buscarSalas(andar) {
-
-        //TO-DO: ADICIONAR METODO CORRETO NA SERVICE E FAZER CHAMADA AQUI.
-
-        andarService.obterPorId(andar.Id)
+    function buscarSalas(equipamentoEdicao, andar) {
+        salaService.buscarPorIdComRackDisponiveis(andar.Id, equipamentoEdicao.Tamanho)
                     .then(function(response) {
                         $scope.salas = response.data.Salas;
                     }) 
     }
 
-    //recebe idSala - retorna salas disponiveis
-
-    function buscarRacks(sala) {
-
-        //TO-DO: ADICIONAR METODO CORRETO NA SERVICE E FAZER CHAMADA AQUI.
-
-        salaService.obterPorId(sala.Id)
+    function buscarRacks(equipamentoEdicao, sala) {
+        equipamentoService.buscarPorIdComRackDisponiveis(sala.Id, equipamentoEdicao.Tamanho)
                     .then(function (response) {
                         $scope.racks = response.data.Racks;
                     })
