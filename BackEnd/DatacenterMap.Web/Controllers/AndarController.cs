@@ -111,7 +111,7 @@ namespace DatacenterMap.Web.Controllers
             return Ok("Removido com Sucesso");
         }
 
-        public Andar CreateAndar(int numeroAndar, int quantidadeSalas, int edificacaoId)
+        internal Andar CreateAndar(int numeroAndar, int quantidadeSalas, int edificacaoId)
         {
             var andar = new Andar
             {
