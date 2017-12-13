@@ -1,0 +1,67 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools cadastro-andar-header">Cadastro de Sala</h1>
+</md-toolbar>
+<md-content class="cadastro-andar-container">
+    <form id="cadastro-sala" novalidate name="cadastroSalaForm" ng-submit="criar(sala)">
+        <span class="texto-andar campos-obrigatorios">(Todos os campos são obrigatórios)</span>
+        <hr>
+        <div class="flex-column column-center">
+            <h5 class="texto-andar">Edificação: {{edificacao.Nome}}</h5>
+            <h5 class="texto-andar">Andar: {{andar[0].NumeroAndar}}</h5>
+            <img  ng-src="image/buildings.svg" heigh="115px" width="115px">
+        </div>
+        <hr class="text-header-title">
+        <div class="form-group">
+            <md-input-container>
+                <label class="texto-andar" for="numeroSala">Número da sala</label>
+                <input type="number" min="1" required  id="numeroSala" ng-model="sala.numeroSala" md-autofocus="">
+
+                <span class="campo-invalido" ng-show="cadastroSalaForm.numeroSala.$invalid && cadastroSalaForm.$submitted">Numero é obrigatório</span>
+
+                <span class="campo-invalido" ng-show="cadastroSalaForm.numeroSala.$touched && cadastroSalaForm.numeroSala.$error.number">Número de sala deve ser maior que 1</span>
+            </md-input-container>
+        </div>   
+        <div class="form-group">
+            <md-input-container>    
+                <label class="texto-andar" for="QuantidadeMaximaSlots">Quantidade máxima de slots</label>
+                <input type="number" min="1" id="QuantidadeMaximaSlots" required ng-model="sala.QuantidadeMaximaSlots" >
+
+                <span class="campo-invalido" ng-show="cadastroSalaForm.QuantidadeMaximaSlots.$invalid && cadastroSalaForm.$submitted">Quantidade máxima é obrigatório</span>
+                
+                <span class="campo-invalido" ng-show="cadastroSalaForm.QuantidadeMaximaSlots.$touched && cadastroSalaForm.QuantidadeMaximaSlots.$error.number">Quantidade máxima deve ser maior que 1</span>
+            </md-input-container>
+        </div>
+        <div class="form-group">
+            <md-input-container>    
+                <label class="texto-andar" for="Largura">Largura</label>
+                <input type="number" min="1" id="Largura" required ng-model="sala.Largura" >
+
+                <span class="campo-invalido" ng-show="cadastroSalaForm.Largura.$invalid && cadastroSalaForm.$submitted">Largura é obrigatória</span>
+                
+                <span class="campo-invalido" ng-show="cadastroSalaForm.QuantidadeMaximaSlots.$touched && cadastroSalaForm.QuantidadeMaximaSlots.$error.number">Largura deve ser maior que 1</span>
+            </md-input-container>
+        </div>
+        <div class="form-group">
+            <md-input-container>    
+                <label class="texto-andar" for="Comprimento">Comprimento</label>
+                <input type="number" min="1" id="Comprimento" required ng-model="sala.Comprimento" >
+
+                <span class="campo-invalido" ng-show="cadastroSalaForm.Comprimento.$invalid && cadastroSalaForm.$submitted">Comprimento é obrigatório</span>
+                
+                <span class="campo-invalido" ng-show="cadastroSalaForm.Comprimento.$touched && cadastroSalaForm.Comprimento.$error.number">Comprimento deve ser maior que 1</span>
+            </md-input-container>
+        </div>
+        <div class="form-group">
+            <div class="flex-row">
+                <md-button class="botao-cancelar-andar" type="submit" class="md-primary">
+                    Cadastrar
+                </md-button>
+                <md-button class="botao-cancelar-andar" type="button" ng-click="close()" class="md-primary">
+                    Cancelar cadastro
+                </md-button>
+            </div>
+        </div>
+        
+    </form>
+</md-content>
+            

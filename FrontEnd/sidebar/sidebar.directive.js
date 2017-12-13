@@ -12,7 +12,7 @@ angular.module('app')
     
     templateUrl: 'sidebar/sidebar.directive.html',
     
-    controller: function ($scope ) {
+    controller: function ($scope) {
 
         $scope.abrir = abrir;
         $scope.fechar = fechar;
@@ -20,8 +20,6 @@ angular.module('app')
         $scope.toggleSidenav = function() {
           $scope.isSidenavOpen = !$scope.isSidenavOpen
         }
-
-       
 
         function abrir() {
           $scope.cadastro = true;
