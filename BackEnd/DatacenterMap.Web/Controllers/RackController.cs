@@ -38,14 +38,14 @@ namespace DatacenterMap.Web.Controllers
             if (contexto.Racks.Where(x => x.Slot.Id == slot.Id).Count() != 0)
                 return BadRequest("Já existe um rack neste slot.");
 
-            Rack rack = MontarRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
+            Rack rack = CreateRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
             rack.Slot = slot;
 
             if (rack.Validar())
             {
                 for (var i = 0; i < rack.QuantidadeGavetas; i++)
                 {
-                    contexto.Gavetas.Add(MontarGaveta(rack, i + 1));
+                    contexto.Gavetas.Add(CreateGaveta(rack, i + 1));
                 }
                 contexto.SaveChanges();
 
@@ -63,7 +63,7 @@ namespace DatacenterMap.Web.Controllers
 
             Rack rackAntiga = contexto.Racks.FirstOrDefault(x => x.Id == request.Id);
 
-            Rack rackNova = MontarRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
+            Rack rackNova = CreateRack(request.QuantidadeGavetas, request.Tensao, request.Descricao);
 
             if (rackNova.QuantidadeGavetas < rackAntiga.QuantidadeGavetas)
                 return BadRequest("A quantidade máxima de gavetas não pode ser diminuida.");
@@ -75,7 +75,7 @@ namespace DatacenterMap.Web.Controllers
                 int quantidadeExtrasSlots = request.QuantidadeGavetas - rackAntiga.QuantidadeGavetas;
                 for (var i = 0; i < quantidadeExtrasSlots; i++)
                 {
-                    contexto.Gavetas.Add(MontarGaveta(rackAntiga, (rackAntiga.QuantidadeGavetas+i+1)));
+                    contexto.Gavetas.Add(CreateGaveta(rackAntiga, (rackAntiga.QuantidadeGavetas+i+1)));
                 }
 
                 contexto.SaveChanges();
@@ -155,8 +155,8 @@ namespace DatacenterMap.Web.Controllers
 
             return Ok("Todos os Equipamentos foram removidos.");
         }
-
-        internal Rack MontarRack(int quantidadeGavetas, int tensao, string descricao)
+        
+        internal Rack CreateRack(int quantidadeGavetas, int tensao, string descricao)
         {
             var rack = new Rack
             {
@@ -167,7 +167,7 @@ namespace DatacenterMap.Web.Controllers
             return rack;
         }
 
-        internal Gaveta MontarGaveta(Rack rack, int posicao)
+        internal Gaveta CreateGaveta(Rack rack, int posicao)
         {
             var gaveta = new Gaveta
             {

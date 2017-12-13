@@ -110,7 +110,7 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
-            Sala sala = contexto.Salas.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            Sala sala = contexto.Salas.Include(x => x.Slots).AsNoTracking().FirstOrDefault(x => x.Id == id);
 
             return Ok(sala);
         }
