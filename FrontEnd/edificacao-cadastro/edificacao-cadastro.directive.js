@@ -33,11 +33,10 @@ angular.module('app')
       function criar(edificacao) {
         $scope.edificacao.numeroAndares = $scope.andares.length;
         if ($scope.cadastroEdificacaoForm.$valid) {
-
           // TO-DO: adicionar caminho para service
-          edificacaoService.criar(edificacao).then(function (){
-            location.reload();
-          });
+          edificacaoService.criar(edificacao)
+                            .then(response => 
+                              location.reload());
         }
         else {
            $scope.enviar = true;

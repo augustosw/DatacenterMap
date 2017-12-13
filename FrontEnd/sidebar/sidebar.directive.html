@@ -5,19 +5,10 @@
     <div style="background-color:#FBB041"></div>
     <div class="flex-column">
         <div class="sidebar-items flex-column center-center ">
-            <form class="busca-sidebar-wrapper">
-                <fieldset>
-                    <div class="sidebar-busca">
-                        <i class="fa fa-search busca-icone"></i>
-                        <input class="edificacao-busca"type="text" ng-model="busca" placeholder="Busque edificações" />
-                    </div>                        
-                </fieldset>
-            </form>
             <map-carousel entidades='entidades' tipo-atual='tipoAtual'></map-carousel>
             <hr class="separador">
             <button ng-if="!cadastro"class="botao-flutuante-adicionar" ng-click="abrir()"> + </button>
-            <button ng-if="cadastro" class="botao-flutuante-cancelar" ng-click="fechar()"> x </button>
-            
+            <button ng-if="cadastro" class="botao-flutuante-cancelar" ng-click="fechar()"> x </button> 
         </div>
     </div>
 </div>

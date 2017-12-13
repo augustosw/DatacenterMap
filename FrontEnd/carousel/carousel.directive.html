@@ -1,22 +1,30 @@
-<div uib-carousel id="carousel"class="vertical" active="active">
-    <div uib-slide ng-repeat="entidade in entidades | filter: busca as results " index="entidade.Id" >
+<form class="busca-sidebar-wrapper">
+        <fieldset>
+            <div class="sidebar-busca">
+                <i class="fa fa-search busca-icone"></i>
+                <input class="edificacao-busca" type="text" ng-model="busca" placeholder="Busque edificações" />
+            </div>                        
+        </fieldset>
+</form>
+<div uib-carousel id="carousel" class="vertical" active="active">
+    <div uib-slide ng-repeat="entidade in entidades | filter: {Nome: busca}" index="$index" >
         <div class="carousel-item" ng-click="buscarEntidade(entidade)">
-            <img class="imagem-carousel" ng-src="image/buildings.svg" heigh="150px" width="150px">
+            <img class="imagem-carousel" ng-src="image/buildings.svg" heigh="115px" width="115px">
+            <div class="carousel-caption">
+                <h5 class="texto-carousel">{{entidades[$index].Nome}}</h5>
+            </div>
         </div>
         <div class="carousel-item" ng-click="buscarEntidade(entidades[getSecondIndex($index + 1)])">
             <img class="imagem-carousel"
-             ng-src="image/buildings.svg" heigh="150px" width="150px">
-                <div class="carousel-caption">
-                    <h4>Edificacao {{entidades[getSecondIndex($index + 1)].Id}}</h4>
-                </div>
-            <div ng-if="results.length === 0">
-                <h2>Nenhum resultado foi encontrado</h2>
+             ng-src="image/buildings.svg" heigh="115px" width="115px">
+            <div class="carousel-caption">
+                <h5 class="texto-carousel">{{entidades[getSecondIndex($index + 1)].Nome}}</h5>
             </div>
         </div>
         <div class="carousel-item" ng-click="buscarEntidade(entidades[getSecondIndex($index + 2)])" >
-            <img class="imagem-carousel"  ng-src="image/buildings.svg" heigh="150px" width="150px">
+            <img class="imagem-carousel"  ng-src="image/buildings.svg" heigh="115px" width="115px">
             <div class="carousel-caption">
-                <h4>Edificacao {{entidades[getSecondIndex($index + 2)].id}}</h4>
+                <h5 class="texto-carousel">{{entidades[getSecondIndex($index + 2)].Nome}}</h5>
             </div>
         </div>
     </div>

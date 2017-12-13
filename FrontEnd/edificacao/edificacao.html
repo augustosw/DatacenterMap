@@ -1,17 +1,35 @@
 <div class="flex-row edificacao-wrapper">
     <map-sidebar entidades='edificacoes' tipo-atual='tipoEntidade'></map-sidebar>
-    <button type="button" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}" ng-click="voltar()">
+    <div class="botoes-tela-edificacao-container"> 
+        <button ng-click="toggleRightAndar()" ng-hide="isOpenRightAndar()"  class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': isAlterar}" > 
+            <img ng-src="/image/novo-andar.svg" height="50" width="50" style="margin-top:6px; margin-right: 3px;">
+        </button>
+        <button type="button" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}" ng-click="voltar()">
             <img ng-src="/image/andares-voltar.svg" height="30" width="30">
-    </button>
+        </button>
+        <button ng-click="toggleRightSala()" ng-hide="isOpenRightSala()" type="button" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}">
+            <img ng-src="/image/nova-sala.svg" height="30" width="30">
+        </button>
+    </div>
     <div class="edificacao-container">
         <div class="base">
             <img class="base-imagem" src="/image/base-imagem.svg" alt="">
         </div>
         <div class="andares" ng-repeat="andar in andaresTela">
-            {{adicionarAndar($index)}}
+            {{adicionarAndarNaTela($index)}}
             <div andar-planta class="andar imagem-andar" ng-model="andar" ng-style="andarStyle" ng-click="listarSalas(andar.Id); selecionarAndar(andar)"></div>
-            <div class="andar-numero" data-tooltip="A {{$index+1}}" ng-style="andarStyle">
+            <div class="andar-numero" data-tooltip="A {{andar.NumeroAndar}}" ng-style="andarStyle">
             </div>
         </div>
     </div>
 </div>
+<section layout="row" flex="">
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp cadastro-andar-container" md-component-id="andar">
+        <map-andar-cadastro edificacao="edificacaoSelecionada"></map-andar-cadastro>
+    </md-sidenav>
+</section>
+<section layout="row" flex="">
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp cadastro-andar-container" md-component-id="sala">
+        <map-sala-cadastro edificacao="edificacaoSelecionada" andar="andaresTela"></map-sala-cadastro>
+    </md-sidenav>
+</section>
