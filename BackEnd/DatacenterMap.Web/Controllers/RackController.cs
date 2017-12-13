@@ -155,7 +155,7 @@ namespace DatacenterMap.Web.Controllers
 
             return Ok("Todos os Equipamentos foram removidos.");
         }
-
+        
         internal Rack CreateRack(int quantidadeGavetas, int tensao, string descricao)
         {
             var rack = new Rack
