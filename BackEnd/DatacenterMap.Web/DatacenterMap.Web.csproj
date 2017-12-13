@@ -153,6 +153,7 @@
     <Compile Include="Controllers\RackController.cs" />
     <Compile Include="Controllers\SalaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="ControllerUtils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
