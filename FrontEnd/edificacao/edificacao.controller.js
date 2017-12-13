@@ -1,4 +1,4 @@
-angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, andarService, $routeParams) {
+angular.module('app').controller('EdificacaoController', function ($scope, $location, edificacaoService, andarService, $routeParams) {
 
     $scope.criar = criar;//para testes atualmente
     $scope.adicionarAndar = adicionarAndar;
