@@ -35,9 +35,10 @@ angular.module('app')
         if ($scope.cadastroEdificacaoForm.$valid) {
           
           // TO-DO: adicionar caminho para service
-          // edificacaoService.criar(edificacao);
+          edificacaoService.criar(edificacao)
+                            .then(response => 
+                              location.reload());
 
-          location.reload();
         }
         else {
            $scope.enviar = true;    

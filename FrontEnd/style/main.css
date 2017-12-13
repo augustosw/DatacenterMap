@@ -137,6 +137,7 @@ a {
 
 .imagem-carousel {
     margin-bottom:5px;
+    filter: opacity(50%);
 }
 
 .imagem-carousel,
@@ -156,20 +157,29 @@ a {
     color: #FBB041;
 }
 
+.botoes-tela-edificacao-container {
+    top: 80px;
+    right: 30px;
+    color: #fff;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
 .botao-voltar-container-ativo,
 .botao-voltar-container  {
     font-size: 2em;
+    margin-bottom: 1px;
+    align-items: center;
     border-radius: 2px;
-    display: block;
     width: 2em;
     background:#42464F;
-    top: 80px;
     height: 2em;
-    margin: 0;
-    padding: 0;
     color: #fff;
     border: 0;
-    position: absolute;
+    position: relative;
     right: 30px;
     text-align: center;
 }
@@ -181,6 +191,11 @@ a {
 .botao-voltar-container-ativo{
     opacity: 1;
     animation: botao-voltar-aparecer 1s;
+}
+
+.botao-voltar-container-ativo:hover,
+.botao-voltar-container:hover {
+    background:#4A4E55;
 }
 
 @keyframes botao-voltar-desaparecer {
@@ -206,10 +221,13 @@ a {
 .edificacao-busca {
     font-size: 14px;
     height: 35px;
-    border: 1px solid #FBB041;
+    background: transparent;
     min-width: 150px;
     width: 100%;
+    color: white;
+    border: 0px;
     padding-left: 50px;
+    border-bottom: 1px solid #736f6f
 }
 
 #carousel .carousel-control.right,
@@ -325,10 +343,6 @@ a {
 }
 
 
-.edificacao-busca:focus {
-    border: 2px solid #FBB041;
-}
-
 .campos-obrigatorios { 
     font-size: 13px;
 }
@@ -367,8 +381,8 @@ a {
 
 .edificacao-wrapper {
     top: 0;
-    width: calc(100vw - 300px);
-    height: 100vh;
+    /* width: calc(100vw - 300px); */
+    height: calc(100vh - 50px);
 }
 
 .campo-cadastro {
@@ -409,11 +423,10 @@ a {
 }
 
 .base  {
-    width: 170vmin;
-    height: 100vmin;
-    margin: -64vmin 0 0 -96vmin;
-    pointer-events: none;
-    transition: opacity 0.8s;
+    width: 65vmin;
+    height: 50vmin;
+    margin: -48vmin 0 0 -68vmin;
+    transition: transform 0.3s;
     transform-style: preserve-3d;
     
 }
@@ -422,8 +435,8 @@ a {
 .andares {
     transform: rotateX(70deg) rotateZ(-45deg) translateZ(-15vmin);
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 70%;
+    left: 70%;
 }
 
 .base-imagem {
@@ -433,11 +446,11 @@ a {
 }
 
 .andares {
-    width: 80vmin;
+    width: 52vmin;
     height: 50vmin;
-    margin: -32vmin 0 0 -48vmin;
+    margin: -50vmin 0 0 -64vmin;
     transition: transform 0.3s;
-    transform-style: preserve-3d;
+    transform-style: preserve-3d
 }
 
 input[type="checkbox"] {
@@ -569,9 +582,48 @@ input[type="checkbox"]:checked + .equipamento-item:hover {
     color: #42464F;   
 }
 
-.md-button {
+.cadastro-andar-header {
+    background: #FBB041;
+}
+
+md-content {
+    margin: 10px;
+}
+
+md-content, 
+.cadastro-andar-container {
+    background-color: #42464F;
+}
+
+#cadastro-andar input,
+#cadastro-sala input, 
+md-input-container:not(.md-input-invalid).md-input-focused .md-input, 
+md-input-container:not(.md-input-invalid).md-input-focused label {
+    border-color: #FBB041;
+    width: 250px;
+}
+
+#cadastro-andar input,
+#cadastro-sala input, 
+md-input-container label,
+md-input-container:not(.md-input-invalid).md-input-focused .md-input, 
+md-input-container:not(.md-input-invalid).md-input-focused label,
+.texto-andar {
+    color: white;
+    font-weight: 500;
+}
+
+
+.botao-cancelar-andar {
+    background: white;
+}
+
+#cadastro-andar .md-button,
+#cadastro-sala .md-button {
     min-height: 0px;
-    min-width: 0px; 
+    min-width: 0px;
+    border-bottom: 1px solid white; 
+    border-radius: 0px;
 }
 
 [data-tooltip]:after {
@@ -691,10 +743,12 @@ input[type="checkbox"]:checked + .equipamento-item:hover {
 .vertical .carousel-inner > .next {
     left: 0;
     top: 100%;
+    padding-left: 73px;   
 }
 
 .vertical .carousel-inner > .prev {
     left: 0;
+    padding-left: 73px;
     top: -100%
 }
 .vertical .carousel-inner > .next.left,

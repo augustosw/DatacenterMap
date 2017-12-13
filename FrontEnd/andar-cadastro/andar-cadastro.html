@@ -1,0 +1,46 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools cadastro-andar-header">Cadastro de Andar</h1>
+</md-toolbar>
+<md-content class="cadastro-andar-container">
+    <form id="cadastro-andar" novalidate name="cadastroAndarForm" ng-submit="criar(andar)">
+        <span class="texto-andar campos-obrigatorios">(Todos os campos são obrigatórios)</span>
+        <hr>
+        <div class="flex-column column-center">
+            <h5 class="texto-andar">Edificação:  {{edificacao.Nome}}</h5>
+            <img  ng-src="image/buildings.svg" heigh="115px" width="115px">
+        </div>
+        <hr class="text-header-title">
+        <div class="form-group">
+            <md-input-container>
+                <label class="texto-andar"for="numeroAndar">Número do andar</label>
+                <input type="number" min="1" required  id="numeroAndar" ng-model="andar.NumeroAndar" md-autofocus="">
+
+                <span class="campo-invalido" ng-show="cadastroAndarForm.numeroAndar.$invalid && cadastroAndarForm.$submitted">Numero é obrigatório</span>
+
+                <span class="campo-invalido" ng-show="cadastroAndarForm.numeroAndar.$touched && cadastroAndarForm.numeroAndar.$error.number">Número de andar deve ser maior que 1</span>
+            </md-input-container>
+        </div>   
+        <div class="form-group">
+            <md-input-container>    
+                <label for="quantidadeMaximaSalas">Quantidade máxima de salas</label>
+                <input type="number" min="1" id="quantidadeMaximaSalas" required ng-model="andar.QuantidadeMaximaSalas" >
+
+                <span class="campo-invalido" ng-show="cadastroAndarForm.quantidadeMaximaSalas.$invalid && cadastroAndarForm.$submitted">Numero é obrigatório</span>
+                
+                <span class="campo-invalido" ng-show="cadastroAndarForm.quantidadeMaximaSalas.$touched && cadastroAndarForm.quantidadeMaximaSalas.$error.number">Número de salas deve ser maior que 1</span>
+            </md-input-container>
+        </div>
+        <div class="form-group">
+            <div class="flex-row">
+                <md-button class="botao-cancelar-andar" type="submit" class="md-primary">
+                    Cadastrar
+                </md-button>
+                <md-button class="botao-cancelar-andar" type="button" ng-click="close()" class="md-primary">
+                    Cancelar cadastro
+                </md-button>
+            </div>
+        </div>
+        
+    </form>
+</md-content>
+        
