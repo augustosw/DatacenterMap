@@ -1,12 +1,8 @@
 // Service de salas
 angular.module('app').factory('salaService', function ($http, $location) {
-    let url = "http://localhost:51641/api/sala";
-    
-    function listar(){
-        return $http.get(url);
-    }
+    let url = "http://localhost:51641/api/sala/";
 
-    function obterPorId(id){
+    function buscarPorId(id){
         return $http.get(url + id);
     }
 
@@ -23,7 +19,6 @@ angular.module('app').factory('salaService', function ($http, $location) {
         criar: criar,
         excluir: excluir,
         editar: editar,
-        listar: listar,
-        obterPorId: obterPorId
+        buscarPorId: buscarPorId
     }
 });   

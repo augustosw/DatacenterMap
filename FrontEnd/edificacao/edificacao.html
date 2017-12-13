@@ -17,7 +17,7 @@
         </div>
         <div class="andares" ng-repeat="andar in andaresTela">
             {{adicionarAndarNaTela($index)}}
-            <div andar-planta class="andar imagem-andar" ng-model="andar" ng-style="andarStyle" ng-click="listarSalas(andar.Id); selecionarAndar(andar)"></div>
+            <button andar-planta class="andar imagem-andar" ng-model="andar" ng-style="andarStyle" ng-click="listarSalas(andar.Id); selecionarAndar(andar)" ng-disabled="detalhe"></button>
             <div class="andar-numero" data-tooltip="A {{andar.NumeroAndar}}" ng-style="andarStyle">
             </div>
         </div>

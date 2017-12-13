@@ -557,6 +557,8 @@ input[type="checkbox"]:checked + .equipamento-item:hover {
 }
 
 .imagem-andar {
+    background: none;
+    border: none;
     transform-origin: 50% 50% 0px;
     height: 100%;
     width:100%;

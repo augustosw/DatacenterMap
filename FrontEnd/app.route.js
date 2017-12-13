@@ -34,7 +34,7 @@ angular.module('app').config(function ($routeProvider) {
             // }
         })
                
-        .when('/sala', {
+        .when('/sala/:id?', {
             controller: 'SalaController',
             templateUrl: 'sala/sala.html',
             //TODO : Implementar autenticação

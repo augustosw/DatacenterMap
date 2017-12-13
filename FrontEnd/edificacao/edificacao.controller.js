@@ -3,6 +3,8 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     $scope.criar = criar;
     $scope.adicionarAndarNaTela = adicionarAndarNaTela;
     $scope.selecionarAndar = selecionarAndar;
+    $scope.listarSalas = listarSalas;
+    $scope.salaClick = salaClick;
     $scope.isAlterar = !!$routeParams.id;
     $scope.voltar = voltar;
     $scope.excluir = excluir;
@@ -64,12 +66,12 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         return '';
     }
 
-    var dataTemp = {};
     function listarSalas(id) {
+        var dataTemp = {};
         andarService.obterPorId(id)
             .then(
             function (response) {
-                var salas = response.data.dados.Salas;
+                var salas = response.data.Salas;
                 angular.forEach(salas, function (sala, key) {
                     dataTemp[sala.NumeroSala] = sala;
                 });
@@ -97,6 +99,7 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         $scope.detalhe = false;
         $scope.andaresTela = $scope.andaresCadastrados;
         $scope.andarSelecionado = [];
+        $scope.salas = [];
     }
 
     function excluir(edificacao) {
