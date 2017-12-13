@@ -110,7 +110,7 @@ namespace DatacenterMap.Testes.Controllers
 		{
 			var usuario = CriarNovoUsuario();
 			var usuarioController = new UsuarioController();
-			var usuarioCadastrado = usuarioController.CreateUsuario(usuario.Nome, usuario.Email, usuario.Senha);
+			var usuarioCadastrado = usuarioController.MontarUsuario(usuario.Nome, usuario.Email, usuario.Senha);
 			Assert.IsTrue(usuarioCadastrado.Senha != "minhasenha123");
 		}
 

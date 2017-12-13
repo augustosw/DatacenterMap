@@ -1,6 +1,7 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using DatacenterMap.Infra;
 using DatacenterMap.Web.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
@@ -109,6 +110,21 @@ namespace DatacenterMap.Web.Controllers
             Sala sala = contexto.Salas.AsNoTracking().FirstOrDefault(x => x.Id == id);
 
             return Ok(sala);
+        }
+
+        [HttpGet]
+        [Route("disponiveis/{andarId}/{tamanho}")]
+        public HttpResponseMessage GetSalasDisponiveis([FromUri] int andarId, int tamanho)
+        {
+            List<Sala> salas = contexto.Salas
+                          .AsNoTracking()
+                          .Include(x => x.Andar)
+                          .Where(x => x.Andar.Id == andarId
+                                 && ControllerUtils.SalaHasRackDisponivel(contexto, x.Id, tamanho))
+                          .ToList();
+
+            return Ok(salas);
+            
         }
 
         public Sala CreateSala(string numeroSala, int quantidadeMaximaSlots, double largura, double comprimento)
