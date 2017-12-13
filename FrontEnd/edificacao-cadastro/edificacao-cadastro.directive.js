@@ -6,8 +6,8 @@ angular.module('app')
     restrict: 'E',
 
     scope: {},
-
-    templateUrl: 'edificacao-cadastro/edificacao-cadastro.html',
+    
+    templateUrl: 'edificacao-cadastro/edificacao-cadastro.html', 
 
     controller: function ($scope ) {
 
@@ -27,20 +27,20 @@ angular.module('app')
       $scope.remover = remover;
       $scope.adicionarAndar = adicionarAndar;
       $scope.adicionarDigitados = adicionarDigitados;
-      $scope.numeroAndares = 1;
+      $scope.numeroAndares = 1; 
       //variavel para manipular na tela
 
       function criar(edificacao) {
         $scope.edificacao.numeroAndares = $scope.andares.length;
         if ($scope.cadastroEdificacaoForm.$valid) {
-
+          
           // TO-DO: adicionar caminho para service
-          edificacaoService.criar(edificacao).then(function (){
-            location.reload();
-          });
+          // edificacaoService.criar(edificacao);
+
+          location.reload();
         }
         else {
-           $scope.enviar = true;
+           $scope.enviar = true;    
         }
       }
 
@@ -48,7 +48,7 @@ angular.module('app')
         // Essa array deve se preocupar em somente aumentar o numero de andares
         $scope.andares.push(Math.random(10));
       }
-
+      
       function remover(){
         if($scope.andares.length == 1)
           return;
@@ -62,19 +62,19 @@ angular.module('app')
         $scope.isCheio = false;
         $scope.adicionando = {
               transform:`rotateX(70deg) rotateZ(-45deg) translateZ(${indice + 2}vmin)`,
-              opacity:1
+              opacity:1 
         }
-        return;
+        return; 
       }
 
       function adicionarDigitados(andaresDigitados) {
         if(andaresDigitados < $scope.andares.length){
-         var diffAndares =   $scope.andares.length - andaresDigitados;
+         var diffAndares =   $scope.andares.length - andaresDigitados; 
           for(var i = 0; i < diffAndares; i++)
             remover();
         }
         else {
-          for(var i = 1; i < andaresDigitados; i++)
+          for(var i = 1; i < andaresDigitados; i++) 
               adicionar();
         }
         atingiuLimiteDeAndaresTela(andaresDigitados);
@@ -115,7 +115,7 @@ angular.module('app')
 
 
 
-
+       
     }
   }
 

@@ -26,7 +26,7 @@ namespace DatacenterMap.Web.Controllers
             this.contexto = contexto;
         }
 
-        [HttpPost] 
+        [HttpPost]      
         public HttpResponseMessage CadastrarEdificacao([FromBody] EdificacaoModel request)
         {
             if (request == null)

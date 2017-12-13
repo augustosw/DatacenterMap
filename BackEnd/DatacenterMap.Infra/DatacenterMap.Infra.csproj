@@ -61,6 +61,9 @@
     <Compile Include="Migrations\201712090302083_Test.Designer.cs">
       <DependentUpon>201712090302083_Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712121758127_atualizando colunas.cs" />
+    <Compile Include="Migrations\201712121758127_atualizando colunas.Designer.cs">
+      <DependentUpon>201712121758127_atualizando colunas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +82,8 @@
     <EmbeddedResource Include="Migrations\201712090302083_Test.resx">
       <DependentUpon>201712090302083_Test.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712121758127_atualizando colunas.resx">
+      <DependentUpon>201712121758127_atualizando colunas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

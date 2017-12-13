@@ -33,7 +33,7 @@ namespace DatacenterMap.Web.Controllers
 
             if (contexto.Usuarios.Where(x => x.Email == request.Email).Count() != 0) return BadRequest("Já existe uma conta com esse email.");
 
-            Usuario usuario = MontarUsuario(request.Nome, request.Email, request.Senha);
+            Usuario usuario = CreateUsuario(request.Nome, request.Email, request.Senha);
 
             if (usuario.Validar())
             {
@@ -95,7 +95,7 @@ namespace DatacenterMap.Web.Controllers
             return usuario;
         }
 
-        public Usuario MontarUsuario(string nome, string email, string senha)
+        public Usuario CreateUsuario(string nome, string email, string senha)
         {
             if (!string.IsNullOrWhiteSpace(senha))
                 senha = Criptografia.CriptografarSenha(email, senha);

@@ -5,7 +5,6 @@ using DatacenterMap.Web.Models;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
-using System.Collections.Generic;
 
 namespace DatacenterMap.Web.Controllers
 {
@@ -81,21 +80,6 @@ namespace DatacenterMap.Web.Controllers
             Andar andar = contexto.Andares.AsNoTracking().Include(x => x.Salas).FirstOrDefault(x => x.Id == id);
 
             return Ok(andar);
-        }
-
-        [HttpGet]
-        [Route("disponiveis/{edificacaoId}/{tamanho}")]
-        public HttpResponseMessage GetAndaresDisponiveis([FromUri] int edificacaoId, int tamanho)
-        {
-            List<Andar> andares = contexto.Andares
-                          .AsNoTracking()
-                          .Include(x => x.Edificacao)
-                          .Where(x => x.Edificacao.Id == edificacaoId
-                                 && ControllerUtils.AndarHasRackDisponivel(contexto, x.Id, tamanho))
-                          .ToList();
-
-            return Ok(andares);
-
         }
 
         [HttpDelete]
