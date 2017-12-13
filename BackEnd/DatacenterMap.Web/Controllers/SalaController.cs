@@ -127,7 +127,7 @@ namespace DatacenterMap.Web.Controllers
             
         }
 
-        public Sala CreateSala(string numeroSala, int quantidadeMaximaSlots, double largura, double comprimento)
+        internal Sala CreateSala(string numeroSala, int quantidadeMaximaSlots, double largura, double comprimento)
         {
             var sala = new Sala
             {
@@ -140,7 +140,7 @@ namespace DatacenterMap.Web.Controllers
             return sala;
         }
 
-        public Slot CreateSlot(Sala sala)
+        internal Slot CreateSlot(Sala sala)
         {
             var slot = new Slot
             {

@@ -165,7 +165,7 @@ namespace DatacenterMap.Web.Controllers
             return Ok("Removido com Sucesso");
         }
 
-        public Equipamento CreateEquipamento(string descricao, int tamanho, int tensao)
+        internal Equipamento CreateEquipamento(string descricao, int tamanho, int tensao)
         {
             var equipamento = new Equipamento
             {

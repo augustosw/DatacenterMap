@@ -83,7 +83,7 @@ namespace DatacenterMap.Web.Controllers
             return Ok(edificacoes);
         }
 
-        public Edificacao CreateEdificacao(string nome, int numeroAndares, double longitude, double latitude)
+        internal Edificacao CreateEdificacao(string nome, int numeroAndares, double longitude, double latitude)
         {
             var edificacao = new Edificacao
             {
