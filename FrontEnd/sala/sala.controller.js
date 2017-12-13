@@ -74,8 +74,11 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				});
 		}
 	
-		function slotClick(id) {
-			$location.path("/sala/" + id);
+		function slotClick(slot) {
+			if(slot.Ocupado)
+				return null;
+			else
+				return null; //TODO: adicionar criação de rack
 		};
 	
 		function selecionarSlot(andar) {
