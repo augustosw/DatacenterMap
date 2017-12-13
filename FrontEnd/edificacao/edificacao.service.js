@@ -21,12 +21,17 @@ angular.module('app').factory('edificacaoService', function ($http, $location) {
         return response;
     }
 
+    function buscarIdDeEdificacaoAtual(){
+        return idSelecionado;
+    }
+
     function buscarPorIdSelecionado() {
         return $http.get(url + '/' + idSelecionado);
     }
 
     return {
         criar: criar,
+        buscarIdDeEdificacaoAtual: buscarIdDeEdificacaoAtual,
         excluir: excluir,
         buscar: buscar,
         buscarPorId: buscarPorId,

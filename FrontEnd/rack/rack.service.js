@@ -10,11 +10,16 @@ angular.module('app').factory('rackService', function ($http, $location) {
         return $http.get(url +'/'+ id);
     }
 
+    function buscarPorIdComRackDisponiveis(salaId, tamanho){
+        return $http.get(url + "disponiveis/" + salaId + tamanho)
+    }
+
     function excluir(id){
         return $http.delete(url + id);
     }
     return {
         criar: criar,
+        buscarPorIdComRackDisponiveis:buscarPorIdComRackDisponiveis,
         buscarPorId:buscarPorId,
         excluir: excluir
     }

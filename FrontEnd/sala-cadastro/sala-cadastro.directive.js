@@ -21,12 +21,13 @@ angular.module('app')
                 sala.AndarId = $scope.andar[0].Id;
                 salaService.criar(sala)
                             .then(
-                            function (response) {
-                                $scope.andar[0].Salas.push(response.data);
-                            },
-                            function(response){
-                                alert(response.data);  
-                                })
+                                function (response) {
+                                    debugger
+                                    $scope.andar[0].Salas.push(response.data);
+                                },
+                                function(response){
+                                    alert(response.data);  
+                            })
             }
             else {
                 $scope.enviar = true;    
@@ -41,9 +42,9 @@ angular.module('app')
                 alert("Falha na solicitação!" + mensagens.join(' - '));
                 return false;
             }
-            if($scope.andar[0].Salas.length > $scope.andar[0].QuantidadeMaximaSalas){
+            
+            if($scope.andar[0].Salas.length === $scope.andar[0].QuantidadeMaximaSalas){
                 mensagens.push("Esse andar antigiu o limite máximo de salas disponíveis. Por favor, tente cadastrar em outro andar.")
-                return;
             }
 
             if(sala.NumeroSala < 1)
