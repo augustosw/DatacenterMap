@@ -20,7 +20,7 @@ html, body {
   */
 .center-center {
     justify-content: center; 
-    align-content: center; 
+    align-items: center; 
 }
   /*
     centraliza horizontalmente.         
@@ -79,6 +79,35 @@ a {
 #button-login {
     padding: 3px;
     cursor: pointer;
+}
+
+.home-wrapper { 
+    position: absolute;
+    width: calc(100% - 400px);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.home-logo-container {
+    margin-top: 140px;
+    padding-right:60px;
+}
+
+.home-titulo {
+    margin-bottom: 25px;
+    font-weight: 800;
+    font-size: 45px;
+    width: 400px;
+    text-align: center;
+}
+
+.descricacao-site-container {
+    font-size: 18px;
+    height: 150px;
+    width: 400px;
+    font-weight: 500;
+    color: #a5a9ac;
+    text-align: center;
 }
 
 .sidebar-closed-icon,
