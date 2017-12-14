@@ -1,5 +1,5 @@
 angular.module('app')
-.directive('mapSidebar', function (authService, $rootScope, $log, $timeout) {
+.directive('mapSidebar', function (authService, $rootScope, $log, $timeout, $mdSidenav) {
 
   return {
 
@@ -7,7 +7,8 @@ angular.module('app')
 
     scope: { 
       entidades: '=',
-      tipoAtual:'=' 
+      tipoAtual:'=',
+      close: '&' 
     },
     
     templateUrl: 'sidebar/sidebar.directive.html',
@@ -28,6 +29,29 @@ angular.module('app')
         function fechar() {
           $scope.cadastro = false;
         }
+
+
+        $scope.toggleLeft = buildToggler('edificacao');
+   
+        $scope.isOpenLeft = function(){
+          return $mdSidenav('edificacao').isOpen();
+        };
+    
+        
+        function buildToggler(navID) {
+          return function() {
+            $mdSidenav(navID)
+              .toggle()
+              .then(function () {
+              });
+          };
+        }
+    
+        $scope.close = function () {
+          $mdSidenav().close()
+            .then(function () {
+            });
+        };    
 
     }
 

@@ -1,5 +1,5 @@
 angular.module('app')
-.directive('mapEdificacaoCadastro', function (authService, edificacaoService, $rootScope, $log, $timeout) {
+.directive('mapEdificacaoCadastro', function (authService, edificacaoService, $rootScope, $log, $location, $timeout) {
 
   return {
 
@@ -31,12 +31,13 @@ angular.module('app')
       //variavel para manipular na tela
 
       function criar(edificacao) {
-        $scope.edificacao.numeroAndares = $scope.andares.length;
-        if ($scope.cadastroEdificacaoForm.$valid) {
-          // TO-DO: adicionar caminho para service
+        edificacao.numeroAndares = $scope.andares.length;
+        if (validar(edificacao)) {
           edificacaoService.criar(edificacao)
-                            .then(response => 
-                              location.reload());
+                            .then(function(response) {
+                              let novaEdificacaoId = response.data.Id; 
+                              $location.path(`/edificacao${novaEdificacaoId}`);
+                            })
         }
         else {
            $scope.enviar = true;    
@@ -77,7 +78,6 @@ angular.module('app')
               adicionar();
         }
         atingiuLimiteDeAndaresTela(andaresDigitados);
-
       }
 
       function atingiuLimiteDeAndaresTela(andares){
@@ -89,10 +89,33 @@ angular.module('app')
       }
 
       function fecharJanela(){
-        $scope.fechar = {
-          display: "none"
-        }
+        $location.path('/edificacao');
       }
+
+      function validar(edificacao) {
+        var mensagens = [];
+        if ($scope.cadastroEdificacaoForm.$invalid && $scope.cadastroEdificacaoForm.$submitted) {
+            mensagens.push('Formulário Inválido');
+            alert("Falha na solicitação!" + mensagens.join(' - '));
+            return false;
+        }
+  
+        if(!edificacao.Nome)
+          mensagens.push('Edificacao deve possuir um nome');
+
+        if(!edificacao.Localizacao)
+          mensagens.push("Edificacao deve possuir uma localização."); 
+  
+        if(edificacao.numeroAndares < 1)
+          mensagens.push("Número de andares deve ser positivo.");
+        
+        if(mensagens.length >= 1){
+          alert("Falha na solicitação!" + mensagens.join(' - ')); 
+          return false;
+        }
+        return true
+      }
+      
 
 
       //api google maps autocomplete

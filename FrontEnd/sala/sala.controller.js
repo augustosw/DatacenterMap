@@ -1,4 +1,4 @@
-angular.module('app').controller('SalaController', function ($scope, $location, salaService, rackService, $routeParams) {
+angular.module('app').controller('SalaController', function ($scope, $location, salaService, rackService, $routeParams, $mdSidenav) {
 	
 		$scope.criar = criar;//para testes atualmente
 		$scope.adicionarSlot = adicionarSlot;
@@ -8,10 +8,14 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 		$scope.isAlterar = !!$routeParams.id;
 		$scope.voltar = voltar;
 		$scope.excluir = excluir;
-		$scope.tipoEntidade = "sala"
+		$scope.tipoEntidade = "sala";
+		$scope.verificarSlot = verificarSlot;
 		// TODO: necessário criar dados para poder usar.
 		// setup();
-	
+
+
+		// $scope.toggleRightRack = buildToggler('rack');
+		
 		console.log($routeParams.id);
 		buscarSalaPorId($routeParams.id);
 		
@@ -74,13 +78,6 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				});
 		}
 	
-		function slotClick(slot) {
-			if(slot.Ocupado)
-				return null;
-			else
-				return null; //TODO: adicionar criação de rack
-		};
-	
 		function selecionarSlot(andar) {
 			$scope.andaresTela = [];
 			$scope.detalhe = true;
@@ -106,6 +103,45 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 					console.log(response);
 				});
 		}
+
+		 // side-bar criação de slot		 
+
+		function verificarSlot(slot) {
+			if(!slot.Ocupado) {
+				$mdSidenav('rack')
+				.toggle()
+				.then(function () {
+				});
+			}
+			else {
+				//TO:DO -> Acessar pagina de detalhe do rack
+			}
+		}
+
+		$scope.isOpenRightRack = function(){
+			return $mdSidenav('rack').isOpen();
+		  };
+		  
+		function buildToggler(navID) {
+			return function() {
+				$mdSidenav(navID)
+				.toggle()
+				.then(function () {
+				});
+			};
+		}
+
+		$scope.close = function () {
+		$mdSidenav().close()
+			.then(function () {
+			});
+		};    
+
+		
+            
+				
+
+
 	
 	});
 	
