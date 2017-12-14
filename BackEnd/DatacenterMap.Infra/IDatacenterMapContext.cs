@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using DatacenterMap.Domain.Entidades;
-using System.Data.Entity.Infrastructure;
 
 namespace DatacenterMap.Infra
 {

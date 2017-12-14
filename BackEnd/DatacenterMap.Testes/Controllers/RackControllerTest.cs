@@ -1,6 +1,5 @@
 ﻿using DatacenterMap.Domain.Entidades;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data.Entity;
 using System.Linq;
 using DeepEqual.Syntax;
 using DatacenterMap.Infra;
