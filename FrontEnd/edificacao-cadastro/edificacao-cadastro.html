@@ -1,51 +1,62 @@
-<div class="flex-column edificacao-cadastro-container" ng-style="fechar">
-    <div>
-        <form id="cadastro-form" novalidate name="cadastroEdificacaoForm" ng-submit="criar(edificacao)">
-                <div> 
-                    <h3>Cadastro Edificacao</h3>
-                    <span class="campos-obrigatorios">(Todos os campos são obrigatórios)</span>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label for="nome" class="campo-cadastro">Nome Edificação</label>
-                    <input  name="nome" id="nome" ng-model="edificacao.nome"  class="form-control" ng-class="{'enviar': enviar}"placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64">
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools cadastro-andar-header">Cadastro de Edificação</h1>
+</md-toolbar>
+
+<md-content class="cadastro-andar-container">
+    <div class="flex-column">
+        <form id="cadastro-edificacao" novalidate name="cadastroEdificacaoForm" ng-submit="criar(edificacao)">
+            <div> 
+                <span class="texto-andar campos-obrigatorios">(Todos os campos são obrigatórios)</span>
+            </div>
+            <hr>
+            <div class="form-group">
+                <md-input-container>
+                    <label for="nome" class="texto-andar">Nome Edificação</label>
+                    <input  name="nome" id="nome" ng-model="edificacao.nome" ng-class="{'enviar': enviar}" placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64" md-autofocus="">
 
                     <span class="campo-invalido" ng-show="cadastroEdificacaoForm.nome.$invalid && cadastroEdificacaoForm.$submitted">Nome obrigatório</span>
                     
                     <span class="campo-invalido" ng-show="cadastroEdificacaoForm.nome.$touched && cadastroEdificacaoForm.nome.$error.minlength">Número de caracteres muito baixo</span>
                     
-                    <span class="campo-invalido"  ng-show="cadastroEdificacaoForm.nome.$touched && cadastroEdificacaoForm.nome.$error.maxlength">Número de caracteres muito alto</span> 
-                </div>
-                <div class="form-group">
-                    <label for="endereco" class="campo-cadastro">Localização</label>
+                    <span class="campo-invalido"  ng-show="cadastroEdificacaoForm.nome.$touched && cadastroEdificacaoForm.nome.$error.maxlength">Número de caracteres muito alto</span>
+                </md-input-container> 
+            </div>
+            <div class="form-group">
+                <md-input-container>
+                    <label for="endereco" class="texto-andar">Localização</label>
                     <input id="autocomplete" ng-class="{'enviar': enviar}" placeholder="Ex: Avenida Theodomiro Porto da Fonseca - Cristo Rei, São Leopoldo - RS, Brazil" class="form-control" type="text" ng-model="localizacao" required>
-                </div>
-                <div class="form-group flex-column">
-                    <label for="numeroAndares" class="campo-cadastro">Número de andares</label>
-                    <div class="row flex-row row-end column-center">
-                        <div class="col-4">
-                            <button type="button" class="btn btn-success" ng-click="adicionar()" style="margin: 0 2px">+</button>
-                            <button type="button" class="btn btn-danger" ng-click="remover()" style="margin: 0 5px">-</button> 
-                        </div>
-                        <div class="col-4">
-                            <input ng-change="adicionarDigitados(numeroAndares)" placeholder="Digite os andares" ng-model="numeroAndares" type="number" min="1"> 
-                        </div>
-                    </div> 
-                    <div class="col-4 flex-row center-center" style="position:relative">
-                        <div class="cadastro-numero-andares" ng-class="{'cadastro-numero-andares-lotado':isCheio}">
-                            <span ng-repeat="andar in andares">
-                            {{adicionarAndar($index)}}
-                            <img class="cadastro-imagem" src="/image/teste.svg"  ng-style="adicionando" height="200" width="200">
-                            </span>
-                        </div>
+                </md-input-container> 
+            </div>
+            <div class="form-group flex-column">
+                <label for="numeroAndares" class="texto-andar">Número de andares</label>
+                <div class="flex-row row-end column-center">
+                    <div class="col-4">
+                        <button type="button" class="btn btn-success" ng-click="adicionar()" style="margin: 0 2px">+</button>
+                        <button type="button" class="btn btn-danger" ng-click="remover()" style="margin: 0 5px">-</button> 
+                    </div>
+                    <div class="col-4">
+                        <input ng-change="adicionarDigitados(numeroAndares)" placeholder="Digite os andares" ng-model="numeroAndares" type="text" min="1"> 
+                    </div>
+                </div> 
+                <div class="col-4 flex-row center-center" style="position:relative">
+                    <div class="cadastro-numero-andares" ng-class="{'cadastro-numero-andares-lotado':isCheio}">
+                        <span ng-repeat="andar in andares">
+                        {{adicionarAndar($index)}}
+                        <img class="cadastro-imagem" src="/image/teste.svg"  ng-style="adicionando" height="200" width="200">
+                        </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="flex-row">
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
-                        <button type="button" class="btn btn-danger col-sm-offset-1" ng-click="fecharJanela()">Cancelar</button> 
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="flex-row">
+                    <md-button class="botao-cancelar-andar botao-sucesso" type="submit" class="md-primary">
+                                Cadastrar
+                    </md-button>
+                    <md-button class="botao-cancelar-andar botao-cancelar" type="button" ng-click="close()" class="md-primary">
+                            Cancelar cadastro
+                    </md-button>
                 </div>
+            </div>
         </form>
-    </div> 
-</div>
+    </div>
+</md-content>

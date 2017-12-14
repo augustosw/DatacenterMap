@@ -1,17 +1,22 @@
-<div ng-if="cadastro">
-    <map-edificacao-cadastro></map-edificacao-cadastro>
-</div>
+<!-- <div ng-if="cadastro"> -->
+    <!-- <map-edificacao-cadastro></map-edificacao-cadastro> -->
+<!-- </div> -->
 <div class="sidenav" ng-class="{'sidenav-open': isSidenavOpen}">
     <div style="background-color:#FBB041"></div>
     <div class="flex-column">
         <div class="sidebar-items flex-column center-center ">
             <map-carousel entidades='entidades' tipo-atual='tipoAtual'></map-carousel>
             <hr class="separador">
-            <button ng-if="!cadastro"class="botao-flutuante-adicionar" ng-click="abrir()"> + </button>
-            <button ng-if="cadastro" class="botao-flutuante-cancelar" ng-click="fechar()"> x </button> 
+            <button ng-if="!cadastro"class="botao-flutuante-adicionar" ng-click="toggleLeft()"> + </button>
+            <!-- <button ng-if="cadastro" class="botao-flutuante-cancelar" ng-click="fechar()"> x </button>  -->
         </div>
     </div>
 </div>
 <div class="conteudo">
     <img class="sidenav-toggler" ng-class="{'sidenav-image-open': isSidenavOpen}" ng-click="toggleSidenav()" height="40" width="40" src="/image/arrow-sidebar.svg">
 </div>
+<section layout="row" flex="">
+        <md-sidenav class="md-sidenav-left md-whiteframe-4dp cadastro-andar-container" md-component-id="edificacao">
+            <map-edificacao-cadastro></map-edificacao-cadastro>
+        </md-sidenav>
+</section>
