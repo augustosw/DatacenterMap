@@ -2,7 +2,9 @@ namespace DatacenterMap.Infra.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage] 
     public partial class Test : DbMigration
     {
         public override void Up()
