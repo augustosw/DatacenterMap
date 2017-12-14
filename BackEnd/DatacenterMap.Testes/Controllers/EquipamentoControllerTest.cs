@@ -8,6 +8,7 @@ using DatacenterMap.Web.Controllers;
 using DatacenterMap.Web.Models;
 using System.Net.Http;
 using System.Collections.Generic;
+using DatacenterMap.Web;
 
 namespace DatacenterMap.Testes.Controllers
 {
@@ -16,11 +17,12 @@ namespace DatacenterMap.Testes.Controllers
     public class EquipamentoControllerTests
     {
         public List<Gaveta> gavetas;
-        public int rack2Id, rack3Id;
+        public int rack2Id, rack3Id, edificacaoId;
+        DatacenterMapContext context;
 
         public EquipamentoControllerTests()
         {
-            using (var context = new DatacenterMapContext("DatacenterMapTest"))
+            context = new DatacenterMapContext("DatacenterMapTest");
             {
                 CleanUp.LimparTabelas(context);
 
@@ -102,6 +104,7 @@ namespace DatacenterMap.Testes.Controllers
                 context.Gavetas.Add(CreateGaveta(rack3, 5, false));
 
                 context.SaveChanges();
+                edificacaoId = context.Edificacoes.ToList()[0].Id;
                 rack3Id = context.Racks.ToList()[2].Id;
                 rack2Id = context.Racks.ToList()[1].Id;
                 gavetas = context.Gavetas.ToList();
@@ -152,6 +155,27 @@ namespace DatacenterMap.Testes.Controllers
 
             var edRemovida = equipamentoController.DeletarEquipamento(equipamentoRetornadaNoPost.Id);
 
+            var objetoGet = equipamentoController.GetEquipamento(equipamentoRetornadaNoPost.Id).Content as ObjectContent;
+            Equipamento equipamentoRetornadoNoGet = objetoGet.Value as Equipamento;
+
+            Assert.IsNull(equipamentoRetornadoNoGet);
+        }
+
+        [TestMethod]
+        public void Edificio_Removido_Nao_Deve_Ter_Equipamentos()
+        {
+            var equipamento = CriarNovaEquipamento1();
+
+            var equipamentoController = CriarController();
+            equipamentoController.Request = new HttpRequestMessage();
+
+            ObjectContent objeto = equipamentoController.CadastrarEquipamento(equipamento).Content as ObjectContent;
+            Equipamento equipamentoRetornadaNoPost = objeto.Value as Equipamento;
+
+            Assert.IsNotNull(equipamentoRetornadaNoPost);
+         
+            ControllerUtils.DeletarEdificacao(context, edificacaoId);
+            
             var objetoGet = equipamentoController.GetEquipamento(equipamentoRetornadaNoPost.Id).Content as ObjectContent;
             Equipamento equipamentoRetornadoNoGet = objetoGet.Value as Equipamento;
 
@@ -383,7 +407,7 @@ namespace DatacenterMap.Testes.Controllers
 
         private EquipamentoController CriarController()
         {
-            return new EquipamentoController(new DatacenterMapContext("DatacenterMapTest"));
+            return new EquipamentoController(context);
         }
     }
 }

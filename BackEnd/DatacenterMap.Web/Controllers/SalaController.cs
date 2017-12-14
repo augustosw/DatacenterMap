@@ -96,11 +96,8 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
-            Sala sala = contexto.Salas.Include(x => x.Slots).FirstOrDefault(x => x.Id == id);
+            ControllerUtils.DeletarSala(contexto, id);
 
-            contexto.Slots.RemoveRange(sala.Slots);
-            contexto.Salas.Remove(sala);
-            contexto.SaveChanges();
             return Ok("Removido com Sucesso");
         }
 

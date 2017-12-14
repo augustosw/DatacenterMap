@@ -69,5 +69,48 @@ namespace DatacenterMap.Web
 
             return false; // Se as gavetas do rack não estão alinhadas de acordo com a necessidade
         }
+
+        public static void DeletarEdificacao(IDatacenterMapContext contexto, int edificacaoId)
+        {
+            Edificacao edificacao = contexto.Edificacoes.Include(x => x.Andares).FirstOrDefault(x => x.Id == edificacaoId);
+            edificacao.Andares.ForEach(x => DeletarAndar(contexto, x.Id));
+            contexto.Edificacoes.Remove(edificacao);
+            contexto.SaveChanges();
+        }
+
+        public static void DeletarAndar(IDatacenterMapContext contexto, int andarId)
+        {
+            Andar andar = contexto.Andares.Include(x => x.Salas).FirstOrDefault(x => x.Id == andarId);
+            andar.Salas.ForEach(x => DeletarSala(contexto, x.Id));
+            contexto.Andares.Remove(andar);
+            contexto.SaveChanges();
+        }
+
+        public static void DeletarSala(IDatacenterMapContext contexto, int salaId)
+        {
+            Sala sala = contexto.Salas.Include(x => x.Slots).FirstOrDefault(x => x.Id == salaId);
+            List<int> idsSlots = new List<int>();
+            sala.Slots.ForEach(x => idsSlots.Add(x.Id));
+            List<Rack> racks = contexto.Racks.Include(x => x.Slot).Where(x => idsSlots.Contains(x.Slot.Id)).ToList();
+            
+            racks.ForEach(x => DeletarRack(contexto, x.Id));
+            contexto.Slots.RemoveRange(sala.Slots);
+            contexto.Salas.Remove(sala);
+            contexto.SaveChanges();
+        }
+
+        public static void DeletarRack(IDatacenterMapContext contexto, int rackId)
+        {
+            Rack rack = contexto.Racks.Include(x => x.Gavetas).Include(x => x.Slot).FirstOrDefault(x => x.Id == rackId);
+            List<int> idsGavetas = new List<int>();
+            rack.Gavetas.ForEach(x => idsGavetas.Add(x.Id));
+            List<Equipamento> equipamentos = contexto.Equipamentos.Include(x => x.Gavetas).Where(x => idsGavetas.Contains(x.Id)).ToList();
+            rack.Slot.Ocupado = false;
+
+            contexto.Equipamentos.RemoveRange(equipamentos);
+            contexto.Gavetas.RemoveRange(rack.Gavetas);
+            contexto.Racks.Remove(rack);
+            contexto.SaveChanges();
+        }
     }
 }
