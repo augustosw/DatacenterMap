@@ -4,7 +4,7 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 		$scope.adicionarSlot = adicionarSlot;
 		$scope.selecionarSlot = selecionarSlot;
 		$scope.listarSlots = listarSlots;
-		$scope.slotClick = slotClick;
+		//$scope.slotClick = slotClick;
 		$scope.isAlterar = !!$routeParams.id;
 		$scope.voltar = voltar;
 		$scope.excluir = excluir;
