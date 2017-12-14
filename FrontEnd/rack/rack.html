@@ -1,93 +1,100 @@
 <div class="container">
     <h3 class="text-center">Selecione slots livres para adicionar Equipamentos</h3>
     <hr>
-    <div class="flex-row center-center">
-        <div class="rack">
-            <div class="flex-row center-center rack__slot" ng-class="{'rack__slot--selected': ativo}" ng-repeat="gaveta in gavetas" ng-style="tamanhoGaveta">
-                {{verificarTamanho(gaveta)}}
-                
-                <input id="{{gaveta.id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.id) || (gaveta.ocupado && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.ocupado">
+    <div class="flex-row row-center">
+        <div class="flex-row center-center">
+            <div class="rack">
+                <div class="flex-row center-center rack__slot"  ng-class="{'rack__slot--selected': ativo}" ng-repeat="gaveta in gavetas" ng-style="tamanhoGaveta">
+                    {{verificarTamanho(gaveta)}}
+                    
+                    <input id="{{gaveta.id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.id) || (gaveta.ocupado && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.ocupado">
 
-                <label for="{{gaveta.id}}" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
+                    <label for="{{gaveta.id}}" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
 
-                <div ng-if="gaveta.ocupado" class="rack__slot__hardware" ng-style="tamanhoGaveta"></div>   
+                    <div ng-if="gaveta.ocupado" class="rack__slot__hardware" ng-style="tamanhoGaveta"></div>   
 
-                </label>
-                <!-- <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)"><p>x</p></button> -->
+                    </label>
+                    <!-- <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)"><p>x</p></button> -->
+                </div>
             </div>
         </div>
-    </div>
-    <div ng-if="tamanho.length > 0 && !isAlterar" class="flex-column col-md-4 cadastro-container">
-        <form id="cadastro-form" novalidate name="cadastroEquipamentoForm" ng-submit="criar(edificacao)">
-            <h4 class="text-center">Cadastro de Equipamento!</h4>
-            <span class="campos-obrigatorios">(Todos os campos são obrigatórios)</span>
-            <div class="form-group">
-                <label for="descricao" class="campo-cadastro">Descrição</label>
-                <input  name="descricao" id="descricao" ng-model="equipamento.descricao"  class="form-control" ng-class="{'enviar': enviar}" placeholder="Ex: teste" required ng-minlength="2" ng-maxlength="64">
+        <div ng-if="tamanho.length > 0 && !isAlterar" class="flex-column cadastro-container">
+                <form id="cadastro-form" novalidate name="cadastroEquipamentoForm" ng-submit="criar(edificacao)">
+                    <h4 class="text-center">Cadastro de Equipamento!</h4>
+                    <span class="campos-obrigatorios">(Todos os campos são obrigatórios)</span>
+                    <div class="form-group">
+                        <label for="descricao" class="campo-cadastro">Descrição</label>
+                        <input  name="descricao" id="descricao" ng-model="equipamento.descricao"  class="form-control" ng-class="{'enviar': enviar}" placeholder="Ex: teste" required ng-minlength="2" ng-maxlength="64">
 
-                <span class="campo-invalido" ng-show="cadastroEquipamentoForm.descricao.$invalid && cadastroEquipamentoForm.$submitted">Descrição é obrigatória</span>
-                
-                <span class="campo-invalido" ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.minlength">Número de caracteres muito baixo</span>
-                
-                <span class="campo-invalido"  ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.maxlength">Número de caracteres muito alto</span>   
-            </div>
-            <div class="form-group row">
-                <div class="col-xs-4 col-md-4 ">
-                    <label for="tensao" class="campo-cadastro">Tensão</label>
-                    <input type="number" name="tensao" id="tensao" placeholder="Ex: 220" class="form-control" ng-class="{'enviar': enviar}" min="1" ng-model="equipamento.tensao" required>
+                        <span class="campo-invalido" ng-show="cadastroEquipamentoForm.descricao.$invalid && cadastroEquipamentoForm.$submitted">Descrição é obrigatória</span>
+                        
+                        <span class="campo-invalido" ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.minlength">Número de caracteres muito baixo</span>
+                        
+                        <span class="campo-invalido"  ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.maxlength">Número de caracteres muito alto</span>   
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-4 col-md-4">
+                            <label for="tensao" class="campo-cadastro">Tensão</label>
+                            <input type="number" name="tensao" id="tensao" placeholder="Ex: 220" class="form-control" ng-class="{'enviar': enviar}" min="1" ng-model="equipamento.tensao" required>
 
-                    <div class="campo-invalido" ng-show="cadastroEquipamentoForm.tensao.$invalid && cadastroEquipamentoForm.$submitted">Por favor, insira uma tensão válida</div>
+                            <div class="campo-invalido" ng-show="cadastroEquipamentoForm.tensao.$invalid && cadastroEquipamentoForm.$submitted">Por favor, insira uma tensão válida</div>
+                        </div>
+                        <div class="col-xs-3 col-md-3">
+                            <label for="tamanho" class="campo-cadastro">Slots</label>
+                            <input type="number" class="form-control" min="1" ng-model="tamanho.length" readonly>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group"> -->
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success" ng-disabled="tamanho.length === 0" ng-click="criarEquipamento(equipamento)"><h5>Cadastrar</h5></button>
+                        </div>
+                    <!-- </div> -->
+                </form>
+        </div>
+        <div ng-if="isAlterar" class="flex-column col-md-4 col-sm-6 cadastro-container">
+            <form id="editar-form" novalidate name="editarEquipamentoForm">
+                <h4 class="text-center">Mover Equipamento</h4>
+                <span class="campos-obrigatorios">(Por favor, faça a seleção dos campos na ordem que segue)</span>
+                <h3>{{equipamentoEdicao.descricao}}</h3>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="andar" class="campo-cadastro">Andar</label>
+                        <select class="form-control" name="andar" id="andar" ng-click="buscarAndares(equipamentoEdicao)" ng-model="andar" required>
+                            <option ng-repeat="andar in andares"  value="{{andar.Id}}">{{andar.NumeroAndar}}</option>
+                        </select>            
+                        <span class="campo-invalido" ng-show="editarEquipamentoForm.andar.$error.required && editarEquipamentoForm.$submitted">É necessário selecionar um andar</span>
+                    </div>
                 </div>
-                <div class="col-xs-3 col-md-3">
-                    <label for="tamanho" class="campo-cadastro">Slots</label>
-                    <input type="number" class="form-control" min="1" ng-model="tamanho.length" readonly>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="sala" class="campo-cadastro">Sala</label>
+                        <select class="form-control" name="sala" id="sala" ng-change="buscarSalas(equipamentoEdicao, andar)" ng-model="sala" required>
+                            <option ng-repeat="sala in salas"  value="{{andar.Id}}">{{sala.NumeroSala}}</option>
+                        </select>            
+                        <span class="campo-invalido" ng-show="editarEquipamentoForm.sala.$error.required && editarEquipamentoForm.$submitted">É necessário selecionar uma sala</span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-success" ng-disabled="tamanho.length === 0" ng-click="criarEquipamento(equipamento)"><h5>Cadastrar</h5></button>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="rack" class="campo-cadastro">Rack</label>
+                        <select class="form-control" name="rack" id="rack" ng-change="buscarRacks(sala)" ng-model="equipamentoEdicao.RackMover" required>
+                            <option ng-repeat="rack in racks"  value="{{rack.Id}}">{{rack.Id}}</option>
+                        </select>            
+                        <span class="campo-invalido" ng-show="editarEquipamentoForm.rack.$error.required && editarEquipamentoForm.$submitted">É necessário selecionar um rack</span>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <div ng-if="isAlterar" class="flex-column col-md-4 cadastro-container">
-        <form id="editar-form" novalidate name="editarEquipamentoForm">
-            <h4 class="text-center">Editar Equipamento!</h4>
-            <span class="campos-obrigatorios">(Por favor, faça a seleção dos campos na ordem que segue)</span>
-            <h3>{{equipamentoEdicao.descricao}}</h3>
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="andar" class="campo-cadastro">Andar</label>
-                    <select class="form-control" name="andar" id="andar" ng-click="buscarAndares(equipamentoEdicao)" ng-model="andar" required>
-                        <option ng-repeat="andar in andares"  value="{{andar.Id}}">{{andar.NumeroAndar}}</option>
-                    </select>            
-                    <span class="campo-invalido" ng-show="editarEquipamentoForm.andar.$error.required && editarEquipamentoForm.$submitted">É necessário selecionar um andar</span>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-success" ng-click="moverEquipamento(equipamentoEdicao)"><h5>Mover</h5></button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-danger" ng-click="deletarEquipamento(equipamentoEdicao)"><h5>Deletar Equipamento</h5></button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="sala" class="campo-cadastro">Sala</label>
-                    <select class="form-control" name="sala" id="sala" ng-change="buscarSalas(equipamentoEdicao, andar)" ng-model="sala" required>
-                        <option ng-repeat="sala in salas"  value="{{andar.Id}}">{{sala.NumeroSala}}</option>
-                    </select>            
-                    <span class="campo-invalido" ng-show="editarEquipamentoForm.andar.$error.required && editarEquipamentoForm.$submitted">É necessário selecionar uma sala</span>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="rack" class="campo-cadastro">Rack</label>
-                    <select class="form-control" name="rack" id="rack" ng-change="buscarRacks(sala)" ng-model="rack" required>
-                        <option ng-repeat="rack in racks"  value="{{rack.Id}}">{{rack.Id}}</option>
-                    </select>            
-                    <span class="campo-invalido" ng-show="editarEquipamentoForm.andar.$error.required && editarEquipamentoForm.$submitted">É necessário selecionar um rack</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-success" ng-disabled="tamanho.length === 0" ng-click="criarEquipamento(equipamento)"><h5>Cadastrar</h5></button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 

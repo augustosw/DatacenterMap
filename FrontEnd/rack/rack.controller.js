@@ -5,6 +5,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
     $scope.tamanho = [] 
     $scope.equipamento = {};
     $scope.aumentarTamanho = aumentarTamanho;
+    $scope.deletarEquipamento = deletarEquipamento;
     $scope.isAlterar = false;
     $scope.editar = editar; 
     $scope.criarEquipamento = criarEquipamento; 
@@ -15,6 +16,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
     $scope.buscarAndares = buscarAndares;
     $scope.buscarSalas = buscarSalas;
     $scope.buscarRacks = buscarRacks;
+    $scope.moverEquipamento = moverEquipamento;
 
     var tamanhoAtual = 0;
 
@@ -121,30 +123,20 @@ angular.module('app').controller('RackController', function ($scope, rackService
                     })
     }
 
+    function moverEquipamento(equipamentoMover) {
+        equipamentoService.moverEquipamento(equipamentoMover.RackMover.Id, equipamentoMover.Id)
+                            .then(function (response) {
+                                $scope.racks = reponse.data.Racks; 
+                            })
+    }
 
-    //recebe idRack 
 
-
-    // function verificarTamanho(gaveta) {
-    //     if(tamanhoAtual === 0){
-    //         equipamentoService.buscarPorId(gaveta.equipamentoId)
-    //                             .then(function(response) {
-    //                                 tamanhoAtual = response.data.tamanho;
-    //                                 $scope.tamanhoGaveta = {
-    //                                     height:`${tamanhoAtual*50}`
-    //                                 }})
-    //     }
-    //     tamanhoAtual--; 
-    // }
-    
-
-    function deletarEquipamento(gaveta){
-        console.log(gaveta);
-        // metodos corretos, porém não há comunicacao com o banco
-        // equipamentoService.excluir(gaveta.equipamentoId)
-        //                     .then( function (response ) {
-        //                         location.reload();
-        //                     })
+    function deletarEquipamento(equipamento){
+        console.log(equipamento.Id);
+        equipamentoService.excluir(equipamento.Id)
+                            .then( function (response ) {
+                                location.reload();
+                            })
     }
 
     //dados mokados para teste das funcionalidades

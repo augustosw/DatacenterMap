@@ -4,10 +4,10 @@
         <button ng-click="toggleRightAndar()" ng-hide="isOpenRightAndar()"  class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': isAlterar}" > 
             <img ng-src="/image/novo-andar.svg" height="50" width="50" style="margin-top:6px; margin-right: 3px;">
         </button>
-        <button type="button" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}" ng-click="voltar()">
+        <button type="button" ng-if="detalhe" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}" ng-click="voltar()">
             <img ng-src="/image/andares-voltar.svg" height="30" width="30">
         </button>
-        <button ng-click="toggleRightSala()" ng-hide="isOpenRightSala()" type="button" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}">
+        <button ng-if="detalhe" ng-click="toggleRightSala()" ng-hide="isOpenRightSala()" type="button" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}">
             <img ng-src="/image/nova-sala.svg" height="30" width="30">
         </button>
     </div>
