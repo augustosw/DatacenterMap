@@ -50,7 +50,7 @@ angular.module('app')
       if(!rack.Descricao)
         mensagens.push('Rack deve possuir uma descrição');
       
-      if(rack.Tensao < 0)
+      if(rack.Tensao < 1)
         mensagens.push('Rack deve possuir uma tensão válida');
       
       if(mensagens.length >= 1){
