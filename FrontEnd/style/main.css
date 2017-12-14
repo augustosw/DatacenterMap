@@ -170,6 +170,7 @@ md-sidenav.md-closed.md-locked-open-add-active{
 
 .carousel-item {
     margin: 15px;
+    /* margin-left: 40px; */
     position: relative;
    
 }
@@ -289,18 +290,20 @@ md-sidenav.md-closed.md-locked-open-add-active{
 #carousel .carousel-control.left {
     bottom: 100%;
     margin-bottom: 10px;
+    margin-left: -20px;
 }
 
 #carousel .carousel-control.right {
     top: 100%;
     margin-top: 10px;
     left: 0;
+    margin-left: -20px;
 }
 
 #carousel .carousel-indicators {
     position: absolute;
     bottom: 50%;
-    left: 20px; 
+    left: 15px; 
     z-index: 15;
     width: 60%;
     padding-left: 0;
@@ -786,12 +789,12 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 .vertical .carousel-inner > .next {
     left: 0;
     top: 100%;
-    padding-left: 73px;   
+    padding-left: 54px;   
 }
 
 .vertical .carousel-inner > .prev {
     left: 0;
-    padding-left: 73px;
+    padding-left: 54px; 
     top: -100%
 }
 .vertical .carousel-inner > .next.left,

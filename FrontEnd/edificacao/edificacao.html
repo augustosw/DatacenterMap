@@ -1,6 +1,6 @@
 <div class="flex-row edificacao-wrapper">
     <map-sidebar entidades='edificacoes' tipo-atual='tipoEntidade'></map-sidebar>
-    <map-edificacao-home ng-if="!detalhe"></map-edificacao-home>
+    <map-edificacao-home ng-if="!isAlterar"></map-edificacao-home>
     <div class="botoes-tela-edificacao-container"> 
         <button ng-click="toggleRightAndar()" ng-hide="isOpenRightAndar()"  class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': isAlterar}" > 
             <img ng-src="/image/novo-andar.svg" height="50" width="50" style="margin-top:6px; margin-right: 3px;">
@@ -12,7 +12,7 @@
             <img ng-src="/image/nova-sala.svg" height="30" width="30">
         </button>
     </div>
-    <div ng-if="detalhe" class="edificacao-container">
+    <div class="edificacao-container">
         <div class="base">
             <img class="base-imagem" src="/image/base-imagem.svg" alt="">
         </div>
