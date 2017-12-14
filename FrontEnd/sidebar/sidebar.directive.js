@@ -48,7 +48,7 @@ angular.module('app')
         }
     
         $scope.close = function () {
-          $mdSidenav().close()
+          $mdSidenav('edificacao').close()
             .then(function () {
             });
         };    
