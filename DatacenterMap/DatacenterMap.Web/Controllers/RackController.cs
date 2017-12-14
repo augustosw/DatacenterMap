@@ -104,16 +104,15 @@ namespace DatacenterMap.Web.Controllers
         {
             List<Slot> slots = contexto.Slots
                           .AsNoTracking()
-                          .Include(x => x.Sala)
                           .Where(x => x.Sala.Id == salaId)
                           .ToList();
 
             List<int> slotsId = new List<int>();
             slots.ForEach(x => slotsId.Add(x.Id));
 
-            List<Rack> racks = contexto.Racks.Include(x => x.Slot)
+            List<Rack> racks = contexto.Racks
                           .AsNoTracking()
-                          .Where(x => slotsId.Contains(x.Id) && ControllerUtils.RackIsDisponivel(contexto, x.Id, tamanho))
+                          .Where(x => slotsId.Contains(x.Slot.Id) && ControllerUtils.RackIsDisponivel(contexto, x.Id, tamanho))
                           .ToList();
 
             return Ok(racks);
@@ -126,6 +125,7 @@ namespace DatacenterMap.Web.Controllers
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
 
             ControllerUtils.DeletarRack(contexto, id);
+            contexto.SaveChanges();
 
             return Ok("Removido com Sucesso");
         }
