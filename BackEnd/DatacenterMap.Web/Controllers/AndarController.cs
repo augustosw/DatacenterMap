@@ -104,9 +104,7 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Andar não encontrado.");
 
-            Andar andar = contexto.Andares.FirstOrDefault(x => x.Id == id);
-            contexto.Andares.Remove(andar);
-            contexto.SaveChanges();
+            ControllerUtils.DeletarAndar(contexto, id);
 
             return Ok("Removido com Sucesso");
         }

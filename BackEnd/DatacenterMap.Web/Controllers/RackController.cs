@@ -125,12 +125,7 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Racks.Where(x => x.Id == id).Count() == 0) return BadRequest("Rack não encontrado.");
 
-            Rack rack = contexto.Racks.Include(x => x.Gavetas).Include(x => x.Slot).FirstOrDefault(x => x.Id == id);
-            rack.Slot.Ocupado = false;
-
-            contexto.Gavetas.RemoveRange(rack.Gavetas);
-            contexto.Racks.Remove(rack);
-            contexto.SaveChanges();
+            ControllerUtils.DeletarRack(contexto, id);
 
             return Ok("Removido com Sucesso");
         }
