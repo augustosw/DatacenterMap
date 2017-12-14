@@ -83,7 +83,7 @@ namespace DatacenterMap.Web.Controllers
 
             if (contexto.Racks.Where(x => x.Id == idRack).Count() == 0) return BadRequest("Rack não encontrado.");
 
-            Rack novoRack = contexto.Racks.Include(x => x.Gavetas).FirstOrDefault(x => x.Id == idRack);
+            Rack novoRack = contexto.Racks.FirstOrDefault(x => x.Id == idRack);
             List<Gaveta> gavetas = contexto.Gavetas.OrderBy(x => x.Posicao).Where(x => x.Rack.Id == novoRack.Id && !x.Ocupado).ToList();
         
             if (gavetas.Count()
@@ -162,6 +162,7 @@ namespace DatacenterMap.Web.Controllers
 
             contexto.Equipamentos.Remove(equipamento);
             contexto.SaveChanges();
+
             return Ok("Removido com Sucesso");
         }
 

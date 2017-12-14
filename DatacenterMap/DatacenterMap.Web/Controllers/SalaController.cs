@@ -97,6 +97,7 @@ namespace DatacenterMap.Web.Controllers
             if (contexto.Salas.Where(x => x.Id == id).Count() == 0) return BadRequest("Sala não encontrada.");
 
             ControllerUtils.DeletarSala(contexto, id);
+            contexto.SaveChanges();
 
             return Ok("Removido com Sucesso");
         }
@@ -118,7 +119,6 @@ namespace DatacenterMap.Web.Controllers
         {
             List<Sala> salas = contexto.Salas
                           .AsNoTracking()
-                          .Include(x => x.Andar)
                           .Where(x => x.Andar.Id == andarId
                                  && ControllerUtils.SalaHasRackDisponivel(contexto, x.Id, tamanho))
                           .ToList();

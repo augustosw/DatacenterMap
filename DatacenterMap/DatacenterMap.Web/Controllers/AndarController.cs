@@ -89,7 +89,6 @@ namespace DatacenterMap.Web.Controllers
         {
             List<Andar> andares = contexto.Andares
                           .AsNoTracking()
-                          .Include(x => x.Edificacao)
                           .Where(x => x.Edificacao.Id == edificacaoId
                                  && ControllerUtils.AndarHasRackDisponivel(contexto, x.Id, tamanho))
                           .ToList();
@@ -105,7 +104,8 @@ namespace DatacenterMap.Web.Controllers
             if (contexto.Andares.Where(x => x.Id == id).Count() == 0) return BadRequest("Andar não encontrado.");
 
             ControllerUtils.DeletarAndar(contexto, id);
-           
+            contexto.SaveChanges();
+
             return Ok("Removido com Sucesso");
         }
 
