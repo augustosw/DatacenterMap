@@ -88,10 +88,9 @@ namespace DatacenterMap.Web.Controllers
         public HttpResponseMessage GetAndaresDisponiveis([FromUri] int edificacaoId, int tamanho)
         {
             List<Andar> andares = contexto.Andares
-                          .AsNoTracking()
-                          .Include(x => x.Edificacao)
                           .Where(x => x.Edificacao.Id == edificacaoId
                                  && ControllerUtils.AndarHasRackDisponivel(contexto, x.Id, tamanho))
+                          .AsNoTracking()
                           .ToList();
 
             return Ok(andares);

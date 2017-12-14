@@ -175,7 +175,8 @@ namespace DatacenterMap.Testes.Controllers
             Assert.IsNotNull(equipamentoRetornadaNoPost);
          
             ControllerUtils.DeletarEdificacao(context, edificacaoId);
-            
+            context.SaveChanges();
+
             var objetoGet = equipamentoController.GetEquipamento(equipamentoRetornadaNoPost.Id).Content as ObjectContent;
             Equipamento equipamentoRetornadoNoGet = objetoGet.Value as Equipamento;
 

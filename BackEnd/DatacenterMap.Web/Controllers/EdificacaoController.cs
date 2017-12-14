@@ -56,6 +56,7 @@ namespace DatacenterMap.Web.Controllers
             if (contexto.Edificacoes.Where(x => x.Id == id).Count() == 0) return BadRequest("Edificação não encontrada.");
 
             ControllerUtils.DeletarEdificacao(contexto, id);
+            contexto.SaveChanges();
 
             return Ok("Removido com Sucesso");
         }

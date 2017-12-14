@@ -21,9 +21,7 @@ namespace DatacenterMap.Web
         {
             List<Slot> slots = contexto.Slots
                           .AsNoTracking()
-                          .Include(x => x.Sala)
-                          .Where(x => x.Sala.Id == salaId)
-                          .ToList();
+                          .Where(x => x.Sala.Id == salaId).ToList();
 
             List<int> slotsId = new List<int>();
             slots.ForEach(x => slotsId.Add(x.Id));
@@ -73,47 +71,55 @@ namespace DatacenterMap.Web
         public static void DeletarEdificacao(IDatacenterMapContext contexto, int edificacaoId)
         {
             Edificacao edificacao = contexto.Edificacoes.Include(x => x.Andares).FirstOrDefault(x => x.Id == edificacaoId);
-            List<Andar> andares = edificacao.Andares.ToList();
-            andares.ForEach(x => { DeletarAndar(contexto, x.Id); andares = contexto.Andares.Where(e => e.Edificacao.Id == edificacaoId).ToList(); });
+            List<Andar> andares = edificacao.Andares.OrderBy(x => x.Id).ToList();
+
+            foreach (Andar andar in andares)
+            {
+                DeletarAndar(contexto, andar.Id);
+            }
+
             contexto.Edificacoes.Remove(edificacao);
-            contexto.SaveChanges();
         }
 
         public static void DeletarAndar(IDatacenterMapContext contexto, int andarId)
         {
             Andar andar = contexto.Andares.Include(x => x.Salas).FirstOrDefault(x => x.Id == andarId);
             List<Sala> salas = andar.Salas.ToList();
-            salas.ForEach(x => { DeletarSala(contexto, x.Id); salas = contexto.Salas.Where(a => a.Andar.Id == andarId).ToList(); });
+
+            foreach (Sala sala in salas)
+            {
+                DeletarSala(contexto, sala.Id);
+            }
+
             contexto.Andares.Remove(andar);
-            contexto.SaveChanges();
         }
 
         public static void DeletarSala(IDatacenterMapContext contexto, int salaId)
         {
             Sala sala = contexto.Salas.Include(x => x.Slots).FirstOrDefault(x => x.Id == salaId);
+
             List<int> idsSlots = new List<int>();
             sala.Slots.ForEach(x => idsSlots.Add(x.Id));
-            List<Rack> racks = contexto.Racks.Include(x => x.Slot).Where(x => idsSlots.Contains(x.Slot.Id)).ToList();
-            
+
+            List<Rack> racks = contexto.Racks.Where(x => idsSlots.Contains(x.Slot.Id)).ToList();
             racks.ForEach(x => DeletarRack(contexto, x.Id));
+
             contexto.Slots.RemoveRange(sala.Slots);
             contexto.Salas.Remove(sala);
-            contexto.SaveChanges();
         }
 
         public static void DeletarRack(IDatacenterMapContext contexto, int rackId)
         {
-            Rack rack = contexto.Racks.Include(x => x.Slot).FirstOrDefault(x => x.Id == rackId);
-            List<Gaveta> gavetas = contexto.Gavetas.Include(x => x.Equipamento).Include(x => x.Rack).Where(x => x.Rack.Id == rackId).ToList();
+            Rack rack = contexto.Racks.FirstOrDefault(x => x.Id == rackId);
+            List<Gaveta> gavetas = contexto.Gavetas.Include(x => x.Equipamento).Where(x => x.Rack.Id == rackId).ToList();
             List<int> idsEquipamentos = new List<int>();
             gavetas.Where(x => x.Equipamento != null).ToList().ForEach(x => idsEquipamentos.Add(x.Equipamento.Id));
-            List<Equipamento> equipamentos = contexto.Equipamentos.Include(x => x.Gavetas).Where(x => idsEquipamentos.Contains(x.Id)).ToList();
+            List<Equipamento> equipamentos = contexto.Equipamentos.Where(x => idsEquipamentos.Contains(x.Id)).ToList();
             rack.Slot.Ocupado = false;
 
             contexto.Equipamentos.RemoveRange(equipamentos);
             contexto.Gavetas.RemoveRange(gavetas);
             contexto.Racks.Remove(rack);
-            contexto.SaveChanges();
         }
     }
 }
