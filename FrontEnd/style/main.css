@@ -457,14 +457,14 @@ input[type="checkbox"] {
     display:none; 
 }
 
-.equipamento-item {
+/* .equipamento-item {
     transition-duration: .2s;
     height: 50px;
     width: 90%;
     margin: 10px;
     background: #a5a9ac;
     cursor: pointer;
-}
+} */
 
 .equipamento-selecionado {
     margin-left: 10px;   
@@ -476,10 +476,10 @@ input[type="checkbox"] {
     left:45%;
     top: 35%;
 }
-
+/* 
 .equipamento-item:hover {
     background:#CECECF;
-}
+} */
 
 input[type="checkbox"]:disabled + .equipamento-item {
     cursor: not-allowed;
@@ -507,7 +507,7 @@ element.style {
 
 
 
-.remover-equipamento-botao {
+/* .remover-equipamento-botao {
     height: 13px;
     width: 13px;
     font-size: 10px;
@@ -518,29 +518,21 @@ element.style {
     margin: 5px 13px; 
     position: absolute;
     right:0;
-}
+} */
 
 .remover-equipamento-botao > p {
     position:relative; 
     transform: translateY(-15%) translateX(-190%);
 }
 
-input[type="checkbox"]:checked + .equipamento-item {
-    background: #51b651;
-}
 
-input[type="checkbox"]:checked + .equipamento-item:hover {
-    background: #0AC30A;
-}
-
-
-.equipamento-invalido {
+/* .equipamento-invalido {
    background: rgb(197, 62, 62); 
 }
 
 .equipamento-invalido:hover {
     background: #FF4545; 
- }
+ } */
 
 
 .andar {
@@ -805,3 +797,109 @@ md-input-container:not(.md-input-invalid).md-input-focused label,
     font-size: 13px;
     font-weight: 300;
 }
+
+
+.rack label {
+    margin:0; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.rack {
+    padding: 15px 10px;
+    max-width: 321px;
+    background: #eee;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .rack__slot {
+    min-height: 53px;
+    background: #424242;
+    margin-top: 10px;
+    position: relative;
+    box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition-duration: .4s;
+    border-radius: 4px;
+}
+
+  .rack__slot--selected + .rack__slot--selected {
+      margin-top: 0px;
+  }
+
+  .rack__slot--selected + .rack__slot--selected,
+  .rack__slot--selected + .rack__slot--selected:before,
+  .rack__slot--selected + .rack__slot--selected:after {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .rack__slot:not(.rack__slot--selected) + .rack__slot--selected,
+  .rack__slot:not(.rack__slot--selected) + .rack__slot--selected:after,
+  .rack__slot:not(.rack__slot--selected) + .rack__slot--selected:before {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .rack__slot--selected:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: #424242;
+      z-index: 0;
+      border-radius: 4px;
+  }
+
+  .rack__slot:hover, .rack__slot--selected {
+    cursor: pointer;
+  }
+  
+  .rack__slot:after {
+    content: '';
+    opacity: 0;
+    background: linear-gradient(to top, rgba(0, 255, 131, 0.4), rgba(0, 255, 131, 0.4)),
+                url(https://openclipart.org/download/216936/2U-Server.svg);
+    width: 300px;
+    height: 53px;
+    background-size: 100%;
+    filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.4)) brightness(1.3);
+    display: block;
+    transition-duration: .4s;
+    z-index: 1;
+    border-radius: 4px;
+  }
+
+  .rack__slot .equipamento-invalido {
+      background: #f00;
+      opacity: 0.3;
+      cursor: not-allowed;
+  }
+
+
+  .rack__slot:hover:after, .rack__slot--selected:after {
+    opacity: 1;
+  }
+
+.rack__slot__hardware {
+    background: url(https://openclipart.org/download/216936/2U-Server.svg);
+    width: 300px;
+    height: 56px;
+    background-size: 100%;
+    filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.4)) brightness(1.3);
+  }
+
+  .rack__slot:hover {
+    transform: scale(1.03); 
+    z-index: 2; 
+  }

@@ -1,19 +1,20 @@
 <div class="container">
     <h3 class="text-center">Selecione slots livres para adicionar Equipamentos</h3>
     <hr>
-    <div class="col-md-3 col-xs-6 col-md-offset-2 col-xs-offset-4">
-        <div class="flex-row center-center rack-content" ng-repeat="gaveta in gavetas">
-            {{verificarTamanho(gaveta)}}
-            <input id="{{gaveta.id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.id) || (gaveta.ocupado && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.ocupado">
-            <label class="flex-column equipamento-item " for="{{gaveta.id}}" ng-style="tamanhoGaveta" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
-                <span ng-if="gaveta.ocupado">{{gaveta.equipamento.id}}</span>
-                <span class="texto-equipamento-disponivel" ng-if="!gaveta.ocupado && !posicaoInvalida(gaveta.id) && !ativo">(Livre)</span>
-                <img class="equipamento-selecionado"  ng-src="/image/check.svg" height="30px" width="30px" ng-if="ativo">                
-                <div class="flex-row center-center">
-                    <img  ng-if="gaveta.ocupado" width="100px" ng-src="image/equipamento.svg">
-                </div>
-            </label>
-            <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)"><p>x</p></button>
+    <div class="flex-row center-center">
+        <div class="rack">
+            <div class="flex-row center-center rack__slot" ng-class="{'rack__slot--selected': ativo}" ng-repeat="gaveta in gavetas" ng-style="tamanhoGaveta">
+                {{verificarTamanho(gaveta)}}
+                
+                <input id="{{gaveta.id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.id) || (gaveta.ocupado && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.ocupado">
+
+                <label for="{{gaveta.id}}" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
+
+                <div ng-if="gaveta.ocupado" class="rack__slot__hardware" ng-style="tamanhoGaveta"></div>   
+
+                </label>
+                <!-- <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)"><p>x</p></button> -->
+            </div>
         </div>
     </div>
     <div ng-if="tamanho.length > 0 && !isAlterar" class="flex-column col-md-4 cadastro-container">

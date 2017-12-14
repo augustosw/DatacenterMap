@@ -1,0 +1,59 @@
+<md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools cadastro-andar-header">Cadastro de Rack</h1>
+</md-toolbar>
+<md-content class="cadastro-andar-container">
+    <form id="cadastro-rack" novalidate name="cadastroRackForm" ng-submit="criar(rack)">
+        <span class="texto-andar campos-obrigatorios">(Todos os campos são obrigatórios)</span>
+        <hr>
+        <div class="flex-column column-center">
+            <!-- <h5 class="texto-andar">Edificação: {{edificacao.Nome}}</h5>
+            <h5 class="texto-andar">Andar: {{andar[0].NumeroAndar}}</h5>
+            <h5 class="texto-andar">Andar: {{andar[0].NumeroAndar}}</h5>             -->
+            <img  ng-src="image/buildings.svg" heigh="115px" width="115px">
+        </div>
+        <hr class="text-header-title">
+        <div class="form-group">
+            <md-input-container>
+                <label class="texto-andar" for="descricao">Descrição</label>
+                <input type="text" min="1" required  id="descricao" ng-model="rack.Descricao" md-autofocus="" ng-minlength="2" ng-maxlength="64">
+                
+                <span class="campo-invalido" ng-show="cadastroRackForm.descricao.$invalid && cadastroRackForm.$submitted">Descricao é obrigatória</span>
+                
+                <span class="campo-invalido" ng-show="cadastroRackForm.descricao.$touched && cadastroRackForm.descricao.$error.minlength">Número de caracteres muito baixo</span>
+                
+                <span class="campo-invalido"  ng-show="cadastroRackForm.descricao.$touched && cadastroRackForm.descricao.$error.maxlength">Número de caracteres muito alto</span> 
+            </md-input-container>
+        </div>   
+        <div class="form-group">
+            <md-input-container>    
+                <label class="texto-andar" for="QuantidadeGavetas">Quantidade máxima de gavetas</label>
+                <input type="number" min="1" id="QuantidadeGavetas" required ng-model="rack.QuantidadeGavetas" >
+
+                <span class="campo-invalido" ng-show="cadastroRackForm.QuantidadeGavetas.$invalid && cadastroRackForm.$submitted">Quantidade máxima é obrigatória</span>
+                
+                <span class="campo-invalido" ng-show="cadastroRackForm.QuantidadeGavetas.$touched && cadastroRackForm.QuantidadeGavetas.$error.number">Quantidade máxima deve ser maior que 1</span>
+            </md-input-container>
+        </div>
+        <div class="form-group">
+            <md-input-container>    
+                <label class="texto-andar" for="Tensao">Tensão</label>
+                <input type="number" min="1" id="Tensao" required ng-model="rack.Tensao" >
+
+                <span class="campo-invalido" ng-show="cadastroRackForm.Tensao.$invalid && cadastroRackForm.$submitted">Tensão é obrigatória</span>
+                
+                <span class="campo-invalido" ng-show="cadastroRackForm.Tensao.$touched && cadastroRackForm.Tensao.$error.number">Tensão deve ser maior que 1</span>
+            </md-input-container>
+        </div>
+        <div class="form-group">
+            <div class="flex-row">
+                <md-button class="botao-cancelar-andar" type="submit" class="md-primary">
+                    Cadastrar
+                </md-button>
+                <md-button class="botao-cancelar-andar" type="button" ng-click="close()" class="md-primary">
+                    Cancelar cadastro
+                </md-button>
+            </div>
+        </div>
+    </form>
+</md-content>
+            
