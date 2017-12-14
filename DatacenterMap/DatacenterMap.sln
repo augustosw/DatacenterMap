@@ -22,6 +22,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. FrontEnd", "2. FrontEnd", "{C0969DE4-38DC-407F-A81D-9A1A234503BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatacenterMap.FrontEnd", "DatacenterMap.FrontEnd\DatacenterMap.FrontEnd.csproj", "{AB7B5F8A-C582-476B-90B0-E7F73BD9F78C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5537B0A-84A2-4101-A0F0-B55D8C574653} = {A5537B0A-84A2-4101-A0F0-B55D8C574653}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

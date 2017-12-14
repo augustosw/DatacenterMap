@@ -74,6 +74,7 @@
     <Content Include="obj\Debug\DatacenterMap.FrontEnd.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,8 +90,6 @@
     <Content Include="app.module.js" />
     <Content Include="app.route.js" />
     <Content Include="auth\auth.module.js" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="carousel\carousel.directive.html" />
     <Content Include="carousel\carousel.directive.js" />
     <Content Include="edificacao-cadastro\edificacao-cadastro.directive.js" />
@@ -155,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatacenterMap.Web\DatacenterMap.Web.csproj">
+      <Project>{a5537b0a-84a2-4101-a0f0-b55d8c574653}</Project>
+      <Name>DatacenterMap.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
