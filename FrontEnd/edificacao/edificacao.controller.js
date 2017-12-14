@@ -8,6 +8,7 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     $scope.isAlterar = !!$routeParams.id;
     $scope.voltar = voltar;
     $scope.excluir = excluir;
+    $scope.ordenarPorAndar = ordenarPorAndar;
     $scope.tipoEntidade = "edificacao";
     
     setup();
@@ -23,7 +24,7 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                 $scope.andaresCadastrados = $scope.edificacaoSelecionada.Andares;
 
                 //variavel que vai manter o(s) andare(s) presentes na tela
-                $scope.andaresTela = $scope.andaresCadastrados;
+                $scope.andaresTela = ordenarPorAndar($scope.andaresCadastrados);
 
                 // variaveel que vai manter o número TOTAL de andares de uma edificação
                 $scope.andaresTotais = $scope.edificacaoSelecionada.NumeroAndares;
@@ -81,6 +82,12 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
             function (response) {
                 console.log(response);
             });
+    }
+
+    function ordenarPorAndar(andares) {
+        return andares.sort(function(a, b) { 
+            return a.NumeroAndar - b.NumeroAndar;
+        });
     }
 
     function salaClick(id) {

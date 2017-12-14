@@ -12,7 +12,7 @@
             <div class="form-group">
                 <md-input-container>
                     <label for="nome" class="texto-andar">Nome Edificação</label>
-                    <input  name="nome" id="nome" ng-model="edificacao.nome" ng-class="{'enviar': enviar}" placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64" md-autofocus="">
+                    <input  name="nome" id="nome" ng-model="edificacao.Nome" ng-class="{'enviar': enviar}" placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64" md-autofocus="">
 
                     <span class="campo-invalido" ng-show="cadastroEdificacaoForm.nome.$invalid && cadastroEdificacaoForm.$submitted">Nome obrigatório</span>
                     
@@ -52,7 +52,7 @@
                     <md-button class="botao-cancelar-andar botao-sucesso" type="submit" class="md-primary">
                                 Cadastrar
                     </md-button>
-                    <md-button class="botao-cancelar-andar botao-cancelar" type="button" ng-click="close()" class="md-primary">
+                    <md-button class="botao-cancelar-andar botao-cancelar" type="button" ng-click="fecharJanela()" class="md-primary">
                             Cancelar cadastro
                     </md-button>
                 </div>

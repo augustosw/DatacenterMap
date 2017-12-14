@@ -1,6 +1,3 @@
-<!-- <div ng-if="cadastro"> -->
-    <!-- <map-edificacao-cadastro></map-edificacao-cadastro> -->
-<!-- </div> -->
 <div class="sidenav" ng-class="{'sidenav-open': isSidenavOpen}">
     <div style="background-color:#FBB041"></div>
     <div class="flex-column">
@@ -17,6 +14,6 @@
 </div>
 <section layout="row" flex="">
         <md-sidenav class="md-sidenav-left md-whiteframe-4dp cadastro-andar-container" md-component-id="edificacao">
-            <map-edificacao-cadastro></map-edificacao-cadastro>
+            <map-edificacao-cadastro on-close="close"></map-edificacao-cadastro>
         </md-sidenav>
 </section>

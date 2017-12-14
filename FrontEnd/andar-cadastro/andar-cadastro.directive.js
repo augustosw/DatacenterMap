@@ -11,7 +11,7 @@ angular.module('app')
     
     templateUrl: 'andar-cadastro/andar-cadastro.html', 
 
-    controller: function ($scope,  $log, $mdSidenav) {
+    controller: function  controller($scope,  $log, $mdSidenav) {
       
     $scope.criar = criar;
     
@@ -23,6 +23,7 @@ angular.module('app')
                     .then(
                       function (response) {
                         $scope.edificacao.Andares.push(response.data);
+                        $scope.edificacao.Andares = ordenarPorAndar($scope.edificacao.Andares);
                         console.log(response.data);
                     },
                       function(response){
@@ -33,7 +34,14 @@ angular.module('app')
       else {
           $scope.enviar = true;    
       }
-    } 
+    }
+    
+    
+    function ordenarPorAndar(andares) {
+      return andares.sort(function(a, b) { 
+          return a.NumeroAndar - b.NumeroAndar;
+      });
+    }
 
 
     function validar(andar) {
