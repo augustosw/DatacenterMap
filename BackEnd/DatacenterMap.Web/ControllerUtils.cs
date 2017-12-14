@@ -73,7 +73,8 @@ namespace DatacenterMap.Web
         public static void DeletarEdificacao(IDatacenterMapContext contexto, int edificacaoId)
         {
             Edificacao edificacao = contexto.Edificacoes.Include(x => x.Andares).FirstOrDefault(x => x.Id == edificacaoId);
-            edificacao.Andares.ForEach(x => DeletarAndar(contexto, x.Id));
+            List<Andar> andares = edificacao.Andares.ToList();
+            andares.ForEach(x => { DeletarAndar(contexto, x.Id); andares = contexto.Andares.Where(e => e.Edificacao.Id == edificacaoId).ToList(); });
             contexto.Edificacoes.Remove(edificacao);
             contexto.SaveChanges();
         }
@@ -81,7 +82,8 @@ namespace DatacenterMap.Web
         public static void DeletarAndar(IDatacenterMapContext contexto, int andarId)
         {
             Andar andar = contexto.Andares.Include(x => x.Salas).FirstOrDefault(x => x.Id == andarId);
-            andar.Salas.ForEach(x => DeletarSala(contexto, x.Id));
+            List<Sala> salas = andar.Salas.ToList();
+            salas.ForEach(x => { DeletarSala(contexto, x.Id); salas = contexto.Salas.Where(a => a.Andar.Id == andarId).ToList(); });
             contexto.Andares.Remove(andar);
             contexto.SaveChanges();
         }
@@ -101,14 +103,15 @@ namespace DatacenterMap.Web
 
         public static void DeletarRack(IDatacenterMapContext contexto, int rackId)
         {
-            Rack rack = contexto.Racks.Include(x => x.Gavetas).Include(x => x.Slot).FirstOrDefault(x => x.Id == rackId);
-            List<int> idsGavetas = new List<int>();
-            rack.Gavetas.ForEach(x => idsGavetas.Add(x.Id));
-            List<Equipamento> equipamentos = contexto.Equipamentos.Include(x => x.Gavetas).Where(x => idsGavetas.Contains(x.Id)).ToList();
+            Rack rack = contexto.Racks.Include(x => x.Slot).FirstOrDefault(x => x.Id == rackId);
+            List<Gaveta> gavetas = contexto.Gavetas.Include(x => x.Equipamento).Include(x => x.Rack).Where(x => x.Rack.Id == rackId).ToList();
+            List<int> idsEquipamentos = new List<int>();
+            gavetas.Where(x => x.Equipamento != null).ToList().ForEach(x => idsEquipamentos.Add(x.Equipamento.Id));
+            List<Equipamento> equipamentos = contexto.Equipamentos.Include(x => x.Gavetas).Where(x => idsEquipamentos.Contains(x.Id)).ToList();
             rack.Slot.Ocupado = false;
 
             contexto.Equipamentos.RemoveRange(equipamentos);
-            contexto.Gavetas.RemoveRange(rack.Gavetas);
+            contexto.Gavetas.RemoveRange(gavetas);
             contexto.Racks.Remove(rack);
             contexto.SaveChanges();
         }
