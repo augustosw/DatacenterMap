@@ -2,7 +2,7 @@
     <map-sidebar entidades='edificacoes' tipo-atual='tipoEntidade'></map-sidebar>
     <map-edificacao-home ng-if="!isAlterar"></map-edificacao-home>
     <div class="botoes-tela-edificacao-container"> 
-        <button ng-click="toggleRightAndar()" ng-hide="isOpenRightAndar()"  class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': isAlterar}" > 
+        <button ng-if="isAlterar" ng-click="toggleRightAndar()" ng-hide="isOpenRightAndar()"  class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': isAlterar}" > 
             <img ng-src="/image/novo-andar.svg" height="50" width="50" style="margin-top:6px; margin-right: 3px;">
         </button>
         <button type="button" ng-if="detalhe" class="botao-voltar-container" ng-class="{'botao-voltar-container-ativo': detalhe}" ng-click="voltar()">
@@ -12,7 +12,11 @@
             <img ng-src="/image/nova-sala.svg" height="30" width="30">
         </button>
     </div>
-    <div class="edificacao-container">
+    <div class="edificacao-container flex-column">
+        <div ng-if="isAlterar"class="flex-row row-center">
+            <h3 class="edificacao-selecionada">{{edificacaoSelecionada.Nome}}</h3>
+            <img class="imagem-delete" ng-click="excluir(edificacaoSelecionada)" ng-src="/image/delete.svg" height="20" width="20">
+        </div>
         <div class="base">
             <img class="base-imagem" src="/image/base-imagem.svg" alt="">
         </div>
@@ -22,8 +26,20 @@
             <div class="andar-numero" data-tooltip="A {{andar.NumeroAndar}}" ng-style="andarStyle">
             </div>
         </div>
+        <div ng-if="isAlterar" class="flex-column edificacao-detalhes-andar">
+            <div>
+                <h6>Andares totais: {{edificacaoSelecionada.NumeroAndares}}</h6>
+                <h6>Andares cadastrados: {{edificacaoSelecionada.Andares.length}}</h6>
+            </div>
+            <div class="teste"ng-if="detalhe">
+                <h6>Salas totais: {{andaresTela[0].QuantidadeMaximaSalas}}</h6>
+                <h6>Salas cadastradas: {{salasTotais.length}}</h6>
+            </div>
+        </div> 
     </div>
+    
 </div>
+
 <section layout="row" flex="">
     <md-sidenav class="md-sidenav-right md-whiteframe-4dp cadastro-andar-container" md-component-id="andar">
         <map-andar-cadastro edificacao="edificacaoSelecionada"></map-andar-cadastro>

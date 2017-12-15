@@ -181,7 +181,9 @@ md-sidenav.md-closed.md-locked-open-add-active{
 }
 
 .imagem-carousel,
-.carousel-caption  {
+.carousel-caption,
+.imagem-delete,
+.botao-voltar-container-ativo  {
     cursor: pointer;
 }
 
@@ -426,7 +428,6 @@ md-sidenav.md-closed.md-locked-open-add-active{
 
 .edificacao-wrapper {
     top: 0;
-    /* width: calc(100vw - 300px); */
     height: calc(100vh - 50px);
 }
 
@@ -480,7 +481,7 @@ md-sidenav.md-closed.md-locked-open-add-active{
 .andares {
     transform: rotateX(70deg) rotateZ(-45deg) translateZ(-15vmin);
     position: absolute;
-    top: 70%;
+    top: 80%;
     left: 70%;
 }
 
@@ -502,15 +503,6 @@ input[type="checkbox"] {
     display:none; 
 }
 
-/* .equipamento-item {
-    transition-duration: .2s;
-    height: 50px;
-    width: 90%;
-    margin: 10px;
-    background: #a5a9ac;
-    cursor: pointer;
-} */
-
 .equipamento-selecionado {
     margin-left: 10px;   
 }
@@ -521,10 +513,6 @@ input[type="checkbox"] {
     left:45%;
     top: 35%;
 }
-/* 
-.equipamento-item:hover {
-    background:#CECECF;
-} */
 
 input[type="checkbox"]:disabled + .equipamento-item {
     cursor: not-allowed;
@@ -567,6 +555,34 @@ element.style {
     transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
     transform-style: preserve-3d
 }
+.imagem-delete {
+    opacity: .6; 
+    margin-top: 6px;
+    transition: .3s;
+}
+
+.imagem-delete:hover {
+    opacity: 1;
+    animation: mover-lixeira 1s linear infinite; 
+}
+
+.imagem-delete {
+    pointer-events: all;
+}
+
+@keyframes mover-lixeira {
+    0%, 50%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(45deg);
+    }
+
+    75% {
+        transform: rotate(-45deg);
+    }
+}
+
 
 .imagem-andar {
     background: none;
@@ -669,6 +685,35 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 
 .botao-cancelar-andar {
     background: white;
+}
+
+
+.edificacao-selecionada {
+    font-size: 26px;
+    color: #42464f;
+    font-weight: 600;
+    padding: 0 15px; 
+    border-bottom: 1px solid #FBB041;
+    text-align: center;
+}
+
+.edificacao-detalhes-andar{
+    position: absolute;
+    top: 35%;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.87);
+    text-align: start;
+    right: 0;
+    margin-right: 32px;
+    box-shadow: 7px 3px 3px 3px rgba(143, 143, 143, 0.26);
+    border-bottom: 2px solid #fbb041;
+    padding: 0 5px;
+    transition: 1s;
+}
+
+.edificacao-detalhes-andar > div > h6 {
+    font-size: 17px;
+    font-weight: 550;
 }
 
 
