@@ -7,7 +7,7 @@ angular.module('app').factory('salaService', function ($http, $location) {
     }
 
     function buscarPorIdComRackDisponiveis(andarId, tamanho){
-        return $http.get(url + "disponiveis/" + andarId + tamanho)
+        return $http.get(url + "disponiveis/" + andarId + '/' + tamanho)
     }
 
     function criar(sala){

@@ -10,8 +10,14 @@ angular.module('app').factory('equipamentoService', function ($http, $location) 
     function excluir(id){
         return $http.delete(url +'/'+ id);
     }
+
+    
+    function moverEquipamento(idRack, idEquipamento) {
+        return $http.put(url + '/' + idRack + '/' + idEquipamento)
+    }
     
     return {
-        criar: criar
+        criar: criar,
+        moverEquipamento:moverEquipamento
     }
 });   
