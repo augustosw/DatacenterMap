@@ -22,6 +22,7 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 		function buscarSalaPorId(id) {
 			salaService.buscarPorId(id)
 				.then(function (response) {
+					$scope.sala = response.data;
 					console.log(response.data);
 					$scope.salaSelecionada = response.data;
 					$scope.slotsPadroes = [];
@@ -108,13 +109,17 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 
 		function verificarSlot(slot) {
 			if(!slot.Ocupado) {
+				$scope.slot = slot;
 				$mdSidenav('rack')
 				.toggle()
 				.then(function () {
 				});
 			}
 			else {
-				//TO:DO -> Acessar pagina de detalhe do rack
+				console.log(slot);
+				//TO:DO -- chamar método da service que busca Rack por Id_Slot
+				// rackService.buscarPorSlotId()
+				// $location.path(`/rack/${slot.Id}`);
 			}
 		}
 

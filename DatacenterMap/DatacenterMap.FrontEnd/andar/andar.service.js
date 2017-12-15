@@ -27,6 +27,7 @@ angular.module('app').factory('andarService', function ($http, $location) {
     }
     return {
         criar: criar,
+        buscarPorIdComRackDisponiveis:buscarPorIdComRackDisponiveis,
         excluir: excluir,
         editar: editar,
         listar: listar,

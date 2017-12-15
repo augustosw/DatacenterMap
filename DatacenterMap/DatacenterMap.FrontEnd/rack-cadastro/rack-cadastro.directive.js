@@ -1,12 +1,13 @@
 angular.module('app')
-.directive('mapRackCadastro', function (authService, rackService, andarService, $rootScope, $log, $timeout) {
+.directive('mapRackCadastro', function (authService, edificacaoService, rackService, andarService, $rootScope, $log, $timeout) {
 
   return {
 
     restrict: 'E',
 
     scope: {
-        sala: '='
+        sala: '=',
+        slot: '='
     },
     
     templateUrl: 'rack-cadastro/rack-cadastro.html', 
@@ -15,10 +16,13 @@ angular.module('app')
       
     $scope.criar = criar;
     
+   
     function criar(rack) {
-      console.log($scope.slot);
+      console.log($scope.rack);
+      console.log($scope.slot.Id);
       if (validar(rack)) {
         rack.SlotId = $scope.slot.Id;
+        console.log(rack);
         rackService.criar(rack)
                     .then(
                       function (response) {
@@ -61,7 +65,7 @@ angular.module('app')
     }
     
     $scope.close = function () {
-      $mdSidenav('andar').close()
+      $mdSidenav('rack').close()
         .then(function () {
         });
     };

@@ -6,10 +6,9 @@
         <span class="texto-andar campos-obrigatorios">(Todos os campos são obrigatórios)</span>
         <hr>
         <div class="flex-column column-center">
-            <!-- <h5 class="texto-andar">Edificação: {{edificacao.Nome}}</h5>
-            <h5 class="texto-andar">Andar: {{andar[0].NumeroAndar}}</h5>
-            <h5 class="texto-andar">Andar: {{andar[0].NumeroAndar}}</h5>             -->
-            <img  ng-src="image/buildings.svg" heigh="115px" width="115px">
+            <h5 class="texto-andar">Edificação: {{edificacao.Nome}}</h5>       
+            <h5 class="texto-andar">Sala: {{sala.NumeroSala}}</h5>
+            <img  ng-src="image/server.svg" heigh="115px" width="115px">
         </div>
         <hr class="text-header-title">
         <div class="form-group">
@@ -46,10 +45,10 @@
         </div>
         <div class="form-group">
             <div class="flex-row">
-                <md-button class="botao-cancelar-andar" type="submit" class="md-primary">
+                <md-button class="botao-cancelar-andar botao-sucesso" type="submit" class="md-primary">
                     Cadastrar
                 </md-button>
-                <md-button class="botao-cancelar-andar" type="button" ng-click="close()" class="md-primary">
+                <md-button class="botao-cancelar-andar botao-cancelar" type="button" ng-click="close()" class="md-primary">
                     Cancelar cadastro
                 </md-button>
             </div>
