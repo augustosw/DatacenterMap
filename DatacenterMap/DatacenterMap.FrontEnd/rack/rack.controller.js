@@ -20,7 +20,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
 
     var tamanhoAtual = 0;
 
-    // setup(); 
+    setup(); 
     function setup() {
         rackService.buscarPorId($routeParams.id)
                     .then(function(response) {
@@ -36,16 +36,16 @@ angular.module('app').controller('RackController', function ($scope, rackService
 
     function aumentarTamanho(gaveta, ativo) {
         console.log(gaveta);
-        if(gaveta.ocupado){
+        if(gaveta.Ocupado){
             editar(gaveta);
             return;
         }
         $scope.isAlterar = false;
         solicitarCadastro = true;
         if(ativo)
-            $scope.tamanho.push(gaveta.id);
+            $scope.tamanho.push(gaveta.Id);
         else {
-            var indice = $scope.tamanho.indexOf(gaveta.id);
+            var indice = $scope.tamanho.indexOf(gaveta.Id);
             if (indice > -1) {
             $scope.tamanho.splice(indice, 1);
             }
@@ -53,16 +53,14 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
     function criarEquipamento(equipamento){
-        if ($scope.cadastroEquipamentoForm.$valid) {      
-            equipamento.gavetasId = [];
-            equipamento.tamanho = $scope.tamanho.length; 
-            $scope.tamanho.forEach(x => equipamento.gavetasId.push(x));
+        console.log(equipamento);
+        if (true) {      
+            equipamento.GavetasId = [];
+            equipamento.Tamanho = $scope.tamanho.length; 
+            $scope.tamanho.forEach(x => equipamento.GavetasId.push(x));
             console.log(equipamento);
-            // Chamar método para criar equipamento 
-            // equipamentoService.criar() 
-    
-            // Chamar método para atualizar gavetas que foram ocupadas 
-            // rackService.atualizarGavetas(equipamento.id, gavetasId) 
+            equipamentoService.criar(equipamento)
+                                .then(response => console.log(response.data)) 
           }
           else {
              $scope.enviar = true;    
@@ -82,9 +80,9 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
     function verificarTamanho(gaveta) {
-        if(gaveta.equipamento !== undefined){
+        if(gaveta.Equipamento){
             if(tamanhoAtual === 0){
-                    tamanhoAtual = gaveta.equipamento.tamanho;
+                    tamanhoAtual = gaveta.Equipamento.Tamanho;
                     $scope.tamanhoGaveta = {
                         height:`${tamanhoAtual*53 -1}px`,
                         // background: "rgba(173, 170, 166, 0.5)"
@@ -102,8 +100,10 @@ angular.module('app').controller('RackController', function ($scope, rackService
 
 
     function buscarAndares(equipamentoEdicao) {
-        let edificacaoAtualId = edificacaoService.buscarIdDeEdificacaoAtual();
-        andarService.buscarPorIdComRackDisponiveis(edificacaoAtualId, equipamentoEdicao.Tamanho)
+        // edificacaoService.buscarIdDeEdificacaoAtual()
+                            
+                            // })
+        andarService.buscarPorIdComRackDisponiveis(1, equipamentoEdicao.Tamanho)
                         .then(function(response) { 
                             $scope.andares = response.data.Andares; 
                         })
@@ -138,75 +138,6 @@ angular.module('app').controller('RackController', function ($scope, rackService
                                 location.reload();
                             })
     }
-
-    //dados mokados para teste das funcionalidades
-
-    $scope.gavetas = [
-        {
-            id:1, 
-            ocupado: false
-        },
-        {
-            id:2,
-            ocupado:true,
-            equipamento: {
-                id:1,
-                tamanho:3
-            }
-        },
-        {
-            id:3,
-            ocupado:true,
-            equipamento: {
-                id:1,
-                tamanho:3
-            }
-        },
-        {
-            id:4,
-            ocupado:true,
-            equipamento: {
-                id:1,
-                tamanho:3
-            }
-        },
-        {
-            id:5,
-            ocupado:true,
-            equipamento: {
-                id:2,
-                tamanho:2
-            }
-        },
-        {
-            id:6,
-            ocupado:true,
-            equipamento: {
-                id:2,
-                tamanho:2
-            }
-        },
-        {
-            id:7,
-            ocupado:false
-        },
-        {
-            id:8,
-            ocupado:false
-        },
-        {
-            id:9,
-            ocupado:false
-        },
-        {
-            id:10,
-            ocupado:false
-        },
-        {
-            id:11,
-            ocupado:false
-        }
-    ];  
     
 });
     

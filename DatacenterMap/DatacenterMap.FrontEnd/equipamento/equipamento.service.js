@@ -1,6 +1,7 @@
 // Service de equipamentos
 angular.module('app').factory('equipamentoService', function ($http, $location) {
-	let url = $location.absUrl() + "/equipamento";
+
+	let url = "http://localhost:51641/api/equipamento";
 
     function criar(equipamento){
         return $http.post(url, equipamento);

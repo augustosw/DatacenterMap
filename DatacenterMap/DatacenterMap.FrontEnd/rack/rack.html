@@ -1,17 +1,17 @@
 <div class="container">
-    <h3 class="text-center">Selecione slots livres para adicionar Equipamentos</h3>
+    <h3 class="text-center edificacao-selecionada">Selecione slots livres para adicionar Equipamentos</h3>
     <hr>
     <div class="flex-row row-center">
         <div class="flex-row center-center">
             <div class="rack">
-                <div class="flex-row center-center rack__slot"  ng-class="{'rack__slot--selected': ativo}" ng-repeat="gaveta in gavetas" ng-style="tamanhoGaveta">
+                <div class="flex-row center-center rack__slot"  ng-class="{'rack__slot--selected': ativo}" ng-repeat="gaveta in rack.Gavetas" ng-style="tamanhoGaveta">
                     {{verificarTamanho(gaveta)}}
                     
-                    <input id="{{gaveta.id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.id) || (gaveta.ocupado && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.ocupado">
+                    <input id="{{gaveta.Id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.Id) || (gaveta.Ocupado && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.Ocupado">
 
-                    <label for="{{gaveta.id}}" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.id)}">
+                    <label for="{{gaveta.Id}}" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.Id)}">
 
-                    <div ng-if="gaveta.ocupado" class="rack__slot__hardware" ng-style="tamanhoGaveta"></div>   
+                    <div ng-if="gaveta.Ocupado" class="rack__slot__hardware" ng-style="tamanhoGaveta"></div>   
 
                     </label>
                     <!-- <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)"><p>x</p></button> -->
@@ -19,12 +19,12 @@
             </div>
         </div>
         <div ng-if="tamanho.length > 0 && !isAlterar" class="flex-column cadastro-container">
-                <form id="cadastro-form" novalidate name="cadastroEquipamentoForm" ng-submit="criar(edificacao)">
-                    <h4 class="text-center">Cadastro de Equipamento!</h4>
+                <form id="cadastro-equipamento" novalidate name="cadastroEquipamentoForm" ng-submit="criarEquipamento(equipamento)">
+                    <h4 class="text-center">Cadastro de Equipamento</h4>
                     <span class="campos-obrigatorios">(Todos os campos são obrigatórios)</span>
                     <div class="form-group">
                         <label for="descricao" class="campo-cadastro">Descrição</label>
-                        <input  name="descricao" id="descricao" ng-model="equipamento.descricao"  class="form-control" ng-class="{'enviar': enviar}" placeholder="Ex: teste" required ng-minlength="2" ng-maxlength="64">
+                        <input  name="descricao" id="descricao" ng-model="equipamento.Descricao"  class="form-control" ng-class="{'enviar': enviar}" placeholder="Ex: teste" required ng-minlength="2" ng-maxlength="64">
 
                         <span class="campo-invalido" ng-show="cadastroEquipamentoForm.descricao.$invalid && cadastroEquipamentoForm.$submitted">Descrição é obrigatória</span>
                         
@@ -33,9 +33,9 @@
                         <span class="campo-invalido"  ng-show="cadastroEquipamentoForm.descricao.$touched && cadastroEquipamentoForm.descricao.$error.maxlength">Número de caracteres muito alto</span>   
                     </div>
                     <div class="form-group row">
-                        <div class="col-xs-4 col-md-4">
+                        <div class="col-xs-5 col-md-5">
                             <label for="tensao" class="campo-cadastro">Tensão</label>
-                            <input type="number" name="tensao" id="tensao" placeholder="Ex: 220" class="form-control" ng-class="{'enviar': enviar}" min="1" ng-model="equipamento.tensao" required>
+                            <input type="number" name="tensao" id="tensao" placeholder="Ex: 220" class="form-control" ng-class="{'enviar': enviar}" min="1" ng-model="equipamento.Tensao" required>
 
                             <div class="campo-invalido" ng-show="cadastroEquipamentoForm.tensao.$invalid && cadastroEquipamentoForm.$submitted">Por favor, insira uma tensão válida</div>
                         </div>
@@ -44,11 +44,9 @@
                             <input type="number" class="form-control" min="1" ng-model="tamanho.length" readonly>
                         </div>
                     </div>
-                    <!-- <div class="form-group"> -->
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-success" ng-disabled="tamanho.length === 0" ng-click="criarEquipamento(equipamento)"><h5>Cadastrar</h5></button>
-                        </div>
-                    <!-- </div> -->
+                    <md-button class="botao-cancelar-andar botao-sucesso" ng-disabled="tamanho.length === 0" type="submit">
+                            Cadastrar
+                    </md-button>
                 </form>
         </div>
         <div ng-if="isAlterar" class="flex-column col-md-4 col-sm-6 cadastro-container">

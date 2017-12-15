@@ -57,6 +57,19 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
+
+        .when('/rack/:id?', {
+            controller: 'RackController',
+            templateUrl: 'rack/rack.html',
+            //TODO : Implementar autenticação
+            // resolve: {
+            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+            //     autenticado: function (authService) {
+            //         return authService.isAutenticadoPromise();
+            //     }
+            // }
+        })
+
         .when('/equipamento', {
             controller: 'EquipamentoController',
             templateUrl: 'equipamento/equipamento.html',
@@ -68,6 +81,19 @@ angular.module('app').config(function ($routeProvider) {
             //     }
             // }
         })
+
+        .when('/equipamento/:id?', {
+            controller: 'EquipamentoController',
+            templateUrl: 'equipamento/equipamento.html',
+            //TODO : Implementar autenticação
+            // resolve: {
+            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+            //     autenticado: function (authService) {
+            //         return authService.isAutenticadoPromise();
+            //     }
+            // }
+        })
+
 
         .otherwise('/login');
 });

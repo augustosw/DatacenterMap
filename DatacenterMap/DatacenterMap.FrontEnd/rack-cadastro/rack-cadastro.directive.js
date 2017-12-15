@@ -65,7 +65,7 @@ angular.module('app')
     }
     
     $scope.close = function () {
-      $mdSidenav('andar').close()
+      $mdSidenav('rack').close()
         .then(function () {
         });
     };

@@ -116,7 +116,10 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				});
 			}
 			else {
-				//TO:DO -> Acessar pagina de detalhe do rack
+				console.log(slot);
+				//TO:DO -- chamar método da service que busca Rack por Id_Slot
+				// rackService.buscarPorSlotId()
+				// $location.path(`/rack/${slot.Id}`);
 			}
 		}
 
