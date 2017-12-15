@@ -19,6 +19,7 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     function buscarEdificacaoPorId(id) {
         edificacaoService.buscarPorId(id)
             .then(function (response) {
+                console.log(response)
                 $scope.edificacaoSelecionada = response.data;
                 // variavel que vai manter o numero de andares cadastrados de uma edificação
                 $scope.andaresCadastrados = $scope.edificacaoSelecionada.Andares;
@@ -72,6 +73,8 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         andarService.obterPorId(id)
             .then(
             function (response) {
+                console.log(response);
+                $scope.salasTotais = response.data.Salas;
                 var salas = response.data.Salas;
                 angular.forEach(salas, function (sala, key) {
                     dataTemp[sala.NumeroSala] = sala;
@@ -99,7 +102,6 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         $scope.detalhe = true;
         $scope.andaresTela.push(andar);
         $scope.andarSelecionado = $scope.andaresCadastrados.filter(function (valor) { return valor.NumeroAndar == andar });
-        console.log($scope.andarSelecionado);
     }
 
     function voltar() {
@@ -110,14 +112,17 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     }
 
     function excluir(edificacao) {
-        edificacaoService.excluir(edificacao) //chama o método de delete da service
-            .then(
-            function (response) {
-                console.log(response);
-            },
-            function (response) {
-                console.log(response);
-            });
+        if(prompt("Você tem certeza que deseja excluir essa edificação? Todos as estruturas relacionadas a ele serão excluidas!)")){
+            edificacaoService.excluir(edificacao.Id) //chama o método de delete da service
+                .then(
+                function (response) {
+                    console.log(response);
+                    $location.path('\edificacao');
+                },
+                function (response) {
+                    console.log(response);
+                });
+        }
     }
 
 
