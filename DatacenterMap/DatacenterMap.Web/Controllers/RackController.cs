@@ -123,10 +123,10 @@ namespace DatacenterMap.Web.Controllers
 
             List<Rack> racks = contexto.Racks
                           .AsNoTracking()
-                          .Where(x => slotsId.Contains(x.Slot.Id) && ControllerUtils.RackIsDisponivel(contexto, x.Id, tamanho))
+                          .Where(x => slotsId.Contains(x.Slot.Id))
                           .ToList();
 
-            return Ok(racks);
+            return Ok(racks.Where(x => ControllerUtils.RackIsDisponivel(contexto, x.Id, tamanho)));
         }
 
         [HttpDelete]
