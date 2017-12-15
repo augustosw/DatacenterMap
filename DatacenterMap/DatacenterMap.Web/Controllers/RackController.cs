@@ -98,12 +98,13 @@ namespace DatacenterMap.Web.Controllers
             return Ok(rack);
         }
 
+        [HttpGet]
         [Route("{slotId}/slot")]
         public HttpResponseMessage GetRackBySlot([FromUri] int slotId)
         {
             if (contexto.Racks.Where(x => x.Slot.Id == slotId).Count() == 0) return BadRequest("Rack não encontrado.");
 
-            Rack rack = contexto.Racks.AsNoTracking().FirstOrDefault(x => x.Id == x.Slot.Id);
+            Rack rack = contexto.Racks.AsNoTracking().FirstOrDefault(x => x.Slot.Id == slotId);
             rack.Gavetas = contexto.Gavetas.AsNoTracking().Include(x => x.Rack).Where(x => x.Rack.Id == rack.Id).Include(x => x.Equipamento).ToList();
 
             return Ok(rack);

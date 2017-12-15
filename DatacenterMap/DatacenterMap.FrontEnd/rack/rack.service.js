@@ -15,7 +15,7 @@ angular.module('app').factory('rackService', function ($http, $location) {
     }
 
     function buscarRackPorIdSlot(slot) {
-        return $http.get(url + slot.Id + '/slot')
+        return $http.get(url + '/' + slot.Id + '/slot')
     }
 
     function moverEquipamento(idRack, idEquipamento) {
