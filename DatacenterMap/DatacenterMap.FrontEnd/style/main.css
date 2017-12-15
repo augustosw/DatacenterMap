@@ -118,10 +118,6 @@ a {
     box-shadow: 0px; 
 }
 
-.sidenav-toggler {
-    margin-top:10px;
-}
-
 md-sidenav,  
 md-sidenav.md-locked-open, 
 md-sidenav.md-closed.md-locked-open-add-active{
@@ -223,8 +219,8 @@ sala-planta {
 }
 
 .botoes-tela-edificacao-container {
+    top: 80px + 2em;
     right: 30px;
-    top: 80px;
     color: #fff;
     position: absolute;
     text-align: center;
@@ -245,7 +241,7 @@ sala-planta {
     color: #fff;
     border: 0;
     position: relative;
-    right: 40px;
+    right: 30px;
     text-align: center;
 }
 .botao-voltar-container{
@@ -345,6 +341,16 @@ sala-planta {
     border-top: 1px solid #7e8596a3
 }
 
+/* .cadastro-login-section {
+    background: linear-gradient(to right,#42464F,#7e8596a3,#42464F); 
+} */
+
+.form-login {
+    background: #7e8596a3;
+    border-radius: 5px;
+    border-color: #42464F;
+    padding: 10px;
+}
 
 .cadastro-numero-andares {    
     height: 180px;
@@ -436,7 +442,7 @@ sala-planta {
 .cadastro-container {
     max-width: 400px;
     margin-left: 10px;
-    justify-content: flex-start;
+    max-height: 300px; 
 }
 
 @keyframes dialogo {
@@ -650,7 +656,6 @@ md-content,
 
 #cadastro-andar input,
 #cadastro-sala input,
-#cadastro-rack input,
 #nome,
 #autocomplete, 
 md-input-container:not(.md-input-invalid).md-input-focused .md-input, 
@@ -678,7 +683,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
  
  #cadastro-andar input,
  #cadastro-sala input,
- #cadastro-rack input,
+
  md-input-container label,
  md-input-container:not(.md-input-invalid).md-input-focused .md-input, 
  md-input-container:not(.md-input-invalid).md-input-focused label,
@@ -689,8 +694,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     
 .botao-cancelar,
 #cadastro-andar .botao-cancelar,
-#cadastro-sala .botao-cancelar,
-#cadastro-rack .botao-cancelar, 
+#cadastro-sala .botao-cancelar, 
 #cadastro-edificacao .botao-cancelar{
     border: 0; 
     border: 1px solid #fa7777;
@@ -700,9 +704,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 
 .botao-sucesso,
 #cadastro-andar .botao-sucesso,
-#cadastro-sala .botao-sucesso,
-#cadastro-rack .botao-sucesso, 
-#cadastro-equipamento .botao-sucesso,
+#cadastro-sala .botao-sucesso, 
 #cadastro-edificacao .botao-sucesso { 
     border: 0; 
     border: 1px solid #90f883ba;
@@ -768,6 +770,48 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     }
 }
 
+.border-image {
+    fill: #bdbdbd;
+    transition: .5s;
+}
+
+.map__ground {
+	fill: #d7d7dc;
+}
+
+.map__outline {
+	-webkit-transition: fill 0.3s;
+	transition: fill 0.3s;
+	fill: #bbb;
+}
+
+.level:hover .map__outline,
+.level--current .map__outline {
+	fill: #a6a3a8;
+}
+
+.map__tree {
+	fill: #7bad7f;
+}
+
+.map__lake {
+	fill: #a2bbdd;
+}
+
+.map__space {
+	-webkit-transition: fill-opacity 0.8s;
+	transition: fill-opacity 0.8s;
+	fill: #bdbdbd;
+	fill-opacity: 0.6;
+}
+
+.level--current .map__space {
+	fill-opacity: 1;
+}
+
+ .map__space--selected {
+ 	fill: #A4A4A4;
+}
 
  .andar:hover .border-image {
     fill: #909090;
@@ -951,7 +995,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     content: '';
     opacity: 0;
     background: linear-gradient(to top, rgba(0, 255, 131, 0.4), rgba(0, 255, 131, 0.4)),
-                url('/image/equipamento.svg');
+                url(https://openclipart.org/download/216936/2U-Server.svg);
     width: 300px;
     height: 53px;
     background-size: 100%;
@@ -991,22 +1035,3 @@ rack__slot:after {
     transform: scale(1.03); 
     z-index: 2; 
 }
-
-[data-tooltip] {
-    position: relative;
-    font-size: 30px;
-  }
-  
-  [data-tooltip]:hover:after {
-    position:absolute; 
-    font-size: 15px; 
-    padding: 2px;
-    background: gray;
-    color: white; 
-    content: attr(data-tooltip);
-    top: -60%;
-    left: 50%;
-    border-radius: 2px;
-    white-space: nowrap;
-    transform: translateX(-50%);
-  }

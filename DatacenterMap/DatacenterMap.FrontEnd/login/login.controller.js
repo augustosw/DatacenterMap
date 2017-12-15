@@ -6,12 +6,9 @@ angular.module('app').controller('LoginController', function ($scope, authServic
       .then(
         function (response) {
           console.log(response);
-          alert('Login com sucesso!');
-
         },
         function (response) {
           console.log(response);
-          alert('Erro no Login!');
         });
   };
 
