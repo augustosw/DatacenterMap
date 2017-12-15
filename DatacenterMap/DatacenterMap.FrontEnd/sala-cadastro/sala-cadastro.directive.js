@@ -22,7 +22,6 @@ angular.module('app')
                 salaService.criar(sala)
                             .then(
                                 function (response) {
-                                    debugger
                                     $scope.andar[0].Salas.push(response.data);
                                 },
                                 function(response){

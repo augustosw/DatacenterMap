@@ -16,6 +16,9 @@
 
 <body ng-app="app" style="font-family: 'Roboto', sans-serif;">
     <map-header></map-header>
+    <button botao-voltar type="button" class="botao-voltar-container-ativo" style="right:0px; position: absolute; margin-right: 3px;">
+        <img ng-src="/image/back-arrow.svg" height="30" width="30">
+    </button>
     <div class="container-wrapper">
         <!-- Rotas -->      
         <ng-view></ng-view>
@@ -78,6 +81,7 @@
 <script src="edificacao-cadastro/edificacao-cadastro.directive.js" type="text/javascript"></script>
 <script src="andar-cadastro/andar-cadastro.directive.js" type="text/javascript"></script>
 <script src="sala/slot.directive.js" type="text/javascript"></script>
+<script src="sidebar/botao-voltar.directive.js" type="text/javascript"></script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5PywnaKNbuVrdxCD1cCbaCrHzqsMoc2g&libraries=places&callback=initMap"></script> -->
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5PywnaKNbuVrdxCD1cCbaCrHzqsMoc2g&libraries=places&callback=initAutocomplete" -->

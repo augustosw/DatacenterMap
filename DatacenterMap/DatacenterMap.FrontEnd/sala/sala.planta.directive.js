@@ -1,12 +1,19 @@
-angular.module('app').directive('salaPlanta', ['$compile', function ($compile) {
+angular.module('app').directive('salaPlanta', ['$compile', function ($compile, $location, rackService) {
     return {
-        restrict: 'A',
+        restrict: 'E',
         templateUrl: 'image/sala.svg',
         link: function (scope, element, attrs) {
             
             var altura = 0;
             var abcissa = 1;
-            
+
+            scope.limparSlot = function (id) {
+                rackService.excluir(id)
+                    .then(function(response){
+                        location.reload();
+                    });
+            };
+
             scope.buscarAbcissa = function buscarAbcissa() {
                     return abcissa;
             }
