@@ -190,6 +190,10 @@ sala-planta {
     fill: #909090;
 }
 
+.sala:hover {
+    fill: #909090;
+}
+
 .imagem-carousel {
     margin-bottom:5px;
     filter: opacity(50%);
