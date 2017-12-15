@@ -219,8 +219,8 @@ sala-planta {
 }
 
 .botoes-tela-edificacao-container {
-    top: 80px + 2em;
     right: 30px;
+    top: 80px;
     color: #fff;
     position: absolute;
     text-align: center;
@@ -241,7 +241,7 @@ sala-planta {
     color: #fff;
     border: 0;
     position: relative;
-    right: 30px;
+    right: 40px;
     text-align: center;
 }
 .botao-voltar-container{
@@ -646,6 +646,7 @@ md-content,
 
 #cadastro-andar input,
 #cadastro-sala input,
+#cadastro-rack input,
 #nome,
 #autocomplete, 
 md-input-container:not(.md-input-invalid).md-input-focused .md-input, 
@@ -673,7 +674,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
  
  #cadastro-andar input,
  #cadastro-sala input,
-
+ #cadastro-rack input,
  md-input-container label,
  md-input-container:not(.md-input-invalid).md-input-focused .md-input, 
  md-input-container:not(.md-input-invalid).md-input-focused label,
@@ -684,7 +685,8 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     
 .botao-cancelar,
 #cadastro-andar .botao-cancelar,
-#cadastro-sala .botao-cancelar, 
+#cadastro-sala .botao-cancelar,
+#cadastro-rack .botao-cancelar, 
 #cadastro-edificacao .botao-cancelar{
     border: 0; 
     border: 1px solid #fa7777;
@@ -694,7 +696,8 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 
 .botao-sucesso,
 #cadastro-andar .botao-sucesso,
-#cadastro-sala .botao-sucesso, 
+#cadastro-sala .botao-sucesso,
+#cadastro-rack .botao-sucesso, 
 #cadastro-edificacao .botao-sucesso { 
     border: 0; 
     border: 1px solid #90f883ba;
@@ -760,48 +763,6 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     }
 }
 
-.border-image {
-    fill: #bdbdbd;
-    transition: .5s;
-}
-
-.map__ground {
-	fill: #d7d7dc;
-}
-
-.map__outline {
-	-webkit-transition: fill 0.3s;
-	transition: fill 0.3s;
-	fill: #bbb;
-}
-
-.level:hover .map__outline,
-.level--current .map__outline {
-	fill: #a6a3a8;
-}
-
-.map__tree {
-	fill: #7bad7f;
-}
-
-.map__lake {
-	fill: #a2bbdd;
-}
-
-.map__space {
-	-webkit-transition: fill-opacity 0.8s;
-	transition: fill-opacity 0.8s;
-	fill: #bdbdbd;
-	fill-opacity: 0.6;
-}
-
-.level--current .map__space {
-	fill-opacity: 1;
-}
-
- .map__space--selected {
- 	fill: #A4A4A4;
-}
 
  .andar:hover .border-image {
     fill: #909090;
@@ -985,7 +946,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     content: '';
     opacity: 0;
     background: linear-gradient(to top, rgba(0, 255, 131, 0.4), rgba(0, 255, 131, 0.4)),
-                url(https://openclipart.org/download/216936/2U-Server.svg);
+                url('/image/equipamento.svg');
     width: 300px;
     height: 53px;
     background-size: 100%;

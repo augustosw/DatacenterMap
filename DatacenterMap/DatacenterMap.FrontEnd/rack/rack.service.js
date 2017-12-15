@@ -1,6 +1,6 @@
 // Service de racks
 angular.module('app').factory('rackService', function ($http, $location) {
-	let url = $location.absUrl() + "/rack";
+	let url = "http://localhost:51641/api/rack";
 
     function criar(rack){
         return $http.post(url, rack);
