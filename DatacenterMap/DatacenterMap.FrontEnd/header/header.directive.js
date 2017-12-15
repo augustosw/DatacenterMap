@@ -13,6 +13,8 @@ angular.module('app')
 
         atualizarUsuario();
 
+        $scope.usuario = authService.getUsuario();
+
         $scope.logout = authService.logout;
 
         $rootScope.$on('authLoginSuccess', function () {

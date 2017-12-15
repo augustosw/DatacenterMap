@@ -1,37 +1,43 @@
 <section class="section cadastro-login-section">
-
-  <form novalidate name="formLogin" ng-submit="login(usuario)">
-  <div class="columns is-mobile is-centered">
-    <div class="column login-form is-narrow is-one-third">
-      <h1 class="title">Rhapsody</h1>
-      <p class="subtitle">O lugar para aqueles que respiram música!</p>
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control has-icons-left has-icons-right">
-          <input class="input" ng-model="usuario.username" type="email" placeholder="user@email.com">
-          <span class="icon is-small is-left">
-            <i class="fa fa-envelope"></i>
-          </span>
-        </div>
+      <div class="logo-empresa flex-row row-center"> 
+        <h1 class="home-titulo">Data Center Map</h1>
       </div>
+      <hr style="border-top:1px solid #fbb041">
+      <div class="flex-row row-center">
 
-      <div class="field">
-        <label class="label">Senha</label>
-        <div class="control has-icons-left has-icons-right">
-          <input ng-model="usuario.password" class="input" type="password">
-          <span class="icon is-small is-left">
-            <i class="fa fa-key"></i>
-          </span>
+  <form class="form-login" novalidate name="formLogin" ng-submit="login(usuario)">
+    <div class="columns is-mobile is-centered">
+      <div class="column login-form is-narrow is-one-third">
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" ng-model="usuario.username" type="email" placeholder="usuario@email.com">
+            <span class="icon is-small is-left">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div class="field is-grouped botoes">
-        <div class="control">
-          <input type="submit" class="button is-link" value="Login"/>
+        <div class="field">
+          <label class="label">Senha</label>
+          <div class="control has-icons-left has-icons-right">
+            <input ng-model="usuario.password" class="input" type="password">
+            <span class="icon is-small is-left">
+              <i class="fa fa-key"></i>
+            </span>
+          </div>
         </div>
+
+        <div class="field is-grouped botoes">
+          <div class="control">
+            <input type="submit" class="btn" value="Login"/>
+            <input type="button" class="btn" value="Cadastro"/>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
   </form>
+</div>
 
 </section>

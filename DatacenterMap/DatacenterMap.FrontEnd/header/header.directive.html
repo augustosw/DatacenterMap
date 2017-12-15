@@ -3,12 +3,14 @@
   <div ng-if="true"> 
     <div class="flex-row column-center">
       <span uib-dropdown on-toggle="toggled(open)">
+        <span>Olá, {{ usuario.Nome }}</span>
         <a href id="simple-dropdown" uib-dropdown-toggle>
           <img class="user-image" src="/image/user-logo.svg" heigh="30" width="30">
         </a>
         <ul id="dropdown-header"class="dropdown-menu flex-row center-center" uib-dropdown-menu aria-labelledby="simple-dropdown">
           <div class="arrow-up"></div>
           <a id="button-login" ng-click="logout()">Logout</button></a>
+          <img src="image/exit.svg" height="16" width="16"/>
         </ul>
       </span>
     </div>
