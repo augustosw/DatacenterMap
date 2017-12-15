@@ -22,7 +22,7 @@ namespace DatacenterMap.Web
             List<Slot> slots = contexto.Slots
                           .AsNoTracking()
                           .Include(x => x.Sala)
-                          .Where(x => x.Sala.Id == salaId)
+                          .Where(x => x.Sala.Id == salaId && x.Ocupado)
                           .ToList();
 
             List<int> slotsId = new List<int>();
@@ -30,7 +30,7 @@ namespace DatacenterMap.Web
 
             List<Rack> racks = contexto.Racks.Include(x => x.Slot)
                           .AsNoTracking()
-                          .Where(x => slotsId.Contains(x.Id))
+                          .Where(x => slotsId.Contains(x.Slot.Id))
                           .ToList();
 
             return racks.Any(x => RackIsDisponivel(contexto, x.Id, tamanhoEquipamento));

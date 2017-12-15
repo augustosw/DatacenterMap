@@ -1,4 +1,4 @@
-angular.module('app').controller('RackController', function ($scope, rackService, equipamentoService, $routeParams, edificacaoService,
+angular.module('app').controller('RackController', function ($scope, rackService, salaService, equipamentoService, $routeParams, edificacaoService,
                                 andarService) {
     
  
@@ -100,33 +100,37 @@ angular.module('app').controller('RackController', function ($scope, rackService
 
 
     function buscarAndares(equipamentoEdicao) {
-        // edificacaoService.buscarIdDeEdificacaoAtual()
-                            
-                            // })
         andarService.buscarPorIdComRackDisponiveis(1, equipamentoEdicao.Tamanho)
                         .then(function(response) { 
-                            $scope.andares = response.data.Andares; 
+                            $scope.andares = response.data;
+                            console.log(response.data); 
                         })
     }
 
     function buscarSalas(equipamentoEdicao, andar) {
-        salaService.buscarPorIdComRackDisponiveis(andar.Id, equipamentoEdicao.Tamanho)
+        console.log('teste');
+        salaService.buscarPorIdComRackDisponiveis(andar, equipamentoEdicao.Tamanho)
                     .then(function(response) {
-                        $scope.salas = response.data.Salas;
+                        console.log(response);
+                        $scope.salas = response.data;
                     }) 
     }
 
     function buscarRacks(equipamentoEdicao, sala) {
-        equipamentoService.buscarPorIdComRackDisponiveis(sala.Id, equipamentoEdicao.Tamanho)
+        console.log(equipamentoEdicao.Tamanho);
+        console.log(sala);
+        rackService.buscarPorIdComRackDisponiveis(sala, equipamentoEdicao.Tamanho)
                     .then(function (response) {
-                        $scope.racks = response.data.Racks;
+                        $scope.racks = response.data;
                     })
     }
 
     function moverEquipamento(equipamentoMover) {
-        equipamentoService.moverEquipamento(equipamentoMover.RackMover.Id, equipamentoMover.Id)
+        console.log(equipamentoMover);
+        equipamentoService.moverEquipamento(equipamentoMover.RackMover, equipamentoMover.Id)
                             .then(function (response) {
-                                $scope.racks = reponse.data.Racks; 
+                                $scope.racks = response.data.Racks; 
+                                location.reload();
                             })
     }
 

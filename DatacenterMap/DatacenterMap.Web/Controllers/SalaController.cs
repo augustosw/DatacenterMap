@@ -119,11 +119,10 @@ namespace DatacenterMap.Web.Controllers
         {
             List<Sala> salas = contexto.Salas
                           .AsNoTracking()
-                          .Where(x => x.Andar.Id == andarId
-                                 && ControllerUtils.SalaHasRackDisponivel(contexto, x.Id, tamanho))
+                          .Where(x => x.Andar.Id == andarId)
                           .ToList();
 
-            return Ok(salas);
+            return Ok(salas.Where(x => ControllerUtils.SalaHasRackDisponivel(contexto, x.Id, tamanho)));
             
         }
 
