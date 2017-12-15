@@ -1,4 +1,4 @@
-angular.module('app').directive('salaPlanta', ['$compile', function ($compile) {
+angular.module('app').directive('salaPlanta', ['$compile', function ($compile, $location, rackService) {
     return {
         restrict: 'A',
         templateUrl: 'image/sala.svg',
@@ -6,7 +6,14 @@ angular.module('app').directive('salaPlanta', ['$compile', function ($compile) {
             
             var altura = 0;
             var abcissa = 1;
-            
+
+            scope.limparSlot = function (id) {
+                rackService.excluir(id)
+                    .then(function(response){
+                        location.reload();
+                    });
+            };
+
             scope.buscarAbcissa = function buscarAbcissa() {
                     return abcissa;
             }

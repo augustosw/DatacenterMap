@@ -134,7 +134,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
     function deletarEquipamento(equipamento){
         console.log(equipamento.Id);
         equipamentoService.excluir(equipamento.Id)
-                            .then( function (response ) {
+                            .then(function (response) {
                                 location.reload();
                             })
     }

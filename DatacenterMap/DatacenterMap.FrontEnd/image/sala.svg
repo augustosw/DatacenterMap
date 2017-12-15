@@ -10,7 +10,11 @@
 <path id="borda" fill-rule="evenodd" d="M 16 16L 16 784L 1184 784L 1184 16L 16 16ZM 0 800L 1200 800L 1200 0L 0 0L 0 800Z" fill="#828282"/>
 </g>
 <g id="slot">
-<rect slot-sala buscar-altura="buscarAltura" buscar-abcissa="buscarAbcissa" ng-hide="salaSelecionada.length==0" ng-repeat="slot in slots" id="{{ slot.Id }}" class="slot" ng-click="verificarSlot(slot)" fill="#F2F2F2" stroke="#4F4F4F" stroke-width="10"/>
+<rect slot-sala buscar-altura="buscarAltura" buscar-abcissa="buscarAbcissa" ng-hide="salaSelecionada.length==0" ng-repeat="slot in slots" id="{{ slot.Id }}" class="slot" ng-click="verificarSlot(slot)" fill="#F2F2F2" stroke="#4F4F4F" stroke-width="10">
+	<svg viewBox="0 0 10 10" ng-click="limparSlot(slot.Id)" ng-if="slot.Ocupado">
+		<use: xlink="delete.svg#lixeira">
+	</svg>
+</rect>
 </g>
 </g>
 </g>

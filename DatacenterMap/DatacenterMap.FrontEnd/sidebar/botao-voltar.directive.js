@@ -1,5 +1,5 @@
 angular.module('app')
-	.directive('botaoVoltar', function ($localStorage) {
+	.directive('botaoVoltar', function () {
 
 		return {
 
