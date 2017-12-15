@@ -1,6 +1,6 @@
 angular.module('app').directive('salaPlanta', ['$compile', function ($compile, $location, rackService) {
     return {
-        restrict: 'A',
+        restrict: 'E',
         templateUrl: 'image/sala.svg',
         link: function (scope, element, attrs) {
             
