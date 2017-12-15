@@ -23,6 +23,7 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 			salaService.buscarPorId(id)
 				.then(function (response) {
 					$scope.sala = response.data;
+					console.log('test');
 					console.log(response.data);
 					$scope.salaSelecionada = response.data;
 					$scope.slotsPadroes = [];
@@ -117,9 +118,8 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 			}
 			else {
 				console.log(slot);
-				//TO:DO -- chamar método da service que busca Rack por Id_Slot
-				// rackService.buscarPorSlotId()
-				// $location.path(`/rack/${slot.Id}`);
+				rackService.buscarRackPorIdSlot(slot)
+							.then(response => $location.path(`/rack/${response.data.Id}`));
 			}
 		}
 
