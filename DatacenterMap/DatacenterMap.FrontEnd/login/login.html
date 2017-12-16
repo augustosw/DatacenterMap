@@ -1,18 +1,17 @@
-<section class="section cadastro-login-section">
-      <div class="logo-empresa flex-row row-center"> 
-        <h1 class="home-titulo">Data Center Map</h1>
-      </div>
-      <hr style="border-top:1px solid #fbb041">
-      <div class="flex-row row-center">
 
-  <form class="form-login" novalidate name="formLogin" ng-submit="login(usuario)">
-    <div class="columns is-mobile is-centered">
-      <div class="column login-form is-narrow is-one-third">
+<section class="cadastro-login-section">
+
+  <div class="flex-row row-center">
+    <form class="form-login" novalidate name="formLogin" ng-submit="login(usuario)">
+      <div class="column login-form">
+        <h1>Datacenter Map</h1>
+        <p>Insira suas credenciais para continuar:</p>
+        <hr class="hr-login">
         <div class="field">
           <label class="label">Email</label>
-          <div class="control has-icons-left has-icons-right">
+          <div class="control has-icons-right">
             <input class="input" ng-model="usuario.username" type="email" placeholder="usuario@email.com">
-            <span class="icon is-small is-left">
+            <span class="icon is-small">
               <i class="fa fa-envelope"></i>
             </span>
           </div>
@@ -20,24 +19,23 @@
 
         <div class="field">
           <label class="label">Senha</label>
-          <div class="control has-icons-left has-icons-right">
+          <div class="control has-icons-right">
             <input ng-model="usuario.password" class="input" type="password">
-            <span class="icon is-small is-left">
+            <span class="icon is-small">
               <i class="fa fa-key"></i>
             </span>
           </div>
         </div>
 
-        <div class="field is-grouped botoes">
+        <div class="botoes-login">
           <div class="control">
-            <input type="submit" class="btn" value="Login"/>
-            <input type="button" class="btn" value="Cadastro"/>
+            <input type="submit" class="btn-primary" value="Login"/>
+            <input type="button" class="btn-primary" value="Cadastro"/>
           </div>
         </div>
 
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 
 </section>
