@@ -176,6 +176,8 @@ md-sidenav.md-closed.md-locked-open-add-active{
 }
 
 .sala-container {
+    background: url("/image/sala.svg");
+    background-size: 100% 100%;
     display: inline-block;
     position: absolute;
     width:50%;
@@ -183,6 +185,19 @@ md-sidenav.md-closed.md-locked-open-add-active{
     left: 50%;
     margin-right: -50%;
     transform: translateX(-50%);
+}
+
+.slot {
+    display: inline-block;
+    position: absolute;
+    outline: medium solid #4F4F4F;
+    outline-offset: -1px;
+    width: 8.33%;
+    height: 12.5%;
+}
+
+.slot:hover {
+    opacity: 0.7;
 }
 
 .sala-largura {
@@ -206,14 +221,6 @@ md-sidenav.md-closed.md-locked-open-add-active{
 }
 .sala-largura:after {
     margin-left:10px;
-}
-
-.slot:hover {
-    fill-opacity: 0.3;
-}
-
-.sala:hover {
-    fill: #909090;
 }
 
 .imagem-carousel {
