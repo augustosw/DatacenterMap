@@ -3,12 +3,12 @@ angular.module('app').directive('andarPlanta', ['$compile', function ($compile) 
         restrict: 'A',
         templateUrl: 'image/andar.svg',
         link: function (scope, element, attrs) {
-            
+
             var altura = 0;
             var abcissa = 0;
-            
+
             scope.buscarAbcissa = function buscarAbcissa() {
-                if(abcissa == 4){
+                if (abcissa == 4) {
                     altura = 800;
                     abcissa = 0;
                 }
@@ -20,7 +20,12 @@ angular.module('app').directive('andarPlanta', ['$compile', function ($compile) 
             scope.buscarAltura = function buscarAltura() {
                 return altura;
             }
-            
+
+            element.on('click', function () {
+                altura = 0;
+                abcissa = 0;
+            });
+
         }
     }
 }]);
