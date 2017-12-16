@@ -1,4 +1,17 @@
+<div class="flex-row row-center">
+    <h3 class="edificacao-selecionada">Sala: {{salaSelecionada.NumeroSala}}</h3>
+    <img class="imagem-delete" ng-click="excluir(salaSelecionada)" ng-src="/image/delete.svg" height="20" width="20">
+</div>
+
 <sala-planta></sala-planta>
+
+<div class="flex-column edificacao-detalhes-andar">
+    <div>
+        <h6>Slots totais: {{salaSelecionada.QuantidadeMaximaSlots}}</h6>
+        <h6>Slots cadastrados: {{slots.length}}</h6>
+    </div>
+</div> 
+
 <section layout="row" flex="">
     <md-sidenav class="md-sidenav-right md-whiteframe-4dp cadastro-andar-container" md-component-id="rack">
         <map-rack-cadastro sala="sala" slot="slot"></map-rack-cadastro>
