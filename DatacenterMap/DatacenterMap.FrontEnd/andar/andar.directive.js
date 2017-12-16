@@ -23,7 +23,7 @@ angular.module('app').directive('andarPlanta', ['$compile', function ($compile) 
 
             element.on('click', function () {
                 altura = 0;
-                abcissa = 0;
+                abcissa = -1;
             });
 
         }

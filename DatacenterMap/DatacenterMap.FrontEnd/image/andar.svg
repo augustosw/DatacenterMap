@@ -10,7 +10,7 @@
 <path id="borda" fill-rule="evenodd" d="M 10 10L 10 790L 1190 790L 1190 10L 10 10ZM 0 800L 1200 800L 1200 0L 0 0L 0 800Z" fill="#828282"/>
 </g>
 <g id="sala">
-<rect sala-andar buscar-altura="buscarAltura" buscar-abcissa="buscarAbcissa" ng-repeat="sala in salas" id="{{ sala.NumeroSala }}" class="sala" ng-click="salaClick(sala.Id)" y="36" fill="#828282"><title>Número: {{sala.NumeroSala}}<br>Quantidade de Slots: {{sala.QuantidadeMaximaSlots}}</title></rect>
+<rect sala-andar buscar-abcissa="buscarAbcissa" buscar-altura="buscarAltura" ng-repeat="sala in salas" id="{{ sala.NumeroSala }}" class="sala" ng-click="salaClick(sala.Id)" y="36" fill="#828282"><title>Número: {{sala.NumeroSala}}<br>Quantidade de Slots: {{sala.QuantidadeMaximaSlots}}</title></rect>
 </g>
 </g>
 </g>

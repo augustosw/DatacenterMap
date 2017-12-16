@@ -15,9 +15,11 @@ angular.module('app').directive('salaAndar', ['$compile', function($location) {
             let largura = 240;
             let altura = 300;
 
+            let abcissa = scope.buscarAbcissa();
+            let ordenada = scope.buscarAltura();
 
-            element.attr("y", `${scope.buscarAltura() == 800 ? scope.buscarAltura() - altura : scope.buscarAltura() * altura}`);
-            element.attr("x", `${scope.buscarAbcissa() * largura}`);
+            element.attr("x", `${abcissa * largura}`);
+            element.attr("y", `${ordenada == 800 ? ordenada - altura : ordenada * altura}`);
             element.attr("height", `${altura}`);
             element.attr("width", `${largura - 10}`);
         }
