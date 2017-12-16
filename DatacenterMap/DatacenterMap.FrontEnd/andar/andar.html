@@ -1,0 +1,4 @@
+<button class="andar imagem-andar" ng-model="andar" ng-style="andarStyle" ng-click="listarSalas(andar.Id); selecionarAndar(andar)"
+ ng-disabled="detalhe">
+	<div sala-andar buscar-abcissa="buscarAbcissa" buscar-altura="buscarAltura" ng-repeat="sala in salas" id="{{ sala.NumeroSala }}" class="sala" ng-click="salaClick(sala.Id)"></div>
+</button>

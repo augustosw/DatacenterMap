@@ -175,9 +175,6 @@ md-sidenav.md-closed.md-locked-open-add-active{
    
 }
 
-sala-planta {
-}
-
 .sala-container {
     display: inline-block;
     position: absolute;
@@ -637,13 +634,25 @@ element.style {
     }
 }
 
+.sala {
+    display: inline-block;
+    position: absolute;
+    background: #828282;
+    height: 25%;
+    width: 20%;
+}
+
+.sala:hover {
+    background: #A4A4A4;
+}
 
 .imagem-andar {
-    background: none;
+    background: url("/image/andar.svg");
+    background-size: 100% 100%;
     border: none;
     transform-origin: 50% 50% 0px;
     height: 100%;
-    width:100%;
+    width: 100%;
     transition-delay: 0.45s;
 }
 

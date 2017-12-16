@@ -6,22 +6,19 @@ angular.module('app').directive('salaAndar', ['$compile', function($location) {
             buscarAbcissa: '='
         },
         link: function (scope, element, attrs) {
-            const MIN_Y = 0;
-            const MIN_X = 0;
+            const MIN_Y = -135;
+            const MIN_X = -250;
 
             let maximoSalas = scope.$parent.andar.QuantidadeMaximaSalas;
             let indice = scope.$parent.$index;
             
-            let largura = 240;
-            let altura = 300;
+            let x = 100;
+            let y = 65;
 
             let abcissa = scope.buscarAbcissa();
             let ordenada = scope.buscarAltura();
-
-            element.attr("x", `${abcissa * largura}`);
-            element.attr("y", `${ordenada == 800 ? ordenada - altura : ordenada * altura}`);
-            element.attr("height", `${altura}`);
-            element.attr("width", `${largura - 10}`);
+            
+            element.attr("style",`transform: translate(${(abcissa * x) + MIN_X}%, ${(ordenada == 100 ? ordenada - y : MIN_Y)}%);`)
         }
     }
 }])

@@ -1,7 +1,7 @@
 angular.module('app').directive('andarPlanta', ['$compile', function ($compile) {
     return {
-        restrict: 'A',
-        templateUrl: 'image/andar.svg',
+        restrict: 'E',
+        templateUrl: 'andar/andar.html',
         link: function (scope, element, attrs) {
 
             var altura = 0;
@@ -9,7 +9,7 @@ angular.module('app').directive('andarPlanta', ['$compile', function ($compile) 
 
             scope.buscarAbcissa = function buscarAbcissa() {
                 if (abcissa == 4) {
-                    altura = 800;
+                    altura = 100;
                     abcissa = 0;
                 }
                 else
