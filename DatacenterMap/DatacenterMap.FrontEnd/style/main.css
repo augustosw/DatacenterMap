@@ -175,19 +175,41 @@ md-sidenav.md-closed.md-locked-open-add-active{
 
 }
 
-sala-planta {
-    display: block;
+.sala-container {
+    display: inline-block;
     position: absolute;
     width:50%;
     height:50%;
     left: 50%;
-    top: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+}
+
+.sala-largura {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.sala-largura:before,
+.sala-largura:after {
+    flex-grow: 1;
+    height: 2px;
+    content: '\a0';
+    background-color: #736f6f;
+    position: relative;
+    top: 0.5em;
+}
+.sala-largura:before {
+    margin-right:10px;
+}
+.sala-largura:after {
+    margin-left:10px;
 }
 
 .slot:hover {
-    fill: #909090;
+    fill-opacity: 0.3;
 }
 
 .sala:hover {
@@ -641,13 +663,25 @@ element.style {
     }
 }
 
+.sala {
+    display: inline-block;
+    position: absolute;
+    background: #828282;
+    height: 25%;
+    width: 20%;
+}
+
+.sala:hover {
+    background: #A4A4A4;
+}
 
 .imagem-andar {
-    background: none;
+    background: url("/image/andar.svg");
+    background-size: 100% 100%;
     border: none;
     transform-origin: 50% 50% 0px;
     height: 100%;
-    width:100%;
+    width: 100%;
     transition-delay: 0.45s;
 }
 

@@ -1,7 +1,6 @@
 angular.module('app').controller('SalaController', function ($scope, $location, salaService, rackService, $routeParams, $mdSidenav) {
 	
 		$scope.criar = criar;//para testes atualmente
-		$scope.adicionarSlot = adicionarSlot;
 		$scope.selecionarSlot = selecionarSlot;
 		$scope.listarSlots = listarSlots;
 		//$scope.slotClick = slotClick;
@@ -23,16 +22,10 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 			salaService.buscarPorId(id)
 				.then(function (response) {
 					$scope.sala = response.data;
-					console.log('test');
 					console.log(response.data);
 					$scope.salaSelecionada = response.data;
-					$scope.slotsPadroes = [];
 					$scope.slots = $scope.salaSelecionada.Slots;
-					for (var i = 1; i <= $scope.salaSelecionada.NumeroSlots; i++) {
-						$scope.slotsPadroes.push(i);
-					}
-					$scope.slotsTela = $scope.slotsPadroes;
-					console.log($scope.slots);
+					$scope.slotsOcupados = $scope.slots.filter(s => s.Ocupado);
 				})
 		}	
 	
@@ -45,22 +38,6 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				function (response) {
 					console.log(response);
 				});
-		}
-	
-		function adicionarSlot(indice) {
-			if ($scope.detalhe) {
-				$scope.andarStyle = {
-					transform: "translateZ(15vmin) rotate3d(0,0,1,20deg)",
-					opacity: 1
-				}
-			}
-			else {
-				$scope.andarStyle = {
-					transform: `translateZ(${indice * 10}vmin)`,
-					opacity: 1
-				}
-			}
-			return '';
 		}
 	
 		function listarSlots(id) {
