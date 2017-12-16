@@ -226,8 +226,8 @@ sala-planta {
 }
 
 .botoes-tela-edificacao-container {
-    top: 80px + 2em;
-    right: 30px;
+    top: 80px;
+    right: 40px;
     color: #fff;
     position: absolute;
     text-align: center;
