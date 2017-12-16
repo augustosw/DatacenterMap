@@ -14,87 +14,80 @@ angular.module('app').config(function ($routeProvider) {
         .when('/edificacao/:id?', {
             controller: 'EdificacaoController',
             templateUrl: 'edificacao/edificacao.html',
-           //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
+            resolve: {
+                // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+                autenticado: function (authService) {
+                    return authService.isAutenticadoPromise();
+                }
+            }
         })
-        
+
         .when('/andar/:id?', {
             controller: 'AndarController',
             templateUrl: 'andar/andar.html',
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
+            resolve: {
+                // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+                autenticado: function (authService) {
+                    return authService.isAutenticadoPromise();
+                }
+            }
         })
-               
+
         .when('/sala/:id?', {
             controller: 'SalaController',
             templateUrl: 'sala/sala.html',
-            //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
+            resolve: {
+                // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+                autenticado: function (authService) {
+                    return authService.isAutenticadoPromise();
+                }
+            }
         })
 
         .when('/rack', {
             controller: 'RackController',
             templateUrl: 'rack/rack.html',
-            //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
+            resolve: {
+                // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+                autenticado: function (authService) {
+                    return authService.isAutenticadoPromise();
+                }
+            }
         })
 
         .when('/rack/:id?', {
             controller: 'RackController',
             templateUrl: 'rack/rack.html',
-            //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
+            resolve: {
+                // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+                autenticado: function (authService) {
+                    return authService.isAutenticadoPromise();
+                }
+            }
         })
 
         .when('/equipamento', {
             controller: 'EquipamentoController',
             templateUrl: 'equipamento/equipamento.html',
-            //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
+            resolve: {
+                // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+                autenticado: function (authService) {
+                    return authService.isAutenticadoPromise();
+                }
+            }
         })
 
         .when('/equipamento/:id?', {
             controller: 'EquipamentoController',
             templateUrl: 'equipamento/equipamento.html',
-            //TODO : Implementar autenticação
-            // resolve: {
-            //     // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
-            //     autenticado: function (authService) {
-            //         return authService.isAutenticadoPromise();
-            //     }
-            // }
+            resolve: {
+                // define que para acessar esta página deve ser um usuário autenticado (mas não restringe o tipo de permissão)
+                autenticado: function (authService) {
+                    return authService.isAutenticadoPromise();
+                }
+            }
         })
 
 
         .otherwise('/login');
 });
-
