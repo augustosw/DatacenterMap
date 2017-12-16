@@ -17,7 +17,7 @@ angular.module('app').directive('slotSala', ['$compile', function ($compile) {
             element.attr("height", `100`);
             element.attr("width", `100`);
 
-            slot.Ocupado ? element.attr("fill", "#FF0000") : element.attr("fill", "#00FF00");
+            slot.Ocupado ? element.attr("fill", "#f3bca7") : element.attr("fill", "#a2f0d6");
             
         }
     }

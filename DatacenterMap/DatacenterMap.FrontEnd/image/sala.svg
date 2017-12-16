@@ -4,13 +4,13 @@
 <g id="Canvas">
 <g id="Sala">
 <g id="piso">
-<path id="piso" d="M 0 0L 0 800L 1200 800L 1200 0L 0 0Z" fill="#C4C4C4"/>
+<path id="piso" d="M 0 0L 0 800L 1200 800L 1200 0L 0 0Z" fill="#e7e7e7"/>
 </g>
 <g id="borda">
-<path id="borda" fill-rule="evenodd" d="M 16 16L 16 784L 1184 784L 1184 16L 16 16ZM 0 800L 1200 800L 1200 0L 0 0L 0 800Z" fill="#828282"/>
+<path id="borda" fill-rule="evenodd" d="M 16 16L 16 784L 1184 784L 1184 475L 1200 475L 1200 800L 0 800L 0 0L 1200 0L 1200 325L 1184 325L 1184 16L 16 16Z" fill="#020202"/>
 </g>
 <g id="slot">
-<rect slot-sala buscar-altura="buscarAltura" buscar-abcissa="buscarAbcissa" ng-hide="salaSelecionada.length==0" ng-repeat="slot in slots" id="{{ slot.Id }}" class="slot" ng-click="verificarSlot(slot)" stroke="#4F4F4F" stroke-width="10">
+<rect slot-sala buscar-altura="buscarAltura" buscar-abcissa="buscarAbcissa" ng-hide="salaSelecionada.length==0" ng-repeat="slot in slots" id="{{ slot.Id }}" class="slot" ng-click="verificarSlot(slot)" stroke="#4F4F4F" stroke-width="5">
 	<svg viewBox="0 0 10 10" ng-click="limparSlot(slot.Id)" ng-if="slot.Ocupado">
 		<use: xlink="/image/delete.svg#lixeira">
 	</svg>
