@@ -17,7 +17,7 @@
             <h3 class="edificacao-selecionada">{{edificacaoSelecionada.Nome}}</h3>
             <img class="imagem-delete" ng-click="excluir(edificacaoSelecionada)" ng-src="/image/delete.svg" height="20" width="20">
         </div>
-        <div class="base">
+        <div ng-if="isAlterar" class="base">
             <img class="base-imagem" src="/image/base-imagem.svg" alt="">
         </div>
         <div class="andares" ng-repeat="andar in andaresTela">
