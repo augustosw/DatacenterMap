@@ -17,6 +17,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
     $scope.buscarSalas = buscarSalas;
     $scope.buscarRacks = buscarRacks;
     $scope.moverEquipamento = moverEquipamento;
+    $scope.gavetaEstaEntreGavetas = gavetaEstaEntreGavetas;
 
     var tamanhoAtual = 0;
 
@@ -79,6 +80,18 @@ angular.module('app').controller('RackController', function ($scope, rackService
         return $scope.tamanho.some(x => x + 1 === idGaveta || x - 1 === idGaveta);
     }
 
+    function gavetaEstaEntreGavetas(idGaveta) {
+        let array = ordenarPorGaveta($scope.tamanho); 
+        return !(array[array.length - 1] === idGaveta || 
+            array[0] === idGaveta)
+    }
+
+    function ordenarPorGaveta(gavetasSelecionadas) {
+        return gavetasSelecionadas.sort(function(a, b) { 
+            return a - b;
+        });
+      }
+
     function verificarTamanho(gaveta) {
 
         if(gaveta.Equipamento){
@@ -91,7 +104,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
                     $scope.tooltip = ""; 
                     $scope.tooltip = ("Descrição: " + gaveta.Equipamento.Descricao + "\n"+ "Tamanho: " + gaveta.Equipamento.Tamanho + "\n" 
                                     + "Tensão: " + gaveta.Equipamento.Tensao + "V"); 
-                    console.log($scope.tooltip);
+
                     
             } 
             else {

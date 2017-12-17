@@ -7,7 +7,7 @@
                 <div class="flex-row center-center rack__slot"  ng-class="{'rack__slot--selected': ativo}" ng-repeat="gaveta in rack.Gavetas" ng-style="tamanhoGaveta">
                     {{verificarTamanho(gaveta)}}
                     
-                    <input id="{{gaveta.Id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.Id) || (gaveta.Ocupado && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.Ocupado">
+                    <input id="{{gaveta.Id}}" ng-model="ativo" ng-disabled="posicaoInvalida(gaveta.Id) || (gaveta.Ocupado && ativo) || (gavetaEstaEntreGavetas(gaveta.Id) && ativo)" ng-click="aumentarTamanho(gaveta, ativo)" type="checkbox" ng-checked="gaveta.Ocupado">
 
                     <label for="{{gaveta.Id}}" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.Id)}">
 
