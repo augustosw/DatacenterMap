@@ -25,8 +25,14 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 					$scope.salaSelecionada = response.data;
 					$scope.slots = $scope.salaSelecionada.Slots;
 					$scope.slotsOcupados = $scope.slots.filter(s => s.Ocupado);
+					buscarTensaoSlotsOcupados();
 				})
 		}	
+		function buscarTensaoSlotsOcupados() {
+			//para preenchimento da popover
+			$scope.slotsOcupados.forEach(slot => rackService.buscarRackPorIdSlot(slot)
+				.then(response => slot.Rack = response.data));
+		}
 	
 		function criar(sala) {
 			salaService.criar(sala) //chama o método de post da service
@@ -67,7 +73,7 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 		function limparSlot(slotId) {		
 			deleteClick();
 			rackService.buscarRackPorIdSlot(slotId)
-				.then(response => rackService.excluir(response.data.Id).then($location.reload()));
+				.then(response => rackService.excluir(response.data.Id).then(location.reload()));
 		}
 
 		 // side-bar criação de slot		 

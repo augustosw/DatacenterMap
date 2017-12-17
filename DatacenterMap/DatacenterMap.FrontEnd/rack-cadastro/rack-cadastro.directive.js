@@ -27,6 +27,7 @@ angular.module('app')
                     .then(
                       function (response) {
                         $scope.slot.Ocupado = true;
+                        location.reload();
                         console.log(response.data);
                     },
                       function(response){

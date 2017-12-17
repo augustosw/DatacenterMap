@@ -210,6 +210,7 @@ md-sidenav.md-closed.md-locked-open-add-active{
 
 .arrow::after {
     border-top-color: #42464f !important;
+    border-bottom-color: #42464f !important;
 }
 
 .slot,
