@@ -1,11 +1,10 @@
 angular.module('app').controller('SalaController', function ($scope, $location, salaService, rackService, $routeParams, $mdSidenav) {
 	
 		$scope.criar = criar;//para testes atualmente
-		$scope.selecionarSlot = selecionarSlot;
-		$scope.listarSlots = listarSlots;
-		//$scope.slotClick = slotClick;
+		$scope.limparSlot = limparSlot;
 		$scope.isAlterar = !!$routeParams.id;
 		$scope.voltar = voltar;
+		$scope.deleteClick = deleteClick;
 		$scope.excluir = excluir;
 		$scope.tipoEntidade = "sala";
 		$scope.verificarSlot = verificarSlot;
@@ -26,8 +25,14 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 					$scope.salaSelecionada = response.data;
 					$scope.slots = $scope.salaSelecionada.Slots;
 					$scope.slotsOcupados = $scope.slots.filter(s => s.Ocupado);
+					buscarTensaoSlotsOcupados();
 				})
 		}	
+		function buscarTensaoSlotsOcupados() {
+			//para preenchimento da popover
+			$scope.slotsOcupados.forEach(slot => rackService.buscarRackPorIdSlot(slot)
+				.then(response => slot.Rack = response.data));
+		}
 	
 		function criar(sala) {
 			salaService.criar(sala) //chama o método de post da service
@@ -38,31 +43,6 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				function (response) {
 					console.log(response);
 				});
-		}
-	
-		function listarSlots(id) {
-			var dataTemp = {};
-			rackService.obterPorId(id)
-				.then(
-				function (response) {
-					var salas = response.data.Salas;
-					angular.forEach(salas, function (sala, key) {
-						dataTemp[sala.NumeroSala] = sala;
-					});
-					$scope.salas = dataTemp;
-					console.log($scope.salas);
-				},
-				function (response) {
-					console.log(response);
-				});
-		}
-	
-		function selecionarSlot(andar) {
-			$scope.andaresTela = [];
-			$scope.detalhe = true;
-			$scope.andaresTela.push(andar);
-			$scope.andarSelecionado = $scope.andares.filter(function (valor) { return valor.NumeroAndar == andar });
-			console.log($scope.andarSelecionado);
 		}
 	
 		function voltar() {
@@ -81,6 +61,19 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				function (response) {
 					console.log(response);
 				});
+		}
+
+		function deleteClick() {
+			//para o evento de click para não ativar div
+			if (!e) var e = window.event;
+			e.cancelBubble = true;
+			if (e.stopPropagation) e.stopPropagation();
+		}
+
+		function limparSlot(slotId) {		
+			deleteClick();
+			rackService.buscarRackPorIdSlot(slotId)
+				.then(response => rackService.excluir(response.data.Id).then(location.reload()));
 		}
 
 		 // side-bar criação de slot		 
@@ -118,12 +111,6 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 			.then(function () {
 			});
 		};    
-
-		
-            
-				
-
-
 	
 	});
 	

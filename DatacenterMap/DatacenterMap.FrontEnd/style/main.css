@@ -178,6 +178,8 @@ md-sidenav.md-closed.md-locked-open-add-active{
 }
 
 .sala-container {
+    background: url("/image/sala.svg");
+    background-size: 100% 100%;
     display: inline-block;
     position: absolute;
     width:50%;
@@ -185,6 +187,57 @@ md-sidenav.md-closed.md-locked-open-add-active{
     left: 50%;
     margin-right: -50%;
     transform: translateX(-50%);
+}
+
+@media screen and (min-width: 600px) {
+    .sala-container {
+        width:300px;
+        height:200px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .sala-container {
+        width:600px;
+        height:400px;
+    }
+}
+
+.popover {
+    background: #42464f !important;
+    color: #fff !important;
+}
+
+.arrow::after {
+    border-top-color: #42464f !important;
+    border-bottom-color: #42464f !important;
+}
+
+.slot,
+.slot:focus,
+.slot:active {
+    display: inline-block;
+    position: absolute;
+    outline: medium solid #4F4F4F;
+    outline-offset: -1px;
+    width: 8.33%;
+    height: 12.5%;
+}
+
+.slot-livre {
+    background: #a2f0d6;
+}
+
+.slot-ocupado {
+    background: #f3bca7;
+}
+
+.slot-livre:hover {
+    background: rgba(163, 239, 224, 0.5)
+}
+
+.slot-ocupado:hover {
+    background: rgba(240, 190, 165, 0.5)
 }
 
 .sala-largura {
@@ -801,6 +854,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 }
 
 .botao-cancelar,
+#limpar-slot-popover .botao-cancelar,
 #cadastro-andar .botao-cancelar,
 #cadastro-sala .botao-cancelar,
 #cadastro-rack .botao-cancelar,
@@ -813,6 +867,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 }
 
 .botao-sucesso,
+#limpar-slot-popover .botao-sucesso,
 #cadastro-andar .botao-sucesso,
 #cadastro-sala .botao-sucesso,
 #cadastro-rack .botao-sucesso,

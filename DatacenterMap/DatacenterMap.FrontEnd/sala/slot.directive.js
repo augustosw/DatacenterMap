@@ -1,10 +1,9 @@
 angular.module('app').directive('slotSala', ['$compile', function ($compile) {
     return {
         restrict: 'A',
-        templateUrl: 'image/sala.svg',
         scope: {
             buscarAltura: '=',
-            buscarAbcissa: '=',
+            buscarAbcissa: '='
         },
         link: function (scope, element, attrs) {
             const MIN_Y = 100;
@@ -12,12 +11,12 @@ angular.module('app').directive('slotSala', ['$compile', function ($compile) {
 
             var slot = scope.$parent.slot;
 
-            element.attr("y", `${scope.buscarAltura() * MIN_Y}`);
-            element.attr("x", `${scope.buscarAbcissa() * MIN_X}`);
-            element.attr("height", `100`);
-            element.attr("width", `100`);
+            let ordenada = scope.buscarAltura();
+            let abcissa = scope.buscarAbcissa();
 
-            slot.Ocupado ? element.attr("fill", "#f3bca7") : element.attr("fill", "#a2f0d6");
+            element.attr("style",`transform: translate(${abcissa * MIN_X}%, ${ordenada * MIN_Y}%);`);
+
+            slot.Ocupado ? element.addClass("slot-ocupado") : element.addClass("slot-livre");
             
         }
     }
