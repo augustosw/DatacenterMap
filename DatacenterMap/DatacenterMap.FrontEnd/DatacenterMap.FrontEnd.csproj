@@ -109,6 +109,7 @@
     <Content Include="image\arrow-sidebar.svg" />
     <Content Include="image\back-arrow.svg" />
     <Content Include="image\background-pattern.jpg" />
+    <Content Include="image\background.jpg" />
     <Content Include="image\base-imagem.svg" />
     <Content Include="image\building.jpeg" />
     <Content Include="image\buildings.svg" />
@@ -154,6 +155,9 @@
     <Content Include="sidebar\sidebar.directive.html" />
     <Content Include="sidebar\sidebar.directive.js" />
     <Content Include="style\main.css" />
+    <Content Include="usuario-cadastro\usuario-cadastro.controller.js" />
+    <Content Include="usuario-cadastro\usuario-cadastro.html" />
+    <Content Include="usuario-cadastro\usuario.service.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

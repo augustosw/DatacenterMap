@@ -1324,3 +1324,14 @@ rack__slot:after {
     background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
 }
+
+
+md-dialog {
+    border-bottom: 2px solid #fbb041;
+}
+.md-button.md-default-theme.md-primary, .md-button.md-primary{
+    border: 0;
+    border: 1px solid #42464F;
+    color: #101010;
+    text-transform: inherit;
+}
