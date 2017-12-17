@@ -90,7 +90,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
                     }
                     $scope.tooltip = ""; 
                     $scope.tooltip = ("Descrição: " + gaveta.Equipamento.Descricao + "\n"+ "Tamanho: " + gaveta.Equipamento.Tamanho + "\n" 
-                                    + "Tensão: " + gaveta.Equipamento.Tensao); 
+                                    + "Tensão: " + gaveta.Equipamento.Tensao + "V"); 
                     console.log($scope.tooltip);
                     
             } 
