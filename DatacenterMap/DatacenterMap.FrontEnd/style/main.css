@@ -1265,3 +1265,16 @@ rack__slot:after {
     background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
 }
+
+.toast-erro {
+    background-color: #fa7777 !important;
+    opacity: 1 !important;
+}
+.toast-aviso {
+    background-color: #FBB041 !important;
+    opacity: 1 !important;
+}
+.toast-sucesso {
+    background-color: #2ea664 !important;
+    opacity: 1 !important;
+}

@@ -1,6 +1,5 @@
-angular.module('app').controller('SalaController', function ($scope, $location, salaService, rackService, $routeParams, $mdSidenav) {
+angular.module('app').controller('SalaController', function ($scope, $location, salaService, rackService, $routeParams, $mdSidenav, toastr) {
 	
-		$scope.criar = criar;//para testes atualmente
 		$scope.limparSlot = limparSlot;
 		$scope.isAlterar = !!$routeParams.id;
 		$scope.voltar = voltar;
@@ -8,41 +7,24 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 		$scope.excluir = excluir;
 		$scope.tipoEntidade = "sala";
 		$scope.verificarSlot = verificarSlot;
-		// TODO: necessário criar dados para poder usar.
-		// setup();
 
-
-		// $scope.toggleRightRack = buildToggler('rack');
-		
-		console.log($routeParams.id);
 		buscarSalaPorId($routeParams.id);
 		
 		function buscarSalaPorId(id) {
 			salaService.buscarPorId(id)
 				.then(function (response) {
 					$scope.sala = response.data;
-					console.log(response.data);
 					$scope.salaSelecionada = response.data;
 					$scope.slots = $scope.salaSelecionada.Slots;
 					$scope.slotsOcupados = $scope.slots.filter(s => s.Ocupado);
 					buscarTensaoSlotsOcupados();
 				})
 		}	
+		
 		function buscarTensaoSlotsOcupados() {
 			//para preenchimento da popover
 			$scope.slotsOcupados.forEach(slot => rackService.buscarRackPorIdSlot(slot)
 				.then(response => slot.Rack = response.data));
-		}
-	
-		function criar(sala) {
-			salaService.criar(sala) //chama o método de post da service
-				.then(
-				function (response) {
-					console.log(response);
-				},
-				function (response) {
-					console.log(response);
-				});
 		}
 	
 		function voltar() {
@@ -56,10 +38,14 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 			salaService.excluir(sala) //chama o método de delete da service
 				.then(
 				function (response) {
-					console.log(response);
+					toastr.success('Sala excluída', {
+					  iconClass: 'toast-sucesso'
+					});
 				},
 				function (response) {
-					console.log(response);
+					toastr.error(response.data.join(" - "), 'Falha na solicitação!', {
+					  iconClass: 'toast-erro'
+					});
 				});
 		}
 
@@ -73,7 +59,13 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 		function limparSlot(slotId) {		
 			deleteClick();
 			rackService.buscarRackPorIdSlot(slotId)
-				.then(response => rackService.excluir(response.data.Id).then(location.reload()));
+				.then(response => rackService.excluir(response.data.Id)
+					.then(function(response) {
+						toastr.success('Rack excluído', {
+						  iconClass: 'toast-sucesso'
+						});
+						location.reload();
+					}));
 		}
 
 		 // side-bar criação de slot		 
@@ -87,7 +79,6 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				});
 			}
 			else {
-				console.log(slot);
 				rackService.buscarRackPorIdSlot(slot)
 							.then(response => $location.path(`/rack/${response.data.Id}`));
 			}

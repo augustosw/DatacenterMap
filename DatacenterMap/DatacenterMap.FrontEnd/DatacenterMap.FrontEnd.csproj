@@ -68,6 +68,7 @@
   <ItemGroup>
     <Content Include="andar\andar.html" />
     <Content Include="auth\README.md" />
+    <Content Include="carregamento\carregamento.directive.js" />
     <Content Include="fonts\.DS_Store" />
     <Content Include="fonts\codropsicons\codropsicons.eot" />
     <Content Include="fonts\codropsicons\codropsicons.ttf" />
@@ -112,11 +113,13 @@
     <Content Include="image\base-imagem.svg" />
     <Content Include="image\building.jpeg" />
     <Content Include="image\buildings.svg" />
+    <Content Include="image\carregamento.svg" />
     <Content Include="image\check.svg" />
     <Content Include="image\delete.svg" />
     <Content Include="image\equipamento.svg" />
     <Content Include="image\exit.svg" />
     <Content Include="image\login.jpg" />
+    <Content Include="image\logo.png" />
     <Content Include="image\logo.svg" />
     <Content Include="image\nova-sala.svg" />
     <Content Include="image\novo-andar.svg" />

@@ -1,6 +1,5 @@
-angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $location, andarService, $routeParams, $mdSidenav) {
+angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $location, andarService, $routeParams, $mdSidenav, toastr) {
 
-    $scope.criar = criar;
     $scope.adicionarAndarNaTela = adicionarAndarNaTela;
     $scope.selecionarAndar = selecionarAndar;
     $scope.listarSalas = listarSalas;
@@ -19,7 +18,6 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     function buscarEdificacaoPorId(id) {
         edificacaoService.buscarPorId(id)
             .then(function (response) {
-                console.log(response)
                 $scope.edificacaoSelecionada = response.data;
                 // variavel que vai manter o numero de andares cadastrados de uma edificação
                 $scope.andaresCadastrados = $scope.edificacaoSelecionada.Andares;
@@ -38,17 +36,6 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
             .then(function (response) {
                 $scope.edificacoes = response.data;
             })
-    }
-
-    function criar(edificacao) {
-        edificacaoService.criar(edificacao) //chama o método de post da service
-            .then(
-            function (response) {
-                console.log(response);
-            },
-            function (response) {
-                console.log(response);
-            });
     }
 
     function adicionarAndarNaTela(indice) {
@@ -73,14 +60,12 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         andarService.obterPorId(id)
             .then(
             function (response) {
-                console.log(response);
                 $scope.salasTotais = response.data.Salas;
                 var salas = response.data.Salas;
                 angular.forEach(salas, function (sala, key) {
                     dataTemp[sala.NumeroSala] = sala;
                 });
                 $scope.salas = dataTemp;
-                console.log($scope.salas);
             },
             function (response) {
                 console.log(response);
@@ -116,11 +101,15 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
             edificacaoService.excluir(edificacao.Id) //chama o método de delete da service
                 .then(
                 function (response) {
-                    console.log(response);
-                    $location.path('\edificacao');
+                    toastr.success("Edificação excluída", {
+                        iconClass: 'toast-sucesso'
+                      });
+                    $location.path('/edificacao');
                 },
                 function (response) {
-                    console.log(response);
+                    toastr.error(response.data.join(" - "), 'Falha na solicitação!', {
+                      iconClass: 'toast-erro'
+                    });
                 });
         }
     }

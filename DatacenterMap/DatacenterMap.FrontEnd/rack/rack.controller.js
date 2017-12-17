@@ -1,5 +1,4 @@
-angular.module('app').controller('RackController', function ($scope, rackService, salaService, equipamentoService, $routeParams, edificacaoService,
-                                andarService) {
+angular.module('app').controller('RackController', function ($scope, rackService, salaService, equipamentoService, $routeParams, edificacaoService, andarService, toastr) {
     
  
     $scope.tamanho = [] 
@@ -25,7 +24,6 @@ angular.module('app').controller('RackController', function ($scope, rackService
     function setup() {
         rackService.buscarPorId($routeParams.id)
                     .then(function(response) {
-                        console.log(response.data); 
                         $scope.rack = response.data;
                     })
     }
@@ -36,7 +34,6 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
     function aumentarTamanho(gaveta, ativo) {
-        console.log(gaveta);
         if(gaveta.Ocupado){
             editar(gaveta);
             return;
@@ -54,14 +51,17 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
     function criarEquipamento(equipamento){
-        console.log(equipamento);
         if (true) {      
             equipamento.GavetasId = [];
             equipamento.Tamanho = $scope.tamanho.length; 
             $scope.tamanho.forEach(x => equipamento.GavetasId.push(x));
-            console.log(equipamento);
             equipamentoService.criar(equipamento)
-                                .then(response => location.reload()) 
+                                .then(function (response) {
+                                    toastr.success('Novo equipamento cadastrado!', {
+                                      iconClass: 'toast-sucesso'
+                                    });
+                                    location.reload();
+                                }) 
           }
           else {
              $scope.enviar = true;    
@@ -122,22 +122,17 @@ angular.module('app').controller('RackController', function ($scope, rackService
         andarService.buscarPorIdComRackDisponiveis(1, equipamentoEdicao.Tamanho)
                         .then(function(response) { 
                             $scope.andares = response.data;
-                            console.log(response.data); 
                         })
     }
 
     function buscarSalas(equipamentoEdicao, andar) {
-        console.log('teste');
         salaService.buscarPorIdComRackDisponiveis(andar, equipamentoEdicao.Tamanho)
                     .then(function(response) {
-                        console.log(response);
                         $scope.salas = response.data;
                     }) 
     }
 
     function buscarRacks(equipamentoEdicao, sala) {
-        console.log(equipamentoEdicao.Tamanho);
-        console.log(sala);
         rackService.buscarPorIdComRackDisponiveis(sala, equipamentoEdicao.Tamanho)
                     .then(function (response) {
                         $scope.racks = response.data;
@@ -145,9 +140,11 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
     function moverEquipamento(equipamentoMover) {
-        console.log(equipamentoMover);
         equipamentoService.moverEquipamento(equipamentoMover.RackMover, equipamentoMover.Id)
                             .then(function (response) {
+                                toastr.success('Equipamento movido', {
+                                  iconClass: 'toast-sucesso'
+                                });
                                 $scope.racks = response.data.Racks; 
                                 location.reload();
                             })
@@ -155,9 +152,11 @@ angular.module('app').controller('RackController', function ($scope, rackService
 
 
     function deletarEquipamento(equipamento){
-        console.log(equipamento.Id);
         equipamentoService.excluir(equipamento.Id)
                             .then(function (response) {
+                                toastr.success('Equipamento excluído', {
+                                  iconClass: 'toast-sucesso'
+                                });
                                 location.reload();
                             })
     }
