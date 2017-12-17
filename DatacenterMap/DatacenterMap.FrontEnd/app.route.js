@@ -1,11 +1,12 @@
 angular.module('app').config(function ($routeProvider) {
 
     $routeProvider
-        // públicas
-        // .when('/cadastro', {
-        //     controller: 'CadastroController',
-        //     templateUrl: 'cadastro/cadastro.html'
-        // })
+        //públicas
+        .when('/cadastro', {
+            controller: 'CadastroController',
+            templateUrl: 'usuario-cadastro/usuario-cadastro.html'
+        })
+
         .when('/login', {
             controller: 'LoginController',
             templateUrl: 'login/login.html'

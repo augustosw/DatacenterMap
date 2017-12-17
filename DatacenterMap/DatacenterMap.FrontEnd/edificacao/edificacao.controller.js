@@ -1,4 +1,4 @@
-angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $location, andarService, $routeParams, $mdSidenav, toastr) {
+angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $mdDialog, $location, andarService, $routeParams, $mdSidenav, toastr) {
 
     $scope.adicionarAndarNaTela = adicionarAndarNaTela;
     $scope.selecionarAndar = selecionarAndar;
@@ -95,12 +95,22 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         $scope.andarSelecionado = [];
         $scope.salas = [];
     }
+  
+    function excluir(ev, edificacao) {
 
-    function excluir(edificacao) {
-        if(prompt("Você tem certeza que deseja excluir essa edificação? Todos as estruturas relacionadas a ele serão excluidas!)")){
+        var confirm = $mdDialog.confirm()
+              .title('Você tem certeza que deseja excluir essa edificação?')
+              .textContent('Todos os items relacionados a mesma serão excluídos.')
+              .ariaLabel('Lucky day')
+              .targetEvent(ev)
+              .ok('Tenho certeza')
+              .cancel('Cancelar');
+    
+        $mdDialog.show(confirm).then(function() {
+            
             edificacaoService.excluir(edificacao.Id) //chama o método de delete da service
-                .then(
-                function (response) {
+                            .then(
+                        function (response) {
                     toastr.success("Edificação excluída", {
                         iconClass: 'toast-sucesso'
                       });
@@ -111,9 +121,10 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
                       iconClass: 'toast-erro'
                     });
                 });
-        }
-    }
-
+        }, function() {
+          return;
+        });
+      };
 
     // side-bar andar
 

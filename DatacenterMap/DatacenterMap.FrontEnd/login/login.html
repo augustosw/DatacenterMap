@@ -1,41 +1,34 @@
-
-<section class="cadastro-login-section">
-
-  <div class="flex-row row-center">
-    <form class="form-login" novalidate name="formLogin" ng-submit="login(usuario)">
-      <div class="column login-form">
-        <h1>Datacenter Map</h1>
-        <p>Insira suas credenciais para continuar:</p>
-        <hr class="hr-login">
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control has-icons-right">
-            <input class="input" ng-model="usuario.username" type="email" placeholder="usuario@email.com">
-            <span class="icon is-small">
-              <i class="fa fa-envelope"></i>
-            </span>
+<section class="cadastro-usuario-container flex-column center-center">
+    <div class="cadastro-usuario-wrapper flex-column column-center">
+        <div class="header-cadastro-usuario flex-row column-center">
+            <h3>Datacenter Map</h3>
+            <img ng-src="/image/logo.svg" class="image-login" height="50" width="50">
+        </div> 
+        <form class="cadastro-usuario-content"id="cadastro-usuario" novalidate name="cadastroUsuarioForm" ng-submit="login(usuario)">
+          <div class="flex-row center-center">
+            
           </div>
-        </div>
-
-        <div class="field">
-          <label class="label">Senha</label>
-          <div class="control has-icons-right">
-            <input ng-model="usuario.password" class="input" type="password">
-            <span class="icon is-small">
-              <i class="fa fa-key"></i>
-            </span>
-          </div>
-        </div>
-
-        <div class="botoes-login">
-          <div class="control">
-            <input type="submit" class="btn-primary" value="Login"/>
-            <input type="button" class="btn-primary" value="Cadastro"/>
-          </div>
-        </div>
-
-      </div>
-    </form>
-  </div>
-
+            <!-- <hr> -->
+            <div class="form-group">
+                <md-input-container>
+                        <label for="email" class="texto-andar">Email</label>
+                        <input  name="email" id="email" ng-model="usuario.username" ng-class="{'enviar': enviar}" required ng-minlength="2" ng-maxlength="64" md-autofocus=""> 
+                </md-input-container> 
+                <md-input-container>
+                        <label for="senha" class="texto-andar">Senha</label>
+                        <input  name="senha" id="senha" type="password" ng-model="usuario.password" ng-class="{'enviar': enviar}" required ng-minlength="2" ng-maxlength="64" md-autofocus=""> 
+                </md-input-container> 
+            </div>
+            <div class="form-group">
+                <div class="flex-row">
+                    <md-button class="botao-cancelar-andar botao-sucesso" type="submit" class="md-primary">
+                                Entrar
+                    </md-button>
+                    <md-button class="botao-cancelar-andar botao-cancelar" type="button" ng-click="registrar()">
+                            Registrar
+                    </md-button>
+                </div>
+            </div>
+        </form>
+    </div>
 </section>

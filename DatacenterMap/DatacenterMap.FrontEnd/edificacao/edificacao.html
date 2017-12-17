@@ -15,7 +15,7 @@
     <div class="edificacao-container flex-column">
         <div ng-if="isAlterar"class="flex-row row-center">
             <h3 class="edificacao-selecionada">{{edificacaoSelecionada.Nome}}</h3>
-            <img class="imagem-delete" ng-click="excluir(edificacaoSelecionada)" ng-src="/image/delete.svg" height="20" width="20">
+            <img class="imagem-delete" ng-click="excluir($event, edificacaoSelecionada)" ng-src="/image/delete.svg" height="20" width="20">
         </div>
         <div ng-if="isAlterar" class="base">
             <img class="base-imagem" src="/image/base-imagem.svg" alt="">
