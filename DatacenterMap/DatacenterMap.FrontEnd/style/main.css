@@ -1169,7 +1169,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     content: '';
     opacity: 0;
     background: linear-gradient(to top, rgba(0, 255, 131, 0.4), rgba(0, 255, 131, 0.4)),
-                url(https://openclipart.org/download/216936/2U-Server.svg);
+                url(/image/equipamento.svg);
     width: 300px;
     height: 53px;
     background-size: 100%;
@@ -1192,7 +1192,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 }
 
 .rack__slot__hardware {
-    background: url(https://openclipart.org/download/216936/2U-Server.svg);
+    background: url(/image/equipamento.svg);
     width: 300px;
     height: 56px;
     background-size: 100%;

@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="andar\andar.html" />
     <Content Include="auth\README.md" />
     <Content Include="fonts\.DS_Store" />
     <Content Include="fonts\codropsicons\codropsicons.eot" />
@@ -115,9 +116,11 @@
     <Content Include="image\delete.svg" />
     <Content Include="image\equipamento.svg" />
     <Content Include="image\exit.svg" />
+    <Content Include="image\login.jpg" />
     <Content Include="image\logo.svg" />
     <Content Include="image\nova-sala.svg" />
     <Content Include="image\novo-andar.svg" />
+    <Content Include="image\pattern.png" />
     <Content Include="image\rack-base.svg" />
     <Content Include="image\rack-criar.svg" />
     <Content Include="image\sala.svg" />
@@ -138,6 +141,9 @@
     <Content Include="rack\rack.service.js" />
     <Content Include="sala-cadastro\sala-cadastro.directive.js" />
     <Content Include="sala-cadastro\sala-cadastro.html" />
+    <Content Include="sala\delete.html" />
+    <Content Include="sala\sala-andar.directive.js" />
+    <Content Include="sala\sala-planta.directive.js" />
     <Content Include="sala\sala.controller.js" />
     <Content Include="sala\sala.directive.js" />
     <Content Include="sala\sala.html" />
