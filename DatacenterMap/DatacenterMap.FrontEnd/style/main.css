@@ -263,6 +263,58 @@ md-sidenav.md-closed.md-locked-open-add-active{
     margin-left:10px;
 }
 
+.slot:hover {
+    fill-opacity: 0.3;
+}
+
+.sala:hover {
+    fill: #909090;
+}
+
+.sala:after {
+    content: attr(tooltip-andar);
+    display: none;
+    position: absolute;
+    white-space: pre;
+    width: 5.5vmin;
+    background: white;
+    transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
+    transform-origin: 50% 100%;
+    transform-style: preserve-3d;
+    background-color: #42464f;
+    border-radius: 5px;
+    color: #fff;
+    padding: 1rem;
+    top: -80px;
+    text-transform: none;
+    transition: all 0.5s ease;
+    width: 120px;
+}
+
+.sala:before {
+    position: absolute;
+    top: -15px;
+    left: 55px;
+    display:none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #42464f;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+    margin-left: -5px;
+    width: 0;
+    transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
+    transform-origin: 50% 100%;
+    transform-style: preserve-3d;
+}
+
+.sala:hover:after,
+.sala:hover:before {
+    display: block;
+    z-index: 9;
+}
+
 .imagem-carousel {
     margin-bottom:5px;
     filter: opacity(50%);
@@ -678,7 +730,7 @@ element.style {
     pointer-events: auto;
     transition: opacity 1s, transform 1s;
     transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-    transform-style: preserve-3d
+    transform-style: preserve-3d;
 }
 .imagem-delete {
     opacity: .6;
@@ -713,7 +765,7 @@ element.style {
     position: absolute;
     background: #828282;
     height: 25%;
-    width: 20%;
+    width: 19.8%;
 }
 
 .sala:hover {
@@ -1156,4 +1208,46 @@ rack__slot:after {
 .rack__slot:hover {
     transform: scale(1.03);
     z-index: 2;
+}
+
+.rack__slot__hardware:before {
+    content:attr(tooltip-equipamento);
+    opacity: 0;
+    position: absolute;
+    white-space: pre-line;
+    width: 5.5vmin;
+    background: white;
+    background-color: #42464f;
+    border-radius: 5px;
+    color: #fff;
+    padding: 1rem;
+    top: -20px;
+    left: -201px;
+    text-transform: none;
+    transition: all 0.5s ease;
+    width: 180px;
+    font-weight: 500;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+.rack__slot__hardware:after {
+    position: absolute;
+    top: 37px;
+    left: -16px;
+    display: block;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #42464f;
+    border-top: 5px solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+    margin-left: -5px;
+    width: 0;
+    opacity:0;
+    transition: all 0.5s ease;
+}
+
+.rack__slot__hardware:hover:before,
+.rack__slot__hardware:hover:after {
+    opacity: 1;
 }

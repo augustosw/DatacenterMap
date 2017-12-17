@@ -11,7 +11,7 @@
 
                     <label for="{{gaveta.Id}}" ng-class="{'equipamento-invalido': posicaoInvalida(gaveta.Id)}">
 
-                    <div ng-if="gaveta.Ocupado" class="rack__slot__hardware" ng-style="tamanhoGaveta"></div>   
+                    <div ng-if="gaveta.Ocupado" tooltip-equipamento="{{tooltip}}" class="rack__slot__hardware" ng-style="tamanhoGaveta"></div>   
 
                     </label>
                     <!-- <button ng-if="gaveta.ocupado" class="remover-equipamento-botao" ng-click="deletarEquipamento(gaveta)"><p>x</p></button> -->
