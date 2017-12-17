@@ -1,4 +1,4 @@
-angular.module('app').controller('SalaController', function ($scope, $location, salaService, rackService, $routeParams, $mdSidenav) {
+angular.module('app').controller('SalaController', function ($scope, $location, salaService, $mdDialog, rackService, $routeParams, $mdSidenav) {
 	
 		$scope.criar = criar;//para testes atualmente
 		$scope.limparSlot = limparSlot;
@@ -52,16 +52,27 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 			$scope.salas = [];
 		}
 	
-		function excluir(sala) {
-			salaService.excluir(sala) //chama o método de delete da service
-				.then(
-				function (response) {
-					console.log(response);
-				},
-				function (response) {
-					console.log(response);
-				});
-		}
+		function excluir(ev, sala) {
+
+			var confirm = $mdDialog.confirm()
+				  .title('Você tem certeza que deseja excluir essa sala?')
+				  .textContent('Todos os items relacionados a mesma serão excluídos.')
+				  .ariaLabel('Lucky day')
+				  .targetEvent(ev)
+				  .ok('Tenho certeza')
+				  .cancel('Cancelar');
+		
+			$mdDialog.show(confirm).then(function() {
+				
+				salaService.excluir(sala.Id) //chama o método de delete da service
+								.then(
+							function (response) {
+								window.history.back();
+							});
+			}, function() {
+			  return;
+			});
+		  };
 
 		function deleteClick() {
 			//para o evento de click para não ativar div

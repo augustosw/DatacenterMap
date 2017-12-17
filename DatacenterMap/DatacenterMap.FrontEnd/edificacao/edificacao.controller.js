@@ -1,4 +1,4 @@
-angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $location, andarService, $routeParams, $mdSidenav) {
+angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $mdDialog, $location, andarService, $routeParams, $mdSidenav) {
 
     $scope.criar = criar;
     $scope.adicionarAndarNaTela = adicionarAndarNaTela;
@@ -111,20 +111,29 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         $scope.salas = [];
     }
 
-    function excluir(edificacao) {
-        if(prompt("Você tem certeza que deseja excluir essa edificação? Todos as estruturas relacionadas a ele serão excluidas!)")){
-            edificacaoService.excluir(edificacao.Id) //chama o método de delete da service
-                .then(
-                function (response) {
-                    console.log(response);
-                    $location.path('\edificacao');
-                },
-                function (response) {
-                    console.log(response);
-                });
-        }
-    }
 
+    function excluir(ev, edificacao) {
+
+        var confirm = $mdDialog.confirm()
+              .title('Você tem certeza que deseja excluir essa edificação?')
+              .textContent('Todos os items relacionados a mesma serão excluídos.')
+              .ariaLabel('Lucky day')
+              .targetEvent(ev)
+              .ok('Tenho certeza')
+              .cancel('Cancelar');
+    
+        $mdDialog.show(confirm).then(function() {
+            
+            edificacaoService.excluir(edificacao.Id) //chama o método de delete da service
+                            .then(
+                        function (response) {
+                            console.log(response);
+                            $location.path('\edificacao');
+                        });
+        }, function() {
+          return;
+        });
+      };
 
     // side-bar andar
 

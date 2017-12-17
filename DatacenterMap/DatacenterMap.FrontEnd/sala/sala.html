@@ -1,6 +1,6 @@
 <div class="flex-row row-center">
     <h3 class="edificacao-selecionada">Sala: {{salaSelecionada.NumeroSala}}</h3>
-    <img class="imagem-delete" ng-click="excluir(salaSelecionada)" ng-src="/image/delete.svg" height="20" width="20">
+    <img class="imagem-delete" ng-click="excluir($event, salaSelecionada)" ng-src="/image/delete.svg" height="20" width="20">
 </div>
 
 <div sala-planta class="sala-container">
