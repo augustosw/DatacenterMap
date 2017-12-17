@@ -204,11 +204,12 @@ md-sidenav.md-closed.md-locked-open-add-active{
 }
 
 .popover {
-    background: rgb(66, 70, 79) !important;
+    background: #42464f !important;
+    color: #fff !important;
 }
 
 .arrow::after {
-    border-top-color: rgb(66, 70, 79) !important;
+    border-top-color: #42464f !important;
 }
 
 .slot,
@@ -800,6 +801,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 }
 
 .botao-cancelar,
+#limpar-slot-popover .botao-cancelar,
 #cadastro-andar .botao-cancelar,
 #cadastro-sala .botao-cancelar,
 #cadastro-rack .botao-cancelar,
@@ -812,6 +814,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 }
 
 .botao-sucesso,
+#limpar-slot-popover .botao-sucesso,
 #cadastro-andar .botao-sucesso,
 #cadastro-sala .botao-sucesso,
 #cadastro-rack .botao-sucesso,
