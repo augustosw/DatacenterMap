@@ -1,5 +1,5 @@
 angular.module('app')
-.directive('mapSalaCadastro', function (authService, salaService, edificacaoService, $rootScope, $log, $timeout) {
+.directive('mapSalaCadastro', function (authService, salaService, edificacaoService, $rootScope, $log, $timeout, toastr) {
 
   return {
 
@@ -23,9 +23,15 @@ angular.module('app')
                             .then(
                                 function (response) {
                                     $scope.andar[0].Salas.push(response.data);
+                                    toastr.success('Nova sala cadastrada!', {
+                                      iconClass: 'toast-sucesso'
+                                    });
+                                    location.reload();
                                 },
                                 function(response){
-                                    alert(response.data);  
+                                    toastr.error(response.data.join(" - "), 'Falha na solicitação!', {
+                                      iconClass: 'toast-erro'
+                                    });
                             })
             }
             else {
@@ -38,7 +44,9 @@ angular.module('app')
             var mensagens = [];
             if ($scope.cadastroSalaForm.$invalid && $scope.cadastroSalaForm.$submitted) {
                 mensagens.push('Formulário Inválido');
-                alert("Falha na solicitação!" + mensagens.join(' - '));
+                toastr.error(mensagens.join(' - '), 'Falha na solicitação!', {
+                  iconClass: 'toast-erro'
+                });
                 return false;
             }
             
@@ -56,7 +64,9 @@ angular.module('app')
                 mensagens.push("O comprimento não deve ser nulo.");
 
             if(mensagens.length >= 1){
-                alert("Falha na solicitação!" + mensagens.join(' - ')); 
+                toastr.error(mensagens.join(' - '), 'Falha na solicitação!', {
+                  iconClass: 'toast-erro'
+                });
                 return false;
             }
             return true

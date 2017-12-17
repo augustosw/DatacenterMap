@@ -1,5 +1,5 @@
 angular.module('app')
-.directive('mapRackCadastro', function (authService, edificacaoService, rackService, andarService, $rootScope, $log, $timeout) {
+.directive('mapRackCadastro', function (authService, edificacaoService, rackService, andarService, $rootScope, $log, $timeout, toastr) {
 
   return {
 
@@ -18,22 +18,22 @@ angular.module('app')
     
    
     function criar(rack) {
-      console.log($scope.rack);
-      console.log($scope.slot.Id);
       if (validar(rack)) {
         rack.SlotId = $scope.slot.Id;
-        console.log(rack);
         rackService.criar(rack)
                     .then(
                       function (response) {
                         $scope.slot.Ocupado = true;
+                        toastr.success('Novo rack cadastrado!', {
+                          iconClass: 'toast-sucesso'
+                        });
                         location.reload();
-                        console.log(response.data);
-                    },
+                      },
                       function(response){
-                        console.log(response);
-                        alert(response.data);  
-                        })
+                        toastr.error(response.data.join(" - "), 'Falha na solicitação!', {
+                          iconClass: 'toast-erro'
+                        });
+                      })
       }
       else {
           $scope.enviar = true;    
@@ -45,7 +45,9 @@ angular.module('app')
       var mensagens = [];
       if ($scope.cadastroRackForm.$invalid && $scope.cadastroRackForm.$submitted) {
           mensagens.push('Formulário Inválido');
-          alert("Falha na solicitação!" + mensagens.join(' - '));
+          toastr.error(mensagens.join(' - '), 'Falha na solicitação!', {
+            iconClass: 'toast-erro'
+          });
           return false;
       }
 
@@ -59,7 +61,9 @@ angular.module('app')
         mensagens.push('Rack deve possuir uma tensão válida');
       
       if(mensagens.length >= 1){
-        alert("Falha na solicitação!" + mensagens.join(' - ')); 
+        toastr.error(mensagens.join(' - '), 'Falha na solicitação!', {
+          iconClass: 'toast-erro'
+        });
         return false;
       }
       return true

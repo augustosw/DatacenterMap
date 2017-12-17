@@ -1,5 +1,5 @@
 angular.module('app')
-.directive('mapEdificacaoCadastro', function (authService, edificacaoService, $rootScope, $log, $location, $timeout) {
+.directive('mapEdificacaoCadastro', function (authService, edificacaoService, $rootScope, $log, $location, $timeout, toastr) {
 
   return {
 
@@ -36,9 +36,16 @@ angular.module('app')
         if (validar(edificacao)) {
           edificacaoService.criar(edificacao)
                             .then(function(response) {
+                              toastr.success('Nova edificação criada!', {
+                                iconClass: 'toast-sucesso'
+                              });
                               let novaEdificacaoId = response.data.Id; 
                               $location.path(`/edificacao/${novaEdificacaoId}`);
-                            })
+                              }, function(response) {
+                                toastr.error(response.data.join(" - "), 'Falha na solicitação!', {
+                                  iconClass: 'toast-erro'
+                                });
+                              })
         }
         else {
            scope.enviar = true;    
@@ -97,7 +104,9 @@ angular.module('app')
         var mensagens = [];
         if (scope.cadastroEdificacaoForm.$invalid && scope.cadastroEdificacaoForm.$submitted) {
             mensagens.push('Formulário Inválido');
-            alert("Falha na solicitação!" + mensagens.join(' - '));
+            toastr.error(mensagens.join(' - '), 'Falha na solicitação!', {
+              iconClass: 'toast-erro'
+            });
             return false;
         }
   
@@ -111,7 +120,9 @@ angular.module('app')
           mensagens.push("Número de andares deve ser positivo.");
         
         if(mensagens.length >= 1){
-          alert("Falha na solicitação!" + mensagens.join(' - ')); 
+          toastr.error(mensagens.join(' - '), 'Falha na solicitação!', {
+            iconClass: 'toast-erro'
+          });
           return false;
         }
         return true
