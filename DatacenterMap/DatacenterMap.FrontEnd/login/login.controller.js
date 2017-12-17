@@ -1,5 +1,6 @@
-angular.module('app').controller('LoginController', function ($scope, authService) {
+angular.module('app').controller('LoginController', function ($scope,$location, authService) {
 
+  $scope.registrar = registrar; 
   $scope.login = function (usuario) {
 
     authService.login(usuario)
@@ -11,5 +12,9 @@ angular.module('app').controller('LoginController', function ($scope, authServic
           console.log(response);
         });
   };
+
+  function registrar() {
+    $location.path('/cadastro');
+  }
 
 });
