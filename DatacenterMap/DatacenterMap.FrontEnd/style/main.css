@@ -218,29 +218,48 @@ md-sidenav.md-closed.md-locked-open-add-active{
     fill: #909090;
 }
 
-.teste:after {
-    content:"teste";
+.sala:after {
+    content: attr(tooltip-andar);
+    display: none;
     position: absolute;
+    white-space: pre;
     width: 5.5vmin;
     background: white;
-    height: 8.25vmin;
-    margin: -8.25vmin 0 0 -2.25vmin;
-    -webkit-transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
     transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
-    -webkit-transform-origin: 50% 100%;
     transform-origin: 50% 100%;
-    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    transform: translate3d(0,0,0) !important;
-    
+    background-color: #42464f;
+    border-radius: 5px;
+    color: #fff;
+    padding: 1rem;
+    top: -80px;
+    text-transform: none;
+    transition: all 0.5s ease;
+    width: 120px;
 }
 
-.sala:after {
-    
+.sala:before {
+    position: absolute;
+    top: -15px;
+    left: 55px;
+    display:none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #42464f;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+    margin-left: -5px;
+    width: 0;
+    transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
+    transform-origin: 50% 100%;
+    transform-style: preserve-3d;
 }
 
-.sala:hover:after {
-    opacity: 1;
+.sala:hover:after,
+.sala:hover:before {
+    display: block;
+    z-index: 9;
 }
 
 .imagem-carousel {
@@ -693,7 +712,7 @@ element.style {
     position: absolute;
     background: #828282;
     height: 25%;
-    width: 20%;
+    width: 19.8%;
 }
 
 .sala:hover {
