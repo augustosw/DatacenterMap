@@ -203,6 +203,14 @@ md-sidenav.md-closed.md-locked-open-add-active{
     }
 }
 
+.popover {
+    background: rgb(66, 70, 79) !important;
+}
+
+.arrow::after {
+    border-top-color: rgb(66, 70, 79) !important;
+}
+
 .slot {
     display: inline-block;
     position: absolute;
@@ -210,10 +218,6 @@ md-sidenav.md-closed.md-locked-open-add-active{
     outline-offset: -1px;
     width: 8.33%;
     height: 12.5%;
-}
-
-.slot:hover {
-    opacity: 0.5;
 }
 
 .sala-largura {

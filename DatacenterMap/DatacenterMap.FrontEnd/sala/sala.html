@@ -6,7 +6,7 @@
 <div sala-planta class="sala-container">
     <!-- <h4 class="sala-largura">{{ salaSelecionada.Largura }}m</h4> -->
     <div slot-sala buscar-altura="buscarAltura" buscar-abcissa="buscarAbcissa" ng-hide="salaSelecionada.length==0" ng-repeat="slot in slots" id="{{ slot.Id }}" class="slot" ng-click="verificarSlot(slot)">
-        <img class="imagem-delete" ng-click="limparSlot(slot)" ng-src="/image/delete.svg" ng-if="slot.Ocupado" height="20" width="20">
+        <img uib-popover-template="'sala/delete.html'" popover-is-open="popoverIsOpen" ng-click="deleteClick()" class="imagem-delete" ng-src="/image/delete.svg" ng-if="slot.Ocupado" height="20" width="20">
     </div>
 
 </div>

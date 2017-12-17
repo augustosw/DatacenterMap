@@ -4,6 +4,7 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 		$scope.limparSlot = limparSlot;
 		$scope.isAlterar = !!$routeParams.id;
 		$scope.voltar = voltar;
+		$scope.deleteClick = deleteClick;
 		$scope.excluir = excluir;
 		$scope.tipoEntidade = "sala";
 		$scope.verificarSlot = verificarSlot;
@@ -56,15 +57,17 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 				});
 		}
 
-		function limparSlot (slotId) {
+		function deleteClick() {
 			//para o evento de click para não ativar div
 			if (!e) var e = window.event;
 			e.cancelBubble = true;
 			if (e.stopPropagation) e.stopPropagation();
+		}
 
+		function limparSlot(slotId) {		
+			deleteClick();
 			rackService.buscarRackPorIdSlot(slotId)
-				.then(response => rackService.excluir(response.data.Id).then(location.reload()));
-			
+				.then(response => rackService.excluir(response.data.Id).then($location.reload()));
 		}
 
 		 // side-bar criação de slot		 
