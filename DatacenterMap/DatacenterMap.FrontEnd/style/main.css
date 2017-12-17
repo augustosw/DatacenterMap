@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-image: url("/image/background-pattern.jpg");
+    background-image: url("/image/pattern.png");
     background-size: 30%;
     font-family:'Roboto', sans-serif;
 }
@@ -63,6 +63,8 @@ a {
     width: 100%;
     height: 50px;
     background: white;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
 }
 
 .user-image {
@@ -106,7 +108,7 @@ a {
     height: 150px;
     width: 400px;
     font-weight: 500;
-    color: #a5a9ac;
+    color: #767676;
     text-align: center;
 }
 
@@ -503,7 +505,7 @@ md-sidenav.md-closed.md-locked-open-add-active{
     width: 100%;
     top: 0; left: 0; bottom: 0; right: 0;
     z-index: 999;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3);
     animation: .5s dialogo;
 }
 .edificacao-cadastro-container {
@@ -514,7 +516,6 @@ md-sidenav.md-closed.md-locked-open-add-active{
 .cadastro-container {
     max-width: 400px;
     margin-left: 10px;
-    max-height: 300px;
 }
 
 @keyframes dialogo {
@@ -529,7 +530,7 @@ md-sidenav.md-closed.md-locked-open-add-active{
 
 .edificacao-wrapper {
     top: 0;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 60px);
 }
 
 .campo-cadastro {
@@ -570,12 +571,11 @@ md-sidenav.md-closed.md-locked-open-add-active{
 }
 
 .base  {
-    width: 65vmin;
-    height: 50vmin;
-    margin: -48vmin 0 0 -68vmin;
+    width: 100vmin;
+    height: 60vmin;
+    margin: -55vmin 0 0 -90vmin;
     transition: transform 0.3s;
     transform-style: preserve-3d;
-
 }
 
 .base,
@@ -740,6 +740,7 @@ md-content,
 
 #cadastro-andar input,
 #cadastro-sala input,
+#cadastro-rack input,
 #nome,
 #autocomplete,
 md-input-container:not(.md-input-invalid).md-input-focused .md-input,
@@ -767,7 +768,7 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 
  #cadastro-andar input,
  #cadastro-sala input,
-
+ #cadastro-rack input,
  md-input-container label,
  md-input-container:not(.md-input-invalid).md-input-focused .md-input,
  md-input-container:not(.md-input-invalid).md-input-focused label,
@@ -779,6 +780,8 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 .botao-cancelar,
 #cadastro-andar .botao-cancelar,
 #cadastro-sala .botao-cancelar,
+#cadastro-rack .botao-cancelar,
+#editar-equipamento .botao-cancelar,
 #cadastro-edificacao .botao-cancelar{
     border: 0;
     border: 1px solid #fa7777;
@@ -789,6 +792,9 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
 .botao-sucesso,
 #cadastro-andar .botao-sucesso,
 #cadastro-sala .botao-sucesso,
+#cadastro-rack .botao-sucesso,
+#editar-equipamento .botao-sucesso,
+#cadastro-equipamento .botao-sucesso, 
 #cadastro-edificacao .botao-sucesso {
     border: 0;
     border: 1px solid #90f883ba;
@@ -796,10 +802,16 @@ md-input-container.md-default-theme.md-input-invalid .md-char-counter,
     text-transform: inherit;
 }
 
-.botao-cancelar-andar {
+
+ .botao-cancelar-andar {
     background: white;
 }
 
+#cadastro-equipamento .botao-equipamento,
+#editar-equipamento .botao-equipamento {
+    color: #494949;
+    margin-left:0;
+}
 
 .edificacao-selecionada {
     font-size: 26px;
