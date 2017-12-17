@@ -12,7 +12,7 @@
             <div class="form-group">
                 <md-input-container>
                     <label for="nome" class="texto-andar">Nome Edificação</label>
-                    <input  name="nome" id="nome" ng-model="edificacao.Nome" ng-class="{'enviar': enviar}" placeholder="Ex: Framework" required ng-minlength="2" ng-maxlength="64" md-autofocus="">
+                    <input  name="nome" id="nome" ng-model="edificacao.Nome" ng-class="{'enviar': enviar}" required ng-minlength="2" ng-maxlength="64" md-autofocus=""> 
 
                     <span class="campo-invalido" ng-show="cadastroEdificacaoForm.nome.$invalid && cadastroEdificacaoForm.$submitted">Nome obrigatório</span>
                     
@@ -23,8 +23,8 @@
             </div>
             <div class="form-group">
                 <md-input-container>
-                    <label for="endereco" class="texto-andar">Localização</label>
-                    <input id="autocomplete" ng-class="{'enviar': enviar}" placeholder="Ex: Avenida Theodomiro Porto da Fonseca - Cristo Rei, São Leopoldo - RS, Brazil" class="form-control" type="text" ng-model="localizacao" required>
+                    <label for="autocomplete" id="localizacao-autocomplete"class="texto-andar">Localização</label>
+                    <input id="autocomplete" placeholder="" name="autocomplete" ng-class="{'enviar': enviar}"  type="text" ng-model="localizacao" required>
                 </md-input-container> 
             </div>
             <div class="form-group flex-column">
@@ -35,7 +35,7 @@
                         <button type="button" class="btn btn-danger" ng-click="remover()" style="margin: 0 5px">-</button> 
                     </div>
                     <div class="col-4">
-                        <input ng-change="adicionarDigitados(numeroAndares)" placeholder="Digite os andares" ng-model="numeroAndares" type="text" min="1"> 
+                        <input ng-change="adicionarDigitados(numeroAndares)" ng-model="numeroAndares" type="text" min="1"> 
                     </div>
                 </div> 
                 <div class="col-4 flex-row center-center" style="position:relative">

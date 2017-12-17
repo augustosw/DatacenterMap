@@ -44,13 +44,13 @@
                             <input type="number" class="form-control" min="1" ng-model="tamanho.length" readonly>
                         </div>
                     </div>
-                    <md-button class="botao-cancelar-andar botao-sucesso" ng-disabled="tamanho.length === 0" type="submit"  style="background:#42464F;">
+                    <md-button class="botao-equipamento botao-sucesso" ng-disabled="tamanho.length === 0" type="submit">
                             Cadastrar
                     </md-button>
                 </form>
         </div>
         <div ng-if="isAlterar" class="flex-column col-md-4 col-sm-6 cadastro-container">
-            <form id="editar-form" novalidate name="editarEquipamentoForm">
+            <form id="editar-equipamento" novalidate name="editarEquipamentoForm">
                 <h4 class="text-center">Mover Equipamento</h4>
                 <span class="campos-obrigatorios">(Por favor, faça a seleção dos campos na ordem que segue)</span>
                 <h3>{{equipamentoEdicao.descricao}}</h3>
@@ -83,12 +83,12 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-success" ng-click="moverEquipamento(equipamentoEdicao)"><h5>Mover</h5></button>
-                        </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-danger" ng-click="deletarEquipamento(equipamentoEdicao)"><h5>Deletar Equipamento</h5></button>
-                        </div>
+                        <md-button class="botao-equipamento botao-sucesso" ng-click="moverEquipamento(equipamentoEdicao)">
+                                Mover
+                        </md-button>
+                        <md-button class="botao-equipamento botao-cancelar" ng-click="deletarEquipamento(equipamentoEdicao)">
+                                Deletar Equipamento
+                        </md-button>
                     </div>
                 </div>
             </form>
