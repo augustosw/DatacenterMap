@@ -1,0 +1,58 @@
+<section class="cadastro-usuario-container flex-column center-center">
+    <div class="cadastro-usuario-wrapper flex-column column-center">
+        <div class="header-cadastro-usuario flex-row column-center " >
+            <h3>Cadastro Usuário</h3>
+            <img ng-src="/image/logo.svg" class="image-login" height="50" width="50">
+        </div> 
+        <form class="cadastro-usuario-content"id="cadastro-usuario" novalidate name="cadastroUsuarioForm" ng-submit="criar(usuario)">
+            <div> 
+                <span class="texto-andar campos-obrigatorios">(Todos os campos são obrigatórios)</span>
+            </div>
+            <hr>
+            <div class="form-group">
+                <md-input-container>
+                    <label for="nomeUser" class="texto-andar">Nome</label>
+                    <input  name="nomeUser" id="nomeUser" ng-model="usuario.Nome" ng-class="{'enviar': enviar}" required ng-minlength="2" ng-maxlength="256" md-autofocus=""> 
+                    <span class="campo-invalido" ng-show="cadastroUsuarioForm.nomeUser.$invalid && cadastroUsuarioForm.$submitted">Nome é obrigatório</span>
+                    
+                    <span class="campo-invalido" ng-show="cadastroUsuarioForm.nomeUser.$touched && cadastroUsuarioForm.nomeUser.$error.minlength">Número de caracteres muito baixo</span>
+                    
+                    <span class="campo-invalido"  ng-show="cadastroUsuarioForm.nomeUser.$touched && cadastroUsuarioForm.nomeUser.$error.maxlength">Número de caracteres muito alto</span> 
+                </md-input-container>
+                <md-input-container>
+                        <label for="email" class="texto-andar">Email</label>
+                        <input  name="email" id="email" ng-model="usuario.Email" ng-class="{'enviar': enviar}" required ng-minlength="2" ng-maxlength="64" type="email" md-autofocus="">
+                        <span class="campo-invalido" ng-show="cadastroUsuarioForm.email.$invalid && cadastroUsuarioForm.$submitted">Email é obrigatória</span>
+                        
+                        <span class="campo-invalido" ng-show="cadastroUsuarioForm.email.$touched && cadastroUsuarioForm.email.$error.minlength">Número de caracteres muito baixo</span>
+                        
+                        <span class="campo-invalido"  ng-show="cadastroUsuarioForm.nomeUser.$touched && cadastroUsuarioForm.nomeUser.$error.maxlength">Número de caracteres muito alto</span>  
+                </md-input-container> 
+                <md-input-container>
+                        <label for="senha" class="texto-andar">Senha</label>
+                        <input  name="senha" id="senha"type="password"  ng-model="usuario.Senha" ng-class="{'enviar': enviar}" required ng-minlength="2" ng-maxlength="64" md-autofocus=""> 
+                        <span class="campo-invalido" ng-show="cadastroUsuarioForm.senha.$invalid && cadastroUsuarioForm.$submitted">Senha é obrigatória</span>
+                        
+                        <span class="campo-invalido" ng-show="cadastroUsuarioForm.senha.$touched && cadastroUsuarioForm.senha.$error.minlength">Número de caracteres muito baixo</span>
+                        
+                        <span class="campo-invalido"  ng-show="cadastroUsuarioForm.senha.$touched && cadastroUsuarioForm.senha.$error.maxlength">Número de caracteres muito alto</span>  
+                </md-input-container> 
+                <md-input-container>
+                        <label for="confirmSenha" class="texto-andar">Confirme sua senha</label>
+                        <input  name="confirmSenha" type="password" id="confirmSenha" ng-model="confirmSenha" ng-class="{'enviar': enviar}" required ng-minlength="2" ng-maxlength="64" md-autofocus=""> 
+                </md-input-container> 
+            </div>
+            <div class="form-group">
+                <div class="flex-row">
+                    <md-button class="botao-cancelar-andar botao-sucesso" type="submit" class="md-primary">
+                                Cadastrar
+                    </md-button>
+                    <md-button class="botao-cancelar-andar botao-cancelar" type="button" ng-click="login()">
+                            Cancelar cadastro
+                    </md-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+    
