@@ -218,6 +218,31 @@ md-sidenav.md-closed.md-locked-open-add-active{
     fill: #909090;
 }
 
+.teste:after {
+    content:"teste";
+    position: absolute;
+    width: 5.5vmin;
+    background: white;
+    height: 8.25vmin;
+    margin: -8.25vmin 0 0 -2.25vmin;
+    -webkit-transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
+    transform: rotateZ(-20deg) rotateZ(45deg) rotateX(-70deg);
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: translate3d(0,0,0) !important;
+    
+}
+
+.sala:after {
+    
+}
+
+.sala:hover:after {
+    opacity: 1;
+}
+
 .imagem-carousel {
     margin-bottom:5px;
     filter: opacity(50%);
@@ -633,7 +658,7 @@ element.style {
     pointer-events: auto;
     transition: opacity 1s, transform 1s;
     transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-    transform-style: preserve-3d
+    transform-style: preserve-3d;
 }
 .imagem-delete {
     opacity: .6;
