@@ -1251,3 +1251,17 @@ rack__slot:after {
 .rack__slot__hardware:hover:after {
     opacity: 1;
 }
+
+.loader{
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(/image/carregamento.svg);
+    background-size: 10% 10%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+}
