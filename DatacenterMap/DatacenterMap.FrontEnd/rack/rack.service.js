@@ -18,10 +18,10 @@ angular.module('app').factory('rackService', function ($http, $location) {
         return $http.get(url + '/' + slot.Id + '/slot')
     }
 
-
     function excluir(id){
-        return $http.delete(url + id);
+        return $http.delete(url + '/' + id);
     }
+
     return {
         criar: criar,
         buscarRackPorIdSlot:buscarRackPorIdSlot,

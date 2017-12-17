@@ -11,11 +11,6 @@ angular.module('app').directive('slotSala', ['$compile', function ($compile) {
 
             var slot = scope.$parent.slot;
 
-            // element.attr("y", `${scope.buscarAltura() * MIN_Y}`);
-            // element.attr("x", `${scope.buscarAbcissa() * MIN_X}`);
-            // element.attr("height", `100`);
-            // element.attr("width", `100`);
-
             let ordenada = scope.buscarAltura();
             let abcissa = scope.buscarAbcissa();
 

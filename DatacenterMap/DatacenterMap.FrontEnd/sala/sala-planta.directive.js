@@ -1,17 +1,10 @@
-angular.module('app').directive('salaPlanta', ['$compile', function ($compile, $location, rackService) {
+angular.module('app').directive('salaPlanta', ['$compile', function ($compile, $location) {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
             
             var altura = 0;
             var abcissa = 1;
-
-            scope.limparSlot = function (id) {
-                rackService.excluir(id)
-                    .then(function(response){
-                        location.reload();
-                    });
-            };
 
             scope.buscarAltura = function buscarAltura() {
                 if(altura == 6){
