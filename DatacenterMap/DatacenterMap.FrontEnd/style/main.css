@@ -211,13 +211,31 @@ md-sidenav.md-closed.md-locked-open-add-active{
     border-top-color: rgb(66, 70, 79) !important;
 }
 
-.slot {
+.slot,
+.slot:focus,
+.slot:active {
     display: inline-block;
     position: absolute;
     outline: medium solid #4F4F4F;
     outline-offset: -1px;
     width: 8.33%;
     height: 12.5%;
+}
+
+.slot-livre {
+    background: #a2f0d6;
+}
+
+.slot-ocupado {
+    background: #f3bca7;
+}
+
+.slot-livre:hover {
+    background: rgba(163, 239, 224, 0.5)
+}
+
+.slot-ocupado:hover {
+    background: rgba(240, 190, 165, 0.5)
 }
 
 .sala-largura {

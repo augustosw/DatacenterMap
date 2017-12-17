@@ -3,7 +3,7 @@ angular.module('app').directive('slotSala', ['$compile', function ($compile) {
         restrict: 'A',
         scope: {
             buscarAltura: '=',
-            buscarAbcissa: '=',
+            buscarAbcissa: '='
         },
         link: function (scope, element, attrs) {
             const MIN_Y = 100;
@@ -16,7 +16,7 @@ angular.module('app').directive('slotSala', ['$compile', function ($compile) {
 
             element.attr("style",`transform: translate(${abcissa * MIN_X}%, ${ordenada * MIN_Y}%);`);
 
-            slot.Ocupado ? element.css({background: '#f3bca7'}) : element.css({background: '#a2f0d6'});
+            slot.Ocupado ? element.addClass("slot-ocupado") : element.addClass("slot-livre");
             
         }
     }
