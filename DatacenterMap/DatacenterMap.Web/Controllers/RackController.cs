@@ -111,6 +111,17 @@ namespace DatacenterMap.Web.Controllers
         }
 
         [HttpGet]
+        [Route("/by-slots")]
+        public HttpResponseMessage GetRackBySlots([FromBody] List<int> slotsId)
+        {
+            if (contexto.Racks.Where(x => slotsId.Contains(x.Slot.Id)).Count() == 0) return BadRequest("Nenhum rack encontrado.");
+
+            List<Rack> racks = contexto.Racks.AsNoTracking().Where(x => slotsId.Contains(x.Slot.Id)).ToList();
+
+            return Ok(racks);
+        }
+
+        [HttpGet]
         [Route("disponiveis/{salaId}/{tamanho}")]
         public HttpResponseMessage GetRacksDisponiveis([FromUri] int salaId, int tamanho)
         {
