@@ -1,4 +1,4 @@
-angular.module('app').controller('RackController', function ($scope, rackService, salaService, equipamentoService, $routeParams, edificacaoService, andarService, toastr) {
+angular.module('app').controller('RackController', function ($scope, rackService, salaService, equipamentoService, $routeParams, edificacaoService, andarService, toastr, $localStorage) {
     
  
     $scope.tamanho = [] 
@@ -99,7 +99,6 @@ angular.module('app').controller('RackController', function ($scope, rackService
                     tamanhoAtual = gaveta.Equipamento.Tamanho;
                     $scope.tamanhoGaveta = {
                         height:`${tamanhoAtual*53 -1}px`,
-                        // background: "rgba(173, 170, 166, 0.5)"
                     }
                     $scope.tooltip = ""; 
                     $scope.tooltip = ("Descrição: " + gaveta.Equipamento.Descricao + "\n"+ "Tamanho: " + gaveta.Equipamento.Tamanho + "\n" 
@@ -119,7 +118,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
 
 
     function buscarAndares(equipamentoEdicao) {
-        andarService.buscarPorIdComRackDisponiveis(1, equipamentoEdicao.Tamanho)
+        andarService.buscarPorIdComRackDisponiveis($localStorage.edificacaoAtual.Id, equipamentoEdicao.Tamanho)
                         .then(function(response) { 
                             $scope.andares = response.data;
                         })

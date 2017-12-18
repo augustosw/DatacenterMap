@@ -1,4 +1,4 @@
-angular.module('app').controller('EdificacaoController', function ($scope, edificacaoService, $mdDialog, $location, andarService, $routeParams, $mdSidenav, toastr) {
+angular.module('app').controller('EdificacaoController', function ($scope, $localStorage, edificacaoService, $mdDialog, $location, andarService, $routeParams, $mdSidenav, toastr) {
 
     $scope.adicionarAndarNaTela = adicionarAndarNaTela;
     $scope.selecionarAndar = selecionarAndar;
@@ -18,6 +18,10 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
     function buscarEdificacaoPorId(id) {
         edificacaoService.buscarPorId(id)
             .then(function (response) {
+
+                // salva edificacao atual em local storage 
+                $localStorage.edificacaoAtual = response.data;
+
                 $scope.edificacaoSelecionada = response.data;
                 // variavel que vai manter o numero de andares cadastrados de uma edificação
                 $scope.andaresCadastrados = $scope.edificacaoSelecionada.Andares;
@@ -59,7 +63,7 @@ angular.module('app').controller('EdificacaoController', function ($scope, edifi
         var dataTemp = {};
         andarService.obterPorId(id)
             .then(
-            function (response) {
+            function (response) { 
                 $scope.salasTotais = response.data.Salas;
                 var salas = response.data.Salas;
                 angular.forEach(salas, function (sala, key) {

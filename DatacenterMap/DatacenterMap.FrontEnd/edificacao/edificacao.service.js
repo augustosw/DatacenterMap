@@ -1,7 +1,6 @@
 // Service de edificacoes
-angular.module('app').factory('edificacaoService', function ($http, $location) {
+angular.module('app').factory('edificacaoService', function ($http, $location, $localStorage) {
     let url = "http://localhost:51641/api/edificacao";
-    var idSelecionado;
 
     function criar(edificacao) {
         return $http.post(url, edificacao);
@@ -17,12 +16,7 @@ angular.module('app').factory('edificacaoService', function ($http, $location) {
 
     function buscarPorId(id) {
         let response = $http.get(url + '/' + id);
-        idSelecionado = id;
         return response;
-    }
-
-    function buscarIdDeEdificacaoAtual(){
-        return idSelecionado;
     }
 
     function buscarPorIdSelecionado() {
@@ -31,7 +25,6 @@ angular.module('app').factory('edificacaoService', function ($http, $location) {
 
     return {
         criar: criar,
-        buscarIdDeEdificacaoAtual: buscarIdDeEdificacaoAtual,
         excluir: excluir,
         buscar: buscar,
         buscarPorId: buscarPorId,
