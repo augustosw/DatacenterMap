@@ -110,8 +110,8 @@ namespace DatacenterMap.Web.Controllers
             return Ok(rack);
         }
 
-        [HttpGet]
-        [Route("/by-slots")]
+        [HttpPost]
+        [Route("by-slots")]
         public HttpResponseMessage GetRackBySlots([FromBody] List<int> slotsId)
         {
             if (contexto.Racks.Where(x => slotsId.Contains(x.Slot.Id)).Count() == 0) return BadRequest("Nenhum rack encontrado.");
