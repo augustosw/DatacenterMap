@@ -35,10 +35,10 @@ namespace DatacenterMap.Domain.Entidades
             if (NumeroAndares <= 0)
                 Mensagens.Add("Número de andares deve ser maior que 0.");
 
-            if (Latitude > 90 || Latitude < -90)
+            if (Latitude > 180 || Latitude < -180)
                 Mensagens.Add("Latitude é inválida.");
 
-            if (Longitude > 90 || Longitude < -90)
+            if (Longitude > 180 || Longitude < -180)
                 Mensagens.Add("Longitude é inválida.");
 
             return Mensagens.Count == 0;

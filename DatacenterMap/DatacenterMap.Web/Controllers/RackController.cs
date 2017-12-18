@@ -116,7 +116,7 @@ namespace DatacenterMap.Web.Controllers
         {
             if (contexto.Racks.Where(x => slotsId.Contains(x.Slot.Id)).Count() == 0) return BadRequest("Nenhum rack encontrado.");
 
-            List<Rack> racks = contexto.Racks.AsNoTracking().Where(x => slotsId.Contains(x.Slot.Id)).ToList();
+            List<Rack> racks = contexto.Racks.AsNoTracking().Include(x => x.Slot).Where(x => slotsId.Contains(x.Slot.Id)).ToList();
 
             return Ok(racks);
         }

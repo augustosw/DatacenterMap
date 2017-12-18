@@ -29,7 +29,7 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 			rackService.buscarPorRacksPorSlots(idSlots)
 									.then(function(response) { 
 										response.data.forEach( rack => $scope.slotsOcupados.forEach(function(slot) {
-										  if(slot.Id === rack.Id) {
+										  if(slot.Id === rack.Slot.Id) {
 												slot.Rack = rack;
 												} 
 										})		

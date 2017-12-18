@@ -141,8 +141,10 @@ angular.module('app')
 
       function obterCoordenadas() {
         var place = scope.autocomplete.getPlace();
-        scope.edificacao.Latitude = place.geometry.location.lat();
-        scope.edificacao.Longitude = place.geometry.location.lng();
+        scope.edificacao.Latitude = Math.round(place.geometry.location.lat() * 100)/100;
+        scope.edificacao.Longitude = Math.round(place.geometry.location.lng() * 100)/100;
+      
+        console.log(scope.edificacao);
         return;
       }
 
