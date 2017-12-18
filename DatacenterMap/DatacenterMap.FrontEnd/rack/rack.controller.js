@@ -29,6 +29,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
     function editar(gaveta){
+        buscarAndares(gaveta.Equipamento);
         $scope.isAlterar = true;
         $scope.equipamentoEdicao = gaveta.Equipamento;
     }
@@ -51,7 +52,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
     }
 
     function criarEquipamento(equipamento){
-        if (true) {      
+        if (validar(equipamento)) {      
             equipamento.GavetasId = [];
             equipamento.Tamanho = $scope.tamanho.length; 
             $scope.tamanho.forEach(x => equipamento.GavetasId.push(x));
@@ -102,9 +103,7 @@ angular.module('app').controller('RackController', function ($scope, rackService
                     }
                     $scope.tooltip = ""; 
                     $scope.tooltip = ("Descrição: " + gaveta.Equipamento.Descricao + "\n"+ "Tamanho: " + gaveta.Equipamento.Tamanho + "\n" 
-                                    + "Tensão: " + gaveta.Equipamento.Tensao + "V"); 
-
-                    
+                                    + "Tensão: " + gaveta.Equipamento.Tensao + "V");   
             } 
             else {
                 $scope.tamanhoGaveta = { display: "none" } 
@@ -116,6 +115,24 @@ angular.module('app').controller('RackController', function ($scope, rackService
         }
     }
 
+
+    function validar(equipamento) {
+        var mensagens = [];
+
+        if(!(equipamento.Descricao))
+          mensagens.push('Descrição inválida'); 
+  
+        if(equipamento.Tensao != $scope.rack.Tensao)
+          mensagens.push(`Tensao do equipamento deve ser a mesma do Rack (${$scope.rack.Tensao})`);
+        
+        if(mensagens.length >= 1){
+          toastr.error(mensagens.join(' - '), 'Falha na solicitação!', {
+            iconClass: 'toast-erro'
+          });
+          return false;
+        }
+        return true
+      }
 
     function buscarAndares(equipamentoEdicao) {
         andarService.buscarPorIdComRackDisponiveis($localStorage.edificacaoAtual.Id, equipamentoEdicao.Tamanho)
