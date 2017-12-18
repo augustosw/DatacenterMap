@@ -21,12 +21,18 @@ angular.module('app').factory('rackService', function ($http, $location) {
     function excluir(id){
         return $http.delete(url + '/' + id);
     }
+    
+    function buscarPorRacksPorSlots(slotsId) {
+        return $http.post(url + '/by-slots', slotsId)
+
+    }
 
     return {
         criar: criar,
         buscarRackPorIdSlot:buscarRackPorIdSlot,
         buscarPorIdComRackDisponiveis:buscarPorIdComRackDisponiveis,
         buscarPorId:buscarPorId,
-        excluir: excluir
+        excluir: excluir,
+        buscarPorRacksPorSlots: buscarPorRacksPorSlots
     }
 });   

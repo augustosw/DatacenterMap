@@ -19,12 +19,23 @@ angular.module('app').controller('SalaController', function ($scope, $location, 
 					$scope.slotsOcupados = $scope.slots.filter(s => s.Ocupado);
 					buscarTensaoSlotsOcupados();
 				})
-		}	
-		
+		}
+			
 		function buscarTensaoSlotsOcupados() {
 			//para preenchimento da popover
-			$scope.slotsOcupados.forEach(slot => rackService.buscarRackPorIdSlot(slot)
-				.then(response => slot.Rack = response.data));
+			console.log($scope.slotsOcupados);
+			let idSlots = []; 
+			$scope.slotsOcupados.forEach(slot => idSlots.push(slot.Id)); 
+			rackService.buscarPorRacksPorSlots(idSlots)
+									.then(function(response) { 
+										response.data.forEach( rack => $scope.slotsOcupados.forEach(function(slot) {
+										  if(slot.Id === rack.Id) {
+												slot.Rack = rack;
+												} 
+										})		
+										)});
+			// $scope.slotsOcupados.forEach(slot => rackService.buscarRackPorIdSlot(slot)
+			// 	.then(response => slot.Rack = response.data));
 		}
 	
 		function voltar() {
